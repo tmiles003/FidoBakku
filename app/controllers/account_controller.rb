@@ -17,20 +17,20 @@ class AccountController < ApplicationController
   def create
     @account = Account.new(account_params)
     
-    #require 'digest/md5'
-    #Digest::MD5.digest("test")
+    hash = OpenSSL::Digest::MD5.new(Time.new.strftime('%c') << Rails.configuration.secret_key_base)
     
     @user = User.new
     @user.email = account_params[:email]
-    @user.password = 'random1234'
+    @user.password = hash.hexdigest[0..12]
     @user.name = 'New User'
     @user.role = 'admin'
+    @user.save
 
     respond_to do |format|
-      if @account.save && @user.save
+      if @account.save
+        @account.users << @user
         sign_in @user
         format.html { redirect_to authenticated_root_path, notice: 'Account was successfully created.' }
-        #format.html { redirect_to edit_account_path @account, notice: 'Account was successfully created.' }
         #format.json { render action: 'show', status: :created, location: @account }
       else
         format.html { render action: 'new' }
