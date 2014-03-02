@@ -1,0 +1,9 @@
+<% current_uri = request.env['PATH_INFO'] %>
+  <ul class="nav navbar-nav">
+    <li class="<%= current_uri == authenticated_root_path ? 'active' : '' %>">
+      <%= link_to 'Dashboard', authenticated_root_path %>
+    </li>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+    <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+  </ul>

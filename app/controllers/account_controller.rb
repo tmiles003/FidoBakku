@@ -16,14 +16,25 @@ class AccountController < ApplicationController
   # POST /account.json
   def create
     @account = Account.new(account_params)
+    
+    #require 'digest/md5'
+    #Digest::MD5.digest("test")
+    
+    @user = User.new
+    @user.email = account_params[:email]
+    @user.password = 'random1234'
+    @user.name = 'New User'
+    @user.role = 'admin'
 
     respond_to do |format|
-      if @account.save
-        format.html { redirect_to edit_account_path @account, notice: 'Account was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @account }
+      if @account.save && @user.save
+        sign_in @user
+        format.html { redirect_to authenticated_root_path, notice: 'Account was successfully created.' }
+        #format.html { redirect_to edit_account_path @account, notice: 'Account was successfully created.' }
+        #format.json { render action: 'show', status: :created, location: @account }
       else
         format.html { render action: 'new' }
-        format.json { render json: @account.errors, status: :unprocessable_entity }
+        #format.json { render json: @account.errors, status: :unprocessable_entity }
       end
     end
   end
