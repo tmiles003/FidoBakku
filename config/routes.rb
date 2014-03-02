@@ -2,6 +2,18 @@ FidoBakku::Application.routes.draw do
   
   resources :account, except: [:index, :show]
 
+  devise_for :users, 
+    :controllers => { :registrations => 'registrations' },
+    :path => '',
+    :path_names => { :sign_in => 'login', :sign_out => 'logout', :sign_up => 'signup' }
+  
+  #get 'dashboard/index'
+  authenticated :user do
+    root :to => 'dashboard#index', :as => :authenticated_root
+  end
+  
+  root :to => redirect('/login', status: 302)
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
