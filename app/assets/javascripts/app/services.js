@@ -2,8 +2,26 @@
 
 /* Services */
 
-
-// Demonstrate how to register services
-// In this case it is a simple value service.
-angular.module('myApp.services', []).
-  value('version', '0.1');
+angular.module('fbApp.services', [])
+  
+  .factory('UserService', function($http, $q) {
+    var service = {
+      
+      getUserList: function() {
+        var d = $q.defer();
+        $http.post('/people/list.json')
+          .then(function(data, status) {
+            if (data.status === 200)
+              d.resolve(data);
+            else
+              d.reject(data);
+          });
+        
+        return d.promise;
+      }
+      
+    };
+    
+    return service;
+  })
+;

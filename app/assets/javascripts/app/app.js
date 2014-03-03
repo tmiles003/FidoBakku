@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('fbApp', [
-  'fbApp.controllers'
+  'fbApp.controllers',
+  'fbApp.services'
 ]);
 
 
