@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="fbApp">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>FidoBakku</title>
+  <link rel="shortcut icon" href="/favicon.ico">
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <% #if user_signed_in? %>
     <%= javascript_include_tag 'application' %>
@@ -26,6 +27,9 @@
   </div>
 
   <div class="container">
+    <div ng-controller="GreetingCtrl">
+      {{ greeting }}
+    </div>
     <div id="notice"><%= notice %></div>
     <%= yield %>
   </div>

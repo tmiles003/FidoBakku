@@ -2,10 +2,8 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', []).
-  controller('MyCtrl1', [function() {
-
+angular.module('fbApp.controllers', [])
+  .controller('GreetingCtrl', ['$scope', function($scope) {
+    $scope.greeting = 'Hola!';
   }])
-  .controller('MyCtrl2', [function() {
-
-  }]);
+;
