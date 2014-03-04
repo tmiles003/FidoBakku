@@ -1,7 +1,5 @@
 FidoBakku::Application.routes.draw do
   
-  root :to => redirect('/login', status: 302)
-  
   resources :account, except: [:index, :show]
 
   devise_for :users, 
@@ -13,6 +11,8 @@ FidoBakku::Application.routes.draw do
   authenticated :user do
     root :to => 'dashboard#index', :as => :authenticated_root
   end
+  
+  root :to => redirect('/login', status: 302)
   
   resources :people, except: [:show] do
     post 'list', on: :collection

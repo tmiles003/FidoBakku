@@ -9,11 +9,12 @@ angular.module('fbApp.controllers', [])
   }])
   
   .controller('UserFormCtrl', ['$scope', function($scope) {
-    //
+    // $scope.greeting = 'UserFormCtrl';
   }])
   
   .controller('UserListCtrl', ['$scope', 'UserService', function($scope, UserService) {
-    // $scope.greeting = 'Users list';
-    $scope.users = UserService.getUserList();
+    UserService.getUserList().then(function(res) {
+      $scope.users = res.data;
+    });
   }])
 ;

@@ -1,4 +1,7 @@
 class AccountController < ApplicationController
+  
+  include PeopleHelper
+  
   before_action :set_account, only: [:edit, :update, :destroy]
 
   # GET /account/new
@@ -17,11 +20,9 @@ class AccountController < ApplicationController
   def create
     @account = Account.new(account_params)
     
-    hash = OpenSSL::Digest::MD5.new(Time.new.strftime('%c') << Rails.configuration.secret_key_base)
-    
     @user = User.new
     @user.email = account_params[:email]
-    @user.password = hash.hexdigest[0..12]
+    @user.password = gen_random_password
     @user.name = 'New User'
     @user.role = 'admin'
     @user.save

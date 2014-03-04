@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
   
-  #before_action :set_person, only: [:edit, :update, :destroy]
+  before_action :set_user, only: [:list, :edit, :update, :destroy]
 
   # GET /people
   # GET /people.json
@@ -10,12 +10,13 @@ class PeopleController < ApplicationController
   # POST /people/all
   # POST /people/all.json
   def list
-    #@users = current_user.account.users
+    @account = @user.account
+    @account_users = @account.account_users
   end
 
   # GET /people/new
   def new
-    @person = Person.new
+    @user = User.new
   end
 
   # GET /people/1/edit
@@ -64,8 +65,8 @@ class PeopleController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_person
-      @person = Person.find(params[:id])
+    def set_user
+      @user = current_user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
