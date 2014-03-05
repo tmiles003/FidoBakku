@@ -1,10 +1,9 @@
 'use strict';
 
 var fbApp = angular.module('fbApp', [
-  'fbApp.controllers',
-  'fbApp.services'
+  // 'fbApp.controllers',
+  // 'fbApp.services'
 ]);
-
 
 // Declare app level module which depends on filters, and services
 /* angular.module('myApp', [
