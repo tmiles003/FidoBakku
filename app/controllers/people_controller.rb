@@ -1,6 +1,8 @@
 class PeopleController < ApplicationController
   
-  before_action :set_user, only: [:list, :edit, :update, :destroy]
+  include PeopleHelper
+  
+  before_action :set_user, only: [:list, :create, :edit, :update, :destroy]
 
   # GET /people
   # GET /people.json
@@ -14,11 +16,6 @@ class PeopleController < ApplicationController
     @account_users = @account.account_users
   end
 
-  # GET /people/new
-  def new
-    @user = User.new
-  end
-
   # GET /people/1/edit
   def edit
   end
@@ -26,15 +23,17 @@ class PeopleController < ApplicationController
   # POST /people
   # POST /people.json
   def create
-    @person = Person.new(person_params)
+    @newUser = User.new(user_params)
+    @newUser.password = gen_random_password
 
     respond_to do |format|
-      if @person.save
+      if @newUser.save
+        @user.account.users << @newUser
         format.html { redirect_to @person, notice: 'Person was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @person }
+        format.json { render json: @newUser, status: :created }
       else
-        format.html { render action: 'new' }
-        format.json { render json: @person.errors, status: :unprocessable_entity }
+        #format.html { render action: 'new' }
+        format.json { render json: @newUser.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -70,7 +69,8 @@ class PeopleController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def person_params
-      params[:person]
+    def user_params
+      # params[:person]
+      params.require(:data).permit(:email, :name, :role)
     end
 end

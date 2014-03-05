@@ -14,7 +14,7 @@ FidoBakku::Application.routes.draw do
   
   root :to => redirect('/login', status: 302)
   
-  resources :people, except: [:show] do
+  resources :people, except: [:show, :new] do
     post 'list', on: :collection
   end
 

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fbApp', [
+var fbApp = angular.module('fbApp', [
   'fbApp.controllers',
   'fbApp.services'
 ]);

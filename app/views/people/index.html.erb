@@ -1,11 +1,11 @@
 <h1>Listing people</h1>
 
 <div ng-controller="UserListCtrl">
-  <div ng-repeat="user in users">
-    {{ user.name }}
+  <div ng-repeat="user in userList">
+    {{ user.id }}, {{ user.name }}, {{ user.email }}
   </div>
 </div>
 
-<div ng-controller="UserFormCtrl">
-  {{ greeting }}
+<div>
+  <%= render 'form' %>
 </div>
