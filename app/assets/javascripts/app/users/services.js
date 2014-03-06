@@ -2,9 +2,9 @@
 
 /* Services */
 
-// var fiAppSrv = angular.module('fiApp.services');
+var UserSrv = angular.module('fiUserService', []);
 
-fiApp.factory('UserService', ['$resource', function($resource) {
+UserSrv.factory('User', ['$resource', function($resource) {
   
-  return $resource('/api/users/:id', { id: '@id' });
+  return $resource('/api/users/:id', { id: '@id' }, { 'update': { method:'PUT' } });
 }]);

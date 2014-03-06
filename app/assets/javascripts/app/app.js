@@ -3,12 +3,9 @@
 var fiApp = angular.module('fiApp', [
   'ngRoute',
   'ngResource',
-  // 'fiApp.services',
-  // 'fiApp.controllers'
+  'fiUserService',
+  'fiUserController'
 ]);
-
-// angular.module('fiApp.services', []);
-// angular.module('fiApp.controllers', []);
 
 // Declare app level module which depends on filters, and services
 /* angular.module('myApp', [

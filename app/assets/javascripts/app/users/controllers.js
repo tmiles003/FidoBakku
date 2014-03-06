@@ -2,38 +2,42 @@
 
 /* Controllers */
 
-// var fiAppCtrl = angular.module('fiApp.controllers');
+var UserCtrl = angular.module('fiUserController', []);
 
-fiApp.controller('UsersCtrl', ['$scope', 'UserService', function($scope, UserService) {
+UserCtrl.controller('UserCtrl', ['$scope', 'User', function($scope, User) {
   
-  UserService.query({}, function(res) {
-    $scope.users = res;
-  });
+  $scope.users = User.query();
   
-  $scope.createUser = function(formData) {
-    UserService.save(formData, 
-      function(val) {
-        $scope.formData = {};
-        $scope.newUserForm.$setPristine();
-        /* UserService.query({}, function(res) {
-          $scope.users = res;
-        }); */
-      }, 
-      function(resp) {
-        console.log( resp );
-      }
-    );
+  var createUser = function(newUser) {
+    $scope.users.push(User.save(newUser));
+    $scope.editableUser = {};
+    $scope.editableUserForm.$setPristine();
   }
   
-  $scope.deleteUser = function(id) {
-    UserService.delete({}, { id: id }, 
-      function(val) {
-        console.log( val );
-      },
-      function(resp) {
-        console.log( resp );
-      }
-    );
+  var updateUser = function(user) {
+    user.$update().then(function() {
+      $scope.editableUser = {};
+      $scope.editableUserForm.$setPristine();
+    });
+  }
+  
+  $scope.saveUser = function(user) {
+    if (user.id) {
+      updateUser(user);
+    }
+    else {
+      createUser(user);
+    }
+  }
+  
+  $scope.editUser = function(user) {
+    $scope.editableUser = user;
+  }
+  
+  $scope.deleteUser = function(user) {
+    user.$delete().then(function() {
+      $scope.users = _.without($scope.users, user);
+    });
   }
   
 }]);
