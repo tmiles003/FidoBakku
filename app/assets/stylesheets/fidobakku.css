@@ -2,7 +2,7 @@
 
 /* prevent page from "jumping" when not enough content for scrollbar */
 html {
-	overflow-y: scroll;
+  overflow-y: scroll;
 }
 
 /* more content below nav + footer space */

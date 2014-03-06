@@ -2,12 +2,13 @@ class Api::UsersController < ApplicationController
   
   include PeopleHelper
   
-  before_action :set_user
+  before_action :set_current_user
+  before_action :set_user, only: [:edit, :update, :destroy]
 
   # GET /api/users
   # GET /api/users.json
   def index
-    @account = @user.account
+    @account = @current_user.account
     @account_users = @account.account_users
   end
 
@@ -23,14 +24,15 @@ class Api::UsersController < ApplicationController
   # POST /api/users
   # POST /api/users.json
   def create
-    @newUser = User.new(user_params)
+    @new_user = User.new(user_params)
+    @new_user.password = gen_random_password
 
     respond_to do |format|
-      if @newUser.save
-        @user.account.users << @newUser
-        format.json { render action: 'show', status: :created, location: @user }
+      if @new_user.save
+        @current_user.account.users << @new_user
+        format.json { render json: @new_user, status: :created }
       else
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: @new_user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -50,7 +52,7 @@ class Api::UsersController < ApplicationController
   # DELETE /api/users/1
   # DELETE /api/users/1.json
   def destroy
-    @user.destroy
+    @user.destroy # unless @user.id != @current_user.id
     respond_to do |format|
       format.json { head :no_content }
     end
@@ -58,8 +60,12 @@ class Api::UsersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_current_user
+      @current_user = current_user
+    end
+    
     def set_user
-      @user = current_user
+      @user = User.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

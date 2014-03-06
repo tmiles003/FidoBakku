@@ -14,6 +14,6 @@
 //= require jquery_ujs
 //= require bootstrap/bootstrap.min
 //= require angular/angular.min
-//= require angular/angular-route.min.js
-//= require angular/angular-resource.min.js
+//= require angular/angular-route.min
+//= require angular/angular-resource.min
 //= require_tree .

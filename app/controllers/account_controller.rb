@@ -24,9 +24,10 @@ class AccountController < ApplicationController
     @user.email = account_params[:email]
     @user.password = gen_random_password
     @user.name = 'New User'
+    @user.reset_password_token = @user.password # temporary!!
     @user.role = 'admin'
     @user.save
-
+    
     respond_to do |format|
       if @account.save
         @account.users << @user

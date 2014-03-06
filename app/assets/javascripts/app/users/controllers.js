@@ -2,27 +2,38 @@
 
 /* Controllers */
 
-fiApp.controller('UserFormCtrl', ['$scope', 'UserService', function($scope, UserService) {
-  
-  $scope.createUser = function(formData) {
-    UserService.createUser(formData).then(function(res) {
-      $scope.formData = {};
-      $scope.newUserForm.$setPristine();
-    });
-  }
-  
-}]);
-  
+// var fiAppCtrl = angular.module('fiApp.controllers');
+
 fiApp.controller('UsersCtrl', ['$scope', 'UserService', function($scope, UserService) {
   
-  $scope.$on('users.update', function(event) {
-    UserService.getUsers().then(function(res) {
-      $scope.users = res.data;
-    });
+  UserService.query({}, function(res) {
+    $scope.users = res;
   });
   
-  UserService.getUsers().then(function(res) {
-    $scope.users = res.data;
-  });
+  $scope.createUser = function(formData) {
+    UserService.save(formData, 
+      function(val) {
+        $scope.formData = {};
+        $scope.newUserForm.$setPristine();
+        /* UserService.query({}, function(res) {
+          $scope.users = res;
+        }); */
+      }, 
+      function(resp) {
+        console.log( resp );
+      }
+    );
+  }
+  
+  $scope.deleteUser = function(id) {
+    UserService.delete({}, { id: id }, 
+      function(val) {
+        console.log( val );
+      },
+      function(resp) {
+        console.log( resp );
+      }
+    );
+  }
   
 }]);
