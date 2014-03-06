@@ -2,16 +2,16 @@
 
 /* Services */
 
-fbApp.factory('UserService', ['$http', '$q', '$rootScope', function($http, $q, $rootScope) {
+fiApp.factory('UserService', ['$http', '$q', '$rootScope', function($http, $q, $rootScope) {
   
   var service = {
     
-    getUserList: function() {
+    getUsers: function() {
       var d = $q.defer();
       
-      return $http.post('/people/list.json', {})
+      return $http.get('/api/users', {})
         .success(function(data, status) {
-          d.resolve(data.data);
+          d.resolve(data);
         })
         .error(function(data, status) {
           d.reject(data);

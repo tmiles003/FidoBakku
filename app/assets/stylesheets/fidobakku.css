@@ -1,5 +1,11 @@
 /* fidobakku.css */
 
+/* prevent page from "jumping" when not enough content for scrollbar */
+html {
+	overflow-y: scroll;
+}
+
+/* more content below nav + footer space */
 body {
   margin: 60px 0 30px 0;
 }

@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-fbApp.controller('UserFormCtrl', ['$scope', 'UserService', function($scope, UserService) {
+fiApp.controller('UserFormCtrl', ['$scope', 'UserService', function($scope, UserService) {
   
   $scope.createUser = function(formData) {
     UserService.createUser(formData).then(function(res) {
@@ -13,16 +13,16 @@ fbApp.controller('UserFormCtrl', ['$scope', 'UserService', function($scope, User
   
 }]);
   
-fbApp.controller('UserListCtrl', ['$scope', 'UserService', function($scope, UserService) {
+fiApp.controller('UsersCtrl', ['$scope', 'UserService', function($scope, UserService) {
   
   $scope.$on('users.update', function(event) {
-    UserService.getUserList().then(function(res) {
-      $scope.userList = res.data;
+    UserService.getUsers().then(function(res) {
+      $scope.users = res.data;
     });
   });
   
-  UserService.getUserList().then(function(res) {
-    $scope.userList = res.data;
+  UserService.getUsers().then(function(res) {
+    $scope.users = res.data;
   });
   
 }]);

@@ -14,8 +14,10 @@ FidoBakku::Application.routes.draw do
   
   root :to => redirect('/login', status: 302)
   
-  resources :people, except: [:show, :new] do
-    post 'list', on: :collection
+  get 'people' => 'people#index', as: :people
+  
+  namespace :api, defaults: { format: :json } do
+    resources :users, except: [:new]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

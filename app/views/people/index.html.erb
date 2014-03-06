@@ -2,12 +2,11 @@
 
 <div class="row">
 
-  <div ng-controller="UserListCtrl" class="col-md-9">
+  <div ng-controller="UsersCtrl" class="col-md-9">
     <ul class="list-group">
-    	<li ng-repeat="user in userList" class="list-group-item">
-      	{{ user.id }}, {{ user.name }}, {{ user.email }}
-      		<span class="text-right"><a href="#">Delete</a></span>
-    	</li>
+      <li ng-repeat="user in users" class="list-group-item">
+        {{ user.id }}, {{ user.name }}, {{ user.email }}
+      </li>
     </ul>
   </div>
 
