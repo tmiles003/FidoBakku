@@ -1,11 +1,18 @@
 <h1>Listing people</h1>
 
-<div ng-controller="UserListCtrl">
-  <div ng-repeat="user in userList">
-    {{ user.id }}, {{ user.name }}, {{ user.email }}
-  </div>
-</div>
+<div class="row">
 
-<div>
-  <%= render 'form' %>
+  <div ng-controller="UserListCtrl" class="col-md-9">
+    <ul class="list-group">
+    	<li ng-repeat="user in userList" class="list-group-item">
+      	{{ user.id }}, {{ user.name }}, {{ user.email }}
+      		<span class="text-right"><a href="#">Delete</a></span>
+    	</li>
+    </ul>
+  </div>
+
+  <div class="col-md-3">
+    <%= render 'form' %>
+  </div>
+
 </div>

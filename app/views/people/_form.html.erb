@@ -1,24 +1,23 @@
 
 <form accept-charset="UTF-8" novalidate ng-controller="UserFormCtrl" name="newUserForm">
 
-<div style="margin:0;padding:0;display:inline">
   <input name="utf8" type="hidden" value="&#x2713;">
-</div>
   
-  <div class="field">
+  <div class="form-group">
     <label for="user_name">Name</label><br>
-    <input id="user_name" ng-model="formData.name" type="text">
+    <input id="user_name" class="form-control" ng-model="formData.name" type="text">
   </div>
-  <div class="field">
+  <div class="form-group">
     <label for="user_email">Email</label><br>
-    <input id="user_email" ng-model="formData.email" type="text">
+    <input id="user_email" class="form-control" ng-model="formData.email" type="text">
   </div>
-  <div class="field">
+  <div class="form-group">
     <label for="user_role">Role</label><br>
-    <input id="user_role" ng-model="formData.role" type="text">
+    <input id="user_role" class="form-control" ng-model="formData.role" type="text">
   </div>
 
   <div class="actions">
     <input ng-click="createUser(formData)" type="submit" value="Create user">
   </div>
+  
 </form>
