@@ -24,7 +24,7 @@ class Api::UsersController < ApplicationController
   # POST /api/users
   # POST /api/users.json
   def create
-    @new_user = User.new(user_params)
+    @new_user = ::User.new(user_params) # :: forces root namespace
     @new_user.password = gen_random_password
 
     respond_to do |format|
@@ -65,7 +65,7 @@ class Api::UsersController < ApplicationController
     end
     
     def set_user
-      @user = User.find(params[:id])
+      @user = ::User.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,12 +1,11 @@
 class Api::FormsController < ApplicationController
   
-  before_action :set_current_user
+  before_action :set_current_account
   before_action :set_form, only: [:edit, :update, :destroy]
 
   # GET /api/forms
   # GET /api/forms.json
   def index
-    @account = @current_user.account
     @forms = @account.forms
   end
 
@@ -22,8 +21,8 @@ class Api::FormsController < ApplicationController
   # POST /api/forms
   # POST /api/forms.json
   def create
-    @form = Form.new(form_params)
-    @form.account_id = @current_user.account.id
+    @form = ::Form.new(form_params) # :: forces root namespace
+    @form.account_id = @account.id
 
     respond_to do |format|
       if @form.save
@@ -57,12 +56,12 @@ class Api::FormsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_current_user
-      @current_user = current_user
+    def set_current_account
+      @account = current_user.account
     end
     
     def set_form
-      @form = Form.find(params[:id])
+      @form = ::Form.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

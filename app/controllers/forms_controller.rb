@@ -3,7 +3,7 @@ class FormsController < ApplicationController
   def index
   end
 
-  def edit
+  def manage
   end
   
 end

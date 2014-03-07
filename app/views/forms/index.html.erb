@@ -21,6 +21,7 @@
       <div class="form-group">
         <label for="form_name">Name</label>
         <input id="form_name" class="form-control" ng-model="editableForm.name" type="text">
+        <span class="help-block" ng-show="errorName">{{ errorName }}</span>
       </div>
 
       <div class="actions">
