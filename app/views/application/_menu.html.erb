@@ -4,7 +4,10 @@
       <%= link_to 'Dashboard', authenticated_root_path %>
     </li>
     <li class="<%= current_uri == people_path ? 'active' : '' %>">
-    	<%= link_to 'People', people_path %>
+      <%= link_to 'People', people_path %>
+    </li>
+    <li class="<%= current_uri == forms_path ? 'active' : '' %>">
+      <%= link_to 'Forms', forms_path %>
     </li>
   </ul>
   <ul class="nav navbar-nav navbar-right">

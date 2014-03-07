@@ -7,7 +7,6 @@ FidoBakku::Application.routes.draw do
     :path => '',
     :path_names => { :sign_in => 'login', :sign_out => 'logout', :sign_up => 'signup' }
   
-  #get 'dashboard/index'
   authenticated :user do
     root :to => 'dashboard#index', :as => :authenticated_root
   end
@@ -15,9 +14,11 @@ FidoBakku::Application.routes.draw do
   root :to => redirect('/login', status: 302)
   
   get 'people' => 'people#index', as: :people
+  get 'forms' => 'forms#index', as: :forms
   
   namespace :api, defaults: { format: :json } do
     resources :users, except: [:new]
+    resources :forms, except: [:new]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
