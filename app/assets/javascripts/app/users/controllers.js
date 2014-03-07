@@ -9,13 +9,16 @@ UserCtrl.controller('UserCtrl', ['$scope', 'User', function($scope, User) {
   $scope.users = User.query();
   
   var createUser = function(newUser) {
-    $scope.users.push(User.save(newUser));
+    User.save(newUser);
+    $scope.users = User.query();
+    // $scope.users.push(User.save(newUser));
     $scope.editableUser = {};
     $scope.editableUserForm.$setPristine();
   }
   
   var updateUser = function(user) {
     user.$update().then(function() {
+      $scope.users = User.query();
       $scope.editableUser = {};
       $scope.editableUserForm.$setPristine();
     });
@@ -31,7 +34,7 @@ UserCtrl.controller('UserCtrl', ['$scope', 'User', function($scope, User) {
   }
   
   $scope.editUser = function(user) {
-    $scope.editableUser = user;
+    $scope.editableUser = angular.copy(user);
   }
   
   $scope.deleteUser = function(user) {
