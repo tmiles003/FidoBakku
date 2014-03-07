@@ -1,2 +1,34 @@
-<h1>Forms</h1>
-<p>Find me in app/views/forms/index.html.erb</p>
+<h1>Listing forms</h1>
+
+<div class="row" ng-controller="FormCtrl">
+
+  <div class="col-md-9">
+    <ul class="list-group">
+      <li ng-repeat="form in forms" class="list-group-item">
+        {{ form.name }}
+        <button class="" data-ng-click="editForm(form)">Edit</button>
+        <button class="" data-ng-click="deleteForm(form)">Delete</button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-md-3">
+
+    <form accept-charset="UTF-8" novalidate name="editableFormForm">
+
+      <input type="hidden" ng-model="editableForm.id">
+      
+      <div class="form-group">
+        <label for="form_name">Name</label>
+        <input id="form_name" class="form-control" ng-model="editableForm.name" type="text">
+      </div>
+
+      <div class="actions">
+        <input ng-click="saveForm(editableForm)" type="submit" value="Save">
+      </div>
+      
+    </form>
+
+  </div>
+
+</div>
