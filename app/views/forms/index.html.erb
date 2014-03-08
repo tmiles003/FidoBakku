@@ -1,15 +1,19 @@
 <h1>Listing forms</h1>
 
-<div class="row" ng-controller="FormCtrl">
+<div ng-controller="FormCtrl">
+
+<div class="row">
 
   <div class="col-md-9">
-    <ul class="list-group">
-      <li ng-repeat="form in forms" class="list-group-item">
-        {{ form.name }}
-        <button class="" data-ng-click="editForm(form)">Edit</button>
-        <button class="" data-ng-click="deleteForm(form)">Delete</button>
-      </li>
-    </ul>
+    <table class="table table-hover">
+      <tr ng-repeat="form in forms | orderBy: '+name' ">
+        <td>{{ form.name }}</td>
+        <td>
+          <button class="" data-ng-click="editForm(form)">Edit</button>
+          <button class="" data-ng-click="deleteForm(form)">Delete</button>
+        </td>
+      </tr> 
+    </table>
   </div>
 
   <div class="col-md-3">
@@ -31,5 +35,7 @@
     </form>
 
   </div>
+
+</div>
 
 </div>

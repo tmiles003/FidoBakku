@@ -1,5 +1,7 @@
 class Form < ActiveRecord::Base
   
+  # belongs_to: :account
+  
   validates :name, length: {
     in: 4..250,
     too_short: 'Too short',

@@ -11,6 +11,11 @@ var fiApp = angular.module('fiApp', [
   'fiFormController'
 ]);
 
+/* fiApp.config(['$routeProvider', function($routeProvider) {
+  $routeProvider.when('/people', 
+    { templateUrl: '/partials/users/index.html', controller: 'UserCtrl' });
+}]); */
+
 // Declare app level module which depends on filters, and services
 /* angular.module('myApp', [
   'ngRoute',

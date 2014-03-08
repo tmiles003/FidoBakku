@@ -9,9 +9,7 @@ UserCtrl.controller('UserCtrl', ['$scope', 'User', function($scope, User) {
   $scope.users = User.query();
   
   var createUser = function(newUser) {
-    User.save(newUser);
-    $scope.users = User.query();
-    // $scope.users.push(User.save(newUser));
+    $scope.users.push(User.save(newUser));
     $scope.editableUser = {};
     $scope.editableUserForm.$setPristine();
   }
