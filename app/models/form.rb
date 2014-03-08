@@ -8,4 +8,8 @@ class Form < ActiveRecord::Base
     too_long: 'Too long'
   }
   
+  def slug
+    self.name.downcase.gsub(/[^a-z0-9]/, '-').squeeze('-')
+  end
+  
 end
