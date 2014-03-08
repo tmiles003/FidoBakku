@@ -1,6 +1,6 @@
 class FormSection < ActiveRecord::Base
   
-  belongs_to: :form
+  belongs_to :form
   
   validates :name, length: {
     in: 4..250,

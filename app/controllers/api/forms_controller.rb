@@ -1,7 +1,8 @@
 class Api::FormsController < ApplicationController
   
-  before_action :set_current_account
+  # before_action :authenticate_user!
   before_action :set_form, only: [:edit, :update, :destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_form
 
   # GET /api/forms
   # GET /api/forms.json
@@ -56,12 +57,13 @@ class Api::FormsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_current_account
+    def set_form
       @account = current_user.account
+      @form = ::Form.in_account(@account.id).find(params[:id])
     end
     
-    def set_form
-      @form = ::Form.find(params[:id])
+    def invalid_form
+      head :no_content
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

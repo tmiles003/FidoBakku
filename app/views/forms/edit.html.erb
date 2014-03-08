@@ -1,2 +1,27 @@
 <h1>Form#edit</h1>
-<p>Find me in app/views/forms/edit.html.erb</p>
+
+<div ng-controller="FormSectionCtrl">
+  <!-- can this be any better?.. -->
+  <input type="hidden" id="form_id" value="<%= @form.id %>">
+
+<div class="row">
+
+  <form accept-charset="UTF-8" novalidate name="editableSectionForm">
+
+    <input type="hidden" ng-model="editableSection.id">
+    
+    <div class="form-group">
+      <label for="section_name">Name</label>
+      <input id="section_name" class="form-control" ng-model="editableSection.name" type="text">
+      <span class="help-block" ng-show="errorName">{{ errorName }}</span>
+    </div>
+
+    <div class="actions">
+      <input ng-click="saveSection(editableSection)" type="submit" value="Save">
+    </div>
+    
+  </form>
+  
+</div>
+
+</div>

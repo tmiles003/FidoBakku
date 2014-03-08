@@ -20,7 +20,7 @@ FidoBakku::Application.routes.draw do
   namespace :api, defaults: { format: :json } do
     resources :users, except: [:new]
     resources :forms, except: [:new] do
-      resources :form_sections, shallow: true, :as => :sections, 
+      resources :form_sections, :as => :sections, # , shallow: true
         except: [:new, :show, :edit]
     end
   end
