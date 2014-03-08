@@ -32,7 +32,8 @@ class AccountController < ApplicationController
       if @account.save
         @account.users << @user
         sign_in @user
-        format.html { redirect_to authenticated_root_path, notice: 'Account was successfully created.' }
+        format.html { redirect_to authenticated_root_path, 
+          notice: 'Account was successfully created.' }
         #format.json { render action: 'show', status: :created, location: @account }
       else
         format.html { render action: 'new' }

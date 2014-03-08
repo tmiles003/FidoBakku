@@ -1,6 +1,6 @@
 class Form < ActiveRecord::Base
   
-  # belongs_to: :account
+  scope :in_account, ->(account_id) { where('account_id = ?', account_id) }
   
   validates :name, length: {
     in: 4..250,

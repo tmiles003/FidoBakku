@@ -15,7 +15,7 @@ FidoBakku::Application.routes.draw do
   
   get 'people' => 'people#index', as: :people
   get 'forms' => 'forms#index', as: :forms
-  get 'form/:id/manage' => 'forms#manage', as: :form_manage
+  get 'form/:id' => 'forms#edit', as: :form_manage
   
   namespace :api, defaults: { format: :json } do
     resources :users, except: [:new]

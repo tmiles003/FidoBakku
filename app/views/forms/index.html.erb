@@ -9,6 +9,7 @@
       <tr ng-repeat="form in forms | orderBy: '+name' ">
         <td>{{ form.name }}</td>
         <td>
+          <a href="{{ form.manage_path }}">Manage</a>
           <button class="" data-ng-click="editForm(form)">Edit</button>
           <button class="" data-ng-click="deleteForm(form)">Delete</button>
         </td>
