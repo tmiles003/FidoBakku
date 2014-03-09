@@ -10,12 +10,11 @@ class Api::FormSectionsController < ApplicationController
     @form_sections = @form.form_sections
   end
 
-  # POST /api/form_sections
-  # POST /api/form_sections.json
+  # POST /api/forms/:form_id/form_sections
+  # POST /api/forms/:form_id/form_sections.json
   def create
     @form_section = ::FormSection.new(form_section_params)
-    logger.info form_section_params.to_yaml
-    # @form_section.form_id = 
+    @form_section.ordr = 2000
 
     respond_to do |format|
       if @form_section.save
@@ -26,8 +25,8 @@ class Api::FormSectionsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /api/form_sections/1
-  # PATCH/PUT /api/form_sections/1.json
+  # PATCH/PUT /api/forms/:form_id/form_sections/1
+  # PATCH/PUT /api/forms/:form_id/form_sections/1.json
   def update
     respond_to do |format|
       if @form_section.update(form_section_params)
@@ -38,8 +37,8 @@ class Api::FormSectionsController < ApplicationController
     end
   end
 
-  # DELETE /api/form_sections/1
-  # DELETE /api/form_sections/1.json
+  # DELETE /api/forms/:form_id/form_sections/1
+  # DELETE /api/forms/:form_id/form_sections/1.json
   def destroy
     @form_section.destroy
     respond_to do |format|

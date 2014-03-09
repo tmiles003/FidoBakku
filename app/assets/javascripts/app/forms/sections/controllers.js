@@ -12,7 +12,7 @@ FormSectionCtrl.controller('FormSectionCtrl', ['$scope', 'FormSection', function
   var createSection = function(newSection) {
     Section.save({ form_id: $scope.formId, form_section: newSection },
       function(val, resp) {
-        $scope.sections.push(val); console.log( $scope.sections );
+        $scope.sections.push(val);
         $scope.editableSection = {};
         $scope.editableSectionForm.$setPristine();
       },
@@ -22,7 +22,7 @@ FormSectionCtrl.controller('FormSectionCtrl', ['$scope', 'FormSection', function
   }
   
   var updateSection = function(section) {
-    section.$update(function(val, resp) {
+    section.$update(function(val, resp) { // { form_id: $scope.formId },
       $scope.sections = Section.query();
       $scope.editableSection = {};
       $scope.editableSectionForm.$setPristine();
@@ -44,7 +44,7 @@ FormSectionCtrl.controller('FormSectionCtrl', ['$scope', 'FormSection', function
   }
   
   $scope.deleteSection = function(section) {
-    section.$delete().then(function() {
+    section.$delete({ form_id: $scope.formId }).then(function() {
       $scope.sections = _.without($scope.sections, section);
     });
   }

@@ -4,16 +4,18 @@
   <!-- fix when i can get routing to work (then take it from url) -->
   <input type="hidden" id="form_id" value="<%= @form.id %>">
   
-<div ng-repeat="section in sections | orderBy: '+ordr'">
+<div ng-repeat="section in sections | orderBy: '+ordr'" class="row">
   {{ section.name }}
+  <button class="" data-ng-click="deleteSection(section)">Delete</button>
+  
+  <div id="" class="row col-md-offset-1">
+  </div>
 </div>
 
 <div class="row">
 
-  <form accept-charset="UTF-8" novalidate name="editableSectionForm">
-
+  <form accept-charset="utf-8" novalidate name="editableSectionForm">
     <input type="hidden" ng-model="editableSection.id">
-    
     <div class="form-group">
       <label for="section_name">Name</label>
       <input id="section_name" class="form-control" ng-model="editableSection.name" type="text">
