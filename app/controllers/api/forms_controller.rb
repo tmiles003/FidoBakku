@@ -1,6 +1,7 @@
 class Api::FormsController < ApplicationController
   
   # before_action :authenticate_user!
+  before_action :set_account
   before_action :set_form, only: [:edit, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_form
 
@@ -8,15 +9,6 @@ class Api::FormsController < ApplicationController
   # GET /api/forms.json
   def index
     @forms = @account.forms
-  end
-
-  # GET /api/forms/1
-  # GET /api/forms/1.json
-  def show
-  end
-
-  # GET /api/forms/1/edit
-  def edit
   end
 
   # POST /api/forms
@@ -57,8 +49,11 @@ class Api::FormsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_form
+    def set_account
       @account = current_user.account
+    end
+    
+    def set_form
       @form = ::Form.in_account(@account.id).find(params[:id])
     end
     
