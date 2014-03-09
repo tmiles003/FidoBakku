@@ -9,6 +9,9 @@
     <li class="<%= current_uri == forms_path ? 'active' : '' %>">
       <%= link_to 'Forms', forms_path %>
     </li>
+    <li class="<%= current_uri == reviews_path ? 'active' : '' %>">
+      <%= link_to 'Reviews', reviews_path %>
+    </li>
   </ul>
   <ul class="nav navbar-nav navbar-right">
     <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>

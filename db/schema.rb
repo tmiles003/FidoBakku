@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140309084405) do
+ActiveRecord::Schema.define(version: 20140309103751) do
 
   create_table "account_users", force: true do |t|
     t.integer "account_id"
@@ -51,6 +51,15 @@ ActiveRecord::Schema.define(version: 20140309084405) do
   create_table "forms", force: true do |t|
     t.integer  "account_id"
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "reviews", force: true do |t|
+    t.integer  "account_id"
+    t.string   "title"
+    t.boolean  "open"
+    t.boolean  "archived"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

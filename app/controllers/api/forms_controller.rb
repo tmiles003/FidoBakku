@@ -2,7 +2,7 @@ class Api::FormsController < ApplicationController
   
   # before_action :authenticate_user!
   before_action :set_account
-  before_action :set_form, only: [:edit, :update, :destroy]
+  before_action :set_form, only: [:update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_form
 
   # GET /api/forms

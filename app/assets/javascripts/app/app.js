@@ -9,12 +9,13 @@ var fiApp = angular.module('fiApp', [
   
   'fiFormService',
   'fiFormController',
-  
   'fiFormSectionService',
   'fiFormSectionController',
-  
   'fiSectionBenchmarkService',
-  'fiSectionBenchmarkController'
+  'fiSectionBenchmarkController',
+  
+  'fiReviewService',
+  'fiReviewController'
 ]);
 
 /* fiApp.config(['$routeProvider', function($routeProvider) {

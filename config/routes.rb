@@ -1,9 +1,9 @@
 FidoBakku::Application.routes.draw do
   
-  namespace :api do
-    resources :benchmarks
-  end
-
+  get "reviews/index"
+  get "reviews/create"
+  get "reviews/update"
+  get "reviews/destroy"
   resources :account, except: [:index, :show]
 
   devise_for :users, 
@@ -18,8 +18,12 @@ FidoBakku::Application.routes.draw do
   root :to => redirect('/login', status: 302)
   
   get 'people' => 'people#index', as: :people
+  
   get 'forms' => 'forms#index', as: :forms
   get 'form/:id/:slug' => 'forms#edit', as: :form_manage
+  
+  get 'reviews' => 'reviews#index', as: :reviews
+  get 'review/:id/:slug' => 'reviews#edit', as: :review_manage
   
   namespace :api, defaults: { format: :json } do
     resources :users, except: [:new]
@@ -28,6 +32,7 @@ FidoBakku::Application.routes.draw do
         resources :benchmarks, except: [:new, :show, :edit]
       end
     end
+    resources :reviews, except: [:new, :show, :edit]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
