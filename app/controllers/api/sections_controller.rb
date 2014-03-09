@@ -1,17 +1,17 @@
-class Api::FormSectionsController < ApplicationController
+class Api::SectionsController < ApplicationController
   
   # before_action :authenticate_user!
   before_action :set_form, only: [:index]
   before_action :set_form_section, only: [:update, :destroy]
   
-  # GET /api/forms/:form_id/form_sections
-  # GET /api/forms/:form_id/form_sections.json
+  # GET /api/forms/:form_id/sections
+  # GET /api/forms/:form_id/sections.json
   def index
     @form_sections = @form.form_sections
   end
 
-  # POST /api/forms/:form_id/form_sections
-  # POST /api/forms/:form_id/form_sections.json
+  # POST /api/forms/:form_id/sections
+  # POST /api/forms/:form_id/sections.json
   def create
     @form_section = ::FormSection.new(form_section_params)
     @form_section.ordr = 2000
@@ -25,8 +25,8 @@ class Api::FormSectionsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /api/forms/:form_id/form_sections/1
-  # PATCH/PUT /api/forms/:form_id/form_sections/1.json
+  # PATCH/PUT /api/forms/:form_id/sections/1
+  # PATCH/PUT /api/forms/:form_id/sections/1.json
   def update
     respond_to do |format|
       if @form_section.update(form_section_params)
@@ -37,8 +37,8 @@ class Api::FormSectionsController < ApplicationController
     end
   end
 
-  # DELETE /api/forms/:form_id/form_sections/1
-  # DELETE /api/forms/:form_id/form_sections/1.json
+  # DELETE /api/forms/:form_id/sections/1
+  # DELETE /api/forms/:form_id/sections/1.json
   def destroy
     @form_section.destroy
     respond_to do |format|
