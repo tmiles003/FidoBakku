@@ -6,49 +6,48 @@ var SectionBenchmarkCtrl = angular.module('fiSectionBenchmarkController', []);
 
 SectionBenchmarkCtrl.controller('SectionBenchmarkCtrl', ['$scope', 'SectionBenchmark', function($scope, Benchmark) {
   
-  // $scope.formId = angular.element('#form_id').val();
-  // $scope.benchmarks = Benchmark.query({ form_id: $scope.formId });
-  console.log( $scope.$parent );
-  console.log( $scope.$parent.formId );
+  $scope.formId = $scope.$parent.formId;
+  $scope.sectionId = $scope.$parent.section.id;
+  $scope.benchmarks = Benchmark.query({ form_id: $scope.formId, section_id: $scope.sectionId });
   
-  /* var createSection = function(newSection) {
-    Section.save({ form_id: $scope.formId, form_section: newSection },
+  var createBenchmark = function(newBenchmark) {
+    Benchmark.save({ form_id: $scope.formId, section_id: $scope.sectionId, section_benchmark: newBenchmark },
       function(val, resp) {
-        $scope.sections.push(val);
-        $scope.editableSection = {};
-        $scope.editableSectionForm.$setPristine();
+        $scope.benchmarks.push(val);
+        $scope.editableBenchmark = {};
+        $scope.editableBenchmarkForm.$setPristine();
       },
       function(resp) {
         $scope.errorName = resp.data.name[0]; // clean this up a bit
       });
   }
   
-  var updateSection = function(section) {
-    section.$update(function(val, resp) { // { form_id: $scope.formId },
-      $scope.sections = Section.query();
-      $scope.editableSection = {};
-      $scope.editableSectionForm.$setPristine();
+  var updateBenchmark = function(benchmark) {
+    benchmark.$update({ form_id: $scope.formId, section_id: $scope.sectionId }, function(val, resp) {
+      $scope.benchmarks = Benchmark.query({ form_id: $scope.formId, section_id: $scope.sectionId });
+      $scope.editableBenchmark = {};
+      $scope.editableBenchmarkForm.$setPristine();
     });
   }
   
-  $scope.saveSection = function(section) {
+  $scope.saveBenchmark = function(benchmark) {
     $scope.errorName = null;
-    if (section.id) {
-      updateSection(section);
+    if (benchmark.id) {
+      updateBenchmark(benchmark);
     }
     else {
-      createSection(section);
+      createBenchmark(benchmark);
     }
   }
   
-  $scope.editSection = function(section) {
-    $scope.editableSection = angular.copy(section);
+  $scope.editBenchmark = function(benchmark) {
+    $scope.editableBenchmark = angular.copy(benchmark);
   }
   
-  $scope.deleteSection = function(section) {
-    section.$delete({ form_id: $scope.formId }).then(function() {
-      $scope.sections = _.without($scope.sections, section);
+  $scope.deleteBenchmark = function(benchmark) {
+    benchmark.$delete({ form_id: $scope.formId, section_id: $scope.sectionId }).then(function() {
+      $scope.benchmarks = _.without($scope.benchmarks, benchmark);
     });
-  } */
+  }
   
 }]);

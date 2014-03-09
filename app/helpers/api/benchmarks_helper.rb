@@ -1,0 +1,2 @@
+module Api::BenchmarksHelper
+end

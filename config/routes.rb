@@ -1,5 +1,9 @@
 FidoBakku::Application.routes.draw do
   
+  namespace :api do
+    resources :benchmarks
+  end
+
   resources :account, except: [:index, :show]
 
   devise_for :users, 

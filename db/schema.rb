@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140308051826) do
+ActiveRecord::Schema.define(version: 20140309084405) do
 
   create_table "account_users", force: true do |t|
     t.integer "account_id"
@@ -31,6 +31,14 @@ ActiveRecord::Schema.define(version: 20140308051826) do
   end
 
   add_index "accounts", ["email"], name: "index_accounts_on_email", unique: true, using: :btree
+
+  create_table "form_section_benchmarks", force: true do |t|
+    t.integer  "section_id"
+    t.text     "content"
+    t.integer  "ordr"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "form_sections", force: true do |t|
     t.integer  "form_id"

@@ -66,6 +66,7 @@ class Api::SectionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def form_section_params
-      params.require(:form_section).permit(:name, :ordr).merge(form_id: params.require(:form_id))
+      params.require(:form_section).permit(:name, :ordr)
+        .merge(form_id: params.require(:form_id))
     end
 end

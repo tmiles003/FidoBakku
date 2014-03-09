@@ -1,4 +1,4 @@
 
-json.array!(@form_sections) do |form_section|
-  json.extract! form_section, :id, :name, :ordr
+json.array!(@form_sections) do |section|
+  json.extract! section, :id, :name, :ordr
 end

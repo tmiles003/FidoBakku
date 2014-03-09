@@ -23,7 +23,7 @@ FormSectionCtrl.controller('FormSectionCtrl', ['$scope', 'FormSection', function
   
   var updateSection = function(section) {
     section.$update(function(val, resp) { // { form_id: $scope.formId },
-      $scope.sections = Section.query();
+      $scope.sections = Section.query({ form_id: $scope.formId });
       $scope.editableSection = {};
       $scope.editableSectionForm.$setPristine();
     });

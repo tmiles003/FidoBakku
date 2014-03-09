@@ -10,13 +10,15 @@
   
   <div class="row col-md-offset-1" ng-controller="SectionBenchmarkCtrl">
     <div ng-repeat="benchmark in benchmarks | orderBy: '+ordr'" class="row">
+    {{ benchmark.content }}
+    <button class="" data-ng-click="deleteBenchmark(benchmark)">Delete</button>
     </div>
     
     <form accept-charset="utf-8" novalidate name="editableBenchmarkForm">
       <input type="hidden" ng-model="editableBenchmark.id">
       <div class="form-group">
-        <label for="benchmark_name">Name</label>
-        <input id="benchmark_name" class="form-control" ng-model="editableBenchmark.name" type="text">
+        <label for="benchmark_content">Content</label>
+        <input id="benchmark_content" class="form-control" ng-model="editableBenchmark.content" type="text">
         <span class="help-block" ng-show="errorName">{{ errorName }}</span>
       </div>
 
