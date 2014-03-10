@@ -1,6 +1,6 @@
 class Api::SectionsController < ApplicationController
   
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
   before_action :set_form, only: [:index]
   before_action :set_form_section, only: [:update, :destroy]
   

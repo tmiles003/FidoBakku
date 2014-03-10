@@ -1,21 +1,24 @@
 FidoBakku::Application.routes.draw do
   
-  get "reviews/index"
-  get "reviews/create"
-  get "reviews/update"
-  get "reviews/destroy"
   resources :account, except: [:index, :show]
 
   devise_for :users, 
     :controllers => { :registrations => 'registrations' },
     :path => '',
-    :path_names => { :sign_in => 'login', :sign_out => 'logout', :sign_up => 'signup' }
+    :path_names => { :sign_in => 'login', :sign_out => 'logout' },
+    :skip => [:registrations]
   
   authenticated :user do
     root :to => 'dashboard#index', :as => :authenticated_root
   end
   
   root :to => redirect('/login', status: 302)
+  
+  resource :user, only: [:edit] do
+    collection do 
+      patch 'update'
+    end
+  end
   
   get 'people' => 'people#index', as: :people
   

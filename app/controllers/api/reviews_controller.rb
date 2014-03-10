@@ -1,6 +1,6 @@
 class Api::ReviewsController < ApplicationController
   
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
   before_action :set_account
   before_action :set_review, only: [:update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_review

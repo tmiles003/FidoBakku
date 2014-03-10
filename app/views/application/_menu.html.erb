@@ -14,5 +14,10 @@
     </li>
   </ul>
   <ul class="nav navbar-nav navbar-right">
-    <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+    <li>
+      <%= link_to 'Change your password', edit_user_path %>
+    </li>
+    <li>
+      <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+    </li>
   </ul>

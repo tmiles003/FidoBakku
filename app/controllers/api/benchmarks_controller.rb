@@ -1,6 +1,6 @@
 class Api::BenchmarksController < ApplicationController
   
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
   before_action :set_form_section, only: [:index]
   before_action :set_section_benchmark, only: [:update, :destroy]
 

@@ -1,10 +1,11 @@
 class Api::UsersController < ApplicationController
   
-  include PeopleHelper
-  
+  before_action :authenticate_user!
   before_action :set_current_user
   before_action :set_user, only: [:edit, :update, :destroy]
-
+  
+  include PeopleHelper
+  
   # GET /api/users
   # GET /api/users.json
   def index
