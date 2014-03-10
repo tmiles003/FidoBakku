@@ -32,5 +32,7 @@ fiApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
     { templateUrl: '/templates/forms/index.html', controller: 'FormCtrl' });
   $routeProvider.when('/form/:id/:slug', 
     { templateUrl: '/templates/forms/edit.html', controller: 'FormSectionCtrl' });
+  $routeProvider.when('/reviews', 
+    { templateUrl: '/templates/reviews/index.html', controller: 'ReviewCtrl' });
   $routeProvider.otherwise({ redirectTo: '/dashboard' });
 }]);

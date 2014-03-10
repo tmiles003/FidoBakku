@@ -15,7 +15,8 @@ FidoBakku::Application.routes.draw do
     end
   end
   
-  get '/' => 'welcome#application', as: :dashboard
+  # get '/' => 'welcome#application', as: :dashboard
+  get '/.*', :to => 'welcome#application'
   
   get 'form/:id/:slug' => 'welcome#application', as: :form_manage
   get 'review/:id/:slug' => 'welcome#application', as: :review_manage
