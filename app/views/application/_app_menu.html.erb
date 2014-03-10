@@ -1,0 +1,22 @@
+  <ul class="nav navbar-nav">
+    <li class="active">
+      <a href="/#/dashboard">Dashboard</a>
+    </li>
+    <li>
+      <a href="/#/people">People</a>
+    </li>
+    <li>
+      <a href="/#/forms">Forms</a>
+    </li>
+    <li>
+      <a href="/#/reviews">Reviews</a>
+    </li>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+    <li>
+      <%= link_to 'Change your password', edit_user_path %>
+    </li>
+    <li>
+      <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+    </li>
+  </ul>

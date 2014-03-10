@@ -4,7 +4,7 @@ class Api::UsersController < ApplicationController
   before_action :set_current_user
   before_action :set_user, only: [:edit, :update, :destroy]
   
-  include PeopleHelper
+  include UsersHelper
   
   # GET /api/users
   # GET /api/users.json

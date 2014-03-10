@@ -1,6 +1,6 @@
 class AccountController < ApplicationController
   
-  include PeopleHelper
+  include UsersHelper
   
   before_action :set_account, only: [:edit, :update, :destroy]
 
@@ -32,7 +32,7 @@ class AccountController < ApplicationController
       if @account.save
         @account.users << @user
         sign_in @user
-        format.html { redirect_to authenticated_root_path, 
+        format.html { redirect_to dashboard_path, 
           notice: 'Account was successfully created.' }
         #format.json { render action: 'show', status: :created, location: @account }
       else

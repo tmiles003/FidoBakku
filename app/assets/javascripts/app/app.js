@@ -4,6 +4,9 @@ var fiApp = angular.module('fiApp', [
   'ngRoute',
   'ngResource',
   
+  'fiDashboardService',
+  'fiDashboardController',
+  
   'fiUserService',
   'fiUserController',
   
@@ -18,11 +21,16 @@ var fiApp = angular.module('fiApp', [
   'fiReviewController'
 ]);
 
-/* fiApp.config(['$routeProvider', function($routeProvider) {
+fiApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+  // $locationProvider.html5Mode(true); // nice urls.
+  
+  $routeProvider.when('/dashboard', 
+    { templateUrl: '/templates/dashboard.html', controller: 'DashboardCtrl' });
   $routeProvider.when('/people', 
-      { templateUrl: '/partials/users/index.html', controller: 'UserCtrl' });
+    { templateUrl: '/templates/users/index.html', controller: 'UserCtrl' });
   $routeProvider.when('/forms', 
-      { templateUrl: '/templates/forms/index.html', controller: 'FormCtrl' });
-  $routeProvider.when('/forms/:id/:slug', 
-      { templateUrl: '/templates/forms/edit.html', controller: 'FormSectionCtrl' });
-}]); */
+    { templateUrl: '/templates/forms/index.html', controller: 'FormCtrl' });
+  $routeProvider.when('/form/:id/:slug', 
+    { templateUrl: '/templates/forms/edit.html', controller: 'FormSectionCtrl' });
+  $routeProvider.otherwise({ redirectTo: '/dashboard' });
+}]);

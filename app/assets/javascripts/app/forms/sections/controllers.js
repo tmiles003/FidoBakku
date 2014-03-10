@@ -4,9 +4,9 @@
 
 var FormSectionCtrl = angular.module('fiFormSectionController', []);
 
-FormSectionCtrl.controller('FormSectionCtrl', ['$scope', 'FormSection', function($scope, Section) {
+FormSectionCtrl.controller('FormSectionCtrl', ['$scope', 'FormSection', '$routeParams', function($scope, Section, $routeParams) {
   
-  $scope.formId = angular.element('#form_id').val();
+  $scope.formId = $routeParams.id;
   $scope.sections = Section.query({ form_id: $scope.formId });
   
   var createSection = function(newSection) {

@@ -1,23 +1,7 @@
-<% current_uri = request.env['PATH_INFO'] %>
   <ul class="nav navbar-nav">
-    <li class="<%= current_uri == authenticated_root_path ? 'active' : '' %>">
-      <%= link_to 'Dashboard', authenticated_root_path %>
-    </li>
-    <li class="<%= current_uri == people_path ? 'active' : '' %>">
-      <%= link_to 'People', people_path %>
-    </li>
-    <li class="<%= current_uri == forms_path ? 'active' : '' %>">
-      <%= link_to 'Forms', forms_path %>
-    </li>
-    <li class="<%= current_uri == reviews_path ? 'active' : '' %>">
-      <%= link_to 'Reviews', reviews_path %>
-    </li>
   </ul>
   <ul class="nav navbar-nav navbar-right">
     <li>
-      <%= link_to 'Change your password', edit_user_path %>
-    </li>
-    <li>
-      <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+      <a href="/login">Login</a>
     </li>
   </ul>

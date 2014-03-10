@@ -1,18 +1,13 @@
 FidoBakku::Application.routes.draw do
   
+  root 'welcome#index'
+  
   resources :account, except: [:index, :show]
 
   devise_for :users, 
-    :controllers => { :registrations => 'registrations' },
     :path => '',
     :path_names => { :sign_in => 'login', :sign_out => 'logout' },
     :skip => [:registrations]
-  
-  authenticated :user do
-    root :to => 'dashboard#index', :as => :authenticated_root
-  end
-  
-  root :to => redirect('/login', status: 302)
   
   resource :user, only: [:edit] do
     collection do 
@@ -20,13 +15,10 @@ FidoBakku::Application.routes.draw do
     end
   end
   
-  get 'people' => 'people#index', as: :people
+  get '/' => 'welcome#application', as: :dashboard
   
-  get 'forms' => 'forms#index', as: :forms
-  get 'form/:id/:slug' => 'forms#edit', as: :form_manage
-  
-  get 'reviews' => 'reviews#index', as: :reviews
-  get 'review/:id/:slug' => 'reviews#edit', as: :review_manage
+  get 'form/:id/:slug' => 'welcome#application', as: :form_manage
+  get 'review/:id/:slug' => 'welcome#application', as: :review_manage
   
   namespace :api, defaults: { format: :json } do
     resources :users, except: [:new]
