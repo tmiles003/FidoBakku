@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140309103751) do
+ActiveRecord::Schema.define(version: 20140310184800) do
 
   create_table "account_users", force: true do |t|
     t.integer "account_id"
@@ -32,17 +32,9 @@ ActiveRecord::Schema.define(version: 20140309103751) do
 
   add_index "accounts", ["email"], name: "index_accounts_on_email", unique: true, using: :btree
 
-  create_table "form_section_benchmarks", force: true do |t|
-    t.integer  "section_id"
+  create_table "benchmarks", force: true do |t|
+    t.integer  "topic_id"
     t.text     "content"
-    t.integer  "ordr"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "form_sections", force: true do |t|
-    t.integer  "form_id"
-    t.string   "name"
     t.integer  "ordr"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -60,6 +52,14 @@ ActiveRecord::Schema.define(version: 20140309103751) do
     t.string   "title"
     t.boolean  "open"
     t.boolean  "archived"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "topics", force: true do |t|
+    t.integer  "form_id"
+    t.string   "name"
+    t.integer  "ordr"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

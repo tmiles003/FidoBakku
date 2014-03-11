@@ -2,4 +2,40 @@
 
 <div ng-controller="ReviewCtrl">
 
+<div class="row">
+
+  <div class="col-md-8">
+    <table class="table table-hover">
+      <tr ng-repeat="review in reviews | orderBy: '-created'" id="review_{{ review.id }}">
+        <td>{{ review.title }}</td>
+        <td>
+        	<a href="{{ review.manage_path }}">Manage</a>
+          <button class="" data-ng-click="editReview(review)">Edit</button>
+          <button class="" data-ng-click="deleteReview(review)">Delete</button>
+        </td>
+      </tr> 
+    </table>
+  </div>
+
+  <div class="col-md-4">
+
+    <form accept-charset="utf-8" novalidate name="editableReviewForm">
+
+      <input type="hidden" ng-model="editableReview.id">
+      
+      <div class="form-group">
+        <label for="review_title">Name</label>
+        <input id="review_title" class="form-control" ng-model="editableReview.title" type="text">
+      </div>
+
+      <div class="actions">
+        <input ng-click="saveReview(editableReview)" type="submit" value="Save">
+      </div>
+      
+    </form>
+
+  </div>
+
+</div>
+
 </div>

@@ -23,12 +23,15 @@ FidoBakku::Application.routes.draw do
   
   namespace :api, defaults: { format: :json } do
     resources :users, except: [:new]
-    resources :forms, except: [:new] do
-      resources :sections, except: [:new, :show, :edit] do
-        resources :benchmarks, except: [:new, :show, :edit]
-      end
+    
+    resources :topics, except: [:index, :show, :new, :edit] do 
+      resources :benchmarks, except: [:show, :new, :edit], shallow: true
     end
-    resources :reviews, except: [:new, :show, :edit]
+    resources :forms, except: [:show, :new] do
+      resources :topics, only: [:index], shallow: true
+    end
+    
+    resources :reviews, except: [:show, :new, :edit]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -12,13 +12,13 @@ var fiApp = angular.module('fiApp', [
   
   'fiFormService',
   'fiFormController',
-  'fiFormSectionService',
-  'fiFormSectionController',
-  'fiSectionBenchmarkService',
-  'fiSectionBenchmarkController',
+  'fiFormManageService',
+  'fiFormManageController',
   
   'fiReviewService',
-  'fiReviewController'
+  'fiReviewController',
+  // 'fiReviewManageService',
+  // 'fiReviewManageController'
 ]);
 
 fiApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
@@ -31,8 +31,10 @@ fiApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
   $routeProvider.when('/forms', 
     { templateUrl: '/templates/forms/index.html', controller: 'FormCtrl' });
   $routeProvider.when('/form/:id/:slug', 
-    { templateUrl: '/templates/forms/edit.html', controller: 'FormSectionCtrl' });
+    { templateUrl: '/templates/forms/manage.html', controller: 'TopicCtrl' });
   $routeProvider.when('/reviews', 
     { templateUrl: '/templates/reviews/index.html', controller: 'ReviewCtrl' });
+  $routeProvider.when('/review/:id/:slug', 
+    { templateUrl: '/templates/reviews/manage.html', controller: 'ReviewManageCtrl' });
   $routeProvider.otherwise({ redirectTo: '/dashboard' });
 }]);
