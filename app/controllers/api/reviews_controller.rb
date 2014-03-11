@@ -17,11 +17,11 @@ class Api::ReviewsController < ApplicationController
     @review = ::Review.new(review_params) # :: forces root namespace
     @review.account_id = @account.id
 
-    respond_to do |reviewat|
+    respond_to do |format|
       if @review.save
-        reviewat.json { render json: @review, status: :created }
+        format.json { render json: @review, status: :created }
       else
-        reviewat.json { render json: @review.errors, status: :unprocessable_entity }
+        format.json { render json: @review.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -29,11 +29,11 @@ class Api::ReviewsController < ApplicationController
   # PATCH/PUT /api/reviews/1
   # PATCH/PUT /api/reviews/1.json
   def update
-    respond_to do |reviewat|
+    respond_to do |format|
       if @review.update(review_params)
-        reviewat.json { head :no_content }
+        format.json { head :no_content }
       else
-        reviewat.json { render json: @review.errors, status: :unprocessable_entity }
+        format.json { render json: @review.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -42,8 +42,8 @@ class Api::ReviewsController < ApplicationController
   # DELETE /api/reviews/1.json
   def destroy
     @review.destroy
-    respond_to do |reviewat|
-      reviewat.json { head :no_content }
+    respond_to do |format|
+      format.json { head :no_content }
     end
   end
 

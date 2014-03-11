@@ -17,8 +17,8 @@ var fiApp = angular.module('fiApp', [
   
   'fiReviewService',
   'fiReviewController',
-  // 'fiReviewManageService',
-  // 'fiReviewManageController'
+  'fiReviewManageService',
+  'fiReviewManageController'
 ]);
 
 fiApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
@@ -35,6 +35,7 @@ fiApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
   $routeProvider.when('/reviews', 
     { templateUrl: '/templates/reviews/index.html', controller: 'ReviewCtrl' });
   $routeProvider.when('/review/:id/:slug', 
-    { templateUrl: '/templates/reviews/manage.html', controller: 'ReviewManageCtrl' });
+    { templateUrl: '/templates/reviews/manage.html', controller: 'UserReviewCtrl' });
+  
   $routeProvider.otherwise({ redirectTo: '/dashboard' });
 }]);

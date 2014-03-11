@@ -32,6 +32,7 @@ FidoBakku::Application.routes.draw do
     end
     
     resources :reviews, except: [:show, :new, :edit]
+    resources :user_reviews, except: [:index, :new, :edit]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

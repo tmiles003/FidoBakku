@@ -7,4 +7,7 @@ class User < ActiveRecord::Base
   has_one :account_user, dependent: :destroy
   has_one :account, through: :account_user
   
+  has_many :user_reviews
+  #has_many :user_reviews, as: :peer_reviews, foreign_key: :reviewer_id
+  
 end
