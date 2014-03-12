@@ -3,8 +3,9 @@ class Api::ProfileController < ApplicationController
   before_action :authenticate_user!
   
   def update
-    @user = User.find(current_user.id)
-    if @user.update(user_params)
+    @user = ::User.find(current_user.id)
+    logger.info @user.to_yaml
+    if @user.update(passwd_params)
       sign_in @user, :bypass => true
       head :no_content
     else
@@ -14,8 +15,8 @@ class Api::ProfileController < ApplicationController
   
   private
     # Never trust parameters from the scary internet, only allow the white list through.
-    def form_params
-      params.required(:user).permit(:password, :password_conf)
+    def passwd_params
+      params.required(:profile).permit(:password, :password_confirmation)
     end
   
 end

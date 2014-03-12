@@ -9,12 +9,6 @@ FidoBakku::Application.routes.draw do
     :path_names => { :sign_in => 'login', :sign_out => 'logout' },
     :skip => [:registrations]
   
-  resource :user, only: [:edit] do
-    collection do 
-      patch 'update'
-    end
-  end
-  
   # get '/' => 'welcome#application', as: :dashboard
   get '/.*', :to => 'welcome#application'
   
@@ -40,6 +34,13 @@ FidoBakku::Application.routes.draw do
     
     resources :reviews, except: [:show, :new, :edit]
     resources :user_reviews, except: [:index, :new, :edit]
+    
+    resource :user, path: '/profile', controller: :profile, only: [:update] do 
+      collection do
+        post 'update'
+      end
+    end
+    
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
