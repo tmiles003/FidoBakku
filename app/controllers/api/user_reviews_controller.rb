@@ -2,13 +2,12 @@ class Api::UserReviewsController < ApplicationController
 	
   before_action :authenticate_user!
   before_action :set_account
-  #before_action :set_review
-  #rescue_from ActiveRecord::RecordNotFound, with: :invalid_review
+  before_action :set_review, only: [:show]
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_review
   
   # GET /api/user_reviews/1
   # GET /api/user_reviews/1.json
   def show
-    set_review
     @user_reviews = @review.user_reviews
   end
 
@@ -58,6 +57,7 @@ class Api::UserReviewsController < ApplicationController
     end
     
     def invalid_review
+      logger.warn 'Not allowed to see this review'
       head :no_content
     end
 
