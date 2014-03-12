@@ -2,12 +2,13 @@ class Api::UserReviewsController < ApplicationController
 	
   before_action :authenticate_user!
   before_action :set_account
-  before_action :set_review
-  rescue_from ActiveRecord::RecordNotFound, with: :invalid_review
+  #before_action :set_review
+  #rescue_from ActiveRecord::RecordNotFound, with: :invalid_review
   
   # GET /api/user_reviews/1
   # GET /api/user_reviews/1.json
   def show
+    set_review
     @user_reviews = @review.user_reviews
   end
 
@@ -64,6 +65,6 @@ class Api::UserReviewsController < ApplicationController
     def user_review_params
     	# allow array of user reviews?
       params.require(:user_review).permit(:user_id, :form_id, :reviewer_id)
-      	.merge(review_id: params.require(:id))
+      	.merge(review_id: params.require(:review_id))
     end
 end

@@ -10,6 +10,13 @@ class Api::FormsController < ApplicationController
   def index
     @forms = @account.forms
   end
+  
+  # GET /api/forms/list
+  # GET /api/forms/list.json
+  def list
+    @account = @current_user.account
+    @forms = @account.forms
+  end
 
   # POST /api/forms
   # POST /api/forms.json

@@ -13,13 +13,11 @@ class Api::UsersController < ApplicationController
     @account_users = @account.account_users
   end
 
-  # GET /api/users/1
-  # GET /api/users/1.json
-  def show
-  end
-
-  # GET /api/users/1/edit
-  def edit
+  # GET /api/users/list
+  # GET /api/users/list.json
+  def list
+    @account = @current_user.account
+    @users = @account.account_users
   end
 
   # POST /api/users

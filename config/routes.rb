@@ -22,12 +22,19 @@ FidoBakku::Application.routes.draw do
   get 'review/:id/:slug' => 'welcome#application', as: :review_manage
   
   namespace :api, defaults: { format: :json } do
-    resources :users, except: [:new]
+    resources :users, except: [:new] do 
+      collection do 
+        get 'list'
+      end
+    end
     
     resources :topics, except: [:index, :show, :new, :edit] do 
       resources :benchmarks, except: [:show, :new, :edit], shallow: true
     end
     resources :forms, except: [:show, :new] do
+      collection do 
+        get 'list'
+      end
       resources :topics, only: [:index], shallow: true
     end
     

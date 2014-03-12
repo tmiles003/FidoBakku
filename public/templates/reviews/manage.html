@@ -1,29 +1,39 @@
 <h1>Manage reviews</h1>
 
-<div class="row">
 
-<form novalidate name="UserReviewForm">
+<form novalidate name="editableUserReviewForm">
+
+<div class="row">
 
   <div class="col-md-4">
     <h2>User</h2>
-    <select>
+    <select id="user_id" class="form-control" ng-model="editableUserReview.user_id" 
+      ng-options="user.id as user.name for user in users">
     </select>
   </div>
   
-  <div class="col-md-3">
+  <div class="col-md-4">
     <h2>Form</h2>
-    <select>
+    <select id="form_id" class="form-control" ng-model="editableUserReview.form_id"
+      ng-options="form.id as form.name for form in forms">
     </select>
   </div>
   
   <div class="col-md-4">
     <h2>Reviewer</h2>
-    <select>
+    <select id="review_id" class="form-control" ng-model="editableUserReview.reviewer_id" 
+      ng-options="user.id as user.name for user in users">
     </select>
   </div>
+
+</div>
+
+<div class="row">
   
-  <div class="col-md-1">
-    <button>Submit</button>
+  <div class="text-right">
+    <input ng-click="saveUserReview(editableUserReview)" type="submit" value="Submit">
   </div>
   
 </div>
+
+</form>
