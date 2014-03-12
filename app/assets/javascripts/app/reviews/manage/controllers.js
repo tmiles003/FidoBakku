@@ -2,9 +2,7 @@
 
 /* Controllers */
 
-var ReviewManageCtrl = angular.module('fiReviewManageController', []);
-
-ReviewManageCtrl.controller('UserReviewCtrl', ['$scope', 'UserReview', '$routeParams', function($scope, UserReview, $routeParams) {
+fiApp.controller('UserReviewCtrl', ['$scope', 'UserReviewSrv', '$routeParams', function($scope, UserReview, $routeParams) {
   
   $scope.userReviewId = $routeParams.id;
   $scope.userReviews = UserReview.query({ id: $scope.userReviewId });

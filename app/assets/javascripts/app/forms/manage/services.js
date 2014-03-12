@@ -2,9 +2,7 @@
 
 /* Services */
 
-var FormManageSrv = angular.module('fiFormManageService', []);
-
-FormManageSrv.factory('Topic', ['$resource', function($resource) {
+fiApp.factory('TopicSrv', ['$resource', function($resource) {
   
   return $resource('/api/topics/:id', 
     { id: '@id' }, 
@@ -13,7 +11,7 @@ FormManageSrv.factory('Topic', ['$resource', function($resource) {
     });
 }]);
 
-FormManageSrv.factory('Benchmark', ['$resource', function($resource) {
+fiApp.factory('BenchmarkSrv', ['$resource', function($resource) {
   
   return $resource('/api/benchmarks/:id', 
     { id: '@id' }, 

@@ -2,9 +2,7 @@
 
 /* Controllers */
 
-var FormManageCtrl = angular.module('fiFormManageController', []);
-
-FormManageCtrl.controller('TopicCtrl', ['$scope', 'Topic', '$routeParams', function($scope, Topic, $routeParams) {
+fiApp.controller('TopicCtrl', ['$scope', 'TopicSrv', '$routeParams', function($scope, Topic, $routeParams) {
   
   $scope.formId = $routeParams.id;
   $scope.topics = Topic.query({ form_id: $scope.formId });
@@ -51,7 +49,7 @@ FormManageCtrl.controller('TopicCtrl', ['$scope', 'Topic', '$routeParams', funct
   
 }]);
 
-FormManageCtrl.controller('BenchmarkCtrl', ['$scope', 'Benchmark', function($scope, Benchmark) {
+fiApp.controller('BenchmarkCtrl', ['$scope', 'BenchmarkSrv', function($scope, Benchmark) {
   
   // $scope.formId = $scope.$parent.formId;
   $scope.topicId = $scope.$parent.topic.id;

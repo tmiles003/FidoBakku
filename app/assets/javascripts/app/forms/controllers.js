@@ -2,9 +2,7 @@
 
 /* Controllers */
 
-var FormCtrl = angular.module('fiFormController', []);
-
-FormCtrl.controller('FormCtrl', ['$scope', 'Form', function($scope, Form) {
+fiApp.controller('FormCtrl', ['$scope', 'FormSrv', function($scope, Form) {
   
   $scope.forms = Form.query();
   

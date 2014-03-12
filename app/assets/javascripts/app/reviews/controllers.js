@@ -2,9 +2,7 @@
 
 /* Controllers */
 
-var ReviewCtrl = angular.module('fiReviewController', []);
-
-ReviewCtrl.controller('ReviewCtrl', ['$scope', 'Review', function($scope, Review) {
+fiApp.controller('ReviewCtrl', ['$scope', 'ReviewSrv', function($scope, Review) {
   
   $scope.reviews = Review.query();
   

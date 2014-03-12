@@ -2,11 +2,10 @@
 
 /* Controllers */
 
-var UserCtrl = angular.module('fiUserController', []);
-
-UserCtrl.controller('UserCtrl', ['$scope', 'User', function($scope, User) {
+fiApp.controller('UserCtrl', ['$scope', 'UserSrv', function($scope, User) {
   
   $scope.users = User.query();
+  $scope.roles = [{s:'user',l:'User'},{s:'manager',l:'Manager'},{s:'admin',l:'Admin'}]; // make this better
   
   var createUser = function(newUser) {
     $scope.users.push(User.save(newUser));

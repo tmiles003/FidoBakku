@@ -2,23 +2,7 @@
 
 var fiApp = angular.module('fiApp', [
   'ngRoute',
-  'ngResource',
-  
-  'fiDashboardService',
-  'fiDashboardController',
-  
-  'fiUserService',
-  'fiUserController',
-  
-  'fiFormService',
-  'fiFormController',
-  'fiFormManageService',
-  'fiFormManageController',
-  
-  'fiReviewService',
-  'fiReviewController',
-  'fiReviewManageService',
-  'fiReviewManageController'
+  'ngResource'
 ]);
 
 fiApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {

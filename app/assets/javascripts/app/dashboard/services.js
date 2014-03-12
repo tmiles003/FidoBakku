@@ -2,7 +2,5 @@
 
 /* Services */
 
-var DashboardSrv = angular.module('fiDashboardService', []);
-
-DashboardSrv.factory('Dashboard', [function() {
+fiApp.factory('DashboardSrv', [function() {
 }]);

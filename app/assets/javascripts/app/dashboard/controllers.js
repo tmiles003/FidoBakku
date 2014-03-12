@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-var DashboardCtrl = angular.module('fiDashboardController', []);
-
-DashboardCtrl.controller('DashboardCtrl', ['$scope', 'Dashboard', function($scope, Dashboard) {
+fiApp.controller('DashboardCtrl', ['$scope', 'DashboardSrv', function($scope, DashboardSrv) {
+	console.log( 'Hello' );
+	// console.log( Config );
 }]);

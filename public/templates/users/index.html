@@ -1,7 +1,5 @@
 <h1>Listing people</h1>
 
-<div ng-controller="UserCtrl">
-
 <div class="row">
 
   <div class="col-md-9">
@@ -34,10 +32,9 @@
       <div class="form-group">
         <label for="user_role">Role</label>
         <!-- input id="user_role" class="form-control" ng-model="editableUser.role" type="text" -->
-        <select id="user_role" ng-model="editableUser.role" class="form-control">
-          <option value="user">User</option>
-          <option value="manager">Manager</option>
-          <option value="admin">Admin</option>
+        <select id="user_role" ng-model="editableUser.role" class="form-control" 
+          ng-options="role.s as role.l for role in roles">
+          <!-- option></option -->
         </select>
       </div>
 
@@ -48,7 +45,5 @@
     </form>
 
   </div>
-
-</div>
 
 </div>
