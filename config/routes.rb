@@ -10,12 +10,16 @@ FidoBakku::Application.routes.draw do
     :skip => [:registrations]
   
   # get '/' => 'welcome#application', as: :dashboard
-  get '/.*', :to => 'welcome#application'
+  get '/.*', :to => 'welcome#application', as: :app_root
   
   get 'form/:id/:slug' => 'welcome#application', as: :form_manage
   get 'review/:id/:slug' => 'welcome#application', as: :review_manage
+  get 'user/:id/:slug' => 'welcome#application', as: :user_view
   
   namespace :api, defaults: { format: :json } do
+    
+    get 'dashboard/reviews' => 'dashboard#reviews'
+    
     resources :users, except: [:new] do 
       collection do 
         get 'list'

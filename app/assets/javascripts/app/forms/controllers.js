@@ -2,14 +2,14 @@
 
 /* Controllers */
 
-fiApp.controller('FormCtrl', ['$scope', 'FormSrv', function($scope, Form) {
+fiApp.controller('FormsCtrl', ['$scope', 'FormsSrv', function($scope, Forms) {
   
-  $scope.forms = Form.query();
+  $scope.forms = Forms.query();
   
   var createForm = function(newForm) {
     Form.save(newForm, 
       function(val, resp) {
-        $scope.forms = Form.query(); // can i do this better?
+        $scope.forms = Forms.query(); // can i do this better?
         $scope.editableForm = {};
         $scope.editableFormForm.$setPristine();
       }, 
@@ -20,7 +20,7 @@ fiApp.controller('FormCtrl', ['$scope', 'FormSrv', function($scope, Form) {
   
   var updateForm = function(form) {
     form.$update(function(val, resp) {
-      $scope.forms = Form.query();
+      $scope.forms = Forms.query();
       $scope.editableForm = {};
       $scope.editableFormForm.$setPristine();
     });

@@ -2,20 +2,20 @@
 
 /* Controllers */
 
-fiApp.controller('UserCtrl', ['$scope', 'UserSrv', function($scope, User) {
+fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', function($scope, Users) {
   
-  $scope.users = User.query();
+  $scope.users = Users.query();
   $scope.roles = [{s:'user',l:'User'},{s:'manager',l:'Manager'},{s:'admin',l:'Admin'}]; // make this better
   
   var createUser = function(newUser) {
-    $scope.users.push(User.save(newUser));
+    $scope.users.push(Users.save(newUser));
     $scope.editableUser = {};
     $scope.editableUserForm.$setPristine();
   }
   
   var updateUser = function(user) {
     user.$update().then(function() {
-      $scope.users = User.query();
+      $scope.users = Users.query();
       $scope.editableUser = {};
       $scope.editableUserForm.$setPristine();
     });

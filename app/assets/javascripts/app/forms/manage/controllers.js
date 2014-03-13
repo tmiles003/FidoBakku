@@ -2,10 +2,10 @@
 
 /* Controllers */
 
-fiApp.controller('TopicCtrl', ['$scope', 'TopicSrv', '$routeParams', function($scope, Topic, $routeParams) {
+fiApp.controller('TopicCtrl', ['$scope', 'TopicsSrv', '$routeParams', function($scope, Topics, $routeParams) {
   
   $scope.formId = $routeParams.id;
-  $scope.topics = Topic.query({ form_id: $scope.formId });
+  $scope.topics = Topics.query({ form_id: $scope.formId });
   
   var createTopic = function(newTopic) {
     Topic.save({ form_id: $scope.formId, topic: newTopic },
@@ -21,7 +21,7 @@ fiApp.controller('TopicCtrl', ['$scope', 'TopicSrv', '$routeParams', function($s
   
   var updateTopic = function(topic) {
     topic.$update(function(val, resp) { // { form_id: $scope.formId },
-      $scope.topics = Topic.query({ form_id: $scope.formId });
+      $scope.topics = Topics.query({ form_id: $scope.formId });
       $scope.editableTopic = {};
       $scope.editableTopicForm.$setPristine();
     });
@@ -49,11 +49,11 @@ fiApp.controller('TopicCtrl', ['$scope', 'TopicSrv', '$routeParams', function($s
   
 }]);
 
-fiApp.controller('BenchmarkCtrl', ['$scope', 'BenchmarkSrv', function($scope, Benchmark) {
+fiApp.controller('BenchmarksCtrl', ['$scope', 'BenchmarksSrv', function($scope, Benchmarks) {
   
   // $scope.formId = $scope.$parent.formId;
   $scope.topicId = $scope.$parent.topic.id;
-  $scope.benchmarks = Benchmark.query({ topic_id: $scope.topicId });
+  $scope.benchmarks = Benchmarks.query({ topic_id: $scope.topicId });
   
   var createBenchmark = function(newBenchmark) {
     Benchmark.save({ topic_id: $scope.topicId, benchmark: newBenchmark },
@@ -69,7 +69,7 @@ fiApp.controller('BenchmarkCtrl', ['$scope', 'BenchmarkSrv', function($scope, Be
   
   var updateBenchmark = function(benchmark) {
     benchmark.$update(function(val, resp) {
-      $scope.benchmarks = Benchmark.query({ topic_id: $scope.topicId });
+      $scope.benchmarks = Benchmarks.query({ topic_id: $scope.topicId });
       $scope.editableBenchmark = {};
       $scope.editableBenchmarkForm.$setPristine();
     });

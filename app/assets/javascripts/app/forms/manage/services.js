@@ -2,7 +2,7 @@
 
 /* Services */
 
-fiApp.factory('TopicSrv', ['$resource', function($resource) {
+fiApp.factory('TopicsSrv', ['$resource', function($resource) {
   
   return $resource('/api/topics/:id', 
     { id: '@id' }, 
@@ -11,7 +11,7 @@ fiApp.factory('TopicSrv', ['$resource', function($resource) {
     });
 }]);
 
-fiApp.factory('BenchmarkSrv', ['$resource', function($resource) {
+fiApp.factory('BenchmarksSrv', ['$resource', function($resource) {
   
   return $resource('/api/benchmarks/:id', 
     { id: '@id' }, 
