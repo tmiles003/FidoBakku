@@ -1,2 +1,3 @@
-class Api::AccountController < ApplicationController
+class Api::AccountController < Api::ApiController
+  
 end

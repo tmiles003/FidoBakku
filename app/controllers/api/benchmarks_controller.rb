@@ -1,6 +1,5 @@
-class Api::BenchmarksController < ApplicationController
+class Api::BenchmarksController < Api::ApiController
   
-  before_action :authenticate_user!
   before_action :set_topic, only: [:index, :create]
   before_action :set_benchmark, only: [:update, :destroy]
 

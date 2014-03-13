@@ -20,11 +20,7 @@ FidoBakku::Application.routes.draw do
     
     get 'dashboard/reviews' => 'dashboard#reviews'
     
-    resources :users, except: [:new] do 
-      collection do 
-        get 'list'
-      end
-    end
+    resources :users, except: [:new]
     
     resources :topics, except: [:index, :show, :new, :edit] do 
       resources :benchmarks, except: [:show, :new, :edit], shallow: true

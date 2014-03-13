@@ -1,6 +1,5 @@
-class Api::TopicsController < ApplicationController
+class Api::TopicsController < Api::ApiController
   
-  before_action :authenticate_user!
   before_action :set_form, only: [:index] # revisit this method
   before_action :set_topic, only: [:update, :destroy]
   

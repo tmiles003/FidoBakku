@@ -1,23 +1,13 @@
-class Api::UsersController < ApplicationController
+class Api::UsersController < Api::ApiController
   
-  before_action :authenticate_user!
-  before_action :set_current_user
-  before_action :set_user, only: [:edit, :update, :destroy]
+  before_action :set_account_user, only: [:edit, :update, :destroy]
   
   include UsersHelper
   
   # GET /api/users
   # GET /api/users.json
   def index
-    @account = @current_user.account
     @account_users = @account.account_users
-  end
-
-  # GET /api/users/list
-  # GET /api/users/list.json
-  def list
-    @account = @current_user.account
-    @users = @account.account_users
   end
 
   # POST /api/users
@@ -28,7 +18,7 @@ class Api::UsersController < ApplicationController
 
     respond_to do |format|
       if @new_user.save
-        @current_user.account.users << @new_user
+        @user.account.users << @new_user
         format.json { render json: @new_user, status: :created }
       else
         format.json { render json: @new_user.errors, status: :unprocessable_entity }
@@ -40,10 +30,10 @@ class Api::UsersController < ApplicationController
   # PATCH/PUT /api/users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      if @account_user.update(user_params)
         format.json { head :no_content }
       else
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: @account_user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -51,7 +41,7 @@ class Api::UsersController < ApplicationController
   # DELETE /api/users/1
   # DELETE /api/users/1.json
   def destroy
-    @user.destroy # unless @user.id != @current_user.id
+    @account_user.destroy # unless @user.id != @current_user.id
     respond_to do |format|
       format.json { head :no_content }
     end
@@ -59,12 +49,8 @@ class Api::UsersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_current_user
-      @current_user = current_user
-    end
-    
-    def set_user
-      @user = ::User.find(params[:id])
+    def set_account_user
+      @account_user = ::User.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

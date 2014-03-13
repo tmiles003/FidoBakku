@@ -1,6 +1,4 @@
-class Api::ProfileController < ApplicationController
-  
-  before_action :authenticate_user!
+class Api::ProfileController < Api::ApiController
   
   def update
     @user = ::User.find(current_user.id)

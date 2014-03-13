@@ -1,7 +1,5 @@
-class Api::UserReviewsController < ApplicationController
+class Api::UserReviewsController < Api::ApiController
 	
-  before_action :authenticate_user!
-  before_action :set_account
   before_action :set_review, only: [:show]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_review
   
@@ -48,9 +46,6 @@ class Api::UserReviewsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_account
-      @account = current_user.account
-    end
     
     def set_review
       @review = ::Review.in_account(@account.id).find(params[:id])
