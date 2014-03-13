@@ -9,6 +9,13 @@ class Api::UsersController < Api::ApiController
   def index
     @account_users = @account.account_users
   end
+  
+  # used in user_reviews
+  # GET /api/users/list
+  # GET /api/users/list.json
+  def list
+    @users = @account.account_users
+  end
 
   # POST /api/users
   # POST /api/users.json
