@@ -7,10 +7,14 @@ fiApp.controller('UserReviewsCtrl', ['$scope', 'UserReviewsSrv', '$routeParams',
   
   $scope.reviewId = $routeParams.id;
   $scope.userReviews = UserReviews.query({ id: $scope.reviewId });
-  $scope.users = [];
-  $http.get('/api/users/list').success(function(data) { $scope.users = data; });
-  $scope.forms = [];
-  $http.get('/api/forms/list').success(function(data) { $scope.forms = data; });
+  // $scope.users = [];
+  $http.get('/api/users/list').success(function(data) { 
+    $scope.users = data; 
+  });
+  // $scope.forms = [];
+  $http.get('/api/forms/list').success(function(data) { 
+    $scope.forms = data; 
+  });
   
   var createUserReview = function(newUserReview) {
     UserReview.save({ user_review: newUserReview, review_id: $scope.reviewId }, 

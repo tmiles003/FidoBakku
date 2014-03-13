@@ -36,4 +36,18 @@
   
 </div>
 
+<div class="row">
+  <table class="table table-hover">
+    <tr ng-repeat="userReview in userReviews">
+      <td>{{ userReview.user_name }}</td>
+      <td>{{ userReview.form_name }}</td>
+      <td>{{ userReview.reviewer_name }}</td>
+      <td>
+        <button class="" data-ng-click="editUserReview(userReview)">Edit</button>
+        <button class="" data-ng-click="deleteUserReview(userReview)">Delete</button>
+      </td>
+    </tr>
+  </table>
+</div>
+
 </form>

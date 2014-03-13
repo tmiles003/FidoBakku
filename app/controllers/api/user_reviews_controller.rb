@@ -2,11 +2,18 @@ class Api::UserReviewsController < Api::ApiController
 	
   before_action :set_review, only: [:show]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_review
+  before_action :set_user_review, only: [:update, :destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_user_review
   
   # GET /api/user_reviews/1
   # GET /api/user_reviews/1.json
   def show
-    @user_reviews = @review.user_reviews
+    cols = 'user_reviews.*, 
+            UNIX_TIMESTAMP(user_reviews.created_at) AS created_at,
+            users.name AS user_name, 
+            forms.name AS form_name, 
+            reviewers_user_reviews.name AS reviewer_name'
+    @user_reviews = @review.user_reviews.select(cols).joins(:user, :form, :reviewer)
   end
 
   # POST /api/user_reviews
@@ -53,6 +60,15 @@ class Api::UserReviewsController < Api::ApiController
     
     def invalid_review
       logger.warn 'Not allowed to see this review'
+      head :no_content
+    end
+    
+    def set_user_review
+      @user_review = ::UserReview.find(params[:id])
+    end
+    
+    def invalid_user_review
+      logger.warn 'User review does not exist'
       head :no_content
     end
 

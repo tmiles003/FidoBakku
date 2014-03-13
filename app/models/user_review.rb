@@ -1,7 +1,7 @@
 class UserReview < ActiveRecord::Base
   
   has_one :user, primary_key: :user_id, foreign_key: :id
-  has_one :form
-  # has_one :reviewer
+  has_one :form, primary_key: :form_id, foreign_key: :id
+  has_one :reviewer, class_name: 'User', primary_key: :reviewer_id, foreign_key: :id
   
 end
