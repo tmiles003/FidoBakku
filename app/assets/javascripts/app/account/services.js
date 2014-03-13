@@ -2,17 +2,6 @@
 
 /* Services */
 
-fiApp.factory('AccountSrv', ['$cacheFactory', '$http', function($cf, $http) {
+fiApp.factory('AccountSrv', ['$http', function($http) {
   
-  var accountCache = $cf('accountCache');  
-  var data = {};
-  
-  return {
-    getAccount: function() {
-      return '';
-    },
-    getUser: function() {
-      return '';
-    }
-  }
 }]);

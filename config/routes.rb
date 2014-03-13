@@ -18,6 +18,7 @@ FidoBakku::Application.routes.draw do
   
   namespace :api, defaults: { format: :json } do
     
+    get 'session' => 'session#index'
     get 'dashboard/reviews' => 'dashboard#reviews'
     
     resources :users, except: [:new]

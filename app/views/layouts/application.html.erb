@@ -23,12 +23,14 @@
     </div>
   </div>
   
-  <!-- div class="container" ng-controller="AccountCtrl">
-    {{ account.name }} - {{ user.name }}
-  </div -->
-
   <div class="container">
     <div ng-view></div>
+  </div>
+  
+  <div class="footer">
+    <div class="container" ng-controller="AccountCtrl">
+      <p class="text-center">{{ account.name }} - {{ user.name }}</p>
+    </div>
   </div>
 
 </body>

@@ -2,9 +2,13 @@
 
 /* Controllers */
 
-fiApp.controller('AccountCtrl', ['$scope', 'AccountSrv', function($scope, Account) {
+fiApp.controller('AccountCtrl', ['$scope', 'AccountSrv', 'SessionSrv', function($scope, Account, Session) {
   
-  $scope.account = { name: '' }; // Account.getAccount();
-  $scope.user = { name: '' }; // Account.getUser();
+  Session.getAccount().then(function(re) {
+    $scope.account = re.account;
+  });
+  Session.getUser().then(function(re) {
+    $scope.user = re.user;
+  });
   
 }]);
