@@ -2,6 +2,7 @@ class Api::UserReviewsController < Api::ApiController
 	
   before_action :set_review, only: [:show]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_review
+  
   before_action :set_user_review, only: [:update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_user_review
   

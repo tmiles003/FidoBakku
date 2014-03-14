@@ -4,6 +4,7 @@
 
 fiApp.controller('UserCtrl', ['$scope', function($scope) {
   
-  // stuff here.
-  
+  $scope.review = [];
+  $scope.topics = [];
+    
 }]);
