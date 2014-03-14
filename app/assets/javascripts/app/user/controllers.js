@@ -2,9 +2,12 @@
 
 /* Controllers */
 
-fiApp.controller('UserCtrl', ['$scope', function($scope) {
+fiApp.controller('UserCtrl', ['$scope', 'UserSrv', '$routeParams', 
+                  function($scope, User, $routeParams) {
   
-  $scope.review = [];
-  $scope.topics = [];
+  User.getReview($routeParams.id).success(function(data) {
+    $scope.review = data;
+    // console.log( $scope.review );
+  });
     
 }]);

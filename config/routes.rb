@@ -40,6 +40,12 @@ FidoBakku::Application.routes.draw do
     resources :reviews, except: [:show, :new, :edit]
     resources :user_reviews, except: [:index, :new, :edit]
     
+    resource :user_review, path: '/review/:user_id', controller: :review , only: [:show, :update] do
+      collection do 
+        post 'update'
+      end
+    end
+    
     resource :user, path: '/profile', controller: :profile, only: [:update] do 
       collection do
         post 'update'
