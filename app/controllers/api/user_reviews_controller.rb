@@ -1,20 +1,12 @@
 class Api::UserReviewsController < Api::ApiController
-	
-  before_action :set_review, only: [:show]
-  rescue_from ActiveRecord::RecordNotFound, with: :invalid_review
   
-  before_action :set_user_review, only: [:update, :destroy]
+  before_action :set_user_review, only: [:show, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_user_review
   
   # GET /api/user_reviews/1
   # GET /api/user_reviews/1.json
   def show
-    cols = 'user_reviews.*, 
-            UNIX_TIMESTAMP(user_reviews.created_at) AS created_at,
-            users.name AS user_name, 
-            forms.name AS form_name, 
-            reviewers_user_reviews.name AS reviewer_name'
-    @user_reviews = @review.user_reviews.select(cols).joins(:user, :form, :reviewer)
+    #
   end
 
   # POST /api/user_reviews
@@ -54,22 +46,13 @@ class Api::UserReviewsController < Api::ApiController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_review
-      @review = ::Review.in_account(@account.id).find(params[:id])
-    end
-    
-    def invalid_review
-      logger.warn 'Not allowed to see this review'
-      head :no_content
-    end
-    
     def set_user_review
       # for this user id?
       @user_review = ::UserReview.find(params[:id])
     end
     
     def invalid_user_review
-      logger.warn 'User review does not exist'
+      logger.warn 'User review is not valid'
       head :no_content
     end
 
