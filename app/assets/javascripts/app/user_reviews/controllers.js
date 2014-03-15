@@ -2,8 +2,8 @@
 
 /* Controllers */
 
-fiApp.controller('ReviewCtrl', ['$scope', 'ReviewSrv', '$routeParams', 
-                  function($scope, Review, $routeParams) {
+fiApp.controller('UserReviewsCtrl', ['$scope', 'UserReviewsSrv', '$routeParams', 
+                  function($scope, UserReviews, $routeParams) {
   
   /* Review.getReview($routeParams.id).success(function(data) {
     $scope.review = data;

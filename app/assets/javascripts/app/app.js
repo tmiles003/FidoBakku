@@ -21,11 +21,11 @@ fiApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
     { templateUrl: '/templates/reviews/index.html', controller: 'ReviewsCtrl' });
   // review
   $routeProvider.when('/reviews/:id/:slug', 
-    { templateUrl: '/templates/reviews/manage.html', controller: 'UserReviewsCtrl' });
+    { templateUrl: '/templates/reviews/manage.html', controller: 'ReviewsManageCtrl' });
   
   // user review
   $routeProvider.when('/review/:id/:name', 
-    { templateUrl: '/templates/review/index.html', controller: 'ReviewCtrl' });
+    { templateUrl: '/templates/review/index.html', controller: 'UserReviewsCtrl' });
   
   $routeProvider.when('/account', 
     { templateUrl: '/templates/account/index.html', controller: 'AccountCtrl' });
