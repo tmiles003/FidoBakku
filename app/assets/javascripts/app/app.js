@@ -16,13 +16,16 @@ fiApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
     { templateUrl: '/templates/forms/index.html', controller: 'FormsCtrl' });
   $routeProvider.when('/form/:id/:slug', 
     { templateUrl: '/templates/forms/manage.html', controller: 'TopicsCtrl' });
+  // list all the reviews
   $routeProvider.when('/reviews', 
     { templateUrl: '/templates/reviews/index.html', controller: 'ReviewsCtrl' });
-  $routeProvider.when('/review/:id/:slug', 
+  // review
+  $routeProvider.when('/reviews/:id/:slug', 
     { templateUrl: '/templates/reviews/manage.html', controller: 'UserReviewsCtrl' });
   
-  $routeProvider.when('/user/:id/:slug', 
-    { templateUrl: '/templates/user/index.html', controller: 'UserCtrl' });
+  // user review
+  $routeProvider.when('/review/:id/:name', 
+    { templateUrl: '/templates/review/index.html', controller: 'ReviewCtrl' });
   
   $routeProvider.when('/account', 
     { templateUrl: '/templates/account/index.html', controller: 'AccountCtrl' });

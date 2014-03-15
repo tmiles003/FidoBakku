@@ -54,7 +54,6 @@ class Api::UserReviewsController < Api::ApiController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    
     def set_review
       @review = ::Review.in_account(@account.id).find(params[:id])
     end
@@ -65,6 +64,7 @@ class Api::UserReviewsController < Api::ApiController
     end
     
     def set_user_review
+      # for this user id?
       @user_review = ::UserReview.find(params[:id])
     end
     
@@ -75,8 +75,8 @@ class Api::UserReviewsController < Api::ApiController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_review_params
-    	# allow array of user reviews?
-      params.require(:user_review).permit(:user_id, :form_id, :reviewer_id)
+    	# array of user reviewer_ids ?
+      params.require(:user_review).permit(:user_id, :form_id, :reviewer_id, :scores)
       	.merge(review_id: params.require(:review_id))
     end
 end

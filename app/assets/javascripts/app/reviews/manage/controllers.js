@@ -2,11 +2,11 @@
 
 /* Controllers */
 
-fiApp.controller('UserReviewsCtrl', ['$scope', 'UserReviewsSrv', '$routeParams', '$http', 
-                  function($scope, UserReviews, $routeParams, $http) {
+fiApp.controller('UserReviewsCtrl', ['$scope', 'ReviewsSrv', 'UserReviewsSrv', '$routeParams', '$http', 
+                  function($scope, Reviews, UserReviews, $routeParams, $http) {
   
   $scope.reviewId = $routeParams.id;
-  $scope.userReviews = UserReviews.query({ id: $scope.reviewId });
+  $scope.userReviews = Reviews.query({ id: $scope.reviewId }); // list user reviews
   // $scope.users = [];
   $http.get('/api/users/list').success(function(data) { 
     $scope.users = data; 

@@ -13,8 +13,8 @@ FidoBakku::Application.routes.draw do
   get '/.*', :to => 'welcome#application', as: :app_root
   
   get 'form/:id/:slug' => 'welcome#application', as: :form_manage
-  get 'review/:id/:slug' => 'welcome#application', as: :review_manage
-  get 'user/:id/:slug' => 'welcome#application', as: :user_view
+  get 'reviews/:id/:slug' => 'welcome#application', as: :review_manage
+  get 'review/:id/:name' => 'welcome#application', as: :user_review
   
   namespace :api, defaults: { format: :json } do
     
@@ -37,14 +37,8 @@ FidoBakku::Application.routes.draw do
       resources :topics, only: [:index], shallow: true
     end
     
-    resources :reviews, except: [:show, :new, :edit]
+    resources :reviews, except: [:new, :edit]
     resources :user_reviews, except: [:index, :new, :edit]
-    
-    resource :user_review, path: '/review/:user_id', controller: :review , only: [:show, :update] do
-      collection do 
-        post 'update'
-      end
-    end
     
     resource :user, path: '/profile', controller: :profile, only: [:update] do 
       collection do
