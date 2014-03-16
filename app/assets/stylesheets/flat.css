@@ -1,0 +1,14 @@
+/* flat.css */
+/* remove drop-shadows and gradients */
+
+.form-control {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: none;
+  transition: none;
+}
+
+.form-control:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}

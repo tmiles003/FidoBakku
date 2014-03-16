@@ -10,13 +10,18 @@ body {
   margin: 60px 0 30px 0;
 }
 
+.navbar-default {
+  background-color: #fff;
+  border: none;
+}
+
 .footer {
-  /* background-color: #f5f5f5; */
   bottom: 0;
   position: absolute;
   width: 100%;
 }
 
 .footer p {
+  color: #ccc;
   margin: 5px 0;
 }
