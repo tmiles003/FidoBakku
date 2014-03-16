@@ -7,19 +7,17 @@ fiApp.controller('ReviewsManageCtrl', ['$scope', 'ReviewsSrv', 'UserReviewsSrv',
   
   $scope.reviewId = $routeParams.id;
   $scope.userReviews = UserReviews.query({ review_id: $scope.reviewId }); // get user reviews for this review
-  // $scope.users = [];
   $http.get('/api/users/list').success(function(data) { 
     $scope.users = data; 
   });
-  // $scope.forms = [];
   $http.get('/api/forms/list').success(function(data) { 
     $scope.forms = data; 
   });
   
   var createUserReview = function(newUserReview) {
-    UserReview.save({ user_review: newUserReview, review_id: $scope.reviewId }, 
+    UserReviews.save({ user_review: newUserReview, review_id: $scope.reviewId }, 
       function(val, resp) {
-        $scope.userReviews = UserReviews.query({ id: $scope.reviewId }); // can i do this better?
+        $scope.userReviews = UserReviews.query({ review_id: $scope.reviewId }); // can i do this better?
         $scope.editableUserReview = {};
         $scope.editableUserReviewForm.$setPristine();
       }, 
@@ -29,8 +27,8 @@ fiApp.controller('ReviewsManageCtrl', ['$scope', 'ReviewsSrv', 'UserReviewsSrv',
   }
   
   var updateUserReview = function(userReview) {
-    userReview.$update(function(val, resp) {
-      $scope.userReviews = UserReviews.query({ id: $scope.reviewId });
+    userReview.$update({ review_id: $scope.reviewId }, function(val, resp) {
+      $scope.userReviews = UserReviews.query({ review_id: $scope.reviewId });
       $scope.editableUserReview = {};
       $scope.editableUserReviewForm.$setPristine();
     });

@@ -12,13 +12,7 @@ class Api::ReviewsController < Api::ApiController
   # GET /api/reviews/1
   # GET /api/reviews/1.json
   def show
-    # move this query to the model
-    cols = 'user_reviews.*, 
-            UNIX_TIMESTAMP(user_reviews.created_at) AS created_at,
-            users.name AS user_name, 
-            forms.name AS form_name, 
-            reviewers_user_reviews.name AS reviewer_name'
-    @user_reviews = @review.user_reviews.select(cols).joins(:user, :form, :reviewer)
+    #
   end
 
   # POST /api/reviews

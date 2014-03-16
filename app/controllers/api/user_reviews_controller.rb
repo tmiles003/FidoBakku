@@ -3,6 +3,20 @@ class Api::UserReviewsController < Api::ApiController
   before_action :set_user_review, only: [:show, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_user_review
   
+  before_action :set_review, only: [:index]
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_review
+  
+  # GET /api/user_reviews
+  def index
+    # move this query to the model
+    cols = 'user_reviews.*, 
+            UNIX_TIMESTAMP(user_reviews.created_at) AS created_at,
+            users.name AS user_name, 
+            forms.name AS form_name, 
+            reviewers_user_reviews.name AS reviewer_name'
+    @user_reviews = @review.user_reviews.select(cols).joins(:user, :form, :reviewer)
+  end
+  
   # GET /api/user_reviews/1
   # GET /api/user_reviews/1.json
   def show
@@ -55,7 +69,15 @@ class Api::UserReviewsController < Api::ApiController
       logger.warn 'User review is not valid'
       head :no_content
     end
-
+    
+    def set_review
+      @review = ::Review.in_account(@account.id).find(params[:review_id])
+    end
+    
+    def invalid_review
+      head :no_content
+    end
+    
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_review_params
     	# array of user reviewer_ids ?

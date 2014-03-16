@@ -4,5 +4,5 @@
 
 fiApp.factory('ReviewsSrv', ['$resource', function($resource) {
   
-  return $resource('/api/reviews/:id', { id: '@id' }, { 'update': { method:'PUT' } });
+  return $resource('/api/reviews/:id', { id: '@id' }, { 'update': { method: 'PUT' } });
 }]);

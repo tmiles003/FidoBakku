@@ -38,7 +38,7 @@ FidoBakku::Application.routes.draw do
     end
     
     resources :reviews, except: [:new, :edit]
-    resources :user_reviews, except: [:index, :new, :edit]
+    resources :user_reviews, except: [:new, :edit]
     
     resource :user, path: '/profile', controller: :profile, only: [:update] do 
       collection do
