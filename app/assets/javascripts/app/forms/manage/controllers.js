@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-fiApp.controller('TopicCtrl', ['$scope', 'TopicsSrv', '$routeParams', function($scope, Topics, $routeParams) {
+fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', '$routeParams', function($scope, Topics, $routeParams) {
   
   $scope.formId = $routeParams.id;
   $scope.topics = Topics.query({ form_id: $scope.formId });
