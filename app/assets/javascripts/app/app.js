@@ -5,6 +5,22 @@ var fiApp = angular.module('fiApp', [
   'ngResource'
 ]);
 
+fiApp.config(['$httpProvider', function($httpProvider) {
+  $httpProvider.interceptors.push(function($q) {
+    return {
+      responseError: function(rejection) {
+        if (403 == rejection.status) {
+          console.log( 'not authorised' );
+        }
+        if (401 == rejection.status) {
+          console.log( 'not logged in' );
+        }
+        return $q.reject(rejection);
+      }
+    };
+  });
+}]);
+
 fiApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   // $locationProvider.html5Mode(true); // nice urls.
   
@@ -19,7 +35,7 @@ fiApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
   // list all the reviews
   $routeProvider.when('/reviews', 
     { templateUrl: '/templates/reviews/index.html', controller: 'ReviewsCtrl' });
-  // review
+  // single review
   $routeProvider.when('/reviews/:id/:slug', 
     { templateUrl: '/templates/reviews/manage.html', controller: 'ReviewsManageCtrl' });
   
