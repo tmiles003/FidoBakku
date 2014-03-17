@@ -21,12 +21,19 @@ fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', function($scope, Users) {
     });
   }
   
-  $scope.saveUser = function(user) {
-    if (user.id) {
-      updateUser(user);
+  $scope.saveUser = function(user, isValid) {
+    $scope.submitted = true;
+    if (isValid) {
+      $scope.submitted = false;
+      if (user.id) {
+        updateUser(user);
+      }
+      else {
+        createUser(user);
+      }
     }
     else {
-      createUser(user);
+      // console.log('form has errors');
     }
   }
   

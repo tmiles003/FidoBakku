@@ -10,22 +10,17 @@ body {
   margin: 60px 0 30px 0;
 }
 
+label {
+  font-weight: normal;
+}
+
 .navbar-default {
   background-color: #fff;
   border: none;
-  font-size: 1.15em;
-}
-
-.navbar-default .navbar-nav>li>a {
-  color: #0061c0;
-}
-
-.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
-  color: #0061c0;
-  text-decoration: underline;
 }
 
 .footer {
+  background-color: #fff;
   bottom: 0;
   position: fixed;
   width: 100%;

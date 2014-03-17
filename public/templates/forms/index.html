@@ -1,18 +1,22 @@
-<h1>Listing forms</h1>
+<!-- h1>Listing forms</h1 -->
 
 <div class="row">
 
   <div class="col-md-9">
-    <table class="table table-hover">
-      <tr ng-repeat="form in forms | orderBy: '+name' ">
-        <td>{{ form.name }}</td>
-        <td>
-          <a href="{{ form.manage_path }}">Manage</a>
-          <button class="" data-ng-click="editForm(form)">Edit</button>
-          <button class="" data-ng-click="deleteForm(form)">Delete</button>
-        </td>
-      </tr> 
-    </table>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">Forms</div>
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="form in forms | orderBy: '+name'">
+        <a href="{{ form.manage_path }}">{{ form.name }}</a>
+        <span style="float: right;">
+          <button class="btn btn-default btn-xs" data-ng-click="editForm(form)">Edit</button>
+          <button class="btn btn-default btn-xs" data-ng-click="deleteForm(form)">Delete</button>
+        </span>
+      </li>
+    </ul>
+  </div>
+  
   </div>
 
   <div class="col-md-3">
@@ -21,14 +25,18 @@
 
       <input type="hidden" ng-model="editableForm.id">
       
-      <div class="form-group">
-        <label for="form_name">Name</label>
-        <input id="form_name" class="form-control" ng-model="editableForm.name" type="text">
-        <span class="help-block" ng-show="errorName">{{ errorName }}</span>
+      <div class="form-group" ng-class="{ 'has-error': editableFormForm.form_name.$invalid 
+          && !editableFormForm.form_name.$pristine && submitted }">
+        <label for="form_name">Form name</label>
+        <input name="form_name" class="form-control" ng-model="editableForm.name" type="text" 
+          ng-required="true" ng-minlength="2" ng-maxlength="100">
+        <p ng-show="editableFormForm.form_name.$invalid && !editableFormForm.form_name.$pristine && submitted" 
+          class="help-block">A name is required</p>
       </div>
 
       <div class="actions">
-        <input ng-click="saveForm(editableForm)" type="submit" value="Save">
+        <input ng-click="saveForm(editableForm, editableFormForm.$valid)" type="submit" value="Save"
+          class="btn btn-default btn-sm">
       </div>
       
     </form>

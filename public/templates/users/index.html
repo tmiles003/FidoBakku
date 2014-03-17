@@ -1,22 +1,48 @@
-<h1>Listing people</h1>
+<!-- h1>Listing people</h1 -->
 
 <div class="row">
 
   <div class="col-md-9">
-    <table class="table table-hover">
-      <tr ng-repeat="user in users | orderBy: '+name'" id="user_{{ user.id }}">
-        <td>
-          <span class="glyphicon glyphicon-star" ng-if="'admin' == user.role"></span>
-          <span class="glyphicon glyphicon-star-empty" ng-if="'manager' == user.role"></span>
-        </td>
-        <td>{{ user.name }}</td>
-        <td>{{ user.email }}</td>
-        <td>
-          <button class="" data-ng-click="editUser(user)">Edit</button>
-          <button class="" data-ng-click="deleteUser(user)">Delete</button>
-        </td>
-      </tr> 
-    </table>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">Admins</div>
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="user in users | orderBy: '+name' | filter: { role: 'admin' }">
+        {{ user.name }}
+        <span style="float: right;">
+          <button class="btn btn-default btn-xs" data-ng-click="editUser(user)">Edit</button>
+          <button class="btn btn-default btn-xs" data-ng-click="deleteUser(user)">Delete</button>
+        </span>
+      </li>
+    </ul>
+  </div>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">Managers</div>
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="user in users | orderBy: '+name' | filter: { role: 'manager' }">
+        {{ user.name }}
+        <span style="float: right;">
+          <button class="btn btn-default btn-xs" data-ng-click="editUser(user)">Edit</button>
+          <button class="btn btn-default btn-xs" data-ng-click="deleteUser(user)">Delete</button>
+        </span>
+      </li>
+    </ul>
+  </div>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">Users</div>
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="user in users | orderBy: '+name' | filter: { role: 'user' }">
+        {{ user.name }}
+        <span style="float: right;">
+          <button class="btn btn-default btn-xs" data-ng-click="editUser(user)">Edit</button>
+          <button class="btn btn-default btn-xs" data-ng-click="deleteUser(user)">Delete</button>
+        </span>
+      </li>
+    </ul>
+  </div>
+  
   </div>
 
   <div class="col-md-3">
@@ -25,25 +51,35 @@
 
       <input type="hidden" ng-model="editableUser.id">
       
-      <div class="form-group">
+      <div class="form-group" ng-class="{ 'has-error': editableUserForm.user_name.$invalid 
+          && !editableUserForm.user_name.$pristine && submitted }">
         <label for="user_name">Name</label>
-        <input id="user_name" class="form-control" ng-model="editableUser.name" type="text">
+        <input name="user_name" class="form-control" ng-model="editableUser.name" type="text"
+          ng-required="true" ng-minlength="2" ng-maxlength="100">
+        <p ng-show="editableUserForm.user_name.$invalid && !editableUserForm.user_name.$pristine && submitted" 
+          class="help-block">A name is required</p>
       </div>
-      <div class="form-group">
+      <div class="form-group" ng-class="{ 'has-error': editableUserForm.user_email.$invalid 
+          && !editableUserForm.user_email.$pristine && submitted }">
         <label for="user_email">Email</label>
-        <input id="user_email" class="form-control" ng-model="editableUser.email" type="text">
+        <input name="user_email" class="form-control" ng-model="editableUser.email" type="email"
+          ng-required="true">
+        <p ng-show="editableUserForm.user_email.$invalid && !editableUserForm.user_email.$pristine && submitted" 
+          class="help-block">A valid email address is required</p>
       </div>
-      <div class="form-group">
+      <div class="form-group" ng-class="{ 'has-error': editableUserForm.user_role.$invalid 
+          && !editableUserForm.user_role.$pristine && submitted }">
         <label for="user_role">Role</label>
-        <!-- input id="user_role" class="form-control" ng-model="editableUser.role" type="text" -->
-        <select id="user_role" ng-model="editableUser.role" class="form-control" 
-          ng-options="role.s as role.l for role in roles">
-          <!-- option></option -->
+        <select name="user_role" ng-model="editableUser.role" class="form-control" 
+          ng-options="role.s as role.l for role in roles" ng-required="true">
         </select>
+        <p ng-show="editableUserForm.user_role.$invalid && !editableUserForm.user_role.$pristine && submitted" 
+          class="help-block">A role must be selected</p>
       </div>
 
       <div class="actions">
-        <input ng-click="saveUser(editableUser)" type="submit" value="Save">
+        <input ng-click="saveUser(editableUser, editableUserForm.$valid)" type="submit" value="Save"
+          class="btn btn-default btn-sm">
       </div>
       
     </form>

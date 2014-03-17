@@ -26,13 +26,19 @@ fiApp.controller('FormsCtrl', ['$scope', 'FormsSrv', function($scope, Forms) {
     });
   }
   
-  $scope.saveForm = function(form) {
-    $scope.errorName = null;
-    if (form.id) {
-      updateForm(form);
+  $scope.saveForm = function(form, isValid) {
+    $scope.submitted = true;
+    if (isValid) {
+      $scope.submitted = false;
+      if (form.id) {
+        updateForm(form);
+      }
+      else {
+        createForm(form);
+      }
     }
     else {
-      createForm(form);
+      // console.log('form has errors');
     }
   }
   

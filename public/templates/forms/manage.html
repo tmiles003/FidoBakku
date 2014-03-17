@@ -1,45 +1,74 @@
-<h1>Form#edit</h1>
+<!-- h1>Form#edit</h1 -->
 
 <div ng-repeat="topic in topics | orderBy: '+ordr'" class="row">
-  {{ topic.name }}
-  <button class="" data-ng-click="deleteTopic(topic)">Delete</button>
   
-  <div class="row col-md-offset-1" ng-controller="BenchmarksCtrl">
-    <div ng-repeat="benchmark in benchmarks | orderBy: '+ordr'" class="row">
-    {{ benchmark.content }}
-    <button class="" data-ng-click="deleteBenchmark(benchmark)">Delete</button>
+  <div class="panel panel-default">
+    <div class="panel-heading">{{ topic.name }}
+      <span style="float:right;">
+        <button class="btn btn-default btn-xs" data-ng-click="editTopic(topic)">Edit</button>
+        <button class="btn btn-default btn-xs" data-ng-click="deleteTopic(topic)">Delete</button>
+      </span>
     </div>
     
-    <form accept-charset="utf-8" novalidate name="editableBenchmarkForm">
-      <input type="hidden" ng-model="editableBenchmark.id">
-      <div class="form-group">
-        <label for="benchmark_content">Content</label>
-        <input id="benchmark_content" class="form-control" ng-model="editableBenchmark.content" type="text">
-        <span class="help-block" ng-show="errorName">{{ errorName }}</span>
-      </div>
-
-      <div class="actions">
-        <input ng-click="saveBenchmark(editableBenchmark)" type="submit" value="Save">
-      </div>
+    <ul class="list-group" ng-controller="BenchmarksCtrl">
+    
+      <li class="list-group-item" ng-repeat="benchmark in benchmarks | orderBy: '+ordr'">
+        {{ benchmark.content }}
+        
+        <span style="float: right;">
+          <button class="btn btn-default btn-xs" data-ng-click="editBenchmark(benchmark)">Edit</button>
+          <button class="btn btn-default btn-xs" data-ng-click="deleteBenchmark(benchmark)">Delete</button>
+        </span>
+      </li>
       
-    </form>
+      <li class="list-group-item">
+        <form accept-charset="utf-8" class="form-horizontal" novalidate name="editableBenchmarkForm">
+          <input type="hidden" ng-model="editableBenchmark.id">
+          
+          <label for="benchmark_content" class="col-md-2 control-label">Question</label>
+          
+          <div class="col-md-9" ng-class="{ 'has-error': editableBenchmarkForm.benchmark_content.$invalid 
+                && submitted }">
+              <!-- input name="benchmark_content" class="form-control" ng-model="editableBenchmark.content" type="text"
+                ng-required="true" ng-minlength="2" -->
+              <textarea class="form-control" name="benchmark_content" ng-model="editableBenchmark.content" 
+                ng-required="true" ng-minlength="2" rows="2"></textarea>
+              <p ng-show="editableBenchmarkForm.benchmark_content.$invalid && submitted" 
+                  class="help-block">Content is required</p>
+          </div>
+          <div class="col-md-1">
+            <button ng-click="saveBenchmark(editableBenchmark, editableBenchmarkForm.$valid)" type="button"
+              class="btn btn-default btn-sm">Save</button>
+          </div>
+        </form>
+        <div style="clear: both;"></div>
+      </li>
+      
+    </ul>
   </div>
+
 </div>
 
 <div class="row">
 
-  <form accept-charset="utf-8" novalidate name="editableTopicForm">
+  <form class="form-horizontal" accept-charset="utf-8" novalidate name="editableTopicForm">
     <input type="hidden" ng-model="editableTopic.id">
-    <div class="form-group">
-      <label for="topic_name">Name</label>
-      <input id="topic_name" class="form-control" ng-model="editableTopic.name" type="text">
-      <span class="help-block" ng-show="errorName">{{ errorName }}</span>
+    
+    <label for="topic_name" class="col-md-1 control-label">Topic</label>
+    
+    <div class="col-md-11">
+      <div class="input-group" ng-class="{ 'has-error': editableTopicForm.topic_name.$invalid && submitted }">
+        <input name="topic_name" class="form-control" ng-model="editableTopic.name" type="text"
+          ng-required="true" ng-minlength="2" ng-maxlength="100">
+        <span class="input-group-btn">
+          <button ng-click="saveTopic(editableTopic, editableTopicForm.$valid)" type="button"
+            class="btn btn-default">Save</button>
+        </span>
+      </div>
+        <p ng-show="editableTopicForm.topic_name.$invalid && submitted" 
+            class="help-block">A topic is required</p>
     </div>
 
-    <div class="actions">
-      <input ng-click="saveTopic(editableTopic)" type="submit" value="Save">
-    </div>
-    
   </form>
   
 </div>

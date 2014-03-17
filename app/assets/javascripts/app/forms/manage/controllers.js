@@ -8,14 +8,14 @@ fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', '$routeParams', function(
   $scope.topics = Topics.query({ form_id: $scope.formId });
   
   var createTopic = function(newTopic) {
-    Topic.save({ form_id: $scope.formId, topic: newTopic },
+    Topics.save({ form_id: $scope.formId, topic: newTopic },
       function(val, resp) {
         $scope.topics.push(val);
         $scope.editableTopic = {};
         $scope.editableTopicForm.$setPristine();
       },
       function(resp) {
-        $scope.errorName = resp.data.name[0]; // clean this up a bit
+        // $scope.errorName = resp.data.name[0]; // clean this up a bit
       });
   }
   
@@ -27,13 +27,19 @@ fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', '$routeParams', function(
     });
   }
   
-  $scope.saveTopic = function(topic) {
-    $scope.errorName = null;
-    if (topic.id) {
-      updateTopic(topic);
+  $scope.saveTopic = function(topic, isValid) {
+    $scope.submitted = true;
+    if (isValid) {
+      $scope.submitted = false;
+      if (topic.id) {
+        updateTopic(topic);
+      }
+      else {
+        createTopic(topic);
+      }
     }
     else {
-      createTopic(topic);
+      // console.log('form not valid');
     }
   }
   
@@ -56,7 +62,7 @@ fiApp.controller('BenchmarksCtrl', ['$scope', 'BenchmarksSrv', function($scope, 
   $scope.benchmarks = Benchmarks.query({ topic_id: $scope.topicId });
   
   var createBenchmark = function(newBenchmark) {
-    Benchmark.save({ topic_id: $scope.topicId, benchmark: newBenchmark },
+    Benchmarks.save({ topic_id: $scope.topicId, benchmark: newBenchmark },
       function(val, resp) {
         $scope.benchmarks.push(val);
         $scope.editableBenchmark = {};
@@ -76,7 +82,6 @@ fiApp.controller('BenchmarksCtrl', ['$scope', 'BenchmarksSrv', function($scope, 
   }
   
   $scope.saveBenchmark = function(benchmark) {
-    $scope.errorName = null;
     if (benchmark.id) {
       updateBenchmark(benchmark);
     }
