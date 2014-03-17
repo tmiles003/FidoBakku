@@ -1,18 +1,23 @@
-<h1>Listing reviews</h1>
+<!-- h1>Listing reviews</h1 -->
 
 <div class="row">
 
   <div class="col-md-8">
-    <table class="table table-hover">
-      <tr ng-repeat="review in reviews | orderBy: '-created'" id="review_{{ review.id }}">
-        <td>{{ review.title }}</td>
-        <td>
-        	<a href="{{ review.manage_path }}">Manage</a>
-          <button class="" data-ng-click="editReview(review)">Edit</button>
-          <button class="" data-ng-click="deleteReview(review)">Delete</button>
-        </td>
-      </tr> 
-    </table>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">Reviews</div>
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="review in reviews | orderBy: '-created'">
+        <a href="{{ review.manage_path }}">{{ review.title }}</a>
+        
+        <span style="float: right;">
+          <button class="btn btn-default btn-xs" data-ng-click="editReview(review)">Edit</button>
+          <button class="btn btn-default btn-xs" data-ng-click="deleteReview(review)">Delete</button>
+        </span>
+      </li>
+    </ul>
+  </div>
+  
   </div>
 
   <div class="col-md-4">
@@ -21,13 +26,17 @@
 
       <input type="hidden" ng-model="editableReview.id">
       
-      <div class="form-group">
-        <label for="review_title">Name</label>
-        <input id="review_title" class="form-control" ng-model="editableReview.title" type="text">
+      <div class="form-group" ng-class="{ 'has-error': editableReviewForm.review_title.$invalid && submitted }">
+        <label for="review_title">Review</label>
+        <input name="review_title" class="form-control" ng-model="editableReview.title" type="text" 
+          ng-required="true" ng-minlength="2" ng-maxlength="100">
+        <p ng-show="editableReviewForm.review_title.$invalid && submitted" 
+          class="help-block">A title is required</p>
       </div>
 
       <div class="actions">
-        <input ng-click="saveReview(editableReview)" type="submit" value="Save">
+        <input ng-click="saveReview(editableReview, editableReviewForm.$valid)" type="submit" value="Save"
+          class="btn btn-default btn-sm">
       </div>
       
     </form>

@@ -7,7 +7,7 @@ fiApp.controller('ReviewsCtrl', ['$scope', 'ReviewsSrv', function($scope, Review
   $scope.reviews = Reviews.query();
   
   var createReview = function(newReview) {
-    Review.save(newReview, 
+    Reviews.save(newReview, 
       function(val, resp) {
         $scope.reviews = Reviews.query(); // can i do this better?
         $scope.editableReview = {};
@@ -26,13 +26,19 @@ fiApp.controller('ReviewsCtrl', ['$scope', 'ReviewsSrv', function($scope, Review
     });
   }
   
-  $scope.saveReview = function(review) {
-    $scope.errorName = null;
-    if (review.id) {
-      updateReview(review);
+  $scope.saveReview = function(review, isValid) {
+    $scope.submitted = true;
+    if (isValid) {
+      $scope.submitted = false;
+      if (review.id) {
+        updateReview(review);
+      }
+      else {
+        createReview(review);
+      }
     }
     else {
-      createReview(review);
+      // console.log('form not valid');
     }
   }
   
