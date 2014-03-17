@@ -13,6 +13,16 @@ body {
 .navbar-default {
   background-color: #fff;
   border: none;
+  font-size: 1.15em;
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: #0061c0;
+}
+
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+  color: #0061c0;
+  text-decoration: underline;
 }
 
 .footer {
