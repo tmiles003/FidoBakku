@@ -56,17 +56,15 @@
     
     <label for="topic_name" class="col-md-1 control-label">Topic</label>
     
-    <div class="col-md-11">
-      <div class="input-group" ng-class="{ 'has-error': editableTopicForm.topic_name.$invalid && submitted }">
-        <input name="topic_name" class="form-control" ng-model="editableTopic.name" type="text"
-          ng-required="true" ng-minlength="2" ng-maxlength="100">
-        <span class="input-group-btn">
-          <button ng-click="saveTopic(editableTopic, editableTopicForm.$valid)" type="button"
-            class="btn btn-default">Save</button>
-        </span>
-      </div>
-        <p ng-show="editableTopicForm.topic_name.$invalid && submitted" 
-            class="help-block">A topic is required</p>
+    <div class="col-md-10" ng-class="{ 'has-error': editableTopicForm.topic_name.$invalid && submitted }">
+      <input name="topic_name" class="form-control" ng-model="editableTopic.name" type="text"
+        ng-required="true" ng-minlength="2" ng-maxlength="100">
+      <p ng-show="editableTopicForm.topic_name.$invalid && submitted" 
+        class="help-block">A topic is required</p>
+    </div>
+    <div class="cold-md-1">
+      <button ng-click="saveTopic(editableTopic, editableTopicForm.$valid)" type="button"
+        class="btn btn-default">Save</button>
     </div>
 
   </form>

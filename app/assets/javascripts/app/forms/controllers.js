@@ -7,7 +7,7 @@ fiApp.controller('FormsCtrl', ['$scope', 'FormsSrv', function($scope, Forms) {
   $scope.forms = Forms.query();
   
   var createForm = function(newForm) {
-    Form.save(newForm, 
+    Forms.save(newForm, 
       function(val, resp) {
         $scope.forms = Forms.query(); // can i do this better?
         $scope.editableForm = {};
