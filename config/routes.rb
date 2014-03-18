@@ -34,7 +34,12 @@ FidoBakku::Application.routes.draw do
       collection do 
         get 'list'
       end
-      resources :topics, only: [:index], shallow: true
+      resources :topics, only: [:index], shallow: true do 
+        member do 
+          post 'up'
+          post 'down'
+        end
+      end
     end
     
     resources :reviews, except: [:new, :edit]

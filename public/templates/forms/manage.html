@@ -5,6 +5,8 @@
   <div class="panel panel-default">
     <div class="panel-heading">{{ topic.name }}
       <span style="float:right;">
+        <button class="btn btn-default btn-xs" data-ng-click="moveTopicUp(topic)">Up</button>
+        <button class="btn btn-default btn-xs" data-ng-click="moveTopicDown(topic)">Down</button>
         <button class="btn btn-default btn-xs" data-ng-click="editTopic(topic)">Edit</button>
         <button class="btn btn-default btn-xs" data-ng-click="deleteTopic(topic)">Delete</button>
       </span>

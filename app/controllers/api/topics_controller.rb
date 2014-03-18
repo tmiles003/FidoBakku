@@ -1,7 +1,12 @@
 class Api::TopicsController < Api::ApiController
   
   before_action :set_form, only: [:index] # revisit this method
-  before_action :set_topic, only: [:update, :destroy]
+  before_action :set_topic, only: [:update, :up, :down, :destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_topic
+  before_action :set_topic_above, only: [:up]
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_topic_above
+  before_action :set_topic_below, only: [:down]
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_topic_below
   
   # GET /api/topics
   # GET /api/topics.json
@@ -35,6 +40,28 @@ class Api::TopicsController < Api::ApiController
       end
     end
   end
+  
+  # POST /api/topics/1/up.json
+  def up
+    ordr = @topic.ordr
+    @topic.update(ordr: @topic_above.ordr)
+    @topic_above.update(ordr: ordr)
+    
+    respond_to do |format|
+      format.json { head :no_content }
+    end
+  end
+  
+  # POST /api/topics/1/down.json
+  def down
+    ordr = @topic.ordr
+    @topic.update(ordr: @topic_below.ordr)
+    @topic_below.update(ordr: ordr)
+    
+    respond_to do |format|
+      format.json { head :no_content }
+    end
+  end
 
   # DELETE /api/topics/1
   # DELETE /api/topics/1.json
@@ -51,15 +78,36 @@ class Api::TopicsController < Api::ApiController
       @form = ::Form.find(params[:form_id])
     end
     
-    def set_topic
-      @topic = ::Topic.find(params[:id])
-    end
-    
     def invalid_form
       head :no_content
     end
     
+    def set_topic
+      @topic = ::Topic.find(params[:id])
+    end
+    
     def invalid_topic
+      logger.info 'invalid topic'
+      head :no_content
+    end
+    
+    def set_topic_above
+      @topic_above = ::Topic.where(form_id: @topic.form_id)
+        .where('ordr < ?', @topic.ordr).order(ordr: :desc).take!
+    end
+    
+    def invalid_topic_above
+      logger.info 'invalid topic above'
+      head :no_content
+    end
+    
+    def set_topic_below
+      @topic_below = ::Topic.where(form_id: @topic.form_id)
+        .where('ordr > ?', @topic.ordr).order(ordr: :asc).take!
+    end
+    
+    def invalid_topic_below
+      logger.info 'invalid topic below'
       head :no_content
     end
 

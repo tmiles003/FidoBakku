@@ -43,6 +43,26 @@ fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', '$routeParams', function(
     }
   }
   
+  $scope.moveTopicUp = function(topic) {
+    topic.$up(function(val, resp) {
+      // success
+      $scope.topics = Topics.query({ form_id: $scope.formId });
+    }, 
+    function() {
+      // error
+    });
+  }
+  
+  $scope.moveTopicDown = function(topic) {
+    topic.$down(function(val, resp) {
+      // success
+      $scope.topics = Topics.query({ form_id: $scope.formId });
+    }, 
+    function() {
+      // error
+    });
+  }
+  
   $scope.editTopic = function(topic) {
     $scope.editableTopic = angular.copy(topic);
   }
