@@ -15,12 +15,17 @@
     <ul class="list-group" ng-controller="BenchmarksCtrl">
     
       <li class="list-group-item" ng-repeat="benchmark in benchmarks | orderBy: '+ordr'">
-        {{ benchmark.content }}
+        <div class="col-md-9">
+          {{ benchmark.content }}
+        </div>
         
-        <span style="float: right;">
+        <div class="col-md-3 text-right">
+          <button class="btn btn-default btn-xs" data-ng-click="moveBenchmarkUp(benchmark)">Up</button>
+          <button class="btn btn-default btn-xs" data-ng-click="moveBenchmarkDown(benchmark)">Down</button>
           <button class="btn btn-default btn-xs" data-ng-click="editBenchmark(benchmark)">Edit</button>
           <button class="btn btn-default btn-xs" data-ng-click="deleteBenchmark(benchmark)">Delete</button>
-        </span>
+        </div>
+        <div style="clear:both;"></div>
       </li>
       
       <li class="list-group-item">
@@ -31,8 +36,6 @@
           
           <div class="col-md-9" ng-class="{ 'has-error': editableBenchmarkForm.benchmark_content.$invalid 
                 && submitted }">
-              <!-- input name="benchmark_content" class="form-control" ng-model="editableBenchmark.content" type="text"
-                ng-required="true" ng-minlength="2" -->
               <textarea class="form-control" name="benchmark_content" ng-model="editableBenchmark.content" 
                 ng-required="true" ng-minlength="2" rows="2"></textarea>
               <p ng-show="editableBenchmarkForm.benchmark_content.$invalid && submitted" 
@@ -60,7 +63,7 @@
     
     <div class="col-md-10" ng-class="{ 'has-error': editableTopicForm.topic_name.$invalid && submitted }">
       <input name="topic_name" class="form-control" ng-model="editableTopic.name" type="text"
-        ng-required="true" ng-minlength="2" ng-maxlength="100">
+        ng-required="true" ng-minlength="4" ng-maxlength="100">
       <p ng-show="editableTopicForm.topic_name.$invalid && submitted" 
         class="help-block">A topic is required</p>
     </div>

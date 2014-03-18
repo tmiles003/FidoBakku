@@ -28,7 +28,12 @@ FidoBakku::Application.routes.draw do
     end
     
     resources :topics, except: [:index, :show, :new, :edit] do 
-      resources :benchmarks, except: [:show, :new, :edit], shallow: true
+      resources :benchmarks, except: [:show, :new, :edit], shallow: true do 
+        member do 
+          post 'up'
+          post 'down'
+        end
+      end
     end
     resources :forms, except: [:show, :new] do
       collection do 

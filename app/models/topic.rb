@@ -10,4 +10,9 @@ class Topic < ActiveRecord::Base
     too_long: 'Too long'
   }
   
+  def next_ordr
+    topic = ::Topic.where(form_id: self.form_id).order(ordr: :desc).take
+    self.ordr = topic.nil? ? 10 : topic.ordr + 10
+  end
+  
 end

@@ -6,4 +6,9 @@ class TopicBenchmark < ActiveRecord::Base
   
   belongs_to :topic
   
+  def next_ordr
+    benchmark = ::TopicBenchmark.where(topic_id: self.topic_id).order(ordr: :desc).take
+    self.ordr = benchmark.nil? ? 10 : benchmark.ordr + 10
+  end
+  
 end

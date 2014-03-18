@@ -18,7 +18,7 @@ class Api::TopicsController < Api::ApiController
   # POST /api/topics.json
   def create
     @topic = ::Topic.new(topic_params)
-    @topic.ordr = 2000
+    @topic.next_ordr
 
     respond_to do |format|
       if @topic.save
@@ -113,7 +113,7 @@ class Api::TopicsController < Api::ApiController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def topic_params
-      params.require(:topic).permit(:name, :ordr)
+      params.require(:topic).permit(:name)
         .merge(form_id: params.require(:form_id))
     end
 end

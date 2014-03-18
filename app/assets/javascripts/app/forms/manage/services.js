@@ -19,6 +19,8 @@ fiApp.factory('BenchmarksSrv', ['$resource', function($resource) {
     { id: '@id' }, 
     { 'update': { method: 'PUT' }, 
       'query': { url: '/api/topics/:topic_id/benchmarks', params: { topic_id: 'topicId' }, isArray: true },
-      'save': { method: 'POST', url: '/api/topics/:topic_id/benchmarks', params: { topic_id: '@topic_id' } }
+      'save': { method: 'POST', url: '/api/topics/:topic_id/benchmarks', params: { topic_id: '@topic_id' } },
+      'up': { method: 'POST', url: '/api/benchmarks/:id/up' },
+      'down': { method: 'POST', url: '/api/benchmarks/:id/down' }
     });
 }]);

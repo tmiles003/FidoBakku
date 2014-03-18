@@ -48,7 +48,7 @@ fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', '$routeParams', function(
       // success
       $scope.topics = Topics.query({ form_id: $scope.formId });
     }, 
-    function() {
+    function(val, resp) {
       // error
     });
   }
@@ -58,7 +58,7 @@ fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', '$routeParams', function(
       // success
       $scope.topics = Topics.query({ form_id: $scope.formId });
     }, 
-    function() {
+    function(val, resp) {
       // error
     });
   }
@@ -107,6 +107,26 @@ fiApp.controller('BenchmarksCtrl', ['$scope', 'BenchmarksSrv', function($scope, 
     else {
       createBenchmark(benchmark);
     }
+  }
+  
+  $scope.moveBenchmarkUp = function(benchmark) {
+    benchmark.$up(function(val, resp) {
+      // success
+      $scope.benchmarks = Benchmarks.query({ topic_id: $scope.topicId });
+    }, 
+    function(val, resp) {
+      // error
+    });
+  }
+  
+  $scope.moveBenchmarkDown = function(benchmark) {
+    benchmark.$down(function(val, resp) {
+      // success
+      $scope.benchmarks = Benchmarks.query({ topic_id: $scope.topicId });
+    }, 
+    function(val, resp) {
+      // error
+    });
   }
   
   $scope.editBenchmark = function(benchmark) {
