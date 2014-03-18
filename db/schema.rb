@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140311110450) do
+ActiveRecord::Schema.define(version: 20140318092205) do
 
   create_table "account_users", force: true do |t|
     t.integer "account_id"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20140311110450) do
     t.integer  "reviewer_id"
     t.string   "reviewer_name"
     t.text     "scores"
+    t.integer  "progress"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
