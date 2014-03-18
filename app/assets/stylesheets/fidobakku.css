@@ -19,6 +19,13 @@ label {
   border: none;
 }
 
+/* #reviewForm .ng-valid-pattern {
+  border-color: green;
+} */
+#reviewForm .ng-invalid-pattern {
+  border-color: red;
+}
+
 .footer {
   background-color: #fff;
   bottom: 0;

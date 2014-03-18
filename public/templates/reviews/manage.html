@@ -1,52 +1,64 @@
-<h1>Manage review assignments</h1>
-
-<form novalidate name="editableUserReviewForm">
+<!-- h1>Manage review assignments</h1 -->
 
 <div class="row">
 
-  <div class="col-md-4">
-    <h2>User</h2>
-    <select id="user_id" class="form-control" ng-model="editableUserReview.user_id" 
-      ng-options="user.id as user.name for user in users">
-    </select>
+  <div class="col-md-9">
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">User reviews</div>
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="userReview in userReviews">
+        <div class="col-md-3">{{ userReview.user_name }}</div>
+        <div class="col-md-3">{{ userReview.form_name }}</div>
+        <div class="col-md-3">{{ userReview.reviewer_name }}</div>
+        <div class="col-md-3">
+          <button class="btn btn-default btn-xs" data-ng-click="editUserReview(userReview)">Edit</button>
+          <button class="btn btn-default btn-xs" data-ng-click="deleteUserReview(userReview)">Delete</button>
+        </div>
+        <div style="clear:both;"></div>
+      </li>
+    </ul>
   </div>
   
-  <div class="col-md-4">
-    <h2>Form</h2>
-    <select id="form_id" class="form-control" ng-model="editableUserReview.form_id"
-      ng-options="form.id as form.name for form in forms">
-    </select>
   </div>
-  
-  <div class="col-md-4">
-    <h2>Reviewer</h2>
-    <select id="review_id" class="form-control" ng-model="editableUserReview.reviewer_id" 
-      ng-options="user.id as user.name for user in users">
-    </select>
+
+  <div class="col-md-3">
+    <form novalidate name="editableUserReviewForm">
+      <input type="hidden" ng-model="editableUserReview.id">
+      
+      <div class="form-group" ng-class="{ 'has-error': editableUserReviewForm.user_id.$invalid && submitted }">
+        <label for="user_id">User</label>
+        <select name="user_id" class="form-control" ng-model="editableUserReview.user_id" 
+          ng-options="user.id as user.name for user in users" ng-required="true">
+        </select>
+        <p ng-show="editableUserReviewForm.user_id.$invalid && submitted" 
+          class="help-block">A user is required</p>
+      </div>
+      
+      <div class="form-group" ng-class="{ 'has-error': editableUserReviewForm.form_id.$invalid && submitted }">
+        <label for="form_id">Form</label>
+        <select name="form_id" class="form-control" ng-model="editableUserReview.form_id"
+          ng-options="form.id as form.name for form in forms" ng-required="true">
+        </select>
+        <p ng-show="editableUserReviewForm.form_id.$invalid && submitted" 
+          class="help-block">A form is required</p>
+      </div>
+      
+      <div class="form-group" ng-class="{ 'has-error': editableUserReviewForm.reviewer_id.$invalid && submitted }">
+        <label for="reviewer_id">Reviewer</label>
+        <select name="reviewer_id" class="form-control" ng-model="editableUserReview.reviewer_id" 
+          ng-options="user.id as user.name for user in users" ng-required="true">
+        </select>
+        <p ng-show="editableUserReviewForm.reviewer_id.$invalid && submitted" 
+          class="help-block">A reviewer is required</p>
+      </div>
+      
+      <div class="actions">
+        <input ng-click="saveUserReview(editableUserReview, editableUserReviewForm.$valid)" 
+          class="btn btn-default btn-sm" type="submit" value="Submit">
+      </div>
+      
+    </form>
   </div>
 
 </div>
-
-<div class="row">
-  
-  <div class="text-right">
-    <input ng-click="saveUserReview(editableUserReview)" type="submit" value="Submit">
-  </div>
-  
-</div>
-
-<div class="row">
-  <table class="table table-hover">
-    <tr ng-repeat="userReview in userReviews">
-      <td>{{ userReview.user_name }}</td>
-      <td>{{ userReview.form_name }}</td>
-      <td>{{ userReview.reviewer_name }}</td>
-      <td>
-        <button class="" data-ng-click="editUserReview(userReview)">Edit</button>
-        <button class="" data-ng-click="deleteUserReview(userReview)">Delete</button>
-      </td>
-    </tr>
-  </table>
-</div>
-
-</form>

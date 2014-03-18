@@ -20,7 +20,7 @@ fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', '$routeParams', function(
   }
   
   var updateTopic = function(topic) {
-    topic.$update(function(val, resp) { // { form_id: $scope.formId },
+    topic.$update({ form_id: $scope.formId }, function(val, resp) {
       $scope.topics = Topics.query({ form_id: $scope.formId });
       $scope.editableTopic = {};
       $scope.editableTopicForm.$setPristine();
@@ -57,7 +57,6 @@ fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', '$routeParams', function(
 
 fiApp.controller('BenchmarksCtrl', ['$scope', 'BenchmarksSrv', function($scope, Benchmarks) {
   
-  // $scope.formId = $scope.$parent.formId;
   $scope.topicId = $scope.$parent.topic.id;
   $scope.benchmarks = Benchmarks.query({ topic_id: $scope.topicId });
   

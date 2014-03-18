@@ -27,6 +27,7 @@ class Api::UserReviewsController < Api::ApiController
   # POST /api/user_reviews.json
   def create
     @user_review = ::UserReview.new(user_review_params)
+    @user_review.scores = '{}' # poor man's initialisation, innit
 
     respond_to do |format|
       if @user_review.save

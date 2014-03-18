@@ -34,13 +34,19 @@ fiApp.controller('ReviewsManageCtrl', ['$scope', 'ReviewsSrv', 'UserReviewsSrv',
     });
   }
   
-  $scope.saveUserReview = function(userReview) {
-    $scope.errorName = null;
-    if (userReview.id) {
-      updateUserReview(userReview);
+  $scope.saveUserReview = function(userReview, isValid) {
+    $scope.submitted = true;
+    if (isValid) {
+      $scope.submitted = false;
+      if (userReview.id) {
+        updateUserReview(userReview);
+      }
+      else {
+        createUserReview(userReview);
+      }
     }
     else {
-      createUserReview(userReview);
+      // console.log('form not valid');
     }
   }
   

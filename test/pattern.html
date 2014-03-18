@@ -1,0 +1,13 @@
+<script>
+p = new RegExp(/^(\?|[1-4](?:.5)?|5)$/);
+console.log( true == p.test("?") );
+console.log( false == p.test("?.5") );
+console.log( false == p.test("0") );
+console.log( true == p.test("1") );
+console.log( false == p.test("6") );
+console.log( false == p.test("a") );
+console.log( true == p.test("1.5") );
+console.log( false == p.test("3.6") );
+console.log( false == p.test("4.") );
+console.log( false == p.test("5.5") );
+</script>
