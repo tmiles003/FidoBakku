@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', function($scope, Users) {
+fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'NotifSrv', function($scope, Users, NotifSrv) {
   
   $scope.users = Users.query();
   $scope.roles = [{s:'user',l:'User'},{s:'manager',l:'Manager'},{s:'admin',l:'Admin'}]; // make this better
@@ -18,6 +18,7 @@ fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', function($scope, Users) {
       $scope.users = Users.query();
       $scope.editableUser = {};
       $scope.editableUserForm.$setPristine();
+      NotifSrv.success();
     });
   }
   

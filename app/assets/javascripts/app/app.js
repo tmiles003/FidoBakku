@@ -2,7 +2,8 @@
 
 var fiApp = angular.module('fiApp', [
   'ngRoute',
-  'ngResource'
+  'ngResource',
+  'toaster'
 ]);
 
 fiApp.config(['$httpProvider', function($httpProvider) {

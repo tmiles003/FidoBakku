@@ -17,5 +17,7 @@
 //= require angular/angular.min
 //= require angular/angular-route.min
 //= require angular/angular-resource.min
+//= require angular/angular-animate.min
+//= require toaster/toaster
 //= require app/app.js
 //= require_tree .
