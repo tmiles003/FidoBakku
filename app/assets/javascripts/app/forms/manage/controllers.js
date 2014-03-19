@@ -7,6 +7,7 @@ fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', '$routeParams', '$filter'
   
   $scope.formId = $routeParams.id;
   $scope.topics = Topics.query({ form_id: $scope.formId });
+  $scope.submitted = false;
   
   var createTopic = function(newTopic) {
     Topics.save({ form_id: $scope.formId, topic: newTopic },
@@ -95,6 +96,7 @@ fiApp.controller('BenchmarksCtrl', ['$scope', 'BenchmarksSrv', '$filter',
   
   $scope.topicId = $scope.$parent.topic.id;
   $scope.benchmarks = Benchmarks.query({ topic_id: $scope.topicId });
+  $scope.submitted = false;
   
   var createBenchmark = function(newBenchmark) {
     Benchmarks.save({ topic_id: $scope.topicId, benchmark: newBenchmark },
@@ -116,12 +118,19 @@ fiApp.controller('BenchmarksCtrl', ['$scope', 'BenchmarksSrv', '$filter',
     });
   }
   
-  $scope.saveBenchmark = function(benchmark) {
-    if (benchmark.id) {
-      updateBenchmark(benchmark);
+  $scope.saveBenchmark = function(benchmark, isValid) {
+    $scope.submitted = true;
+    if (isValid) {
+      $scope.submitted = false;
+      if (benchmark.id) {
+        updateBenchmark(benchmark);
+      }
+      else {
+        createBenchmark(benchmark);
+      }
     }
     else {
-      createBenchmark(benchmark);
+      // console.log('form not valid');
     }
   }
   
