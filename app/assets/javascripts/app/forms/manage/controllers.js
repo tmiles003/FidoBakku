@@ -2,7 +2,8 @@
 
 /* Controllers */
 
-fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', '$routeParams', function($scope, Topics, $routeParams) {
+fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', '$routeParams', '$filter', 
+                  function($scope, Topics, $routeParams, $filter) {
   
   $scope.formId = $routeParams.id;
   $scope.topics = Topics.query({ form_id: $scope.formId });
@@ -44,23 +45,37 @@ fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', '$routeParams', function(
   }
   
   $scope.moveTopicUp = function(topic) {
-    topic.$up(function(val, resp) {
-      // success
-      $scope.topics = Topics.query({ form_id: $scope.formId });
-    }, 
-    function(val, resp) {
-      // error
-    });
+    Topics.up({ id: topic.id }, 
+      function(val, resp) { // success
+        _.each(val, function(el) {
+          var topic = _.find($scope.topics, function(t) {
+            return t.id === el.id;
+          });
+          topic.ordr = el.ordr; // update object in array
+        });
+        // reorder topics
+        $scope.topics = $filter('orderBy')($scope.topics, '+ordr');
+      }, 
+      function(resp) {
+        // error
+      });
   }
   
   $scope.moveTopicDown = function(topic) {
-    topic.$down(function(val, resp) {
-      // success
-      $scope.topics = Topics.query({ form_id: $scope.formId });
-    }, 
-    function(val, resp) {
-      // error
-    });
+    Topics.down({ id: topic.id }, 
+      function(val, resp) { // success
+        _.each(val, function(el) {
+          var topic = _.find($scope.topics, function(t) {
+            return t.id === el.id;
+          });
+          topic.ordr = el.ordr; // update object in array
+        });
+        // reorder topics
+        $scope.topics = $filter('orderBy')($scope.topics, '+ordr');
+      }, 
+      function(resp) {
+        // error
+      });
   }
   
   $scope.editTopic = function(topic) {
@@ -75,7 +90,8 @@ fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', '$routeParams', function(
   
 }]);
 
-fiApp.controller('BenchmarksCtrl', ['$scope', 'BenchmarksSrv', function($scope, Benchmarks) {
+fiApp.controller('BenchmarksCtrl', ['$scope', 'BenchmarksSrv', '$filter', 
+                  function($scope, Benchmarks, $filter) {
   
   $scope.topicId = $scope.$parent.topic.id;
   $scope.benchmarks = Benchmarks.query({ topic_id: $scope.topicId });
@@ -110,23 +126,37 @@ fiApp.controller('BenchmarksCtrl', ['$scope', 'BenchmarksSrv', function($scope, 
   }
   
   $scope.moveBenchmarkUp = function(benchmark) {
-    benchmark.$up(function(val, resp) {
-      // success
-      $scope.benchmarks = Benchmarks.query({ topic_id: $scope.topicId });
-    }, 
-    function(val, resp) {
-      // error
-    });
+    Benchmarks.up({ id: benchmark.id },
+      function(val, resp) { // success
+        _.each(val, function(el) {
+          var benchmark = _.find($scope.benchmarks, function(b) {
+            return b.id === el.id;
+          });
+          benchmark.ordr = el.ordr; // update object in array
+        });
+        // reorder benchmarks
+        $scope.benchmarks = $filter('orderBy')($scope.benchmarks, '+ordr');
+      }, 
+      function(resp) {
+        // error
+      });
   }
   
   $scope.moveBenchmarkDown = function(benchmark) {
-    benchmark.$down(function(val, resp) {
-      // success
-      $scope.benchmarks = Benchmarks.query({ topic_id: $scope.topicId });
-    }, 
-    function(val, resp) {
-      // error
-    });
+    Benchmarks.down({ id: benchmark.id },
+      function(val, resp) { // success
+        _.each(val, function(el) {
+          var benchmark = _.find($scope.benchmarks, function(b) {
+            return b.id === el.id;
+          });
+          benchmark.ordr = el.ordr; // update object in array
+        });
+        // reorder benchmarks
+        $scope.benchmarks = $filter('orderBy')($scope.benchmarks, '+ordr');
+      }, 
+      function(resp) {
+        // error
+      });
   }
   
   $scope.editBenchmark = function(benchmark) {

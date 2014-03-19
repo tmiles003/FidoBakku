@@ -41,25 +41,29 @@ class Api::TopicsController < Api::ApiController
     end
   end
   
-  # POST /api/topics/1/up.json
+  # PUT /api/topics/1/up.json
   def up
     ordr = @topic.ordr
     @topic.update(ordr: @topic_above.ordr)
     @topic_above.update(ordr: ordr)
     
+    @topics = Array.[](@topic, @topic_above)
+    
     respond_to do |format|
-      format.json { head :no_content }
+      format.json { render :index }
     end
   end
   
-  # POST /api/topics/1/down.json
+  # PUT /api/topics/1/down.json
   def down
     ordr = @topic.ordr
     @topic.update(ordr: @topic_below.ordr)
     @topic_below.update(ordr: ordr)
     
+    @topics = Array.[](@topic, @topic_below)
+    
     respond_to do |format|
-      format.json { head :no_content }
+      format.json { render :index }
     end
   end
 

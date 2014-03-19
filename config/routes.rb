@@ -30,8 +30,8 @@ FidoBakku::Application.routes.draw do
     resources :topics, except: [:index, :show, :new, :edit] do 
       resources :benchmarks, except: [:show, :new, :edit], shallow: true do 
         member do 
-          post 'up'
-          post 'down'
+          put 'up'
+          put 'down'
         end
       end
     end
@@ -41,8 +41,8 @@ FidoBakku::Application.routes.draw do
       end
       resources :topics, only: [:index], shallow: true do 
         member do 
-          post 'up'
-          post 'down'
+          put 'up'
+          put 'down'
         end
       end
     end

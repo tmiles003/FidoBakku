@@ -42,25 +42,29 @@ class Api::BenchmarksController < Api::ApiController
     end
   end
   
-  # POST /api/benchmarks/1/up.json
+  # PUT /api/benchmarks/1/up.json
   def up
     ordr = @benchmark.ordr
     @benchmark.update(ordr: @benchmark_above.ordr)
     @benchmark_above.update(ordr: ordr)
     
+    @benchmarks = Array.[](@benchmark, @benchmark_above)
+    
     respond_to do |format|
-      format.json { head :no_content }
+      format.json { render :index }
     end
   end
   
-  # POST /api/benchmarks/1/down.json
+  # PUT /api/benchmarks/1/down.json
   def down
     ordr = @benchmark.ordr
     @benchmark.update(ordr: @benchmark_below.ordr)
     @benchmark_below.update(ordr: ordr)
     
+    @benchmarks = Array.[](@benchmark, @benchmark_below)
+    
     respond_to do |format|
-      format.json { head :no_content }
+      format.json { render :index }
     end
   end
 

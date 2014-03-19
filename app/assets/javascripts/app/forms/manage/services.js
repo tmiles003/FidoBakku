@@ -8,8 +8,8 @@ fiApp.factory('TopicsSrv', ['$resource', function($resource) {
     { id: '@id' }, 
     { 'update': { method: 'PUT' }, 
       'query': { url: '/api/forms/:form_id/topics', params: { form_id: 'formId' }, isArray: true },
-      'up': { method: 'POST', url: '/api/topics/:id/up' },
-      'down': { method: 'POST', url: '/api/topics/:id/down' }
+      'up': { method: 'PUT', url: '/api/topics/:id/up', isArray: true },
+      'down': { method: 'PUT', url: '/api/topics/:id/down', isArray: true }
     });
 }]);
 
@@ -20,7 +20,7 @@ fiApp.factory('BenchmarksSrv', ['$resource', function($resource) {
     { 'update': { method: 'PUT' }, 
       'query': { url: '/api/topics/:topic_id/benchmarks', params: { topic_id: 'topicId' }, isArray: true },
       'save': { method: 'POST', url: '/api/topics/:topic_id/benchmarks', params: { topic_id: '@topic_id' } },
-      'up': { method: 'POST', url: '/api/benchmarks/:id/up' },
-      'down': { method: 'POST', url: '/api/benchmarks/:id/down' }
+      'up': { method: 'PUT', url: '/api/benchmarks/:id/up', isArray: true },
+      'down': { method: 'PUT', url: '/api/benchmarks/:id/down', isArray: true }
     });
 }]);
