@@ -9,7 +9,6 @@ fiApp.controller('UserReviewsCtrl', ['$scope', '$http', 'UserReviewsSrv', '$rout
     $scope.review = resp.user_review.review;
     $scope.form = resp.user_review.form;
     $scope.scores = angular.fromJson(resp.user_review.scores);
-    $scope.user = resp.user_review.user;
     $scope.reviewer = resp.user_review.reviewer;
 
     $scope.$watchCollection('scores', function() {
@@ -18,4 +17,32 @@ fiApp.controller('UserReviewsCtrl', ['$scope', '$http', 'UserReviewsSrv', '$rout
     });
   
   });
+}]);
+
+fiApp.controller('ReviewFeedbackCtrl', ['$scope', '$routeParams', 'ReviewFeedbackSrv', 
+                  function($scope, $routeParams, ReviewFeedbackSrv) {
+  
+  $scope.feedback = ReviewFeedbackSrv.get({ review_id: $routeParams.id });
+  
+  var updateFeedback = function(feedback) {
+    feedback.$update({ review_id: $routeParams.id }, function(val, resp) {
+      // success
+      console.log('done');
+    });
+  }
+  
+  $scope.saveFeedback = function(feedback, isValid) {
+    $scope.submitted = true;
+    if (isValid) {
+      $scope.submitted = false;
+      console.log( feedback );
+      if (feedback.id) {
+        updateFeedback(feedback);
+      }
+    }
+    else {
+      // console.log('form has errors');
+    }
+  }
+  
 }]);
