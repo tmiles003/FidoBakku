@@ -8,7 +8,7 @@ html {
 /* more content below nav + footer space */
 body {
   background-color: #558baa;
-  margin: 60px 0 30px 0;
+  margin: 65px 0 45px 0;
 }
 
 label {
@@ -21,7 +21,7 @@ a {
 
 .navbar-default {
   background-color: #fff;
-  border: none;
+  border-bottom: 2px solid #558baa;
 }
 
 .container {
@@ -49,6 +49,6 @@ a {
 }
 
 .footer p {
-  color: #ccc;
+  color: #558baa;
   margin: 5px 0;
 }
