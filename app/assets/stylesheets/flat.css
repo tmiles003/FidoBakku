@@ -1,9 +1,10 @@
 /* flat.css */
-/* remove drop-shadows, transitions, and gradients */
+/* remove drop-shadows, transitions, round corners, and gradients */
 
 * {
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
+  border-radius: 0px !important;
   -webkit-transition: none;
   transition: none;
 }
