@@ -2,8 +2,9 @@
 
 /* Controllers */
 
-fiApp.controller('ReviewsManageCtrl', ['$scope', 'ReviewsSrv', 'UserReviewsSrv', '$routeParams', '$http', 
-                  function($scope, Reviews, UserReviews, $routeParams, $http) {
+fiApp.controller('ReviewsManageCtrl', ['$scope', 'ReviewsSrv', 'UserReviewsSrv', 
+                    'NotifSrv', '$routeParams', '$http', 
+                  function($scope, Reviews, UserReviews, NotifSrv, $routeParams, $http) {
   
   $scope.reviewId = $routeParams.id;
   $scope.userReviews = UserReviews.query({ review_id: $scope.reviewId }); // get user reviews for this review
@@ -15,22 +16,25 @@ fiApp.controller('ReviewsManageCtrl', ['$scope', 'ReviewsSrv', 'UserReviewsSrv',
   });
   
   var createUserReview = function(newUserReview) {
-    UserReviews.save({ user_review: newUserReview, review_id: $scope.reviewId }, 
-      function(val, resp) {
-        $scope.userReviews = UserReviews.query({ review_id: $scope.reviewId }); // can i do this better?
-        $scope.editableUserReview = {};
-        $scope.editableUserReviewForm.$setPristine();
-      }, 
-      function(resp) {
-        $scope.errorName = resp.data.name[0]; // clean this up a bit...
-      });
+    UserReviews.save({ user_review: newUserReview, review_id: $scope.reviewId }, function(val, resp) {
+      $scope.userReviews = UserReviews.query({ review_id: $scope.reviewId }); // improve
+      $scope.editableUserReview = {};
+      $scope.editableUserReviewForm.$setPristine();
+      NotifSrv.success();
+    }, function(resp) {
+      NotifSrv.error('Error'); // improve
+      // $scope.errorName = resp.data.name[0]; // clean this up a bit...
+    });
   }
   
   var updateUserReview = function(userReview) {
     userReview.$update({ review_id: $scope.reviewId }, function(val, resp) {
-      $scope.userReviews = UserReviews.query({ review_id: $scope.reviewId });
+      $scope.userReviews = UserReviews.query({ review_id: $scope.reviewId }); // improve
       $scope.editableUserReview = {};
       $scope.editableUserReviewForm.$setPristine();
+      NotifSrv.success();
+    }, function(resp) {
+      NotifSrv.error('Error'); // improve
     });
   }
   
@@ -46,7 +50,7 @@ fiApp.controller('ReviewsManageCtrl', ['$scope', 'ReviewsSrv', 'UserReviewsSrv',
       }
     }
     else {
-      // console.log('form not valid');
+      // NotifSrv.error('Error');
     }
   }
   
@@ -55,8 +59,11 @@ fiApp.controller('ReviewsManageCtrl', ['$scope', 'ReviewsSrv', 'UserReviewsSrv',
   }
   
   $scope.deleteUserReview = function(userReview) {
-    userReview.$delete().then(function() {
+    userReview.$delete(function() {
       $scope.userReviews = _.without($scope.userReviews, userReview);
+      NotifSrv.success();
+    }, function(resp) {
+      NotifSrv.error('Error'); // improve
     });
   }
   

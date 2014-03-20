@@ -5,20 +5,27 @@
 fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'NotifSrv', function($scope, Users, NotifSrv) {
   
   $scope.users = Users.query();
-  $scope.roles = [{s:'user',l:'User'},{s:'manager',l:'Manager'},{s:'admin',l:'Admin'}]; // make this better
+  $scope.roles = [{s:'user',l:'User'},{s:'manager',l:'Manager'},{s:'admin',l:'Admin'}]; // improve
   
   var createUser = function(newUser) {
-    $scope.users.push(Users.save(newUser));
-    $scope.editableUser = {};
-    $scope.editableUserForm.$setPristine();
-  }
-  
-  var updateUser = function(user) {
-    user.$update().then(function() {
-      $scope.users = Users.query();
+    Users.save(newUser, function(val, resp) {
+      $scope.users.push(val);
       $scope.editableUser = {};
       $scope.editableUserForm.$setPristine();
       NotifSrv.success();
+    }, function(resp) {
+      NotifSrv.error('Error'); // improve
+    });
+  }
+  
+  var updateUser = function(user) {
+    user.$update(function(val, resp) {
+      $scope.users = Users.query(); // improve
+      $scope.editableUser = {};
+      $scope.editableUserForm.$setPristine();
+      NotifSrv.success();
+    }, function(resp) {
+      NotifSrv.error('Error'); // improve
     });
   }
   
@@ -34,7 +41,7 @@ fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'NotifSrv', function($scope
       }
     }
     else {
-      // console.log('form has errors');
+      // NotifSrv.error('Error');
     }
   }
   
@@ -43,8 +50,11 @@ fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'NotifSrv', function($scope
   }
   
   $scope.deleteUser = function(user) {
-    user.$delete().then(function() {
+    user.$delete(function() {
       $scope.users = _.without($scope.users, user);
+      NotifSrv.success();
+    }, function(resp) {
+      NotifSrv.error('Error'); // improve
     });
   }
   

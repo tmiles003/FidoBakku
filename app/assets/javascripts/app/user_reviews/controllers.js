@@ -2,8 +2,8 @@
 
 /* Controllers */
 
-fiApp.controller('UserReviewsCtrl', ['$scope', '$http', 'UserReviewsSrv', '$routeParams', 
-                  function($scope, $http, UserReviews, $routeParams) {
+fiApp.controller('UserReviewsCtrl', ['$scope', '$http', 'UserReviewsSrv', 'NotifSrv', '$routeParams', 
+                  function($scope, $http, UserReviews, NotifSrv, $routeParams) {
   
   var userReview = UserReviews.get({ id: $routeParams.id }, function(resp) {
     $scope.review = resp.user_review.review;
@@ -11,23 +11,30 @@ fiApp.controller('UserReviewsCtrl', ['$scope', '$http', 'UserReviewsSrv', '$rout
     $scope.scores = angular.fromJson(resp.user_review.scores);
     $scope.reviewer = resp.user_review.reviewer;
 
+    var isLoading = true;
     $scope.$watchCollection('scores', function() {
       UserReviews.update({ id: $routeParams.id }, 
-        { review_id: $scope.review.id, scores: JSON.stringify($scope.scores) });
+        { review_id: $scope.review.id, scores: JSON.stringify($scope.scores) }, function() {
+          if (!isLoading) 
+            NotifSrv.success();
+          else 
+            isLoading = false;
+        });
     });
   
   });
 }]);
 
-fiApp.controller('ReviewFeedbackCtrl', ['$scope', '$routeParams', 'ReviewFeedbackSrv', 
-                  function($scope, $routeParams, ReviewFeedbackSrv) {
+fiApp.controller('ReviewFeedbackCtrl', ['$scope', '$routeParams', 'ReviewFeedbackSrv', 'NotifSrv',
+                  function($scope, $routeParams, ReviewFeedbackSrv, NotifSrv) {
   
   $scope.feedback = ReviewFeedbackSrv.get({ review_id: $routeParams.id });
   
   var updateFeedback = function(feedback) {
     feedback.$update({ review_id: $routeParams.id }, function(val, resp) {
-      // success
-      console.log('done');
+      NotifSrv.success();
+    }, function(resp) {
+      NotifSrv.error('Error'); // improve
     });
   }
   
@@ -35,13 +42,12 @@ fiApp.controller('ReviewFeedbackCtrl', ['$scope', '$routeParams', 'ReviewFeedbac
     $scope.submitted = true;
     if (isValid) {
       $scope.submitted = false;
-      console.log( feedback );
       if (feedback.id) {
         updateFeedback(feedback);
       }
     }
     else {
-      // console.log('form has errors');
+      // NotifSrv.error('Error');
     }
   }
   
