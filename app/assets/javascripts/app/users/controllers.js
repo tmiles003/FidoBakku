@@ -2,9 +2,9 @@
 
 /* Controllers */
 
-fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'NotifSrv', function($scope, Users, NotifSrv) {
+fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'NotifSrv', 'users', function($scope, Users, NotifSrv, users) {
   
-  $scope.users = Users.query();
+  $scope.users = users;
   $scope.roles = [{s:'user',l:'User'},{s:'manager',l:'Manager'},{s:'admin',l:'Admin'}]; // improve
   
   var createUser = function(newUser) {

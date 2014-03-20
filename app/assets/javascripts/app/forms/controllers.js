@@ -2,13 +2,14 @@
 
 /* Controllers */
 
-fiApp.controller('FormsCtrl', ['$scope', 'FormsSrv', 'NotifSrv', function($scope, Forms, NotifSrv) {
+fiApp.controller('FormsCtrl', ['$scope', 'FormsSrv', 'NotifSrv', 'forms', 
+                  function($scope, FormsSrv, NotifSrv, forms) {
   
-  $scope.forms = Forms.query();
+  $scope.forms = forms; // Forms.query();
   
   var createForm = function(newForm) {
-    Forms.save(newForm, function(val, resp) {
-      $scope.forms = Forms.query(); // improve
+    FormsSrv.save(newForm, function(val, resp) {
+      $scope.forms = FormsSrv.query(); // improve
       $scope.editableForm = {};
       $scope.editableFormForm.$setPristine();
       NotifSrv.success();
@@ -20,7 +21,7 @@ fiApp.controller('FormsCtrl', ['$scope', 'FormsSrv', 'NotifSrv', function($scope
   
   var updateForm = function(form) {
     form.$update(function(val, resp) {
-      $scope.forms = Forms.query(); // improve
+      $scope.forms = FormsSrv.query(); // improve
       $scope.editableForm = {};
       $scope.editableFormForm.$setPristine();
       NotifSrv.success();

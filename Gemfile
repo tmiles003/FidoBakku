@@ -33,8 +33,8 @@ group :doc do
 end
 
 gem 'devise'
-gem 'cancan'
-#gem 'cancancan', '~> 1.7'
+#gem 'cancan'
+gem 'cancancan', '~> 1.7'
 gem 'mysql2'
 
 # Use ActiveModel has_secure_password

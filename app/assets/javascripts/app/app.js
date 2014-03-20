@@ -7,14 +7,15 @@ var fiApp = angular.module('fiApp', [
 ]);
 
 fiApp.config(['$httpProvider', function($httpProvider) {
-  $httpProvider.interceptors.push(function($q) {
+  $httpProvider.interceptors.push(function($q, $location, NotifSrv) {
     return {
       responseError: function(rejection) {
         if (403 == rejection.status) {
-          console.log( 'not authorised' );
+          NotifSrv.info('Unauthorised', null, 3000);
+          $location.path('/');
         }
         if (401 == rejection.status) {
-          console.log( 'not logged in' );
+          NotifSrv.info('Please log in');
         }
         return $q.reject(rejection);
       }
@@ -22,27 +23,52 @@ fiApp.config(['$httpProvider', function($httpProvider) {
   });
 }]);
 
-fiApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+fiApp.config(['$routeProvider', '$locationProvider', // '$routeParams', 
+              function($routeProvider, $locationProvider) {
   // $locationProvider.html5Mode(true); // nice urls.
   
   $routeProvider.when('/dashboard', 
     { templateUrl: '/templates/dashboard.html', controller: 'DashboardCtrl' });
   $routeProvider.when('/people', 
-    { templateUrl: '/templates/users/index.html', controller: 'UsersCtrl' });
+    { templateUrl: '/templates/users/index.html', controller: 'UsersCtrl', 
+      resolve: { 
+        users: function(UsersSrv) { return UsersSrv.query()['$promise']; } 
+      }
+  });
   $routeProvider.when('/forms', 
-    { templateUrl: '/templates/forms/index.html', controller: 'FormsCtrl' });
+    { templateUrl: '/templates/forms/index.html', controller: 'FormsCtrl', 
+      resolve: {
+        forms: function(FormsSrv) { return FormsSrv.query()['$promise']; }
+      }
+  });
   $routeProvider.when('/form/:id/:slug', 
     { templateUrl: '/templates/forms/manage.html', controller: 'TopicsCtrl' });
   // list all the reviews
   $routeProvider.when('/reviews', 
-    { templateUrl: '/templates/reviews/index.html', controller: 'ReviewsCtrl' });
+    { templateUrl: '/templates/reviews/index.html', controller: 'ReviewsCtrl', 
+      resolve: {
+        reviews: function(ReviewsSrv) { return ReviewsSrv.query()['$promise']; }
+      }
+  });
   // single review
   $routeProvider.when('/reviews/:id/:slug', 
-    { templateUrl: '/templates/reviews/manage.html', controller: 'ReviewsManageCtrl' });
+    { templateUrl: '/templates/reviews/manage.html', controller: 'ReviewsManageCtrl',
+      resolve: {
+        userReviews: function(UserReviewsSrv, $route) {
+          return UserReviewsSrv.query({ review_id: $route.current.params.id })['$promise'];
+        }
+    }
+  });
   
   // user review
   $routeProvider.when('/review/:id/:name', 
-    { templateUrl: '/templates/review/index.html', controller: 'UserReviewsCtrl' });
+    { templateUrl: '/templates/review/index.html', controller: 'UserReviewsCtrl',
+      resolve: {
+        review: function(UserReviewsSrv, $route) {
+          return UserReviewsSrv.get({ id: $route.current.params.id })['$promise'];
+        }
+      }
+  });
   
   $routeProvider.when('/account', 
     { templateUrl: '/templates/account/index.html', controller: 'AccountCtrl' });

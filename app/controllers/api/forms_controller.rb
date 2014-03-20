@@ -1,5 +1,7 @@
 class Api::FormsController < Api::ApiController
   
+  load_and_authorize_resource
+  
   before_action :set_form, only: [:update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_form
 

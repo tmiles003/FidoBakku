@@ -2,14 +2,14 @@
 
 /* Controllers */
 
-fiApp.controller('ReviewsCtrl', ['$scope', 'ReviewsSrv', 'NotifSrv', 
-                  function($scope, Reviews, NotifSrv) {
+fiApp.controller('ReviewsCtrl', ['$scope', 'ReviewsSrv', 'NotifSrv', 'reviews',
+                  function($scope, ReviewsSrv, NotifSrv, reviews) {
   
-  $scope.reviews = Reviews.query();
+  $scope.reviews = reviews;
   
   var createReview = function(newReview) {
-    Reviews.save(newReview, function(val, resp) {
-      $scope.reviews = Reviews.query(); // improve
+    ReviewsSrv.save(newReview, function(val, resp) {
+      $scope.reviews = ReviewsSrv.query(); // improve
       $scope.editableReview = {};
       $scope.editableReviewForm.$setPristine();
       NotifSrv.success();
@@ -21,7 +21,7 @@ fiApp.controller('ReviewsCtrl', ['$scope', 'ReviewsSrv', 'NotifSrv',
   
   var updateReview = function(review) {
     review.$update(function(val, resp) {
-      $scope.reviews = Reviews.query(); // improve
+      $scope.reviews = ReviewsSrv.query(); // improve
       $scope.editableReview = {};
       $scope.editableReviewForm.$setPristine();
       NotifSrv.success();

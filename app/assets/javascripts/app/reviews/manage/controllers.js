@@ -3,11 +3,11 @@
 /* Controllers */
 
 fiApp.controller('ReviewsManageCtrl', ['$scope', 'ReviewsSrv', 'UserReviewsSrv', 
-                    'NotifSrv', '$routeParams', '$http', 
-                  function($scope, Reviews, UserReviews, NotifSrv, $routeParams, $http) {
+                    'NotifSrv', '$routeParams', '$http', 'userReviews', 
+                  function($scope, Reviews, UserReviewsSrv, NotifSrv, $routeParams, $http, userReviews) {
   
   $scope.reviewId = $routeParams.id;
-  $scope.userReviews = UserReviews.query({ review_id: $scope.reviewId }); // get user reviews for this review
+  $scope.userReviews = userReviews; // get user reviews for this review
   $http.get('/api/users/list').success(function(data) { 
     $scope.users = data; 
   });
@@ -16,8 +16,8 @@ fiApp.controller('ReviewsManageCtrl', ['$scope', 'ReviewsSrv', 'UserReviewsSrv',
   });
   
   var createUserReview = function(newUserReview) {
-    UserReviews.save({ user_review: newUserReview, review_id: $scope.reviewId }, function(val, resp) {
-      $scope.userReviews = UserReviews.query({ review_id: $scope.reviewId }); // improve
+    UserReviewsSrv.save({ user_review: newUserReview, review_id: $scope.reviewId }, function(val, resp) {
+      $scope.userReviews = UserReviewsSrv.query({ review_id: $scope.reviewId }); // improve
       $scope.editableUserReview = {};
       $scope.editableUserReviewForm.$setPristine();
       NotifSrv.success();
@@ -29,7 +29,7 @@ fiApp.controller('ReviewsManageCtrl', ['$scope', 'ReviewsSrv', 'UserReviewsSrv',
   
   var updateUserReview = function(userReview) {
     userReview.$update({ review_id: $scope.reviewId }, function(val, resp) {
-      $scope.userReviews = UserReviews.query({ review_id: $scope.reviewId }); // improve
+      $scope.userReviews = UserReviewsSrv.query({ review_id: $scope.reviewId }); // improve
       $scope.editableUserReview = {};
       $scope.editableUserReviewForm.$setPristine();
       NotifSrv.success();

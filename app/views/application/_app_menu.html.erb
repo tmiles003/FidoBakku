@@ -2,20 +2,28 @@
     <li>
       <a href="/#/dashboard">Dashboard</a>
     </li>
+  <% if can? :manage, User # admins only %>
     <li>
       <a href="/#/people">People</a>
     </li>
+  <% end %>
+  <% if can? :manage, Form # admins only %>
     <li>
       <a href="/#/forms">Forms</a>
     </li>
+  <% end %>
+  <% if can? :manage, Form # admins + managers only %>
     <li>
       <a href="/#/reviews">Reviews</a>
     </li>
+  <% end %>
   </ul>
   <ul class="nav navbar-nav navbar-right">
+  <% if can? :manage, Account # admins only %>
     <li>
       <a href="/#/account">Account</a>
     </li>
+  <% end %>
     <li>
       <a href="/#/profile">Profile</a>
     </li>

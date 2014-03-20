@@ -2,26 +2,23 @@
 
 /* Controllers */
 
-fiApp.controller('UserReviewsCtrl', ['$scope', '$http', 'UserReviewsSrv', 'NotifSrv', '$routeParams', 
-                  function($scope, $http, UserReviews, NotifSrv, $routeParams) {
+fiApp.controller('UserReviewsCtrl', ['$scope', '$http', 'UserReviewsSrv', 'NotifSrv', '$routeParams', 'review', 
+                  function($scope, $http, UserReviewsSrv, NotifSrv, $routeParams, review) {
   
-  var userReview = UserReviews.get({ id: $routeParams.id }, function(resp) {
-    $scope.review = resp.user_review.review;
-    $scope.form = resp.user_review.form;
-    $scope.scores = angular.fromJson(resp.user_review.scores);
-    $scope.reviewer = resp.user_review.reviewer;
+  $scope.review = review.user_review.review;
+  $scope.form = review.user_review.form;
+  $scope.scores = angular.fromJson(review.user_review.scores);
+  $scope.reviewer = review.user_review.reviewer;
 
-    var isLoading = true;
-    $scope.$watchCollection('scores', function() {
-      UserReviews.update({ id: $routeParams.id }, 
-        { review_id: $scope.review.id, scores: JSON.stringify($scope.scores) }, function() {
-          if (!isLoading) 
-            NotifSrv.success();
-          else 
-            isLoading = false;
-        });
-    });
-  
+  var isLoading = true;
+  $scope.$watchCollection('scores', function() {
+    UserReviewsSrv.update({ id: $routeParams.id }, 
+      { review_id: $scope.review.id, scores: JSON.stringify($scope.scores) }, function() {
+        if (!isLoading) 
+          NotifSrv.success();
+        else 
+          isLoading = false;
+      });
   });
 }]);
 

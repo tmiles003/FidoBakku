@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   layout :choose_layout
   
   after_filter :set_csrf_cookie
-
+  
   def set_csrf_cookie
     if protect_against_forgery?
       cookies['XSRF-TOKEN'] = form_authenticity_token

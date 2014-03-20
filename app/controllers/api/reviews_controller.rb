@@ -1,5 +1,7 @@
 class Api::ReviewsController < Api::ApiController
   
+  load_and_authorize_resource
+  
   before_action :set_review, only: [:show, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_review
   
