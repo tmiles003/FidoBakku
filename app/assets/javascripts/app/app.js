@@ -29,9 +29,10 @@ fiApp.config(['$routeProvider', '$locationProvider', // '$routeParams',
   
   $routeProvider.when('/dashboard', 
     { templateUrl: '/templates/dashboard.html', controller: 'DashboardCtrl' });
-  $routeProvider.when('/people', 
+  $routeProvider.when('/staff', 
     { templateUrl: '/templates/users/index.html', controller: 'UsersCtrl', 
       resolve: { 
+        // abilities: function(AbilitiesSrv) { return ...; },
         users: function(UsersSrv) { return UsersSrv.query()['$promise']; } 
       }
   });
