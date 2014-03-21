@@ -71,6 +71,8 @@ fiApp.config(['$routeProvider', '$locationProvider', // '$routeParams',
       }
   });
   
+  // review feedback
+  
   $routeProvider.when('/account', 
     { templateUrl: '/templates/account/index.html', controller: 'AccountCtrl' });
   $routeProvider.when('/profile', 
