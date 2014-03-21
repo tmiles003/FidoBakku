@@ -2,13 +2,14 @@
 
 /* Controllers */
 
-fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'NotifSrv', 'users', function($scope, Users, NotifSrv, users) {
+fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'abilities', 'users', 'NotifSrv', 
+                  function($scope, UsersSrv, abilities, users, NotifSrv) {
   
   $scope.users = users;
   $scope.roles = [{s:'user',l:'User'},{s:'manager',l:'Manager'},{s:'admin',l:'Admin'}]; // improve
   
   var createUser = function(newUser) {
-    Users.save(newUser, function(val, resp) {
+    UsersSrv.save(newUser, function(val, resp) {
       $scope.users.push(val);
       $scope.editableUser = {};
       $scope.editableUserForm.$setPristine();
@@ -20,7 +21,7 @@ fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'NotifSrv', 'users', functi
   
   var updateUser = function(user) {
     user.$update(function(val, resp) {
-      $scope.users = Users.query(); // improve
+      $scope.users = UsersSrv.query(); // improve
       $scope.editableUser = {};
       $scope.editableUserForm.$setPristine();
       NotifSrv.success();
