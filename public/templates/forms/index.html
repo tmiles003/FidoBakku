@@ -6,15 +6,23 @@
   
   <div class="panel panel-default">
     <div class="panel-heading">Forms</div>
-    <ul class="list-group">
-      <li class="list-group-item" ng-repeat="form in forms | orderBy: '+name'">
-        <a href="{{ form.manage_path }}">{{ form.name }}</a>
-        <span style="float: right;">
-          <button class="btn btn-default btn-xs" data-ng-click="editForm(form)">Edit</button>
-          <button class="btn btn-default btn-xs" data-ng-click="deleteForm(form)">Delete</button>
-        </span>
-      </li>
-    </ul>
+    <!-- div class="panel-body">
+    </div -->
+    <table class="table table-hover">
+      <tr ng-repeat="form in forms | orderBy: '+name'">
+        <td>
+          <a href="{{ form.manage_path }}">{{ form.name }}</a>
+        </td>
+        <td class="text-right">
+          <button class="btn btn-default btn-xs" ng-click="editForm(form)">
+            <span class="glyphicon glyphicon-pencil"></span>
+          </button>
+          <button class="btn btn-default btn-xs" ng-click="deleteForm(form)">
+            <span class="glyphicon glyphicon-remove"></span>
+          </button>
+        </td>
+      </tr>
+    </table>
   </div>
   
   </div>

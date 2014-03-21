@@ -1,28 +1,26 @@
 <h1>Review</h1>
 
-<div class="container">
-
 <form name="reviewForm" id="reviewForm" novalidate>
 <div class="row" ng-repeat="topic in form.topics | orderBy: '+ordr'">
+  
+  <div class="col-md-12">
   
   <div class="panel panel-default">
     <div class="panel-heading">
       {{ topic.name }}
     </div>
     
-    <ul class="list-group">
-      <li class="list-group-item" ng-repeat="benchmark in topic.benchmarks | orderBy: '+ordr'">
-        <div class="col-md-11">
-          {{ benchmark.content }}
-        </div>
-        
-        <div class="col-md-1"><!-- ng-invalid-pattern: border red -->
-          <input type="text" ng-model="scores[benchmark.id]" 
+    <table class="table table-hover">
+      <tr ng-repeat="benchmark in topic.benchmarks | orderBy: '+ordr'">
+        <td>{{ benchmark.content }}</td>
+        <td class="" style="width:70px;">
+          <input type="text" ng-model="scores[benchmark.id]"
             ng-pattern="/^(\?|[1-4](?:.5)?|5)$/" class="form-control text-center">
-        </div>
-        <div style="clear:both;"></div>
-      </li>
-    </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+  
   </div>
 
 </div>

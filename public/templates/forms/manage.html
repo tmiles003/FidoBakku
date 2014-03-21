@@ -2,54 +2,67 @@
 
 <div ng-repeat="topic in topics | orderBy: '+ordr'" class="row">
   
+  <div class="col-md-12">
+  
   <div class="panel panel-default">
     <div class="panel-heading">{{ topic.name }}
-      <span style="float:right;">
-        <button class="btn btn-default btn-xs" data-ng-click="moveTopicUp(topic)">Up</button>
-        <button class="btn btn-default btn-xs" data-ng-click="moveTopicDown(topic)">Down</button>
-        <button class="btn btn-default btn-xs" data-ng-click="editTopic(topic)">Edit</button>
-        <button class="btn btn-default btn-xs" data-ng-click="deleteTopic(topic)">Delete</button>
+      <span class="pull-right">
+        <button class="btn btn-default btn-xs" ng-click="moveTopicUp(topic)">
+          <span class="glyphicon glyphicon-arrow-up"></span>
+        </button>
+        <button class="btn btn-default btn-xs" ng-click="moveTopicDown(topic)">
+          <span class="glyphicon glyphicon-arrow-down"></span>
+        </button>
+        <button class="btn btn-default btn-xs" ng-click="editTopic(topic)">
+          <span class="glyphicon glyphicon-pencil"></span>
+        </button>
+        <button class="btn btn-default btn-xs" ng-click="deleteTopic(topic)">
+          <span class="glyphicon glyphicon-remove"></span>
+        </button>
       </span>
     </div>
     
-    <ul class="list-group" ng-controller="BenchmarksCtrl">
-    
-      <li class="list-group-item" ng-repeat="benchmark in benchmarks | orderBy: '+ordr'">
-        <div class="col-md-9">
-          {{ benchmark.content }}
-        </div>
-        
-        <div class="col-md-3 text-right">
-          <button class="btn btn-default btn-xs" data-ng-click="moveBenchmarkUp(benchmark)">Up</button>
-          <button class="btn btn-default btn-xs" data-ng-click="moveBenchmarkDown(benchmark)">Down</button>
-          <button class="btn btn-default btn-xs" data-ng-click="editBenchmark(benchmark)">Edit</button>
-          <button class="btn btn-default btn-xs" data-ng-click="deleteBenchmark(benchmark)">Delete</button>
-        </div>
-        <div style="clear:both;"></div>
-      </li>
-      
-      <li class="list-group-item">
-        <form accept-charset="utf-8" class="form-horizontal" novalidate name="editableBenchmarkForm">
-          <input type="hidden" ng-model="editableBenchmark.id">
-          
-          <label for="benchmark_content" class="col-md-2 control-label">Question</label>
-          
-          <div class="col-md-9" ng-class="{ 'has-error': editableBenchmarkForm.benchmark_content.$invalid 
+    <table class="table table-hover" ng-controller="BenchmarksCtrl">
+      <tr ng-repeat="benchmark in benchmarks | orderBy: '+ordr'">
+        <td colspan="2">{{ benchmark.content }}</td>
+        <td class="text-right">
+          <button class="btn btn-default btn-xs" ng-click="moveBenchmarkUp(benchmark)">
+            <span class="glyphicon glyphicon-arrow-up"></span>
+          </button>
+          <button class="btn btn-default btn-xs" ng-click="moveBenchmarkDown(benchmark)">
+            <span class="glyphicon glyphicon-arrow-down"></span>
+          </button>
+          <button class="btn btn-default btn-xs" ng-click="editBenchmark(benchmark)">
+            <span class="glyphicon glyphicon-pencil"></span>
+          </button>
+          <button class="btn btn-default btn-xs" ng-click="deleteBenchmark(benchmark)">
+            <span class="glyphicon glyphicon-remove"></span>
+          </button>
+        </td>
+      </tr>
+      <tr>
+          <td class="" ng-class="{ 'has-error': editableBenchmarkForm.benchmark_content.$invalid 
                 && submitted }">
+          <form accept-charset="utf-8" class="form-horizontal" novalidate name="editableBenchmarkForm">
+            <input type="hidden" ng-model="editableBenchmark.id">
+            
+            <label for="benchmark_content" class="control-label">Question</label>
+          </td>
+          <td>
               <textarea class="form-control" name="benchmark_content" ng-model="editableBenchmark.content" 
                 ng-required="true" ng-minlength="2" rows="2"></textarea>
               <p ng-show="editableBenchmarkForm.benchmark_content.$invalid && submitted" 
                   class="help-block">Content is required</p>
-          </div>
-          <div class="col-md-1">
+          </td>
+          <td class="">
             <button ng-click="saveBenchmark(editableBenchmark, editableBenchmarkForm.$valid)" type="button"
               class="btn btn-default btn-sm">Save</button>
-          </div>
+          </td>
         </form>
-        <div style="clear: both;"></div>
-      </li>
-      
-    </ul>
+      </tr>
+    </table>
+  </div>
+  
   </div>
 
 </div>

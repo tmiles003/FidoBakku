@@ -2,15 +2,16 @@
 
 /* Controllers */
 
-fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', 'NotifSrv', '$routeParams', '$filter', 
-                  function($scope, Topics, NotifSrv, $routeParams, $filter) {
+fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', 'topics', 'NotifSrv', '$routeParams', '$filter', 
+                  function($scope, TopicsSrv, topics, NotifSrv, $routeParams, $filter) {
   
   $scope.formId = $routeParams.id;
-  $scope.topics = Topics.query({ form_id: $scope.formId });
+  $scope.topics = topics;
+  $scope.editableTopic = {};
   $scope.submitted = false;
   
   var createTopic = function(newTopic) {
-    Topics.save({ form_id: $scope.formId, topic: newTopic }, function(val, resp) {
+    TopicsSrv.save({ form_id: $scope.formId, topic: newTopic }, function(val, resp) {
       $scope.topics.push(val);
       $scope.editableTopic = {};
       $scope.editableTopicForm.$setPristine();
@@ -24,7 +25,7 @@ fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', 'NotifSrv', '$routeParams
   
   var updateTopic = function(topic) {
     topic.$update({ form_id: $scope.formId }, function(val, resp) {
-      $scope.topics = Topics.query({ form_id: $scope.formId }); // improve
+      $scope.topics = TopicsSrv.query({ form_id: $scope.formId }); // improve
       $scope.editableTopic = {};
       $scope.editableTopicForm.$setPristine();
       NotifSrv.success();
@@ -50,7 +51,7 @@ fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', 'NotifSrv', '$routeParams
   }
   
   $scope.moveTopicUp = function(topic) {
-    Topics.up({ id: topic.id }, function(val, resp) { // success
+    TopicsSrv.up({ id: topic.id }, function(val, resp) { // success
       _.each(val, function(el) {
         var topic = _.find($scope.topics, function(t) {
           return t.id === el.id;
@@ -67,7 +68,7 @@ fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', 'NotifSrv', '$routeParams
   }
   
   $scope.moveTopicDown = function(topic) {
-    Topics.down({ id: topic.id }, function(val, resp) { // success
+    TopicsSrv.down({ id: topic.id }, function(val, resp) { // success
       _.each(val, function(el) {
         var topic = _.find($scope.topics, function(t) {
           return t.id === el.id;
@@ -99,14 +100,15 @@ fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', 'NotifSrv', '$routeParams
 }]);
 
 fiApp.controller('BenchmarksCtrl', ['$scope', 'BenchmarksSrv', 'NotifSrv', '$filter', 
-                  function($scope, Benchmarks, NotifSrv, $filter) {
+                  function($scope, BenchmarksSrv, NotifSrv, $filter) {
   
   $scope.topicId = $scope.$parent.topic.id;
-  $scope.benchmarks = Benchmarks.query({ topic_id: $scope.topicId });
+  $scope.benchmarks = BenchmarksSrv.query({ topic_id: $scope.topicId });
+  $scope.editableBenchmark = {};
   $scope.submitted = false;
   
   var createBenchmark = function(newBenchmark) {
-    Benchmarks.save({ topic_id: $scope.topicId, benchmark: newBenchmark }, function(val, resp) {
+    BenchmarksSrv.save({ topic_id: $scope.topicId, benchmark: newBenchmark }, function(val, resp) {
       $scope.benchmarks.push(val);
       $scope.editableBenchmark = {};
       $scope.editableBenchmarkForm.$setPristine();
@@ -120,7 +122,7 @@ fiApp.controller('BenchmarksCtrl', ['$scope', 'BenchmarksSrv', 'NotifSrv', '$fil
   
   var updateBenchmark = function(benchmark) {
     benchmark.$update(function(val, resp) {
-      $scope.benchmarks = Benchmarks.query({ topic_id: $scope.topicId }); // improve
+      $scope.benchmarks = BenchmarksSrv.query({ topic_id: $scope.topicId }); // improve
       $scope.editableBenchmark = {};
       $scope.editableBenchmarkForm.$setPristine();
       NotifSrv.success();
@@ -146,7 +148,7 @@ fiApp.controller('BenchmarksCtrl', ['$scope', 'BenchmarksSrv', 'NotifSrv', '$fil
   }
   
   $scope.moveBenchmarkUp = function(benchmark) {
-    Benchmarks.up({ id: benchmark.id },
+    BenchmarksSrv.up({ id: benchmark.id },
       function(val, resp) { // success
         _.each(val, function(el) {
           var benchmark = _.find($scope.benchmarks, function(b) {
@@ -164,7 +166,7 @@ fiApp.controller('BenchmarksCtrl', ['$scope', 'BenchmarksSrv', 'NotifSrv', '$fil
   }
   
   $scope.moveBenchmarkDown = function(benchmark) {
-    Benchmarks.down({ id: benchmark.id },
+    BenchmarksSrv.down({ id: benchmark.id },
       function(val, resp) { // success
         _.each(val, function(el) {
           var benchmark = _.find($scope.benchmarks, function(b) {

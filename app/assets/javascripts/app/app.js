@@ -29,6 +29,7 @@ fiApp.config(['$routeProvider', '$locationProvider', // '$routeParams',
   
   $routeProvider.when('/dashboard', 
     { templateUrl: '/templates/dashboard.html', controller: 'DashboardCtrl' });
+  
   $routeProvider.when('/staff', 
     { templateUrl: '/templates/users/index.html', controller: 'UsersCtrl', 
       resolve: { 
@@ -36,6 +37,7 @@ fiApp.config(['$routeProvider', '$locationProvider', // '$routeParams',
         users: function(UsersSrv) { return UsersSrv.query()['$promise']; } 
       }
   });
+  
   $routeProvider.when('/forms', 
     { templateUrl: '/templates/forms/index.html', controller: 'FormsCtrl', 
       resolve: {
@@ -43,7 +45,14 @@ fiApp.config(['$routeProvider', '$locationProvider', // '$routeParams',
       }
   });
   $routeProvider.when('/form/:id/:slug', 
-    { templateUrl: '/templates/forms/manage.html', controller: 'TopicsCtrl' });
+    { templateUrl: '/templates/forms/manage.html', controller: 'TopicsCtrl',
+      resolve: {
+        topics: function(TopicsSrv, $route) { 
+          return TopicsSrv.query({ form_id: $route.current.params.id });
+        }
+      }
+  });
+  
   // list all the reviews
   $routeProvider.when('/reviews', 
     { templateUrl: '/templates/reviews/index.html', controller: 'ReviewsCtrl', 

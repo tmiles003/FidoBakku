@@ -6,16 +6,23 @@
   
   <div class="panel panel-default">
     <div class="panel-heading">Reviews</div>
-    <ul class="list-group">
-      <li class="list-group-item" ng-repeat="review in reviews | orderBy: '-created'">
-        <a href="{{ review.manage_path }}">{{ review.title }}</a>
-        
-        <span style="float: right;">
-          <button class="btn btn-default btn-xs" data-ng-click="editReview(review)">Edit</button>
-          <button class="btn btn-default btn-xs" data-ng-click="deleteReview(review)">Delete</button>
-        </span>
-      </li>
-    </ul>
+    <!-- div class="panel-body">
+    </div -->
+    <table class="table table-hover">
+      <tr ng-repeat="review in reviews | orderBy: '-created'">
+        <td>
+          <a href="{{ review.manage_path }}">{{ review.title }}</a>
+        </td>
+        <td class="text-right">
+          <button class="btn btn-default btn-xs" ng-click="editReview(review)">
+            <span class="glyphicon glyphicon-pencil"></span>
+          </button>
+          <button class="btn btn-default btn-xs" ng-click="deleteReview(review)">
+            <span class="glyphicon glyphicon-remove"></span>
+          </button>
+        </td>
+      </tr>
+    </table>
   </div>
   
   </div>
