@@ -1,8 +1,11 @@
 class Api::TopicsController < Api::ApiController
   
-  before_action :set_form, only: [:index] # revisit this method
+  before_action :set_form, only: [:index]
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_form
+  
   before_action :set_topic, only: [:update, :up, :down, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_topic
+  
   before_action :set_topic_above, only: [:up]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_topic_above
   before_action :set_topic_below, only: [:down]
@@ -79,10 +82,11 @@ class Api::TopicsController < Api::ApiController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_form
-      @form = ::Form.find(params[:form_id])
+      @form = ::Form.find(params[:form_id].to_i(36))
     end
     
     def invalid_form
+      logger.info 'no form with this id'
       head :no_content
     end
     
@@ -118,6 +122,6 @@ class Api::TopicsController < Api::ApiController
     # Never trust parameters from the scary internet, only allow the white list through.
     def topic_params
       params.require(:topic).permit(:name)
-        .merge(form_id: params.require(:form_id))
+        .merge(form_id: params.require(:form_id).to_i(36)) # ummm
     end
 end

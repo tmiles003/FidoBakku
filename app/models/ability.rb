@@ -18,7 +18,7 @@ class Ability
       can :manage, UserReview
     end
     
-    if 'user' == user.role
+    if 'employee' == user.role
       can :manage, UserReview
     end
     
