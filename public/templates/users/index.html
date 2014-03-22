@@ -45,11 +45,11 @@
   </div>
   
   <div class="panel panel-default">
-    <div class="panel-heading">Users</div>
+    <div class="panel-heading">Employees</div>
     <!-- div class="panel-body">
     </div -->
     <table class="table table-hover">
-      <tr ng-repeat="user in users | orderBy: '+name' | filter: { role: 'user' }">
+      <tr ng-repeat="user in users | orderBy: '+name' | filter: { role: 'employee' }">
         <td>{{ user.name }}</td>
         <td>{{ user.email }}</td>
         <td class="text-right">
