@@ -7,16 +7,16 @@
   <div class="panel panel-default">
     <div class="panel-heading">{{ topic.name }}
       <span class="pull-right">
-        <button class="btn btn-default btn-xs" ng-click="moveTopicUp(topic)">
+        <button class="btn btn-default btn-fi-slim" ng-click="moveTopicUp(topic)">
           <span class="glyphicon glyphicon-arrow-up"></span>
         </button>
-        <button class="btn btn-default btn-xs" ng-click="moveTopicDown(topic)">
+        <button class="btn btn-default btn-fi-slim" ng-click="moveTopicDown(topic)">
           <span class="glyphicon glyphicon-arrow-down"></span>
         </button>
-        <button class="btn btn-default btn-xs" ng-click="editTopic(topic)">
+        <button class="btn btn-default btn-fi-slim" ng-click="editTopic(topic)">
           <span class="glyphicon glyphicon-pencil"></span>
         </button>
-        <button class="btn btn-default btn-xs" ng-click="deleteTopic(topic)">
+        <button class="btn btn-default btn-fi-slim" ng-click="deleteTopic(topic)">
           <span class="glyphicon glyphicon-remove"></span>
         </button>
       </span>
@@ -26,16 +26,16 @@
       <tr ng-repeat="benchmark in benchmarks | orderBy: '+ordr'">
         <td colspan="2">{{ benchmark.content }}</td>
         <td class="text-right">
-          <button class="btn btn-default btn-xs" ng-click="moveBenchmarkUp(benchmark)">
+          <button class="btn btn-default btn-fi-slim" ng-click="moveBenchmarkUp(benchmark)">
             <span class="glyphicon glyphicon-arrow-up"></span>
           </button>
-          <button class="btn btn-default btn-xs" ng-click="moveBenchmarkDown(benchmark)">
+          <button class="btn btn-default btn-fi-slim" ng-click="moveBenchmarkDown(benchmark)">
             <span class="glyphicon glyphicon-arrow-down"></span>
           </button>
-          <button class="btn btn-default btn-xs" ng-click="editBenchmark(benchmark)">
+          <button class="btn btn-default btn-fi-slim" ng-click="editBenchmark(benchmark)">
             <span class="glyphicon glyphicon-pencil"></span>
           </button>
-          <button class="btn btn-default btn-xs" ng-click="deleteBenchmark(benchmark)">
+          <button class="btn btn-default btn-fi-slim" ng-click="deleteBenchmark(benchmark)">
             <span class="glyphicon glyphicon-remove"></span>
           </button>
         </td>

@@ -25,7 +25,10 @@ fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', 'topics', 'NotifSrv', '$r
   
   var updateTopic = function(topic) {
     topic.$update({ form_id: $scope.formId }, function(val, resp) {
-      $scope.topics = TopicsSrv.query({ form_id: $scope.formId }); // improve
+      var topic = _.find($scope.topics, function(t) {
+        return t.id === val.id;
+      });
+      _.extend(topic, val); // update object with returned values
       $scope.editableTopic = {};
       $scope.editableTopicForm.$setPristine();
       NotifSrv.success();
@@ -123,7 +126,10 @@ fiApp.controller('BenchmarksCtrl', ['$scope', 'BenchmarksSrv', 'NotifSrv', '$fil
   
   var updateBenchmark = function(benchmark) {
     benchmark.$update(function(val, resp) {
-      $scope.benchmarks = BenchmarksSrv.query({ topic_id: $scope.topicId }); // improve
+      var benchmark = _.find($scope.benchmarks, function(b) {
+        return b.id === val.id;
+      });
+      _.extend(benchmark, val); // update object with returned values
       $scope.editableBenchmark = {};
       $scope.editableBenchmarkForm.$setPristine();
       NotifSrv.success();
