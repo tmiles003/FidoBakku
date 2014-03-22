@@ -66,3 +66,12 @@ a {
   color: #558baa;
   margin: 5px 0;
 }
+
+/* toaster overrides */
+#toast-container > div.ng-enter {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+} 
