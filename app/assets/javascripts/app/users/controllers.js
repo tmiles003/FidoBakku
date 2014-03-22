@@ -21,7 +21,10 @@ fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'abilities', 'users', 'Noti
   
   var updateUser = function(user) {
     user.$update(function(val, resp) {
-      $scope.users = UsersSrv.query(); // improve
+      var user = _.find($scope.users, function(u) {
+        return u.id === val.id;
+      });
+      _.extend(user, val); // update object with returned values
       $scope.editableUser = {};
       $scope.editableUserForm.$setPristine();
       NotifSrv.success();
@@ -52,7 +55,7 @@ fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'abilities', 'users', 'Noti
   
   $scope.deleteUser = function(user) {
     user.$delete(function() {
-      $scope.users = _.without($scope.users, user);
+      $scope.users = _.without($scope.users, user); // "blind-up" row before trashing?
       NotifSrv.success();
     }, function(resp) {
       NotifSrv.error('Error'); // improve
