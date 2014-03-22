@@ -56,6 +56,7 @@ fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', 'topics', 'NotifSrv', '$r
         var topic = _.find($scope.topics, function(t) {
           return t.id === el.id;
         });
+        // _.extend     
         topic.ordr = el.ordr; // update object in array
       });
       // reorder topics

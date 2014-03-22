@@ -43,6 +43,13 @@ a {
   /* font-style: italic; */
 }
 
+.btn-fi-slim, .btn-fi-slim:hover {
+  background-color: transparent;
+  border-color: transparent;
+  line-height: 1em;
+  padding: 0 3px;
+}
+
 .form-control:focus {
   border-color: #558baa;
 }
