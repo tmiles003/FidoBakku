@@ -3,8 +3,6 @@ class Api::UsersController < Api::ApiController
   load_and_authorize_resource
   before_action :set_account_user, only: [:edit, :update, :destroy]
   
-  include UsersHelper
-  
   # GET /api/users
   # GET /api/users.json
   def index
@@ -22,7 +20,6 @@ class Api::UsersController < Api::ApiController
   # POST /api/users.json
   def create
     @new_user = ::User.new(user_params) # :: forces root namespace
-    @new_user.password = gen_random_password
 
     respond_to do |format|
       if @new_user.save

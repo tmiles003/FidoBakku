@@ -2,7 +2,7 @@ FidoBakku::Application.routes.draw do
   
   root 'welcome#index'
   
-  resources :account, except: [:index, :show]
+  resources :account, only: [:create, :new]
 
   devise_for :users, 
     :path => '',
