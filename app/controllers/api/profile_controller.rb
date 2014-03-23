@@ -2,7 +2,6 @@ class Api::ProfileController < Api::ApiController
   
   def update
     @user = ::User.find(current_user.id)
-    logger.info @user.to_yaml
     if @user.update(passwd_params)
       sign_in @user, :bypass => true
       head :no_content
