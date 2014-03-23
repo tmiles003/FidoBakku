@@ -2,7 +2,7 @@
 
 /* Services */
 
-fiApp.factory('NotifSrv', ['toaster', function (toaster) {
+fiApp.factory('NotifSrv', ['toaster', function(toaster) {
   
   var service = {
     

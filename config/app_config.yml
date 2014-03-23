@@ -3,6 +3,31 @@ defaults: &defaults
   fidobakku:
     account_type: basic
     account_expiry: 2013-03-01
+    account_limits:
+      basic:
+        users: 5
+        forms: 1
+        topics: 3
+        benchmarks: 15
+        reviews: 1
+      value:
+        users: 500
+        forms: 1000
+        topics: 3000
+        benchmarks: 15000
+        reviews: 1000
+      social:
+        users: 500
+        forms: 1000
+        topics: 3000
+        benchmarks: 15000
+        reviews: 1000
+      premium:
+        users: 500
+        forms: 1000
+        topics: 3000
+        benchmarks: 15000
+        reviews: 1000
 
 development:
   <<: *defaults

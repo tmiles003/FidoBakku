@@ -14,8 +14,6 @@ fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'users', 'NotifSrv',
       $scope.editableUser = {};
       $scope.editableUserForm.$setPristine();
       NotifSrv.success();
-    }, function(resp) {
-      NotifSrv.error('Error'); // improve
     });
   }
   
@@ -28,8 +26,6 @@ fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'users', 'NotifSrv',
       $scope.editableUser = {};
       $scope.editableUserForm.$setPristine();
       NotifSrv.success();
-    }, function(resp) {
-      NotifSrv.error('Error'); // improve
     });
   }
   
@@ -44,9 +40,6 @@ fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'users', 'NotifSrv',
         createUser(user);
       }
     }
-    else {
-      // NotifSrv.error('Error');
-    }
   }
   
   $scope.editUser = function(user) {
@@ -57,8 +50,6 @@ fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'users', 'NotifSrv',
     user.$delete(function() {
       $scope.users = _.without($scope.users, user); // "blind-up" row before trashing?
       NotifSrv.success();
-    }, function(resp) {
-      NotifSrv.error('Error'); // improve
     });
   }
   

@@ -82,3 +82,7 @@ a {
   -o-transition: none !important;
   transition: none !important;
 } 
+
+.toast {
+  border: 1px solid #fff;
+}

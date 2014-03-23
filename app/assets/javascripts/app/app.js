@@ -9,13 +9,16 @@ var fiApp = angular.module('fiApp', [
 fiApp.config(['$httpProvider', function($httpProvider) {
   $httpProvider.interceptors.push(function($q, $location, NotifSrv) {
     return {
-      responseError: function(rejection) {
+      responseError: function(rejection) { console.log(rejection);
         if (403 == rejection.status) {
           NotifSrv.info('Unauthorised', null, 3000);
           $location.path('/');
         }
-        if (401 == rejection.status) {
+        else if (401 == rejection.status) {
           NotifSrv.info('Please log in');
+        }
+        else if (402 == rejection.status) {
+          NotifSrv.info(rejection.data);
         }
         return $q.reject(rejection);
       }
@@ -23,9 +26,8 @@ fiApp.config(['$httpProvider', function($httpProvider) {
   });
 }]);
 
-fiApp.config(['$routeProvider', '$locationProvider', // '$routeParams', 
+fiApp.config(['$routeProvider', '$locationProvider', 
               function($routeProvider, $locationProvider) {
-  // $locationProvider.html5Mode(true); // nice urls.
   
   $routeProvider.when('/dashboard', 
     { templateUrl: '/templates/dashboard.html', controller: 'DashboardCtrl' });
