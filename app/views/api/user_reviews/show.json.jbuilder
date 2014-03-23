@@ -6,6 +6,7 @@ json.user_review do
   end
   json.form do 
     json.name @user_review.form.name
+    ## what if no topics??
     json.topics @user_review.form.topics do |topic|
       json.name topic.name
       json.ordr topic.ordr
