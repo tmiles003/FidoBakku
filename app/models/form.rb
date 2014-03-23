@@ -4,6 +4,8 @@ class Form < ActiveRecord::Base
   
   scope :in_account, ->(account_id) { where('account_id = ?', account_id) }
   
+  # don't delete form if associated with user review
+  
   validates :name, length: {
     in: 4..250,
     too_short: 'Too short',

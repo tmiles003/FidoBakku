@@ -29,7 +29,6 @@ class Api::UserReviewsController < Api::ApiController
   # POST /api/user_reviews.json
   def create
     @user_review = ::UserReview.new(user_review_params)
-    @user_review.scores = '{}' # poor man's initialisation, innit
 
     respond_to do |format|
       if @user_review.save
@@ -65,7 +64,7 @@ class Api::UserReviewsController < Api::ApiController
     # Use callbacks to share common setup or constraints between actions.
     def set_user_review
       # for this user id?
-      @user_review = ::UserReview.find(params[:id].to_i(36))
+      @user_review = ::UserReview.find(params[:id])
     end
     
     def invalid_user_review
@@ -74,7 +73,7 @@ class Api::UserReviewsController < Api::ApiController
     end
     
     def set_review
-      @review = ::Review.in_account(@account.id).find(params[:review_id].to_i(36))
+      @review = ::Review.in_account(@account.id).find(params[:review_id])
     end
     
     def invalid_review

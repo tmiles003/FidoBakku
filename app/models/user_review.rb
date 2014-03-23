@@ -7,9 +7,15 @@ class UserReview < ActiveRecord::Base
   has_one :reviewer, class_name: 'User', primary_key: :reviewer_id, foreign_key: :id
   has_one :feedback, foreign_key: :review_id
   
+  after_validation :initial_setup, on: :create
   before_save :update_progress
   
   protected
+  
+  def initial_setup
+    self.scores = ActiveSupport::JSON.encode Hash.new
+    self.progress = 0
+  end
   
   def update_progress
     # get benchmark ids from form id
@@ -35,7 +41,9 @@ class UserReview < ActiveRecord::Base
     }
     
     # the difference between the 2 hashes is the completion progress
-    self.progress = ((scores_tmp.count / benchmark_ids.count.to_f) * 100).to_i
+    unless benchmark_ids.empty?
+      self.progress = ((scores_tmp.count / benchmark_ids.count.to_f) * 100).to_i
+    end
      
     self.scores = ActiveSupport::JSON.encode scores_tmp
   end

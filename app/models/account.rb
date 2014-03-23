@@ -12,6 +12,8 @@ class Account < ActiveRecord::Base
 	
 	has_many :reviews
   
+  protected
+  
   def email_valid # unique, and not in users or accounts
     if email.blank? || !email =~ /.+@.+\..+/i
       errors.add(:email, 'address is invalid')
