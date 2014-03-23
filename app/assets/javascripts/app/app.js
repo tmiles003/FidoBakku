@@ -33,7 +33,6 @@ fiApp.config(['$routeProvider', '$locationProvider', // '$routeParams',
   $routeProvider.when('/staff', 
     { templateUrl: '/templates/users/index.html', controller: 'UsersCtrl', 
       resolve: { 
-        abilities: function(AbilitiesSrv) { return AbilitiesSrv.get('staff'); },
         users: function(UsersSrv) { return UsersSrv.query()['$promise']; } 
       }
   });
@@ -83,7 +82,13 @@ fiApp.config(['$routeProvider', '$locationProvider', // '$routeParams',
   // review feedback
   
   $routeProvider.when('/account', 
-    { templateUrl: '/templates/account/index.html', controller: 'AccountCtrl' });
+    { templateUrl: '/templates/account/index.html', controller: 'AccountCtrl',
+      resolve: {
+        account: function(AccountSrv) {
+          return AccountSrv.get()['$promise'];
+        }
+      }
+  });
   $routeProvider.when('/profile', 
     { templateUrl: '/templates/profile/index.html', controller: 'ProfileCtrl' });
   

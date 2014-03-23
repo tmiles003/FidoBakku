@@ -2,6 +2,7 @@
 
 /* Services */
 
-fiApp.factory('AccountSrv', ['$http', function($http) {
+fiApp.factory('AccountSrv', ['$resource', function($resource) {
   
+  return $resource('/api/account', {}, { 'update': { method:'PUT' } });
 }]);

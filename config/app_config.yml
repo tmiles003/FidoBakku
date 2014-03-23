@@ -1,7 +1,7 @@
 
 defaults: &defaults
   fidobakku:
-    account_type: free
+    account_type: basic
     account_expiry: 2013-03-01
 
 development:

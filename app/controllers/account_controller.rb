@@ -17,6 +17,7 @@ class AccountController < ApplicationController
         @user = User.new(email: account_params[:email])
         @account.users << @user # assign to account
         @user.update(name: 'Admin', role: 'admin') # promote
+        @account.update(owner_id: @user.id)
         sign_in @user
         
         # send welcome email

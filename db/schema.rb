@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140322112427) do
+ActiveRecord::Schema.define(version: 20140323084820) do
 
   create_table "account_users", force: true do |t|
     t.integer "account_id"
@@ -22,16 +22,15 @@ ActiveRecord::Schema.define(version: 20140322112427) do
   add_index "account_users", ["user_id"], name: "index_account_users_on_user_id", using: :btree
 
   create_table "accounts", force: true do |t|
-    t.string   "email"
     t.string   "name"
+    t.string   "email"
+    t.integer  "owner_id"
     t.string   "type"
     t.string   "key"
     t.date     "expires_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "accounts", ["email"], name: "index_accounts_on_email", unique: true, using: :btree
 
   create_table "benchmarks", force: true do |t|
     t.integer  "topic_id"

@@ -2,8 +2,8 @@
 
 /* Controllers */
 
-fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'abilities', 'users', 'NotifSrv', 
-                  function($scope, UsersSrv, abilities, users, NotifSrv) {
+fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'users', 'NotifSrv', 
+                  function($scope, UsersSrv, users, NotifSrv) {
   
   $scope.users = users;
   $scope.roles = [{s:'employee',l:'Employee'},{s:'manager',l:'Manager'},{s:'admin',l:'Admin'}]; // improve

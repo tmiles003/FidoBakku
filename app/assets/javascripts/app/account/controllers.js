@@ -2,13 +2,42 @@
 
 /* Controllers */
 
-fiApp.controller('AccountCtrl', ['$scope', 'AccountSrv', 'SessionSrv', function($scope, Account, Session) {
+fiApp.controller('AccountCtrl', ['$scope', 'AccountSrv', 'NotifSrv', '$http', 'account',
+                  function($scope, AccountSrv, NotifSrv, $http, account) {
   
-  Session.getAccount().then(function(re) {
-    $scope.account = re.account;
+  $scope.account = account;
+  $scope.admins = [];
+  $http.get('/api/users/list?role[]=admin').success(function(list) { 
+    $scope.admins = list;
   });
-  Session.getUser().then(function(re) {
-    $scope.user = re.user;
-  });
+  
+  var updateAccount = function(account) {
+    account.$update(function(val, resp) {
+      $scope.account = val;
+      NotifSrv.success();
+      // refresh session details
+    }, function(resp) {
+      NotifSrv.error('Error'); // improve
+    });
+  }
+  
+  $scope.saveAccount = function(account, isValid) {
+    $scope.submitted = true;
+    if (isValid) {
+      $scope.submitted = false;
+      updateAccount(account);
+    }
+    else {
+      // NotifSrv.error('Error');
+    }
+  }
+  
+  /* $scope.deleteAccount = function(account) {
+    account.$delete(function() {
+      NotifSrv.success();
+    }, function(resp) {
+      NotifSrv.error('Error'); // improve
+    });
+  } */
   
 }]);

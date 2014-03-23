@@ -2,10 +2,11 @@
 
 /* Services */
 
-fiApp.factory('SessionSrv', ['$http', '$q', '$cacheFactory', function($http, $q, $cf) {
+fiApp.factory('SessionSrv', ['$http', '$q', function($http, $q) {
+  
+  var data = null;
   
   var service = {
-    data: null,
     
     isAuthenticated: function() {
       return !!this.data;
@@ -31,7 +32,8 @@ fiApp.factory('SessionSrv', ['$http', '$q', '$cacheFactory', function($http, $q,
           return self.data = resp.data;
         });
       }
-    }
+    },
+    getData: function() {}
   };
   
   return service;

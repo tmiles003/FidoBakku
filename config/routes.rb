@@ -19,7 +19,6 @@ FidoBakku::Application.routes.draw do
   namespace :api, defaults: { format: :json } do
     
     get 'session' => 'session#index'
-    get 'abilities' => 'abilities#list'
     get 'dashboard/reviews' => 'dashboard#reviews'
     
     resources :users, except: [:new] do 
@@ -52,11 +51,8 @@ FidoBakku::Application.routes.draw do
     resources :user_reviews, except: [:new, :edit]
     resources :feedbacks, except: [:show, :new, :create, :edit]
     
-    resource :user, path: '/profile', controller: :profile, only: [:update] do 
-      collection do
-        post 'update'
-      end
-    end
+    resource :account, controller: :account, only: [:show, :update, :destroy]
+    resource :user, path: '/profile', controller: :profile, only: [:update]
     
   end
 
