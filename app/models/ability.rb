@@ -18,11 +18,14 @@ class Ability
       can :manage, TopicBenchmark
       can [:index, :show, :statuses], Review
       can :manage, UserReview
+      can :manage, Feedback # where reviewer_id?
       can :show, Account
     end
     
     if 'employee' == user.role
-      can :manage, UserReview # where reviewer_id
+      can :manage, UserReview #, :user_id => user.id # where reviewer_id
+      can :manage, Feedback # where reviewer_id?
+      can :show, Account
     end
     
     #

@@ -15,11 +15,13 @@ FidoBakku::Application.routes.draw do
   get 'form/:id/:slug' => 'welcome#application', as: :form_manage
   get 'reviews/:id/:slug' => 'welcome#application', as: :review_manage
   get 'review/:id/:name' => 'welcome#application', as: :user_review
+  get 'feedback/:id/:name' => 'welcome#application', as: :user_feedback
   
   namespace :api, defaults: { format: :json } do
     
     get 'session' => 'session#index'
     get 'dashboard/reviews' => 'dashboard#reviews'
+    get 'dashboard/feedbacks' => 'dashboard#feedbacks'
     
     resources :users, except: [:new] do 
       collection do 

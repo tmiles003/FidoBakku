@@ -1,0 +1,19 @@
+<h1>Dashboard</h1>
+
+<div class="row">
+
+  <h2>Reviews</h2>
+  <ul>
+    <li ng-repeat="review in reviews">
+      <a href="{{ review.review_path }}">{{ review.name }}</a>
+    </li>
+  </ul>
+
+  <h2>Feedbacks</h2>
+  <ul>
+    <li ng-repeat="feedback in feedbacks">
+      <a href="{{ feedback.feedback_path }}">{{ feedback.user_id }}</a>
+    </li>
+  </ul>
+
+</div>
