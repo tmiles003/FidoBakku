@@ -30,8 +30,6 @@ fiApp.controller('ReviewFeedbackCtrl', ['$scope', '$routeParams', 'ReviewFeedbac
   var updateFeedback = function(feedback) {
     feedback.$update({ review_id: $routeParams.id }, function(val, resp) {
       NotifSrv.success();
-    }, function(resp) {
-      NotifSrv.error('Error'); // improve
     });
   }
   
@@ -42,9 +40,6 @@ fiApp.controller('ReviewFeedbackCtrl', ['$scope', '$routeParams', 'ReviewFeedbac
       if (feedback.id) {
         updateFeedback(feedback);
       }
-    }
-    else {
-      // NotifSrv.error('Error');
     }
   }
   

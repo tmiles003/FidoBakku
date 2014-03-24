@@ -1,5 +1,7 @@
 class Api::TopicsController < Api::ApiController
   
+  load_and_authorize_resource
+  
   before_action :set_form, only: [:index]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_form
   

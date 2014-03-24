@@ -13,9 +13,6 @@ fiApp.controller('FormsCtrl', ['$scope', 'FormsSrv', 'NotifSrv', 'forms',
       $scope.editableForm = {};
       $scope.editableFormForm.$setPristine();
       NotifSrv.success();
-    }, function(resp) {
-      NotifSrv.error('Error'); // improve
-      // $scope.errorName = resp.data.name[0];
     });
   }
   
@@ -28,8 +25,6 @@ fiApp.controller('FormsCtrl', ['$scope', 'FormsSrv', 'NotifSrv', 'forms',
       $scope.editableForm = {};
       $scope.editableFormForm.$setPristine();
       NotifSrv.success();
-    }, function(resp) {
-      NotifSrv.error('Error'); // improve
     });
   }
   
@@ -44,9 +39,6 @@ fiApp.controller('FormsCtrl', ['$scope', 'FormsSrv', 'NotifSrv', 'forms',
         createForm(form);
       }
     }
-    else {
-      // NotifSrv.error('Error');
-    }
   }
   
   $scope.editForm = function(form) {
@@ -57,8 +49,6 @@ fiApp.controller('FormsCtrl', ['$scope', 'FormsSrv', 'NotifSrv', 'forms',
     form.$delete().then(function() {
       $scope.forms = _.without($scope.forms, form);
       NotifSrv.success();
-    }, function(resp) {
-      NotifSrv.error('Error'); // improve
     });
   }
   

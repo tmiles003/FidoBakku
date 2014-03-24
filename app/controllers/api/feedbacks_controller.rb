@@ -1,5 +1,7 @@
 class Api::FeedbacksController < Api::ApiController
   
+  load_and_authorize_resource
+  
   before_action :set_feedback, only: [:index, :update, :destroy]
 
   # GET /api/feedbacks

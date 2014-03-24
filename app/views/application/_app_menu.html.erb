@@ -7,7 +7,7 @@
       <a href="/#/staff">Staff</a>
     </li>
   <% end %>
-  <% if can? :manage, Form # admins only %>
+  <% if can? :index, Form # admins + managers only %>
     <li>
       <a href="/#/forms">Forms</a>
     </li>
@@ -19,7 +19,7 @@
   <% end %>
   </ul>
   <ul class="nav navbar-nav navbar-right">
-  <% if can? :manage, Account # admins only %>
+  <% if can? :show, Account # admins only %>
     <li>
       <a href="/#/account">Account</a>
     </li>

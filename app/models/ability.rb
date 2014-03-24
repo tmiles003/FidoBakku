@@ -13,13 +13,16 @@ class Ability
     
     if 'manager' == user.role
       can :list, User
-      can :list, Form
-      can [:index, :show], Review
+      can [:index, :list], Form
+      can :manage, Topic
+      can :manage, TopicBenchmark
+      can [:index, :show, :statuses], Review
       can :manage, UserReview
+      can :show, Account
     end
     
     if 'employee' == user.role
-      can :manage, UserReview
+      can :manage, UserReview # where reviewer_id
     end
     
     #

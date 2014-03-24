@@ -16,8 +16,6 @@ fiApp.controller('AccountCtrl', ['$scope', 'AccountSrv', 'NotifSrv', '$http', 'a
       $scope.account = val;
       NotifSrv.success();
       // refresh session details
-    }, function(resp) {
-      NotifSrv.error('Error'); // improve
     });
   }
   
@@ -26,9 +24,6 @@ fiApp.controller('AccountCtrl', ['$scope', 'AccountSrv', 'NotifSrv', '$http', 'a
     if (isValid) {
       $scope.submitted = false;
       updateAccount(account);
-    }
-    else {
-      // NotifSrv.error('Error');
     }
   }
   

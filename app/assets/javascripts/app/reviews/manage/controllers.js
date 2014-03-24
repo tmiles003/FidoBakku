@@ -21,9 +21,6 @@ fiApp.controller('ReviewsManageCtrl', ['$scope', 'ReviewsSrv', 'UserReviewsSrv',
       $scope.editableUserReview = {};
       $scope.editableUserReviewForm.$setPristine();
       NotifSrv.success();
-    }, function(resp) {
-      NotifSrv.error('Error'); // improve
-      // $scope.errorName = resp.data.name[0]; // clean this up a bit...
     });
   }
   
@@ -33,8 +30,6 @@ fiApp.controller('ReviewsManageCtrl', ['$scope', 'ReviewsSrv', 'UserReviewsSrv',
       $scope.editableUserReview = {};
       $scope.editableUserReviewForm.$setPristine();
       NotifSrv.success();
-    }, function(resp) {
-      NotifSrv.error('Error'); // improve
     });
   }
   
@@ -49,9 +44,6 @@ fiApp.controller('ReviewsManageCtrl', ['$scope', 'ReviewsSrv', 'UserReviewsSrv',
         createUserReview(userReview);
       }
     }
-    else {
-      // NotifSrv.error('Error');
-    }
   }
   
   $scope.editUserReview = function(userReview) {
@@ -62,8 +54,6 @@ fiApp.controller('ReviewsManageCtrl', ['$scope', 'ReviewsSrv', 'UserReviewsSrv',
     userReview.$delete(function() {
       $scope.userReviews = _.without($scope.userReviews, userReview);
       NotifSrv.success();
-    }, function(resp) {
-      NotifSrv.error('Error'); // improve
     });
   }
   

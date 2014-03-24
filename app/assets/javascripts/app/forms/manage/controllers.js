@@ -16,10 +16,6 @@ fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', 'topics', 'NotifSrv', '$r
       $scope.editableTopic = {};
       $scope.editableTopicForm.$setPristine();
       NotifSrv.success();
-    },
-    function(resp) {
-      NotifSrv.error('Error'); // improve
-      // $scope.errorName = resp.data.name[0]; // clean this up a bit
     });
   }
   
@@ -32,8 +28,6 @@ fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', 'topics', 'NotifSrv', '$r
       $scope.editableTopic = {};
       $scope.editableTopicForm.$setPristine();
       NotifSrv.success();
-    }, function(resp) {
-      NotifSrv.error('Error'); // improve
     });
   }
   
@@ -47,9 +41,6 @@ fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', 'topics', 'NotifSrv', '$r
       else {
         createTopic(topic);
       }
-    }
-    else {
-      // NotifSrv.error('Error');
     }
   }
   
@@ -65,9 +56,6 @@ fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', 'topics', 'NotifSrv', '$r
       // reorder topics
       $scope.topics = $filter('orderBy')($scope.topics, '+ordr');
       NotifSrv.success();
-    }, 
-    function(resp) {
-      NotifSrv.error('Error'); // improve
     });
   }
   
@@ -82,9 +70,6 @@ fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', 'topics', 'NotifSrv', '$r
       // reorder topics
       $scope.topics = $filter('orderBy')($scope.topics, '+ordr');
       NotifSrv.success();
-    }, 
-    function(resp) {
-      NotifSrv.error('Error'); // improve
     });
   }
   
@@ -96,8 +81,6 @@ fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', 'topics', 'NotifSrv', '$r
     topic.$delete({ form_id: $scope.formId }).then(function() {
       $scope.topics = _.without($scope.topics, topic);
       NotifSrv.success();
-    }, function(resp) {
-      NotifSrv.error('Error'); // improve
     });
   }
   
@@ -117,10 +100,6 @@ fiApp.controller('BenchmarksCtrl', ['$scope', 'BenchmarksSrv', 'NotifSrv', '$fil
       $scope.editableBenchmark = {};
       $scope.editableBenchmarkForm.$setPristine();
       NotifSrv.success();
-    },
-    function(resp) {
-      NotifSrv.error('Error'); // improve
-      // $scope.errorName = resp.data.name[0]; // clean this up a bit
     });
   }
   
@@ -133,8 +112,6 @@ fiApp.controller('BenchmarksCtrl', ['$scope', 'BenchmarksSrv', 'NotifSrv', '$fil
       $scope.editableBenchmark = {};
       $scope.editableBenchmarkForm.$setPristine();
       NotifSrv.success();
-    }, function(resp) {
-      NotifSrv.error('Error'); // improve
     });
   }
   
@@ -148,9 +125,6 @@ fiApp.controller('BenchmarksCtrl', ['$scope', 'BenchmarksSrv', 'NotifSrv', '$fil
       else {
         createBenchmark(benchmark);
       }
-    }
-    else {
-      // NotifSrv.error('Error');
     }
   }
   
@@ -166,9 +140,6 @@ fiApp.controller('BenchmarksCtrl', ['$scope', 'BenchmarksSrv', 'NotifSrv', '$fil
         // reorder benchmarks
         $scope.benchmarks = $filter('orderBy')($scope.benchmarks, '+ordr');
         NotifSrv.success();
-      }, 
-      function(resp) {
-        NotifSrv.error('Error'); // improve
       });
   }
   
@@ -184,9 +155,6 @@ fiApp.controller('BenchmarksCtrl', ['$scope', 'BenchmarksSrv', 'NotifSrv', '$fil
         // reorder benchmarks
         $scope.benchmarks = $filter('orderBy')($scope.benchmarks, '+ordr');
         NotifSrv.success();
-      }, 
-      function(resp) {
-        NotifSrv.error('Error'); // improve
       });
   }
   
@@ -198,8 +166,6 @@ fiApp.controller('BenchmarksCtrl', ['$scope', 'BenchmarksSrv', 'NotifSrv', '$fil
     benchmark.$delete().then(function() {
       $scope.benchmarks = _.without($scope.benchmarks, benchmark);
       NotifSrv.success();
-    }, function(resp) {
-      NotifSrv.error('Error'); // improve
     });
   }
   
