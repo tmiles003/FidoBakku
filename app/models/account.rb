@@ -1,6 +1,6 @@
 class Account < ActiveRecord::Base
   
-  TYPES = %w[basic value social premium]
+  PLANS = %w[basic premium]
   
   validate :email_valid, on: :create
   after_validation :initial_setup, on: :create
@@ -36,7 +36,7 @@ class Account < ActiveRecord::Base
   
   def initial_setup
     self.name = 'New Account'
-    self.plan = AppConfig.fidobakku['account_type']
+    self.plan = AppConfig.fidobakku['account_plan']
     self.expires_at = AppConfig.fidobakku['account_expiry']
   end
   
