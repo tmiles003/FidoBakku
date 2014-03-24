@@ -24,6 +24,7 @@ FidoBakku::Application.routes.draw do
     resources :users, except: [:new] do 
       collection do 
         get 'list'
+        get 'roles'
       end
     end
     
@@ -47,7 +48,11 @@ FidoBakku::Application.routes.draw do
       end
     end
     
-    resources :reviews, except: [:new, :edit]
+    resources :reviews, except: [:new, :edit] do 
+      collection do 
+        get 'statuses'
+      end
+    end
     resources :user_reviews, except: [:new, :edit]
     resources :feedbacks, except: [:show, :new, :create, :edit]
     

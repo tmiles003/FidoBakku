@@ -6,7 +6,10 @@ fiApp.controller('ReviewsCtrl', ['$scope', 'ReviewsSrv', 'NotifSrv', 'reviews',
                   function($scope, ReviewsSrv, NotifSrv, reviews) {
   
   $scope.reviews = reviews;
-  $scope.states = [{s:'setup',l:'Setup'},{s:'review',l:'Review'},{s:'feedback',l:'Feedback'},{s:'closed',l:'Closed'},{s:'archived',l:'Archived'}];
+  $scope.statuses = [];
+  ReviewsSrv.getStatuses(function(list) {
+    $scope.statuses = list;
+  });
   
   var createReview = function(newReview) {
     ReviewsSrv.save(newReview, function(val, resp) {

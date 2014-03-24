@@ -9,6 +9,11 @@ class Api::UsersController < Api::ApiController
     @account_users = @account.account_users
   end
   
+  # GET /api/users/roles
+  def roles
+    @roles = ::User::ROLES
+  end
+  
   # used in user_reviews, account
   # GET /api/users/list
   # GET /api/users/list.json

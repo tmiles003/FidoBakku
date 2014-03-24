@@ -11,6 +11,11 @@ class Api::ReviewsController < Api::ApiController
     @reviews = @account.reviews
   end
   
+  # GET /api/reviews/statuses
+  def statuses
+    @statuses = ::Review::STATUS
+  end
+  
   # GET /api/reviews/1
   # GET /api/reviews/1.json
   def show
@@ -65,6 +70,6 @@ class Api::ReviewsController < Api::ApiController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
-      params.require(:review).permit(:title, :state)
+      params.require(:review).permit(:title, :status)
     end
 end

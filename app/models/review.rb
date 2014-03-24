@@ -1,6 +1,6 @@
 class Review < ActiveRecord::Base
   
-  STATES = %w[setup review feedback closed archived]
+  STATUS = %w[setup review feedback closed archived]
 	
   scope :in_account, ->(account_id) { where('account_id = ?', account_id) }
   

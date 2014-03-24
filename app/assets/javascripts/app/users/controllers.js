@@ -6,7 +6,10 @@ fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'users', 'NotifSrv',
                   function($scope, UsersSrv, users, NotifSrv) {
   
   $scope.users = users;
-  $scope.roles = [{s:'employee',l:'Employee'},{s:'manager',l:'Manager'},{s:'admin',l:'Admin'}]; // improve
+  $scope.roles = [];
+  UsersSrv.getRoles(function(roles) {
+    $scope.roles = roles;
+  });
   
   var createUser = function(newUser) {
     UsersSrv.save(newUser, function(val, resp) {

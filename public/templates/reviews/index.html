@@ -14,7 +14,7 @@
           <a href="{{ review.manage_path }}">{{ review.title }}</a>
         </td>
         <td>
-          {{ review.state }}
+          {{ review.status }}
         </td>
         <td class="text-right">
           <button class="btn btn-default btn-fi-slim" ng-click="editReview(review)">
@@ -43,13 +43,13 @@
           class="help-block">A title is required</p>
       </div>
       
-      <div class="form-group" ng-class="{ 'has-error': editableReviewForm.review_state.$invalid 
-          && !editableReviewForm.review_state.$pristine && submitted }">
-        <label for="review_state">Status</label>
-        <select name="review_state" ng-model="editableReview.state" class="form-control" 
-          ng-options="state.s as state.l for state in states" ng-required="true">
+      <div class="form-group" ng-class="{ 'has-error': editableReviewForm.review_status.$invalid 
+          && !editableReviewForm.review_status.$pristine && submitted }">
+        <label for="review_status">Status</label>
+        <select name="review_status" ng-model="editableReview.status" class="form-control" 
+          ng-options="status.s as status.l for status in statuses" ng-required="true">
         </select>
-        <p ng-show="editableReviewForm.review_state.$invalid && !editableReviewForm.review_state.$pristine && submitted" 
+        <p ng-show="editableReviewForm.review_statu.$invalid && !editableReviewForm.review_status.$pristine && submitted" 
           class="help-block">A status must be selected</p>
       </div>
 
