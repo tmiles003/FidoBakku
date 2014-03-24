@@ -65,6 +65,6 @@ class Api::ReviewsController < Api::ApiController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
-      params.require(:review).permit(:title, :open, :archived)
+      params.require(:review).permit(:title, :state)
     end
 end

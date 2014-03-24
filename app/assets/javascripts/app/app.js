@@ -9,7 +9,7 @@ var fiApp = angular.module('fiApp', [
 fiApp.config(['$httpProvider', function($httpProvider) {
   $httpProvider.interceptors.push(function($q, $location, NotifSrv) {
     return {
-      responseError: function(rejection) { console.log(rejection);
+      responseError: function(rejection) {
         if (403 == rejection.status) {
           NotifSrv.info('Unauthorised', null, 3000);
           $location.path('/');

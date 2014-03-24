@@ -13,11 +13,14 @@
         <td>
           <a href="{{ review.manage_path }}">{{ review.title }}</a>
         </td>
+        <td>
+          {{ review.state }}
+        </td>
         <td class="text-right">
-          <button class="btn btn-default btn-xs" ng-click="editReview(review)">
+          <button class="btn btn-default btn-fi-slim" ng-click="editReview(review)">
             <span class="glyphicon glyphicon-pencil"></span>
           </button>
-          <button class="btn btn-default btn-xs" ng-click="deleteReview(review)">
+          <button class="btn btn-default btn-fi-slim" ng-click="deleteReview(review)">
             <span class="glyphicon glyphicon-remove"></span>
           </button>
         </td>
@@ -30,7 +33,6 @@
   <div class="col-md-4">
 
     <form accept-charset="utf-8" novalidate name="editableReviewForm">
-
       <input type="hidden" ng-model="editableReview.id">
       
       <div class="form-group" ng-class="{ 'has-error': editableReviewForm.review_title.$invalid && submitted }">
@@ -39,6 +41,16 @@
           ng-required="true" ng-minlength="2" ng-maxlength="100">
         <p ng-show="editableReviewForm.review_title.$invalid && submitted" 
           class="help-block">A title is required</p>
+      </div>
+      
+      <div class="form-group" ng-class="{ 'has-error': editableReviewForm.review_state.$invalid 
+          && !editableReviewForm.review_state.$pristine && submitted }">
+        <label for="review_state">Status</label>
+        <select name="review_state" ng-model="editableReview.state" class="form-control" 
+          ng-options="state.s as state.l for state in states" ng-required="true">
+        </select>
+        <p ng-show="editableReviewForm.review_state.$invalid && !editableReviewForm.review_state.$pristine && submitted" 
+          class="help-block">A status must be selected</p>
       </div>
 
       <div class="actions">
