@@ -44,12 +44,12 @@
       </div>
       
       <div class="form-group" ng-class="{ 'has-error': editableReviewForm.review_status.$invalid 
-          && !editableReviewForm.review_status.$pristine && submitted }">
+          && submitted }">
         <label for="review_status">Status</label>
         <select name="review_status" ng-model="editableReview.status" class="form-control" 
           ng-options="status.s as status.l for status in statuses" ng-required="true">
         </select>
-        <p ng-show="editableReviewForm.review_statu.$invalid && !editableReviewForm.review_status.$pristine && submitted" 
+        <p ng-show="editableReviewForm.review_status.$invalid && submitted" 
           class="help-block">A status must be selected</p>
       </div>
 
