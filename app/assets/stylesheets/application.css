@@ -10,6 +10,7 @@
  *
  *= require bootstrap/bootstrap.min
  *= require toaster/toaster
+ *= require font-awesome/font-awesome.min
  *= require flat
  *= require fidobakku
  *= require_self

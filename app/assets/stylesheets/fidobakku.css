@@ -7,7 +7,7 @@ html {
 
 /* more content below nav + footer space */
 body {
-  background-color: #558baa;
+  background-color: #fff;
   margin: 65px 0 45px 0;
 }
 
@@ -15,18 +15,25 @@ label {
   font-weight: normal;
 }
 
-a {
-  color: #558baa !important;
-}
+/* a {
+  color: #415b76 !important;
+} */
 
 .navbar-default {
-  background-color: #fff;
-  border-bottom: 2px solid #558baa;
+  background-color: #415b76;
+  /* border-bottom: 2px solid #558baa; */
 }
 
-.container {
-  background-color: #fff;
+.navbar-default .navbar-nav>li>a {
+  color: #fff;
 }
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+  color: #fff;
+}
+
+/* .container {
+  background-color: #fff;
+} */
 
 .main-container {
   padding-bottom: 20px;
@@ -34,12 +41,12 @@ a {
 }
 
 .panel-default {
-  border-color: #88adc3;
+  border-color: #415b76;
 }
 
 .panel-default > .panel-heading {
   color: #fff;
-  background-color: #558baa;
+  background-color: #415b76;
   /* font-style: italic; */
 }
 
@@ -51,7 +58,7 @@ a {
 }
 
 .form-control:focus {
-  border-color: #558baa;
+  border-color: #415b76;
 }
 
 /* #reviewForm .ng-valid-pattern {
@@ -63,7 +70,7 @@ a {
 
 .footer {
   background-color: #fff;
-  border-top: 1px solid #558baa;
+  /* border-top: 1px solid #558baa; */
   bottom: 0;
   position: fixed;
   width: 100%;

@@ -1,33 +1,33 @@
   <ul class="nav navbar-nav">
     <li>
-      <a href="/#/dashboard">Dashboard</a>
+      <a href="/#/dashboard"><i class="fa fa-dashboard fa-lg"></i> Dashboard</a>
     </li>
   <% if can? :manage, User # admins only %>
     <li>
-      <a href="/#/staff">Staff</a>
+      <a href="/#/staff"><i class="fa fa-users fa-lg"></i> Staff</a>
     </li>
   <% end %>
   <% if can? :index, Form # admins + managers only %>
     <li>
-      <a href="/#/forms">Forms</a>
+      <a href="/#/forms"><i class="fa fa-list-alt fa-lg"></i> Forms</a>
     </li>
   <% end %>
   <% if can? :index, Review # admins + managers only %>
     <li>
-      <a href="/#/reviews">Reviews</a>
+      <a href="/#/reviews"><i class="fa fa-book fa-lg"></i> Reviews</a>
     </li>
   <% end %>
   </ul>
   <ul class="nav navbar-nav navbar-right">
   <% if can? :show, Account # admins only %>
     <li>
-      <a href="/#/account">Account</a>
+      <a href="/#/account"><i class="fa fa-cog fa-lg"></i> Account</a>
     </li>
   <% end %>
     <li>
-      <a href="/#/profile">Profile</a>
+      <a href="/#/profile"><i class="fa fa-user fa-lg"></i> Profile</a>
     </li>
     <li>
-      <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+      <a data-method="delete" href="/logout" rel="nofollow"><i class="fa fa-sign-out fa-lg"></i> Logout</a>
     </li>
   </ul>
