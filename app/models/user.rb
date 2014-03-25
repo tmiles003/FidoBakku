@@ -1,10 +1,12 @@
 class User < ActiveRecord::Base
   
   include UsersHelper
+  include Upgradable
   
-  ROLES = %w[admin manager employee]
+  ROLES = %w[employee manager admin]
   
   before_validation :initial_setup, on: :create
+  before_validation :check_plan_users, on: :create
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

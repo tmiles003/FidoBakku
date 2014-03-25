@@ -1,8 +1,12 @@
 class Topic < ActiveRecord::Base
   
+  include Upgradable
+  
   belongs_to :form
   
   has_many :benchmarks, class_name: 'TopicBenchmark', foreign_key: :topic_id, dependent: :destroy
+  
+  before_validation :check_plan_topics, on: :create
   
   validates :name, length: {
     in: 4..250,

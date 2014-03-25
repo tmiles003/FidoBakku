@@ -25,11 +25,8 @@ class Api::UsersController < Api::ApiController
   # POST /api/users.json
   def create
     @new_user = ::User.new(user_params) # :: forces root namespace
+    @new_user._account = @account
     
-    #logger.info AppConfig.fidobakku['account_limits'][@account.plan]['users']
-    #logger.info @account.account_users.count
-    #render text: 'Upgrade to remove limits', status: :payment_required and return
-
     respond_to do |format|
       if @new_user.save
         @user.account.users << @new_user

@@ -6,11 +6,4 @@ module UsersHelper
     hash.hexdigest[0..12]
   end
   
-  def available_roles
-  	roles = Array[]
-  	roles << { 'user' => 'User' }
-  	roles << { 'manager' => 'Manager' }
-  	roles << { 'admin' => 'Admin' }
-  end
-  
 end

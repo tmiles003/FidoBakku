@@ -30,8 +30,6 @@ class Account < ActiveRecord::Base
         errors.add(:email, 'address already in use')
       end
     end
-        
-    #errors.add(:email, 'is being deliberately being failed for now')
   end
   
   def initial_setup

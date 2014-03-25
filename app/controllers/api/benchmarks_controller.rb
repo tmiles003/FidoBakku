@@ -19,6 +19,7 @@ class Api::BenchmarksController < Api::ApiController
   def create
     @benchmark = ::TopicBenchmark.new(benchmark_params)
     @benchmark.next_ordr
+    @benchmark._account = @account
 
     respond_to do |format|
       if @benchmark.save

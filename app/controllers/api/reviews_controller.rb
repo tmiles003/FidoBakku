@@ -27,6 +27,7 @@ class Api::ReviewsController < Api::ApiController
   def create
     @review = ::Review.new(review_params) # :: forces root namespace
     @review.account_id = @account.id
+    @review._account = @account
 
     respond_to do |format|
       if @review.save

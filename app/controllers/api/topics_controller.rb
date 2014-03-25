@@ -24,6 +24,7 @@ class Api::TopicsController < Api::ApiController
   def create
     @topic = ::Topic.new(topic_params)
     @topic.next_ordr
+    @topic._account = @account
 
     respond_to do |format|
       if @topic.save

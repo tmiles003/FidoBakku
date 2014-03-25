@@ -23,6 +23,7 @@ class Api::FormsController < Api::ApiController
   def create
     @form = ::Form.new(form_params) # :: forces root namespace
     @form.account_id = @account.id
+    @form._account = @account
 
     respond_to do |format|
       if @form.save
