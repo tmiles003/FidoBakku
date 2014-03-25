@@ -18,10 +18,10 @@
         </td>
         <td class="text-right">
           <button class="btn btn-default btn-fi-slim" ng-click="editReview(review)">
-            <span class="glyphicon glyphicon-pencil"></span>
+            <i class="fa fa-edit fa-lg"></i>
           </button>
           <button class="btn btn-default btn-fi-slim" ng-click="deleteReview(review)">
-            <span class="glyphicon glyphicon-remove"></span>
+            <i class="fa fa-trash-o fa-lg"></i>
           </button>
         </td>
       </tr>
@@ -31,6 +31,11 @@
   </div>
 
   <div class="col-md-4">
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">Form</div>
+    <!-- div class="panel-body">
+    </div -->
 
     <form accept-charset="utf-8" novalidate name="editableReviewForm">
       <input type="hidden" ng-model="editableReview.id">
@@ -60,6 +65,7 @@
       
     </form>
 
+  </div>
   </div>
 
 </div>
