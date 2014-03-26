@@ -29,6 +29,7 @@ class Api::UserReviewsController < Api::ApiController
   # POST /api/user_reviews.json
   def create
     @user_review = ::UserReview.new(user_review_params)
+    #logger.info user_review_params.to_yaml
 
     respond_to do |format|
       if @user_review.save
@@ -83,7 +84,7 @@ class Api::UserReviewsController < Api::ApiController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_review_params
     	# array of user reviewer_ids ?
-      params.require(:user_review).permit(:user_id, :form_id, :reviewer_id, :scores)
+      params.require(:user_review).permit(:user_id, :form_id, :reviewer_id, :scores) # {:reviewer_id => []}
       	.merge(review_id: params.require(:review_id))
     end
 end

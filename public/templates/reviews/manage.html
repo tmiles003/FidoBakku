@@ -28,6 +28,7 @@
       
       <div class="form-group" ng-class="{ 'has-error': editableUserReviewForm.reviewer_id.$invalid && submitted }">
         <label for="reviewer_id">Reviewer</label>
+        <!-- multiple name="reviewer_id[]" -->
         <select name="reviewer_id" class="form-control" ng-model="editableUserReview.reviewer_id" 
           ng-options="user.id as user.name for user in users" ng-required="true">
         </select>
