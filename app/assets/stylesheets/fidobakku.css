@@ -1,5 +1,10 @@
 /* fidobakku.css */
 
+/* remove browser focus style(s) */
+*:focus {
+  outline: none !important;
+}
+
 /* prevent page from "jumping" when not enough content for scrollbar */
 html {
   overflow-y: scroll;
@@ -13,6 +18,11 @@ body {
 
 label {
   font-weight: normal;
+}
+
+/* a bit of breathing space between the icon and text */
+i.fa {
+  margin-right: 4px;
 }
 
 /* a {
@@ -32,9 +42,30 @@ label {
   color: #fff;
 }
 
-/* .container {
-  background-color: #fff;
-} */
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
+  background-color: #34495e;
+}
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
+  color: #fff;
+}
+/* open on hover for computer users */
+ul.nav li.dropdown:hover > ul.dropdown-menu {
+  display: block;    
+}
+.dropdown-menu {
+  background-color: #415b76;
+  border: none;
+  padding: 0;
+}
+.dropdown-menu>li>a {
+  color: #fff;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
+  background-color: #34495e;
+  color: #fff;
+}
 
 .main-container {
   padding-bottom: 20px;
@@ -55,7 +86,7 @@ label {
   background-color: transparent;
   border-color: transparent;
   line-height: 1em;
-  padding: 0 3px;
+  padding: 1px 2px 1px;
 }
 
 .form-control:focus {
