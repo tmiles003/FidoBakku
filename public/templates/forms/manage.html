@@ -2,67 +2,7 @@
 
 <div ng-repeat="topic in topics | orderBy: '+ordr'" class="row">
   
-  <div class="col-md-12">
-  
-  <div class="panel panel-default">
-    <div class="panel-heading">{{ topic.name }}
-      <span class="pull-right">
-        <button class="btn btn-default btn-fi-slim" ng-click="moveTopicUp(topic)">
-          <i class="fa fa-arrow-up fa-lg"></i>
-        </button>
-        <button class="btn btn-default btn-fi-slim" ng-click="moveTopicDown(topic)">
-          <i class="fa fa-arrow-down fa-lg"></i>
-        </button>
-        <button class="btn btn-default btn-fi-slim" ng-click="editTopic(topic)">
-          <i class="fa fa-edit fa-lg"></i>
-        </button>
-        <button class="btn btn-default btn-fi-slim" ng-click="deleteTopic(topic)">
-          <i class="fa fa-trash-o fa-lg"></i>
-        </button>
-      </span>
-    </div>
-    
-    <table class="table table-hover" ng-controller="BenchmarksCtrl">
-      <tr ng-repeat="benchmark in benchmarks | orderBy: '+ordr'">
-        <td colspan="2">{{ benchmark.content }}</td>
-        <td class="text-right">
-          <button class="btn btn-default btn-fi-slim" ng-click="moveBenchmarkUp(benchmark)">
-            <i class="fa fa-arrow-up fa-lg"></i>
-          </button>
-          <button class="btn btn-default btn-fi-slim" ng-click="moveBenchmarkDown(benchmark)">
-            <i class="fa fa-arrow-down fa-lg"></i>
-          </button>
-          <button class="btn btn-default btn-fi-slim" ng-click="editBenchmark(benchmark)">
-            <i class="fa fa-edit fa-lg"></i>
-          </button>
-          <button class="btn btn-default btn-fi-slim" ng-click="deleteBenchmark(benchmark)">
-            <i class="fa fa-trash-o fa-lg"></i>
-          </button>
-        </td>
-      </tr>
-      <tr>
-          <td class="" ng-class="{ 'has-error': editableBenchmarkForm.benchmark_content.$invalid 
-                && submitted }">
-          <form accept-charset="utf-8" class="form-horizontal" novalidate name="editableBenchmarkForm">
-            <input type="hidden" ng-model="editableBenchmark.id">
-            
-            <label for="benchmark_content" class="control-label">Question</label>
-          </td>
-          <td>
-              <textarea class="form-control" name="benchmark_content" ng-model="editableBenchmark.content" 
-                ng-required="true" ng-minlength="2" rows="2"></textarea>
-              <p ng-show="editableBenchmarkForm.benchmark_content.$invalid && submitted" 
-                  class="help-block">Content is required</p>
-          </td>
-          <td class="">
-            <button ng-click="saveBenchmark(editableBenchmark, editableBenchmarkForm.$valid)" type="button"
-              class="btn btn-default btn-sm">Save</button>
-          </td>
-        </form>
-      </tr>
-    </table>
-  </div>
-  
+  <div class="col-md-12" ng-include="'/templates/forms/manage_topic.html'">
   </div>
 
 </div>
@@ -80,7 +20,7 @@
       <p ng-show="editableTopicForm.topic_name.$invalid && submitted" 
         class="help-block">A topic is required</p>
     </div>
-    <div class="cold-md-1">
+    <div class="col-md-1">
       <button ng-click="saveTopic(editableTopic, editableTopicForm.$valid)" type="button"
         class="btn btn-default">Save</button>
     </div>

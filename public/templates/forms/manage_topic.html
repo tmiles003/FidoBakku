@@ -1,0 +1,24 @@
+
+  <div class="panel panel-default">
+    <div class="panel-heading">{{ topic.name }}
+      <span class="pull-right">
+        <button class="btn btn-default btn-fi-slim" ng-click="moveTopicUp(topic)">
+          <i class="fa fa-arrow-up fa-lg"></i>
+        </button>
+        <button class="btn btn-default btn-fi-slim" ng-click="moveTopicDown(topic)">
+          <i class="fa fa-arrow-down fa-lg"></i>
+        </button>
+        <button class="btn btn-default btn-fi-slim" ng-click="editTopic(topic)">
+          <i class="fa fa-edit fa-lg"></i>
+        </button>
+        <button class="btn btn-default btn-fi-slim" ng-click="deleteTopic(topic)">
+          <i class="fa fa-trash-o fa-lg"></i>
+        </button>
+      </span>
+    </div>
+    
+    <div ng-include="'/templates/forms/manage_benchmark.html'">
+    </div>
+    
+  </div>
+  
