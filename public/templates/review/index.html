@@ -26,21 +26,21 @@
 </div>
 </form>
 
-<div class="row" ng-controller="ReviewFeedbackCtrl">
-  <form novalidate class="form-horizontal" name="feedbackForm">
-    <input type="hidden" ng-model="feedback.id">
+<div class="row" ng-controller="ReviewCommentCtrl">
+  <form novalidate class="form-horizontal" name="commentForm">
+    <input type="hidden" ng-model="comment.id">
     
-    <label for="feedback_content" class="col-md-2 control-label">Feedback</label>
+    <label for="comment_content" class="col-md-2 control-label">Feedback</label>
     
-    <div class="col-md-9" ng-class="{ 'has-error': feedbackForm.feedback_content.$invalid 
+    <div class="col-md-9" ng-class="{ 'has-error': commentForm.comment_content.$invalid 
           && submitted }">
-        <textarea class="form-control" name="feedback_content" ng-model="feedback.content" 
+        <textarea class="form-control" name="comment_content" ng-model="comment.content" 
           ng-required="true" ng-minlength="2" rows="6"></textarea>
-        <p ng-show="feedbackForm.feedback_content.$invalid && submitted" 
+        <p ng-show="commentForm.comment_content.$invalid && submitted" 
             class="help-block">Content is required</p>
     </div>
     <div class="col-md-1">
-      <button ng-click="saveFeedback(feedback, feedbackForm.$valid)" type="button"
+      <button ng-click="saveComment(comment, commentForm.$valid)" type="button"
         class="btn btn-default btn-sm">Save</button>
     </div>
   </form>

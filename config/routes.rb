@@ -56,7 +56,7 @@ FidoBakku::Application.routes.draw do
       end
     end
     resources :user_reviews, except: [:new, :edit]
-    resources :feedbacks, except: [:show, :new, :create, :edit]
+    resources :comments, except: [:show, :new, :create, :edit]
     
     resource :account, controller: :account, only: [:show, :update, :destroy]
     resource :user, path: '/profile', controller: :profile, only: [:update]

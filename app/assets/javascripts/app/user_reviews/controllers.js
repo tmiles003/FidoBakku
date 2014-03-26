@@ -22,23 +22,23 @@ fiApp.controller('UserReviewsCtrl', ['$scope', '$http', 'UserReviewsSrv', 'Notif
   });
 }]);
 
-fiApp.controller('ReviewFeedbackCtrl', ['$scope', '$routeParams', 'ReviewFeedbackSrv', 'NotifSrv',
-                  function($scope, $routeParams, ReviewFeedbackSrv, NotifSrv) {
+fiApp.controller('ReviewCommentCtrl', ['$scope', '$routeParams', 'ReviewCommentsSrv', 'NotifSrv',
+                  function($scope, $routeParams, ReviewCommentsSrv, NotifSrv) {
   
-  $scope.feedback = ReviewFeedbackSrv.get({ review_id: $routeParams.id });
+  $scope.comment = ReviewCommentsSrv.get({ review_id: $routeParams.id });
   
-  var updateFeedback = function(feedback) {
-    feedback.$update({ review_id: $routeParams.id }, function(val, resp) {
+  var updateComment = function(comment) {
+    comment.$update({ review_id: $routeParams.id }, function(val, resp) {
       NotifSrv.success();
     });
   }
   
-  $scope.saveFeedback = function(feedback, isValid) {
+  $scope.saveComment = function(comment, isValid) {
     $scope.submitted = true;
     if (isValid) {
       $scope.submitted = false;
-      if (feedback.id) {
-        updateFeedback(feedback);
+      if (comment.id) {
+        updateComment(comment);
       }
     }
   }
