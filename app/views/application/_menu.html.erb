@@ -1,4 +1,10 @@
   <ul class="nav navbar-nav">
+    <li>
+      <a href="/" class="active">FidoBakku</a>
+    </li>
+<% if lookup_context.template_exists?('home/menu_extra', [], true) %>
+  <%= render partial: 'home/menu_extra' %>
+<% end %>
   </ul>
   <ul class="nav navbar-nav navbar-right">
     <li>
