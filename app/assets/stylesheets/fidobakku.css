@@ -82,7 +82,14 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
   /* font-style: italic; */
 }
 
-.btn-fi-slim, .btn-fi-slim:hover {
+.panel-default .fi-panel-inner {
+  padding: 8px;
+}
+.panel-default .fi-panel-inner .fi-btn-short {
+  padding: 1px;
+}
+
+.fi-btn-slim, .fi-btn-slim:hover {
   background-color: transparent;
   border-color: transparent;
   line-height: 1em;

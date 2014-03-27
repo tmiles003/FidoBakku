@@ -17,10 +17,10 @@
           {{ review.status }}
         </td>
         <td class="text-right">
-          <button class="btn btn-default btn-fi-slim" ng-click="editReview(review)">
+          <button class="btn btn-default fi-btn-slim" ng-click="editReview(review)">
             <i class="fa fa-edit fa-lg"></i>
           </button>
-          <button class="btn btn-default btn-fi-slim" ng-click="deleteReview(review)">
+          <button class="btn btn-default fi-btn-slim" ng-click="deleteReview(review)">
             <i class="fa fa-trash-o fa-lg"></i>
           </button>
         </td>
@@ -36,6 +36,7 @@
     <div class="panel-heading">Form</div>
     <!-- div class="panel-body">
     </div -->
+    <div class="fi-panel-inner">
 
     <form accept-charset="utf-8" novalidate name="editableReviewForm">
       <input type="hidden" ng-model="editableReview.id">
@@ -64,7 +65,8 @@
       </div>
       
     </form>
-
+    
+    </div>
   </div>
   </div>
 

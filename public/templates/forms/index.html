@@ -14,10 +14,10 @@
           <a href="{{ form.manage_path }}">{{ form.name }}</a>
         </td>
         <td class="text-right">
-          <button class="btn btn-default btn-fi-slim" ng-click="editForm(form)">
+          <button class="btn btn-default fi-btn-slim" ng-click="editForm(form)">
             <i class="fa fa-edit fa-lg"></i>
           </button>
-          <button class="btn btn-default btn-fi-slim" ng-click="deleteForm(form)">
+          <button class="btn btn-default fi-btn-slim" ng-click="deleteForm(form)">
             <i class="fa fa-trash-o fa-lg"></i>
           </button>
         </td>
@@ -33,6 +33,7 @@
     <div class="panel-heading">Form</div>
     <!-- div class="panel-body">
     </div -->
+    <div class="fi-panel-inner">
 
     <form accept-charset="utf-8" novalidate name="editableFormForm">
       <input type="hidden" ng-model="editableForm.id">
@@ -53,6 +54,7 @@
       
     </form>
 
+    </div>
   </div>
   </div>
 

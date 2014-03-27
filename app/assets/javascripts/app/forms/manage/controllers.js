@@ -2,13 +2,18 @@
 
 /* Controllers */
 
-fiApp.controller('TopicsCtrl', ['$scope', 'TopicsSrv', 'topics', 'NotifSrv', '$routeParams', '$filter', 
-                  function($scope, TopicsSrv, topics, NotifSrv, $routeParams, $filter) {
+fiApp.controller('TopicsCtrl', ['$scope', '$http', 
+                  'TopicsSrv', 'topics', 'NotifSrv', '$routeParams', '$filter', 
+                  function($scope, $http, 
+                           TopicsSrv, topics, NotifSrv, $routeParams, $filter) {
   
   $scope.formId = $routeParams.id;
   $scope.topics = topics;
   $scope.editableTopic = {};
   $scope.submitted = false;
+  $http.get('/api/users/list').success(function(list) { 
+    $scope.users = list; 
+  });
   
   var createTopic = function(newTopic) {
     TopicsSrv.save({ form_id: $scope.formId, topic: newTopic }, function(val, resp) {

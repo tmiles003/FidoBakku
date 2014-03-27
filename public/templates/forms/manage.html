@@ -6,16 +6,16 @@
     <div class="panel panel-default" ng-repeat="topic in topics | orderBy: '+ordr'">
       <div class="panel-heading">{{ topic.name }}
         <span class="pull-right">
-          <button class="btn btn-default btn-fi-slim" ng-click="moveTopicUp(topic)">
+          <button class="btn btn-default fi-btn-slim" ng-click="moveTopicUp(topic)">
             <i class="fa fa-arrow-up fa-lg"></i>
           </button>
-          <button class="btn btn-default btn-fi-slim" ng-click="moveTopicDown(topic)">
+          <button class="btn btn-default fi-btn-slim" ng-click="moveTopicDown(topic)">
             <i class="fa fa-arrow-down fa-lg"></i>
           </button>
-          <button class="btn btn-default btn-fi-slim" ng-click="editTopic(topic)">
+          <button class="btn btn-default fi-btn-slim" ng-click="editTopic(topic)">
             <i class="fa fa-edit fa-lg"></i>
           </button>
-          <button class="btn btn-default btn-fi-slim" ng-click="deleteTopic(topic)">
+          <button class="btn btn-default fi-btn-slim" ng-click="deleteTopic(topic)">
             <i class="fa fa-trash-o fa-lg"></i>
           </button>
         </span>
@@ -49,5 +49,14 @@
   
   <div class="col-md-3">
     <!-- tabbed user lists -->
+    <div class="panel panel-default">
+      <div class="panel-heading">Users</div>
+      <!-- div class="panel-body">
+      </div -->
+      <div class="fi-panel-inner">
+        <button ng-repeat="user in users"
+          type="button" class="btn btn-default btn-block fi-btn-short">{{ user.name }}</button>
+      </div>
+    </div>
   </div>
 </div>

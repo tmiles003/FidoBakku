@@ -8,11 +8,11 @@ fiApp.controller('ReviewsManageCtrl', ['$scope', 'ReviewsSrv', 'UserReviewsSrv',
   
   $scope.reviewId = $routeParams.id;
   $scope.userReviews = userReviews; // get user reviews for this review
-  $http.get('/api/users/list').success(function(data) { 
-    $scope.users = data; 
+  $http.get('/api/users/list').success(function(list) { 
+    $scope.users = list; 
   });
-  $http.get('/api/forms/list').success(function(data) { 
-    $scope.forms = data; 
+  $http.get('/api/forms/list').success(function(list) { 
+    $scope.forms = list; 
   });
   
   var createUserReview = function(newUserReview) {
