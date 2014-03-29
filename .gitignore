@@ -16,3 +16,6 @@
 /tmp
 
 config/initializers/secret_token.rb
+
+/vendor/cache/*
+
