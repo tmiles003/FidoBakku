@@ -24,3 +24,12 @@ fiApp.factory('BenchmarksSrv', ['$resource', function($resource) {
       'down': { method: 'PUT', url: '/api/benchmarks/:id/down', isArray: true }
     });
 }]);
+
+fiApp.factory('FormUserSrv', ['$resource', function($resource) {
+  
+  return $resource('/api/forms/:id/user/:user_id', 
+    { id: '@id', user_id: '@userId' }, 
+    { 
+      'update': { method: 'PUT' }
+    });
+}]);

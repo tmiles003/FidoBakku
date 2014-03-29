@@ -53,8 +53,14 @@
       <div class="panel-heading">Users</div>
       <!-- div class="panel-body">
       </div -->
-      <div class="fi-panel-inner">
-        <button ng-repeat="user in users"
+      <div class="fi-panel-inner" ng-controller="FormUserCtrl">
+        <!-- filter with a drop-down. role/team -->
+        <select name="user_role" ng-model="role" class="form-control" 
+          ng-options="role.s as role.l for role in roles">
+        </select>
+        <hr>
+        <button ng-repeat="user in users | orderBy: '+name' | filter: role" 
+          form-user user="user" ng-click="updateFormAssignment(user.id)"
           type="button" class="btn btn-default btn-block fi-btn-short">{{ user.name }}</button>
       </div>
     </div>

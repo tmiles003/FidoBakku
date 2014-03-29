@@ -2,7 +2,7 @@ class Api::FormsController < Api::ApiController
   
   load_and_authorize_resource
   
-  before_action :set_form, only: [:update, :destroy]
+  before_action :set_form, only: [:update, :user, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_form
 
   # GET /api/forms
@@ -44,6 +44,16 @@ class Api::FormsController < Api::ApiController
         format.json { render json: @form.errors, status: :unprocessable_entity }
       end
     end
+  end
+  
+  # PATCH/PUT /api/forms/1/user/1
+  # PATCH/PUT /api/forms/1/user/1.json
+  def user
+    @form_user = ::User.find(params[:user_id])
+    #logger.info 'assigning form to user'
+    # clear any existing assignments
+    
+    # assign
   end
 
   # DELETE /api/forms/1

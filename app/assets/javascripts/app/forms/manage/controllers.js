@@ -2,10 +2,10 @@
 
 /* Controllers */
 
-fiApp.controller('TopicsCtrl', ['$scope', '$http', 
-                  'TopicsSrv', 'topics', 'NotifSrv', '$routeParams', '$filter', 
-                  function($scope, $http, 
-                           TopicsSrv, topics, NotifSrv, $routeParams, $filter) {
+fiApp.controller('TopicsCtrl', ['$scope', '$http', '$routeParams', '$filter', 
+                  'TopicsSrv', 'topics', 'NotifSrv', 
+                  function($scope, $http, $routeParams, $filter, 
+                           TopicsSrv, topics, NotifSrv) {
   
   $scope.formId = $routeParams.id;
   $scope.topics = topics;
@@ -171,6 +171,24 @@ fiApp.controller('BenchmarksCtrl', ['$scope', 'BenchmarksSrv', 'NotifSrv', '$fil
     benchmark.$delete().then(function() {
       $scope.benchmarks = _.without($scope.benchmarks, benchmark);
       NotifSrv.success();
+    });
+  }
+  
+}]);
+
+fiApp.controller('FormUserCtrl', ['$scope', '$http', '$routeParams',
+                  'UsersSrv', 'FormUserSrv',
+                  function($scope, $http, $routeParams, UsersSrv, FormUserSrv) {
+  
+  $scope.formId = $routeParams.id;
+  $scope.roles = [];
+  UsersSrv.getRoles(function(roles) {
+    $scope.roles = roles;
+  });
+  
+  $scope.updateFormAssignment = function(userId) {
+    FormUserSrv.update({ id: $scope.formId, userId: userId }, function(val, resp) {
+      console.log( val );
     });
   }
   

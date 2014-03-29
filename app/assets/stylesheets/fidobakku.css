@@ -86,7 +86,9 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
   padding: 8px;
 }
 .panel-default .fi-panel-inner .fi-btn-short {
-  padding: 1px;
+  border: none;
+  padding: 2px 8px;
+  text-align: left;
 }
 
 .fi-btn-slim, .fi-btn-slim:hover {

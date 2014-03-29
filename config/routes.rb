@@ -42,6 +42,9 @@ FidoBakku::Application.routes.draw do
       collection do 
         get 'list'
       end
+      member do
+        put 'user/:user_id' => 'forms#user'
+      end
       resources :topics, only: [:index], shallow: true do 
         member do 
           put 'up'
