@@ -5,51 +5,15 @@
   <div class="col-md-9">
   
   <div class="panel panel-default">
-    <div class="panel-heading">Admins</div>
+    <div class="panel-heading">No team</div>
     <!-- div class="panel-body">
     </div -->
     <table class="table table-hover">
-      <tr ng-repeat="user in users | orderBy: '+name' | filter: { role: 'admin', team_id: null }">
-        <td>{{ user.name }}</td>
-        <td>{{ user.email }}</td>
-        <td class="text-right">
-          <button class="btn btn-default fi-btn-slim" ng-click="editUser(user)">
-            <i class="fa fa-edit fa-lg"></i>
-          </button>
-          <button class="btn btn-default fi-btn-slim" ng-click="deleteUser(user)">
-            <i class="fa fa-trash-o fa-lg"></i>
-          </button>
+      <tr ng-repeat="user in users | orderBy: '+name' | filter: { team_id: null }">
+        <td ng-switch on="user.role">
+          <i class="fa fa-font" ng-switch-when="admin"></i>
+          <i class="fa fa-briefcase" ng-switch-when="manager"></i>
         </td>
-      </tr>
-    </table>
-  </div>
-  
-  <div class="panel panel-default"><!-- hide if managers == 0 -->
-    <div class="panel-heading">Managers</div>
-    <!-- div class="panel-body">
-    </div -->
-    <table class="table table-hover">
-      <tr ng-repeat="user in users | orderBy: '+name' | filter: { role: 'manager', team_id: null }">
-        <td>{{ user.name }}</td>
-        <td>{{ user.email }}</td>
-        <td class="text-right">
-          <button class="btn btn-default fi-btn-slim" ng-click="editUser(user)">
-            <i class="fa fa-edit fa-lg"></i>
-          </button>
-          <button class="btn btn-default fi-btn-slim" ng-click="deleteUser(user)">
-            <i class="fa fa-trash-o fa-lg"></i>
-          </button>
-        </td>
-      </tr>
-    </table>
-  </div>
-  
-  <div class="panel panel-default">
-    <div class="panel-heading">Employees</div>
-    <!-- div class="panel-body">
-    </div -->
-    <table class="table table-hover">
-      <tr ng-repeat="user in users | orderBy: '+name' | filter: { role: 'employee', team_id: null }">
         <td>{{ user.name }}</td>
         <td>{{ user.email }}</td>
         <td class="text-right">
@@ -65,11 +29,24 @@
   </div>
   
   <div class="panel panel-default" ng-repeat="team in teams | orderBy: '+name'">
-    <div class="panel-heading">{{ team.name }}</div>
+    <div class="panel-heading">{{ team.name }}
+      <span class="pull-right">
+        <button class="btn btn-default fi-btn-slim" ng-click="editTeam(team)">
+          <i class="fa fa-edit fa-lg"></i>
+        </button>
+        <button class="btn btn-default fi-btn-slim" ng-click="deleteTeam(team)">
+          <i class="fa fa-trash-o fa-lg"></i>
+        </button>
+      </span>
+    </div>
     <!-- div class="panel-body">
     </div -->
     <table class="table table-hover">
       <tr ng-repeat="user in users | orderBy: '+name' | filter: { team_id: team.id }">
+        <td ng-switch on="user.role">
+          <i class="fa fa-font" ng-switch-when="admin"></i>
+          <i class="fa fa-briefcase" ng-switch-when="manager"></i>
+        </td>
         <td>{{ user.name }}</td>
         <td>{{ user.email }}</td>
         <td class="text-right">
@@ -93,10 +70,10 @@
       
       <label for="team_name" class="control-label">Team</label>
       
-      <div class="" ng-class="{ 'has-error': editableTeamForm.team_name.$invalid && submitted }">
+      <div class="" ng-class="{ 'has-error': editableTeamForm.team_name.$invalid && teamFormSubmitted }">
         <input name="team_name" class="form-control" ng-model="editableTeam.name" type="text"
           ng-required="true" ng-minlength="1" ng-maxlength="100">
-        <p ng-show="editableTeamForm.team_name.$invalid && submitted" 
+        <p ng-show="editableTeamForm.team_name.$invalid && teamFormSubmitted" 
           class="help-block">A name is required</p>
       <!-- /div>
       <div class="" -->
@@ -120,34 +97,35 @@
       <input type="hidden" ng-model="editableUser.id">
       
       <div class="form-group" ng-class="{ 'has-error': editableUserForm.user_name.$invalid 
-          && !editableUserForm.user_name.$pristine && submitted }">
+          && userFormSubmitted }">
         <label for="user_name">Name</label>
         <input name="user_name" class="form-control" ng-model="editableUser.name" type="text"
           ng-required="true" ng-minlength="2" ng-maxlength="100">
-        <p ng-show="editableUserForm.user_name.$invalid && !editableUserForm.user_name.$pristine && submitted" 
+        <p ng-show="editableUserForm.user_name.$invalid && userFormSubmitted" 
           class="help-block">A name is required</p>
       </div>
       <div class="form-group" ng-class="{ 'has-error': editableUserForm.user_email.$invalid 
-          && !editableUserForm.user_email.$pristine && submitted }">
+          && userFormSubmitted }">
         <label for="user_email">Email</label>
         <input name="user_email" class="form-control" ng-model="editableUser.email" type="email"
           ng-required="true">
-        <p ng-show="editableUserForm.user_email.$invalid && !editableUserForm.user_email.$pristine && submitted" 
+        <p ng-show="editableUserForm.user_email.$invalid && userFormSubmitted" 
           class="help-block">A valid email address is required</p>
       </div>
       <div class="form-group" ng-class="{ 'has-error': editableUserForm.user_role.$invalid 
-          && !editableUserForm.user_role.$pristine && submitted }">
-        <label for="user_role">Role</label>
+          && userFormSubmitted }">
+        <label for="user_role">Access level</label>
         <select name="user_role" ng-model="editableUser.role" class="form-control" 
           ng-options="role.s as role.l for role in roles" ng-required="true">
         </select>
-        <p ng-show="editableUserForm.user_role.$invalid && !editableUserForm.user_role.$pristine && submitted" 
-          class="help-block">A role must be selected</p>
+        <p ng-show="editableUserForm.user_role.$invalid && userFormSubmitted" 
+          class="help-block">Access level must be set</p>
       </div>
       <div class="form-group">
         <label for="user_team_id">Team</label>
         <select name="user_team_id" ng-model="editableUser.team_id" class="form-control" 
           ng-options="team.id as team.name for team in teams">
+          <option value=""></option>
         </select>
       </div>
 

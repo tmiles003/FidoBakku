@@ -28,7 +28,7 @@ class Api::TeamsController < Api::ApiController
   def update
     respond_to do |format|
       if @team.update(team_params)
-        format.json { head :no_content }
+        format.json { render json: @team }
       else
         format.json { render json: @team.errors, status: :unprocessable_entity }
       end

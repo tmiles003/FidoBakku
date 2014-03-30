@@ -23,6 +23,12 @@ class User < ActiveRecord::Base
   
   has_many :user_reviews
   
+  def as_json(options = nil)
+    h = super({ except: [:created_at, :updated_at] }.merge(options || {}))
+    h['team_id'] = self.team.nil? ? nil : self.team.id
+    h
+  end
+  
   def initial_setup
     if name.nil?
       self.name = 'New User'

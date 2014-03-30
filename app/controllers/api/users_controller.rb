@@ -51,7 +51,7 @@ class Api::UsersController < Api::ApiController
         @team_user = ::TeamUser.find_or_create_by(user_id: @account_user.id)
         @team_user.update(team_id: params[:team_id])
         
-        format.json { head :no_content } # return the updated data!
+        format.json { render json: @account_user }
       else
         format.json { render json: @account_user.errors, status: :unprocessable_entity }
       end

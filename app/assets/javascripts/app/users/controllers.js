@@ -37,9 +37,9 @@ fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'users', 'TeamsSrv', 'Notif
   }
   
   $scope.saveUser = function(user, isValid) {
-    $scope.submitted = true;
+    $scope.userFormSubmitted = true;
     if (isValid) {
-      $scope.submitted = false;
+      $scope.userFormSubmitted = false;
       if (user.id) {
         updateUser(user);
       }
@@ -73,7 +73,7 @@ fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'users', 'TeamsSrv', 'Notif
   
   var updateTeam = function(team) {
     team.$update(function(val, resp) {
-      var team = _.find($scope.team, function(t) {
+      var team = _.find($scope.teams, function(t) {
         return t.id === val.id;
       });
       _.extend(team, val); // update object with returned values
@@ -84,9 +84,9 @@ fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'users', 'TeamsSrv', 'Notif
   }
   
   $scope.saveTeam = function(team, isValid) {
-    $scope.submitted = true;
+    $scope.teamFormSubmitted = true;
     if (isValid) {
-      $scope.submitted = false;
+      $scope.teamFormSubmitted = false;
       if (team.id) {
         updateTeam(team);
       }
@@ -101,7 +101,12 @@ fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'users', 'TeamsSrv', 'Notif
   }
   
   $scope.deleteTeam = function(team) {
+    var teamId = team.id;
     team.$delete(function() {
+      // update users with that team id
+      _.each(_.where($scope.users, { team_id: teamId }), function(u) {
+        u.team_id = null;
+      });
       $scope.teams = _.without($scope.teams, team);
       NotifSrv.success();
     });
