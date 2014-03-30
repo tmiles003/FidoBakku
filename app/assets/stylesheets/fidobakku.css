@@ -80,6 +80,7 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
   color: #fff;
   background-color: #415b76;
   /* font-style: italic; */
+  padding: 5px 15px;
 }
 
 .panel-default .fi-panel-inner {

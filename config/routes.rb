@@ -30,6 +30,8 @@ FidoBakku::Application.routes.draw do
       end
     end
     
+    resources :teams, except: [:show, :new]
+    
     resources :topics, except: [:index, :show, :new, :edit] do 
       resources :benchmarks, except: [:show, :new, :edit], shallow: true do 
         member do 

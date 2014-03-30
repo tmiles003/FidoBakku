@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140326114010) do
+ActiveRecord::Schema.define(version: 20140330034844) do
 
   create_table "account_users", force: true do |t|
     t.integer "account_id"
@@ -68,6 +68,19 @@ ActiveRecord::Schema.define(version: 20140326114010) do
     t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "team_users", force: true do |t|
+    t.integer "team_id"
+    t.integer "user_id"
+  end
+
+  add_index "team_users", ["team_id"], name: "index_team_users_on_team_id", using: :btree
+  add_index "team_users", ["user_id"], name: "index_team_users_on_user_id", using: :btree
+
+  create_table "teams", force: true do |t|
+    t.integer "account_id"
+    t.string  "name"
   end
 
   create_table "topics", force: true do |t|
