@@ -8,7 +8,13 @@ class Api::GoalsController < Api::ApiController
   # GET /api/goals
   # GET /api/goals.json
   def index
-    @goals = @user.goals
+    render json: @user.goals
+  end
+  
+  # GET /api/goals/1
+  # GET /api/goals/1.json
+  def show
+    render json: @goal
   end
   
   # POST /api/goals

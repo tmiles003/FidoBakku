@@ -18,6 +18,19 @@ fiApp.config(['$routeProvider', '$locationProvider',
     }
   });
   
+  $routeProvider.when('/user/:id/:name', { 
+    templateUrl: '/templates/user/index.html', 
+    controller: 'UserCtrl',
+    resolve: {
+      user: function(UsersSrv, $route) { 
+        return UsersSrv.get({ id: $route.current.params.id });
+      },
+      goals: function(GoalsSrv) { 
+        return GoalsSrv.query()['$promise']; 
+      }
+    }
+  });
+  
   $routeProvider.when('/goals', { 
     templateUrl: '/templates/goals/index.html', 
     controller: 'GoalsCtrl', 
@@ -28,12 +41,12 @@ fiApp.config(['$routeProvider', '$locationProvider',
     }
   });
   
-  $routeProvider.when('/user/:id/:name', { 
-    templateUrl: '/templates/users/user.html', 
-    controller: 'UserCtrl',
+  $routeProvider.when('/goal/:id/:slug', { 
+    templateUrl: '/templates/goal/index.html', 
+    controller: 'GoalCtrl',
     resolve: {
-      user: function(UsersSrv, $route) { 
-        return UsersSrv.get({ id: $route.current.params.id });
+      goal: function(GoalsSrv, $route) { 
+        return GoalsSrv.get({ id: $route.current.params.id });
       }
     }
   });

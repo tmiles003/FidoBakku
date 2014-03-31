@@ -9,6 +9,12 @@ class Api::UsersController < Api::ApiController
     render json: @account.users
   end
   
+  # GET /api/users/1
+  # GET /api/users/1.json
+  def show
+    render json: @user
+  end
+  
   # GET /api/users/roles
   def roles
     render json: ::User::ROLES, :each_serializer => RoleSerializer
