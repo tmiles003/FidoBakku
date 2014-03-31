@@ -12,10 +12,11 @@ FidoBakku::Application.routes.draw do
   # get '/' => 'welcome#application', as: :dashboard
   get '/.*', :to => 'welcome#application', as: :app_root
   
+  get 'user/:id' => 'welcome#application', as: :user_manage
   get 'form/:id/:slug' => 'welcome#application', as: :form_manage
-  get 'reviews/:id/:slug' => 'welcome#application', as: :review_manage
-  get 'review/:id/:name' => 'welcome#application', as: :user_review
-  get 'feedback/:id/:name' => 'welcome#application', as: :user_feedback
+  #get 'reviews/:id/:slug' => 'welcome#application', as: :review_manage
+  #get 'review/:id/:name' => 'welcome#application', as: :user_review
+  #get 'feedback/:id/:name' => 'welcome#application', as: :user_feedback
   
   namespace :api, defaults: { format: :json } do
     

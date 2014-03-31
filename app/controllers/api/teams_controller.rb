@@ -2,14 +2,15 @@ class Api::TeamsController < Api::ApiController
   
   before_action :set_team, only: [:update, :destroy]
 
-  # GET /teams
-  # GET /teams.json
+  # GET /api/teams
+  # GET /api/teams.json
   def index
-    @teams = @account.teams
+    #@teams = @account.teams
+    render json: @account.teams
   end
 
-  # POST /teams
-  # POST /teams.json
+  # POST /api/teams
+  # POST /api/teams.json
   def create
     @team = ::Team.new(team_params)
     @team.account = @account
@@ -23,8 +24,8 @@ class Api::TeamsController < Api::ApiController
     end
   end
 
-  # PATCH/PUT /teams/1
-  # PATCH/PUT /teams/1.json
+  # PATCH/PUT /api/teams/1
+  # PATCH/PUT /api/teams/1.json
   def update
     respond_to do |format|
       if @team.update(team_params)
@@ -35,8 +36,8 @@ class Api::TeamsController < Api::ApiController
     end
   end
 
-  # DELETE /teams/1
-  # DELETE /teams/1.json
+  # DELETE /api/teams/1
+  # DELETE /api/teams/1.json
   def destroy
     @team.destroy
     respond_to do |format|

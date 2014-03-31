@@ -28,6 +28,16 @@ fiApp.config(['$routeProvider', '$locationProvider',
     }
   });
   
+  $routeProvider.when('/user/:id/:name', { 
+    templateUrl: '/templates/users/user.html', 
+    controller: 'UserCtrl',
+    resolve: {
+      user: function(UsersSrv, $route) { 
+        return UsersSrv.get({ id: $route.current.params.id });
+      }
+    }
+  });
+  
   $routeProvider.when('/forms', { 
     templateUrl: '/templates/forms/index.html', 
     controller: 'FormsCtrl', 

@@ -11,8 +11,4 @@ class Team < ActiveRecord::Base
     too_long: 'Too long'
   }
   
-  def as_json(options)
-    h = super({ except: [:account_id] }.merge(options || {}))
-  end
-  
 end

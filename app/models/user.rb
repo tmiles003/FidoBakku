@@ -25,6 +25,11 @@ class User < ActiveRecord::Base
   
   has_many :user_reviews
   
+  def to_param
+    [id, self.slug].join('/')
+    #[id.to_s(36), self.slug].join('/')
+  end
+  
   def as_json(options = nil)
     h = super({ except: [:created_at, :updated_at] }.merge(options || {}))
     h['team_id'] = self.team.nil? ? nil : self.team.id

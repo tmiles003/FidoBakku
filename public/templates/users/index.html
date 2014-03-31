@@ -16,6 +16,9 @@
         </td>
         <td>{{ user.name }}</td>
         <td>{{ user.email }}</td>
+        <td>
+          <a href="{{ user.user_path }}"><i class="fa fa-user fa-lg"></i></a>
+        </td>
         <td class="text-right">
           <button class="btn btn-default fi-btn-slim" ng-click="editUser(user)">
             <i class="fa fa-edit fa-lg"></i>
@@ -49,6 +52,9 @@
         </td>
         <td>{{ user.name }}</td>
         <td>{{ user.email }}</td>
+        <td>
+          <a href="{{ user.user_path }}"><i class="fa fa-user fa-lg"></i></a>
+        </td>
         <td class="text-right">
           <button class="btn btn-default fi-btn-slim" ng-click="editUser(user)">
             <i class="fa fa-edit fa-lg"></i>
@@ -65,22 +71,24 @@
     <div class="panel-heading">Team form</div>
     <!-- div class="panel-body">
     </div -->
-    <form class="form-inline" accept-charset="utf-8" novalidate name="editableTeamForm">
-      <input type="hidden" ng-model="editableTeam.id">
-      
-      <label for="team_name" class="control-label">Team</label>
-      
-      <div class="" ng-class="{ 'has-error': editableTeamForm.team_name.$invalid && teamFormSubmitted }">
-        <input name="team_name" class="form-control" ng-model="editableTeam.name" type="text"
-          ng-required="true" ng-minlength="1" ng-maxlength="100">
-        <p ng-show="editableTeamForm.team_name.$invalid && teamFormSubmitted" 
-          class="help-block">A name is required</p>
-      <!-- /div>
-      <div class="" -->
-        <button ng-click="saveTeam(editableTeam, editableTeamForm.$valid)" type="button"
-          class="btn btn-default">Save</button>
-      </div>
-    </form>
+    <div class="fi-panel-inner">
+      <form accept-charset="utf-8" novalidate name="editableTeamForm">
+        <input type="hidden" ng-model="editableTeam.id">
+        
+        <div class="form-group" ng-class="{ 'has-error': editableTeamForm.team_name.$invalid && teamFormSubmitted }">
+          <label for="team_name" class="control-label">Team</label>
+        
+          <input name="team_name" class="form-control" ng-model="editableTeam.name" type="text"
+            ng-required="true" ng-minlength="1" ng-maxlength="100">
+          <p ng-show="editableTeamForm.team_name.$invalid && teamFormSubmitted" 
+            class="help-block">A name is required</p>
+        </div>
+        <div class="actions">
+          <button ng-click="saveTeam(editableTeam, editableTeamForm.$valid)" type="button"
+            class="btn btn-default btn-sm text-right">Save</button>
+        </div>
+      </form>
+    </div>
   </div>
   
   </div>

@@ -8,6 +8,10 @@ class Api::ApiController < ApplicationController
   before_action :set_user
   before_action :set_account
   
+  def default_serializer_options
+    { root: false }
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def forbidden_access

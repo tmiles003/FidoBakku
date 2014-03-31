@@ -36,6 +36,7 @@ gem 'devise'
 #gem 'cancan'
 gem 'cancancan', '~> 1.7'
 gem 'mysql2'
+gem 'active_model_serializers', '~> 0.8.1'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'

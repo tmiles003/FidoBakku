@@ -6,12 +6,12 @@ class Api::UsersController < Api::ApiController
   # GET /api/users
   # GET /api/users.json
   def index
-    @account_users = @account.users # account_users
+    render json: @account.users
   end
   
   # GET /api/users/roles
   def roles
-    @roles = ::User::ROLES
+    render json: ::User::ROLES, :each_serializer => RoleSerializer
   end
   
   # used in user_reviews, account
@@ -19,6 +19,7 @@ class Api::UsersController < Api::ApiController
   # GET /api/users/list.json
   def list
     @users = @account.account_users.in_role(params[:role])
+    #render json: @users # @account.account_users.in_role(params[:role])
   end
 
   # POST /api/users
