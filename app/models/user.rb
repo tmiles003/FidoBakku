@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
   has_one :team_user, dependent: :destroy
   has_one :team, through: :team_user
   
+  has_many :goals, dependent: :destroy
+  
   has_one :form, through: :form_user
   
   has_many :user_reviews

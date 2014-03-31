@@ -18,6 +18,16 @@ fiApp.config(['$routeProvider', '$locationProvider',
     }
   });
   
+  $routeProvider.when('/goals', { 
+    templateUrl: '/templates/goals/index.html', 
+    controller: 'GoalsCtrl', 
+    resolve: { 
+      goals: function(GoalsSrv) { 
+        return GoalsSrv.query()['$promise']; 
+      }
+    }
+  });
+  
   $routeProvider.when('/forms', { 
     templateUrl: '/templates/forms/index.html', 
     controller: 'FormsCtrl', 

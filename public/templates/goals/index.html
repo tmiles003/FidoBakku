@@ -1,0 +1,60 @@
+<!-- h1>Listing goals</h1 -->
+
+<div class="row">
+
+  <div class="col-md-8">
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">Goals</div>
+    <!-- div class="panel-body">
+    </div -->
+    <table class="table table-hover">
+      <tr ng-repeat="goal in goals">
+        <td>
+          {{ goal.content }}
+        </td>
+        <td class="text-right">
+          <button class="btn btn-default fi-btn-slim" ng-click="editGoal(goal)">
+            <i class="fa fa-edit fa-lg"></i>
+          </button>
+          <button class="btn btn-default fi-btn-slim" ng-click="deleteGoal(goal)">
+            <i class="fa fa-trash-o fa-lg"></i>
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  
+  </div>
+
+  <div class="col-md-4">
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Form</div>
+    <!-- div class="panel-body">
+    </div -->
+    <div class="fi-panel-inner">
+
+    <form accept-charset="utf-8" novalidate name="eGoalForm">
+      <input type="hidden" ng-model="eGoal.id">
+      
+      <div class="form-group" ng-class="{ 'has-error': eGoalForm.goal_content.$invalid && submitted }">
+        <label for="goal_content">Goal</label>
+        <textarea name="goal_content" class="form-control" ng-model="eGoal.content"
+          ng-required="true" ng-minlength="2"></textarea>
+        <p ng-show="eGoalForm.goal_content.$invalid && submitted" 
+          class="help-block">Content is required</p>
+      </div>
+
+      <div class="actions">
+        <input ng-click="saveGoal(eGoal, eGoalForm.$valid)" type="submit" value="Save"
+          class="btn btn-default btn-sm">
+      </div>
+      
+    </form>
+
+    </div>
+  </div>
+  </div>
+
+</div>
