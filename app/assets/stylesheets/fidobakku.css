@@ -1,5 +1,8 @@
 /* fidobakku.css */
 
+/* #3e7965/#9cae59 - notification green */
+/* #76531e - page links */
+
 /* remove browser focus style(s) */
 *:focus {
   outline: none !important;
