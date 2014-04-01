@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140331044146) do
+ActiveRecord::Schema.define(version: 20140331131922) do
 
   create_table "account_users", force: true do |t|
     t.integer "account_id"
@@ -64,10 +64,11 @@ ActiveRecord::Schema.define(version: 20140331044146) do
 
   create_table "goals", force: true do |t|
     t.integer  "user_id"
+    t.string   "title"
     t.text     "content"
     t.date     "due_date"
-    t.boolean  "private"
-    t.boolean  "complete"
+    t.boolean  "is_private",  default: false
+    t.boolean  "is_complete", default: false
     t.datetime "created_at"
   end
 

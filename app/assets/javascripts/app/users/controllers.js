@@ -2,17 +2,14 @@
 
 /* Controllers */
 
-fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'users', 'TeamsSrv', 'NotifSrv', 
-                  function($scope, UsersSrv, users, TeamsSrv, NotifSrv) {
+fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'users', 'TeamsSrv', 'teams', 'NotifSrv', 
+                  function($scope, UsersSrv, users, TeamsSrv, teams, NotifSrv) {
   
   $scope.users = users;
+  $scope.teams = teams;
   $scope.roles = [];
   UsersSrv.getRoles(function(roles) {
     $scope.roles = roles;
-  });
-  $scope.teams = [];
-  TeamsSrv.query(function(teams) {
-    $scope.teams = teams;
   });
   
   var createUser = function(newUser) {

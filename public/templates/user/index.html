@@ -11,7 +11,7 @@
     <table class="table table-hover">
       <tr ng-repeat="goal in goals">
         <td>
-          {{ goal.content }}
+          {{ goal.title }}
         </td>
         <td class="text-right">
           <button class="btn btn-default fi-btn-slim" ng-click="editGoal(goal)">
@@ -38,12 +38,29 @@
     <form accept-charset="utf-8" novalidate name="eGoalForm">
       <input type="hidden" ng-model="eGoal.id">
       
-      <div class="form-group" ng-class="{ 'has-error': eGoalForm.goal_content.$invalid && submitted }">
-        <label for="goal_content">Goal</label>
-        <textarea name="goal_content" class="form-control" ng-model="eGoal.content"
-          ng-required="true" ng-minlength="2"></textarea>
-        <p ng-show="eGoalForm.goal_content.$invalid && submitted" 
-          class="help-block">Content is required</p>
+      <div class="form-group" ng-class="{ 'has-error': eGoalForm.goal_title.$invalid && submitted }">
+        <label for="goal_title">Goal</label>
+        <input name="goal_title" class="form-control" ng-model="eGoal.title" type="text" 
+          ng-required="true" ng-minlength="2" ng-maxlength="100">
+        <p ng-show="eGoalForm.goal_title.$invalid && submitted" 
+          class="help-block">A title is required</p>
+      </div>
+      
+      <div class="form-group">
+        <label for="goal_content">Description</label>
+        <textarea name="goal_content" class="form-control" ng-model="eGoal.content"></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label for="goal_due_date">Due</label>
+        <input name="goal_due_date" class="form-control" ng-model="eGoal.due_date" type="text">
+      </div>
+      
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="eGoal.is_private" 
+            ng-true-value="1" ng-false-value="0"> Private
+        </label>
       </div>
 
       <div class="actions">

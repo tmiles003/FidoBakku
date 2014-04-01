@@ -14,7 +14,10 @@ fiApp.config(['$routeProvider', '$locationProvider',
     resolve: { 
       users: function(UsersSrv) { 
         return UsersSrv.query()['$promise']; 
-      } 
+      },
+      teams: function(TeamsSrv) {
+        return TeamsSrv.query()['$promise'];
+      }
     }
   });
   
@@ -25,8 +28,8 @@ fiApp.config(['$routeProvider', '$locationProvider',
       user: function(UsersSrv, $route) { 
         return UsersSrv.get({ id: $route.current.params.id });
       },
-      goals: function(GoalsSrv) { 
-        return GoalsSrv.query()['$promise']; 
+      goals: function(GoalsSrv, $route) { 
+        return GoalsSrv.query({ user_id: $route.current.params.id })['$promise']; 
       }
     }
   });

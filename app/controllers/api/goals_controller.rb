@@ -8,7 +8,7 @@ class Api::GoalsController < Api::ApiController
   # GET /api/goals
   # GET /api/goals.json
   def index
-    render json: @user.goals
+    render json: ::Goal.for_user(@user, params[:user_id])
   end
   
   # GET /api/goals/1
@@ -65,6 +65,6 @@ class Api::GoalsController < Api::ApiController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def goal_params
-      params.require(:goal).permit(:content)
+      params.require(:goal).permit(:title, :content, :due_date, :is_private, :is_complete)
     end
 end
