@@ -53,7 +53,14 @@
       
       <div class="form-group">
         <label for="goal_due_date">Due</label>
-        <input name="goal_due_date" class="form-control" ng-model="eGoal.due_date" type="text">
+        <div class="input-group date">
+          <input name="goal_due_date" class="form-control" ng-model="eGoal.due_date" type="text">
+          <span class="input-group-btn">
+            <button class="btn btn-default" ng-click="dueDate()">
+              <i class="fa fa-calendar"></i>
+            </button>
+          </span>
+        </div>
       </div>
       
       <div class="checkbox">

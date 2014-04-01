@@ -18,6 +18,7 @@
 //= require angular/angular-route.min
 //= require angular/angular-resource.min
 //= require angular/angular-animate.min
+//= require datepicker/bootstrap-datepicker
 //= require toaster/toaster
 //= require app/app.js
 //= require app/routes.js

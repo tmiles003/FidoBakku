@@ -1,12 +1,13 @@
 class GoalSerializer < ActiveModel::Serializer
   attributes :id, :title, :content, :due_date, :is_private, :is_complete, :goal_path
   
+  # strings seem to be better...
   def is_private
-    object.is_private ? 1 : 0
+    object.is_private ? '1' : '0'
   end
   
   def is_complete
-    object.is_complete ? 1 : 0
+    object.is_complete ? '1' : '0'
   end
   
   def goal_path

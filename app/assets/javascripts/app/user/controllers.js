@@ -7,6 +7,20 @@ fiApp.controller('UserCtrl', ['$scope', 'GoalsSrv', 'goals', 'NotifSrv',
   
   $scope.goals = goals;
   
+  $scope.dueDate = function() {
+    $('.input-group.date').datepicker({
+      format: 'dd/mm/yyyy',
+      startDate: '-1d',
+      // endDate: '+3y',
+      startView: 2,
+      // weekStart: 1,
+      orientation: 'auto',
+      clearBtn: true,
+      keyboardNavigation: false,
+      autoclose: true
+    });
+  }
+  
   var createGoal = function(newGoal) {
     GoalsSrv.save(newGoal, function(val, resp) {
       $scope.goals.push(val);
@@ -29,9 +43,9 @@ fiApp.controller('UserCtrl', ['$scope', 'GoalsSrv', 'goals', 'NotifSrv',
   }
   
   $scope.saveGoal = function(goal, isValid) {
-    $scope.goalFormSubmitted = true;
+    $scope.submitted = true;
     if (isValid) {
-      $scope.goalFormSubmitted = false;
+      $scope.submitted = false;
       if (goal.id) {
         updateGoal(goal);
       }

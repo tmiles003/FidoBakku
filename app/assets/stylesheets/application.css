@@ -11,6 +11,7 @@
  *= require bootstrap/bootstrap.min
  *= require toaster/toaster
  *= require font-awesome/font-awesome.min
+ *= require datepicker/datepicker3
  *= require flat
  *= require fidobakku
  *= require_self
