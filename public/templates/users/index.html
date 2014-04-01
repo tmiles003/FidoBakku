@@ -14,11 +14,10 @@
           <i class="fa fa-font" ng-switch-when="admin"></i>
           <i class="fa fa-briefcase" ng-switch-when="manager"></i>
         </td>
-        <td>{{ user.name }}</td>
-        <td>{{ user.email }}</td>
         <td>
-          <a href="{{ user.user_path }}"><i class="fa fa-user fa-lg"></i></a>
+          <a href="{{ user.user_path }}">{{ user.name }}</a>
         </td>
+        <td>{{ user.email }}</td>
         <td class="text-right">
           <button class="btn btn-default fi-btn-slim" ng-click="editUser(user)">
             <i class="fa fa-edit fa-lg"></i>
@@ -50,11 +49,10 @@
           <i class="fa fa-font" ng-switch-when="admin"></i>
           <i class="fa fa-briefcase" ng-switch-when="manager"></i>
         </td>
-        <td>{{ user.name }}</td>
-        <td>{{ user.email }}</td>
         <td>
-          <a href="{{ user.user_path }}"><i class="fa fa-user fa-lg"></i></a>
+          <a href="{{ user.user_path }}">{{ user.name }}</a>
         </td>
+        <td>{{ user.email }}</td>
         <td class="text-right">
           <button class="btn btn-default fi-btn-slim" ng-click="editUser(user)">
             <i class="fa fa-edit fa-lg"></i>

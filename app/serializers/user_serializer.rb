@@ -8,4 +8,5 @@ class UserSerializer < ActiveModel::Serializer
   def user_path
     root_path(anchor: user_manage_path(object))
   end
+  
 end

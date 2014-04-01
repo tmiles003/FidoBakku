@@ -1,28 +1,31 @@
 <!-- h1>Listing goals</h1 -->
 
-<h1>My goals</h1>
+<div class="row">
+  <a href="{{ user.user_path }}" class="pull-right">My goals</a>
+</div>
+
+<h1>Current goals</h1>
 
 <div class="row">
   <div class="col-md-4" ng-repeat="goal in goals">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <i class="fa fa-crosshair"></i>
+        <i class="fa fa-crosshairs"></i>
       </div>
       <a href="{{ goal.goal_path }}">{{ goal.title }}</a>
     </div>
   </div>
 </div>
 
-<h1>Team goals</h1>
+<h1>Team members' goals</h1>
 
- <div class="row" ng-repeat="row in teamGoals | partition:3">
+<div class="row" ng-repeat="row in teamGoals | partition: 3">
   <div class="col-md-4" ng-repeat="goal in row">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <i class="fa fa-crosshair"></i>
+        <i class="fa fa-crosshairs"></i>
       </div>
       <a href="{{ goal.goal_path }}">{{ goal.title }}</a>
     </div>
   </div>
- </div>
- 
+</div>

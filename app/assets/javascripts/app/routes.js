@@ -38,6 +38,9 @@ fiApp.config(['$routeProvider', '$locationProvider',
     templateUrl: '/templates/goals/index.html', 
     controller: 'GoalsCtrl', 
     resolve: { 
+      user: function(UsersSrv) {
+        return UsersSrv.current()['$promise'];
+      },
       goals: function(GoalsSrv) { 
         return GoalsSrv.query({ limit: 3 })['$promise']; 
       }

@@ -1,7 +1,7 @@
 class Api::UsersController < Api::ApiController
   
   load_and_authorize_resource
-  before_action :set_account_user, only: [:edit, :update, :destroy]
+  before_action :set_account_user, only: [:show, :edit, :update, :destroy]
   
   # GET /api/users
   # GET /api/users.json
@@ -9,10 +9,16 @@ class Api::UsersController < Api::ApiController
     render json: @account.users
   end
   
+  # GET /api/users/current
+  # GET /api/users/current.json
+  def current
+    render json: @user
+  end
+  
   # GET /api/users/1
   # GET /api/users/1.json
   def show
-    render json: @user
+    render json: @account_user
   end
   
   # GET /api/users/roles

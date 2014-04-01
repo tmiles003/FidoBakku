@@ -27,6 +27,7 @@ FidoBakku::Application.routes.draw do
     
     resources :users, except: [:new] do 
       collection do 
+        get 'current'
         get 'list'
         get 'roles'
       end
