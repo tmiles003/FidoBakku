@@ -34,7 +34,11 @@ FidoBakku::Application.routes.draw do
     
     resources :teams, except: [:show, :new, :edit]
     
-    resources :goals, except: [:new, :edit]
+    resources :goals, except: [:new, :edit] do
+      collection do
+        get 'team'
+      end
+    end
     
     resources :topics, except: [:index, :show, :new, :edit] do 
       resources :benchmarks, except: [:show, :new, :edit], shallow: true do 

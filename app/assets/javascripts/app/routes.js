@@ -39,7 +39,7 @@ fiApp.config(['$routeProvider', '$locationProvider',
     controller: 'GoalsCtrl', 
     resolve: { 
       goals: function(GoalsSrv) { 
-        return GoalsSrv.query()['$promise']; 
+        return GoalsSrv.query({ limit: 3 })['$promise']; 
       }
     }
   });

@@ -8,7 +8,7 @@ class Api::GoalsController < Api::ApiController
   # GET /api/goals
   # GET /api/goals.json
   def index
-    render json: ::Goal.for_user(@user, params[:user_id])
+    render json: ::Goal.for_user(@user, params[:user_id]).with_limit(params[:limit])
   end
   
   # GET /api/goals/1
@@ -17,11 +17,17 @@ class Api::GoalsController < Api::ApiController
     render json: @goal
   end
   
+  # GET /api/goals/team
+  # GET /api/goals/team.json
+  def team
+    render json: []
+  end
+  
   # POST /api/goals
   # POST /api/goals.json
   def create
     @goal = ::Goal.new(goal_params) # :: forces root namespace
-    @goal.user = @user
+    # @goal.user = @user
 
     respond_to do |format|
       if @goal.save
@@ -65,6 +71,6 @@ class Api::GoalsController < Api::ApiController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def goal_params
-      params.require(:goal).permit(:title, :content, :due_date, :is_private, :is_complete)
+      params.require(:goal).permit(:user_id, :title, :content, :due_date, :is_private, :is_complete)
     end
 end

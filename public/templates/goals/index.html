@@ -1,10 +1,28 @@
 <!-- h1>Listing goals</h1 -->
 
-<div class="row" ng-repeat="row in goals | partition:3">
-  <div class="col-md-4" ng-repeat="goal in row">
+<h1>My goals</h1>
+
+<div class="row">
+  <div class="col-md-4" ng-repeat="goal in goals">
     <div class="panel panel-default">
-      <div class="panel-heading">Goal</div>
+      <div class="panel-heading">
+        <i class="fa fa-crosshair"></i>
+      </div>
       <a href="{{ goal.goal_path }}">{{ goal.title }}</a>
     </div>
   </div>
 </div>
+
+<h1>Team goals</h1>
+
+ <div class="row" ng-repeat="row in teamGoals | partition:3">
+  <div class="col-md-4" ng-repeat="goal in row">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-crosshair"></i>
+      </div>
+      <a href="{{ goal.goal_path }}">{{ goal.title }}</a>
+    </div>
+  </div>
+ </div>
+ 

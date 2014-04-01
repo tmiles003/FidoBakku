@@ -5,6 +5,7 @@
 fiApp.factory('GoalsSrv', ['$resource', function($resource) {
   
   return $resource('/api/goals/:id', { id: '@id' }, {
-    'update': { method: 'PUT' }
+    'update': { method: 'PUT' },
+    'team': { url: '/api/goals/team' }
   });
 }]);

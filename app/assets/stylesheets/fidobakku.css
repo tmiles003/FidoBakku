@@ -16,6 +16,8 @@ html {
 /* more content below nav + footer space */
 body {
   background-color: #fff;
+  /* font-size: 16px;
+  font-weight: lighter; */
   margin: 65px 0 45px 0;
 }
 
@@ -84,6 +86,10 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
   background-color: #415b76;
   /* font-style: italic; */
   padding: 5px 15px;
+}
+
+.panel-default > .panel-heading i.fa {
+  color: #fff;
 }
 
 .panel-default .fi-panel-inner {
