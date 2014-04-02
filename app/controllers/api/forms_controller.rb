@@ -8,14 +8,14 @@ class Api::FormsController < Api::ApiController
   # GET /api/forms
   # GET /api/forms.json
   def index
-    @forms = @account.forms
+    render json: @account.forms
   end
   
   # GET /api/forms/list
   # GET /api/forms/list.json
   def list
     @account = @current_user.account
-    @forms = @account.forms
+    render json: @account.forms
   end
 
   # POST /api/forms
@@ -77,6 +77,6 @@ class Api::FormsController < Api::ApiController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def form_params
-      params.require(:form).permit(:name)
+      params.require(:form).permit(:name, :component, :parent)
     end
 end

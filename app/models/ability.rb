@@ -15,7 +15,7 @@ class Ability
       can :manage, :all
       #can :list, User
       #can [:index, :list], Form
-      #can :manage, Topic
+      #can :manage, Section
       #can :manage, TopicBenchmark
       #can [:index, :show, :statuses], Review
       #can :manage, UserReview

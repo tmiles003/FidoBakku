@@ -22,8 +22,8 @@ FidoBakku::Application.routes.draw do
   namespace :api, defaults: { format: :json } do
     
     get 'session' => 'session#index'
-    get 'dashboard/reviews' => 'dashboard#reviews'
-    get 'dashboard/feedbacks' => 'dashboard#feedbacks'
+    #get 'dashboard/reviews' => 'dashboard#reviews'
+    #get 'dashboard/feedbacks' => 'dashboard#feedbacks'
     
     resources :users, except: [:new] do 
       collection do 
@@ -41,7 +41,7 @@ FidoBakku::Application.routes.draw do
       end
     end
     
-    resources :topics, except: [:index, :show, :new, :edit] do 
+    resources :sections, except: [:index, :show, :new, :edit] do 
       resources :benchmarks, except: [:show, :new, :edit], shallow: true do 
         member do 
           put 'up'
@@ -56,7 +56,7 @@ FidoBakku::Application.routes.draw do
       member do
         put 'user/:user_id' => 'forms#user'
       end
-      resources :topics, only: [:index], shallow: true do 
+      resources :sections, only: [:index], shallow: true do 
         member do 
           put 'up'
           put 'down'

@@ -2,89 +2,89 @@
 
 /* Controllers */
 
-fiApp.controller('TopicsCtrl', ['$scope', '$http', '$routeParams', '$filter', 
-                  'TopicsSrv', 'topics', 'NotifSrv', 
+fiApp.controller('SectionsCtrl', ['$scope', '$http', '$routeParams', '$filter', 
+                  'SectionsSrv', 'sections', 'NotifSrv', 
                   function($scope, $http, $routeParams, $filter, 
-                           TopicsSrv, topics, NotifSrv) {
+                           SectionsSrv, sections, NotifSrv) {
   
   $scope.formId = $routeParams.id;
-  $scope.topics = topics;
-  $scope.editableTopic = {};
+  $scope.sections = sections;
+  $scope.eSection = {};
   $scope.submitted = false;
   $http.get('/api/users/list').success(function(list) { 
     $scope.users = list; 
   });
   
-  var createTopic = function(newTopic) {
-    TopicsSrv.save({ form_id: $scope.formId, topic: newTopic }, function(val, resp) {
-      $scope.topics.push(val);
-      $scope.editableTopic = {};
-      $scope.editableTopicForm.$setPristine();
+  var createSection = function(newSection) {
+    SectionsSrv.save({ form_id: $scope.formId, section: newSection }, function(val, resp) {
+      $scope.sections.push(val);
+      $scope.eSection = {};
+      $scope.eSectionForm.$setPristine();
       NotifSrv.success();
     });
   }
   
-  var updateTopic = function(topic) {
-    topic.$update({ form_id: $scope.formId }, function(val, resp) {
-      var topic = _.find($scope.topics, function(t) {
+  var updateSection = function(section) {
+    section.$update({ form_id: $scope.formId }, function(val, resp) {
+      var section = _.find($scope.sections, function(t) {
         return t.id === val.id;
       });
-      _.extend(topic, val); // update object with returned values
-      $scope.editableTopic = {};
-      $scope.editableTopicForm.$setPristine();
+      _.extend(section, val); // update object with returned values
+      $scope.eSection = {};
+      $scope.eSectionForm.$setPristine();
       NotifSrv.success();
     });
   }
   
-  $scope.saveTopic = function(topic, isValid) {
+  $scope.saveSection = function(section, isValid) {
     $scope.submitted = true;
     if (isValid) {
       $scope.submitted = false;
-      if (topic.id) {
-        updateTopic(topic);
+      if (section.id) {
+        updateSection(section);
       }
       else {
-        createTopic(topic);
+        createSection(section);
       }
     }
   }
   
-  $scope.moveTopicUp = function(topic) {
-    TopicsSrv.up({ id: topic.id }, function(val, resp) { // success
+  $scope.moveSectionUp = function(section) {
+    SectionsSrv.up({ id: section.id }, function(val, resp) { // success
       _.each(val, function(el) {
-        var topic = _.find($scope.topics, function(t) {
+        var section = _.find($scope.sections, function(t) {
           return t.id === el.id;
         });
         // _.extend     
-        topic.ordr = el.ordr; // update object in array
+        section.ordr = el.ordr; // update object in array
       });
-      // reorder topics
-      $scope.topics = $filter('orderBy')($scope.topics, '+ordr');
+      // reorder sections
+      $scope.sections = $filter('orderBy')($scope.sections, '+ordr');
       NotifSrv.success();
     });
   }
   
-  $scope.moveTopicDown = function(topic) {
-    TopicsSrv.down({ id: topic.id }, function(val, resp) { // success
+  $scope.moveSectionDown = function(section) {
+    SectionsSrv.down({ id: section.id }, function(val, resp) { // success
       _.each(val, function(el) {
-        var topic = _.find($scope.topics, function(t) {
+        var section = _.find($scope.sections, function(t) {
           return t.id === el.id;
         });
-        topic.ordr = el.ordr; // update object in array
+        section.ordr = el.ordr; // update object in array
       });
-      // reorder topics
-      $scope.topics = $filter('orderBy')($scope.topics, '+ordr');
+      // reorder sections
+      $scope.sections = $filter('orderBy')($scope.sections, '+ordr');
       NotifSrv.success();
     });
   }
   
-  $scope.editTopic = function(topic) {
-    $scope.editableTopic = angular.copy(topic);
+  $scope.editSection = function(section) {
+    $scope.eSection = angular.copy(section);
   }
   
-  $scope.deleteTopic = function(topic) {
-    topic.$delete({ form_id: $scope.formId }).then(function() {
-      $scope.topics = _.without($scope.topics, topic);
+  $scope.deleteSection = function(section) {
+    section.$delete({ form_id: $scope.formId }).then(function() {
+      $scope.sections = _.without($scope.sections, section);
       NotifSrv.success();
     });
   }
@@ -94,13 +94,13 @@ fiApp.controller('TopicsCtrl', ['$scope', '$http', '$routeParams', '$filter',
 fiApp.controller('BenchmarksCtrl', ['$scope', 'BenchmarksSrv', 'NotifSrv', '$filter', 
                   function($scope, BenchmarksSrv, NotifSrv, $filter) {
   
-  $scope.topicId = $scope.$parent.topic.id;
-  $scope.benchmarks = BenchmarksSrv.query({ topic_id: $scope.topicId });
+  $scope.sectionId = $scope.$parent.section.id;
+  $scope.benchmarks = BenchmarksSrv.query({ section_id: $scope.sectionId });
   $scope.editableBenchmark = {};
   $scope.submitted = false;
   
   var createBenchmark = function(newBenchmark) {
-    BenchmarksSrv.save({ topic_id: $scope.topicId, benchmark: newBenchmark }, function(val, resp) {
+    BenchmarksSrv.save({ section_id: $scope.sectionId, benchmark: newBenchmark }, function(val, resp) {
       $scope.benchmarks.push(val);
       $scope.editableBenchmark = {};
       $scope.editableBenchmarkForm.$setPristine();

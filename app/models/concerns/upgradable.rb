@@ -33,9 +33,9 @@ module Upgradable
     check_plan_limit 'forms', _account.forms.count
   end
   
-  def check_plan_topics
-    num_topics = Account.joins(forms: :topics).where(id: _account.id).count
-    check_plan_limit 'topics', num_topics
+  def check_plan_sections
+    num_sections = Account.joins(forms: :sections).where(id: _account.id).count
+    check_plan_limit 'sections', num_sections
   end
   
   def check_plan_benchmarks

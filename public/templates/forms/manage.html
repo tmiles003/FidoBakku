@@ -2,48 +2,54 @@
 
 <div class="row">
   <div class="col-md-9">
-    <!-- topics first -->
-    <div class="panel panel-default" ng-repeat="topic in topics | orderBy: '+ordr'">
-      <div class="panel-heading">{{ topic.name }}
+    <!-- sections first -->
+    <div class="panel panel-default" ng-repeat="section in sections | orderBy: '+ordr'">
+      <div class="panel-heading">{{ section.name }}
         <span class="pull-right">
-          <button class="btn btn-default fi-btn-slim" ng-click="moveTopicUp(topic)">
+          <button class="btn btn-default fi-btn-slim" ng-click="moveSectionUp(section)">
             <i class="fa fa-arrow-up fa-lg"></i>
           </button>
-          <button class="btn btn-default fi-btn-slim" ng-click="moveTopicDown(topic)">
+          <button class="btn btn-default fi-btn-slim" ng-click="moveSectionDown(section)">
             <i class="fa fa-arrow-down fa-lg"></i>
           </button>
-          <button class="btn btn-default fi-btn-slim" ng-click="editTopic(topic)">
+          <button class="btn btn-default fi-btn-slim" ng-click="editSection(section)">
             <i class="fa fa-edit fa-lg"></i>
           </button>
-          <button class="btn btn-default fi-btn-slim" ng-click="deleteTopic(topic)">
+          <button class="btn btn-default fi-btn-slim" ng-click="deleteSection(section)">
             <i class="fa fa-trash-o fa-lg"></i>
           </button>
         </span>
       </div>
-      <!-- topic benchmarks -->
-      <div ng-include="'/templates/forms/manage_benchmarks.html'">
-      </div>
+      <!-- section benchmarks -->
+      <!-- div ng-include="'/templates/forms/manage_benchmarks.html'">
+      </div -->
     </div>
     
-    <!-- then the new/edit topic form -->
+    <!-- then the new/edit section form -->
     <div class="panel panel-default">
-      <div class="panel-heading">Topic form</div>
-      <form class="form-inline" accept-charset="utf-8" novalidate name="editableTopicForm">
-        <input type="hidden" ng-model="editableTopic.id">
+      <div class="panel-heading">Section form</div>
+      <!-- div class="panel-body">
+      </div -->
+      <div class="fi-panel-inner">
+      
+      <form accept-charset="utf-8" novalidate name="eSectionForm">
+        <input type="hidden" ng-model="eSection.id">
         
-        <label for="topic_name" class="control-label">Topic</label>
-        
-        <div class="" ng-class="{ 'has-error': editableTopicForm.topic_name.$invalid && submitted }">
-          <input name="topic_name" class="form-control" ng-model="editableTopic.name" type="text"
+        <div class="form-group" ng-class="{ 'has-error': eSectionForm.section_name.$invalid && submitted }">
+          <label for="section_name" class="control-label">Section</label>
+          <input name="section_name" class="form-control" ng-model="eSection.name" type="text"
             ng-required="true" ng-minlength="4" ng-maxlength="100">
-          <p ng-show="editableTopicForm.topic_name.$invalid && submitted" 
-            class="help-block">A topic is required</p>
+          <p ng-show="eSectionForm.section_name.$invalid && submitted" 
+            class="help-block">A section is required</p>
         </div>
-        <div class="">
-          <button ng-click="saveTopic(editableTopic, editableTopicForm.$valid)" type="button"
+        
+        <div class="actions">
+          <button ng-click="saveSection(eSection, eSectionForm.$valid)" type="button"
             class="btn btn-default">Save</button>
         </div>
       </form>
+      
+      </div>
     </div>
   </div>
   

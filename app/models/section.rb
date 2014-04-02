@@ -1,4 +1,4 @@
-class Topic < ActiveRecord::Base
+class Section < ActiveRecord::Base
   
   include Upgradable
   
@@ -6,7 +6,7 @@ class Topic < ActiveRecord::Base
   
   has_many :benchmarks, class_name: 'TopicBenchmark', foreign_key: :topic_id, dependent: :destroy
   
-  before_validation :check_plan_topics, on: :create
+  before_validation :check_plan_sections, on: :create
   
   validates :name, length: {
     in: 4..250,
@@ -15,8 +15,8 @@ class Topic < ActiveRecord::Base
   }
   
   def next_ordr
-    topic = ::Topic.where(form_id: self.form_id).order(ordr: :desc).take
-    self.ordr = topic.nil? ? 10 : topic.ordr + 10
+    section = ::Section.where(form_id: self.form_id).order(ordr: :desc).take
+    self.ordr = section.nil? ? 10 : section.ordr + 10
   end
   
 end

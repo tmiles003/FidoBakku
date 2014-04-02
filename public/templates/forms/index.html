@@ -11,8 +11,11 @@
     <table class="table table-hover">
       <tr ng-repeat="form in forms | orderBy: '+name'">
         <td>
-          <a href="{{ form.manage_path }}">{{ form.name }}</a>
+          <a href="{{ form.form_path }}">{{ form.name }}</a>
         </td>
+        <!-- td>
+          <i class="fa fa-puzzle-piece" ng-if="form.component"></i>
+        </td -->
         <td class="text-right">
           <button class="btn btn-default fi-btn-slim" ng-click="editForm(form)">
             <i class="fa fa-edit fa-lg"></i>
@@ -35,21 +38,28 @@
     </div -->
     <div class="fi-panel-inner">
 
-    <form accept-charset="utf-8" novalidate name="editableFormForm">
-      <input type="hidden" ng-model="editableForm.id">
+    <form accept-charset="utf-8" novalidate name="eFormForm">
+      <input type="hidden" ng-model="eForm.id">
       
-      <div class="form-group" ng-class="{ 'has-error': editableFormForm.form_name.$invalid 
-          && !editableFormForm.form_name.$pristine && submitted }">
+      <div class="form-group" ng-class="{ 'has-error': eFormForm.form_name.$invalid 
+          && !eFormForm.form_name.$pristine && submitted }">
         <label for="form_name">Form name</label>
-        <input name="form_name" class="form-control" ng-model="editableForm.name" type="text" 
+        <input name="form_name" class="form-control" ng-model="eForm.name" type="text" 
           ng-required="true" ng-minlength="2" ng-maxlength="100">
-        <p ng-show="editableFormForm.form_name.$invalid && !editableFormForm.form_name.$pristine && submitted" 
+        <p ng-show="eFormForm.form_name.$invalid && !eFormForm.form_name.$pristine && submitted" 
           class="help-block">A name is required</p>
       </div>
 
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="eForm.component"> Component
+        </label>
+      </div>
+
       <div class="actions">
-        <input ng-click="saveForm(editableForm, editableFormForm.$valid)" type="submit" value="Save"
+        <input ng-click="saveForm(eForm, eFormForm.$valid)" type="submit" value="Save"
           class="btn btn-default btn-sm">
+        <button ng-click="clearForm()" class="btn btn-default btn-sm"><i class="fa fa-undo"></i></button>
       </div>
       
     </form>

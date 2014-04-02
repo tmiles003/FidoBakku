@@ -7,13 +7,13 @@ defaults: &defaults
       basic:
         users: 5
         forms: 1
-        topics: 3
+        sections: 3
         benchmarks: 15
         reviews: 1
       premium:
         users: 500
         forms: 1000
-        topics: 3000
+        sections: 3000
         benchmarks: 15000
         reviews: 1000
 

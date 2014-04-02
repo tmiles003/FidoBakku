@@ -69,10 +69,10 @@ fiApp.config(['$routeProvider', '$locationProvider',
   
   $routeProvider.when('/form/:id/:slug', { 
     templateUrl: '/templates/forms/manage.html', 
-    controller: 'TopicsCtrl',
+    controller: 'SectionsCtrl',
     resolve: {
-      topics: function(TopicsSrv, $route) { 
-        return TopicsSrv.query({ form_id: $route.current.params.id });
+      sections: function(SectionsSrv, $route) { 
+        return SectionsSrv.query({ form_id: $route.current.params.id });
       }
     }
   });

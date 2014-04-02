@@ -10,8 +10,8 @@ fiApp.controller('FormsCtrl', ['$scope', 'FormsSrv', 'NotifSrv', 'forms',
   var createForm = function(newForm) {
     FormsSrv.save(newForm, function(val, resp) {
       $scope.forms.push(val);
-      $scope.editableForm = {};
-      $scope.editableFormForm.$setPristine();
+      $scope.eForm = {};
+      $scope.eFormForm.$setPristine();
       NotifSrv.success();
     });
   }
@@ -22,8 +22,8 @@ fiApp.controller('FormsCtrl', ['$scope', 'FormsSrv', 'NotifSrv', 'forms',
         return f.id === val.id;
       });
       _.extend(form, val); // update object with returned values
-      $scope.editableForm = {};
-      $scope.editableFormForm.$setPristine();
+      $scope.eForm = {};
+      $scope.eFormForm.$setPristine();
       NotifSrv.success();
     });
   }
@@ -41,8 +41,12 @@ fiApp.controller('FormsCtrl', ['$scope', 'FormsSrv', 'NotifSrv', 'forms',
     }
   }
   
+  $scope.clearForm = function() {
+    $scope.eForm = {};
+  }
+  
   $scope.editForm = function(form) {
-    $scope.editableForm = angular.copy(form);
+    $scope.eForm = angular.copy(form);
   }
   
   $scope.deleteForm = function(form) {
