@@ -15,6 +15,9 @@
           <i class="fa fa-briefcase" ng-switch-when="manager"></i>
         </td>
         <td>
+          <!-- img ng-src="//secure.gravatar.com/avatar/{{ user.email_hash }}?s=25&d=identicon" alt="" -->
+        </td>
+        <td>
           <a href="{{ user.user_path }}">{{ user.name }}</a>
         </td>
         <td>{{ user.email }}</td>
@@ -48,6 +51,9 @@
         <td ng-switch on="user.role">
           <i class="fa fa-font" ng-switch-when="admin"></i>
           <i class="fa fa-briefcase" ng-switch-when="manager"></i>
+        </td>
+        <td>
+          <!-- img ng-src="//secure.gravatar.com/avatar/{{ user.email_hash }}?s=25&d=identicon" alt="" -->
         </td>
         <td>
           <a href="{{ user.user_path }}">{{ user.name }}</a>

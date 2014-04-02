@@ -21,11 +21,11 @@
     </li>
   <% end %>
   </ul>
-  <ul class="nav navbar-nav navbar-right">
-    <!-- li style="padding-top:5px;">
-      <img src="https://s.gravatar.com/avatar/{md5(email)}?s=40" alt="">
-    </li -->
-    <li class="dropdown" ng-controller="FooterCtrl">
+  <ul class="nav navbar-nav navbar-right" ng-controller="FooterCtrl">
+    <li style="padding-top:5px;">
+      <img ng-src="//secure.gravatar.com/avatar/{{ user.email_hash }}?s=40&d=identicon" alt="">
+    </li>
+    <li class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown">{{ user.name }} <b class="caret"></b></a>
       <ul class="dropdown-menu">
       <% if can? :show, Account # admins only %>

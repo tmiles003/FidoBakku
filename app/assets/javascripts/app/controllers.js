@@ -2,17 +2,17 @@
 
 /* Controllers */
 
-fiApp.controller('FooterCtrl', ['$scope', 'SessionSrv', 
-                  function($scope, SessionSrv) {
+fiApp.controller('FooterCtrl', ['$scope', 'UsersSrv', 'SessionSrv', 
+                  function($scope, UsersSrv, SessionSrv) {
   
   $scope.user = '';
-  $scope.account = '';
+  UsersSrv.current(function(user) {
+    $scope.user = user;
+  });
   
+  $scope.account = '';
   SessionSrv.getAccount().then(function(re) {
     $scope.account = re.account;
-  });
-  SessionSrv.getUser().then(function(re) {
-    $scope.user = re.user;
   });
   
   /* SessionSrv.getData(function(data) {
