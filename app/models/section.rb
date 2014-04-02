@@ -4,7 +4,7 @@ class Section < ActiveRecord::Base
   
   belongs_to :form
   
-  has_many :benchmarks, class_name: 'TopicBenchmark', foreign_key: :topic_id, dependent: :destroy
+  has_many :comps, foreign_key: :section_id, dependent: :destroy
   
   before_validation :check_plan_sections, on: :create
   

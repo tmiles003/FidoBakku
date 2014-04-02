@@ -52,8 +52,8 @@ fiApp.controller('SectionsCtrl', ['$scope', '$http', '$routeParams', '$filter',
   $scope.moveSectionUp = function(section) {
     SectionsSrv.up({ id: section.id }, function(val, resp) { // success
       _.each(val, function(el) {
-        var section = _.find($scope.sections, function(t) {
-          return t.id === el.id;
+        var section = _.find($scope.sections, function(s) {
+          return s.id === el.id;
         });
         // _.extend     
         section.ordr = el.ordr; // update object in array
@@ -67,8 +67,8 @@ fiApp.controller('SectionsCtrl', ['$scope', '$http', '$routeParams', '$filter',
   $scope.moveSectionDown = function(section) {
     SectionsSrv.down({ id: section.id }, function(val, resp) { // success
       _.each(val, function(el) {
-        var section = _.find($scope.sections, function(t) {
-          return t.id === el.id;
+        var section = _.find($scope.sections, function(s) {
+          return s.id === el.id;
         });
         section.ordr = el.ordr; // update object in array
       });
@@ -91,85 +91,85 @@ fiApp.controller('SectionsCtrl', ['$scope', '$http', '$routeParams', '$filter',
   
 }]);
 
-fiApp.controller('BenchmarksCtrl', ['$scope', 'BenchmarksSrv', 'NotifSrv', '$filter', 
-                  function($scope, BenchmarksSrv, NotifSrv, $filter) {
+fiApp.controller('CompsCtrl', ['$scope', 'CompsSrv', 'NotifSrv', '$filter', 
+                  function($scope, CompsSrv, NotifSrv, $filter) {
   
   $scope.sectionId = $scope.$parent.section.id;
-  $scope.benchmarks = BenchmarksSrv.query({ section_id: $scope.sectionId });
-  $scope.editableBenchmark = {};
+  $scope.comps = CompsSrv.query({ section_id: $scope.sectionId });
+  $scope.eComp = {};
   $scope.submitted = false;
   
-  var createBenchmark = function(newBenchmark) {
-    BenchmarksSrv.save({ section_id: $scope.sectionId, benchmark: newBenchmark }, function(val, resp) {
-      $scope.benchmarks.push(val);
-      $scope.editableBenchmark = {};
-      $scope.editableBenchmarkForm.$setPristine();
+  var createComp = function(newComp) {
+    CompsSrv.save({ section_id: $scope.sectionId, comp: newComp }, function(val, resp) {
+      $scope.comps.push(val);
+      $scope.eComp = {};
+      $scope.eCompForm.$setPristine();
       NotifSrv.success();
     });
   }
   
-  var updateBenchmark = function(benchmark) {
-    benchmark.$update(function(val, resp) {
-      var benchmark = _.find($scope.benchmarks, function(b) {
+  var updateComp = function(comp) {
+    comp.$update(function(val, resp) {
+      var comp = _.find($scope.comps, function(b) {
         return b.id === val.id;
       });
-      _.extend(benchmark, val); // update object with returned values
-      $scope.editableBenchmark = {};
-      $scope.editableBenchmarkForm.$setPristine();
+      _.extend(comp, val); // update object with returned values
+      $scope.eComp = {};
+      $scope.eCompForm.$setPristine();
       NotifSrv.success();
     });
   }
   
-  $scope.saveBenchmark = function(benchmark, isValid) {
+  $scope.saveComp = function(comp, isValid) {
     $scope.submitted = true;
     if (isValid) {
       $scope.submitted = false;
-      if (benchmark.id) {
-        updateBenchmark(benchmark);
+      if (comp.id) {
+        updateComp(comp);
       }
       else {
-        createBenchmark(benchmark);
+        createComp(comp);
       }
     }
   }
   
-  $scope.moveBenchmarkUp = function(benchmark) {
-    BenchmarksSrv.up({ id: benchmark.id },
+  $scope.moveCompUp = function(comp) {
+    CompsSrv.up({ id: comp.id },
       function(val, resp) { // success
         _.each(val, function(el) {
-          var benchmark = _.find($scope.benchmarks, function(b) {
-            return b.id === el.id;
+          var comp = _.find($scope.comps, function(c) {
+            return c.id === el.id;
           });
-          benchmark.ordr = el.ordr; // update object in array
+          comp.ordr = el.ordr; // update object in array
         });
-        // reorder benchmarks
-        $scope.benchmarks = $filter('orderBy')($scope.benchmarks, '+ordr');
+        // reorder comps
+        $scope.comps = $filter('orderBy')($scope.comps, '+ordr');
         NotifSrv.success();
       });
   }
   
-  $scope.moveBenchmarkDown = function(benchmark) {
-    BenchmarksSrv.down({ id: benchmark.id },
+  $scope.moveCompDown = function(comp) {
+    CompsSrv.down({ id: comp.id },
       function(val, resp) { // success
         _.each(val, function(el) {
-          var benchmark = _.find($scope.benchmarks, function(b) {
-            return b.id === el.id;
+          var comp = _.find($scope.comps, function(c) {
+            return c.id === el.id;
           });
-          benchmark.ordr = el.ordr; // update object in array
+          comp.ordr = el.ordr; // update object in array
         });
-        // reorder benchmarks
-        $scope.benchmarks = $filter('orderBy')($scope.benchmarks, '+ordr');
+        // reorder comps
+        $scope.comps = $filter('orderBy')($scope.comps, '+ordr');
         NotifSrv.success();
       });
   }
   
-  $scope.editBenchmark = function(benchmark) {
-    $scope.editableBenchmark = angular.copy(benchmark);
+  $scope.editComp = function(comp) {
+    $scope.eComp = angular.copy(comp);
   }
   
-  $scope.deleteBenchmark = function(benchmark) {
-    benchmark.$delete().then(function() {
-      $scope.benchmarks = _.without($scope.benchmarks, benchmark);
+  $scope.deleteComp = function(comp) {
+    comp.$delete().then(function() {
+      $scope.comps = _.without($scope.comps, comp);
       NotifSrv.success();
     });
   }

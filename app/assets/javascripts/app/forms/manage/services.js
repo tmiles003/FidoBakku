@@ -13,15 +13,15 @@ fiApp.factory('SectionsSrv', ['$resource', function($resource) {
     });
 }]);
 
-fiApp.factory('BenchmarksSrv', ['$resource', function($resource) {
+fiApp.factory('CompsSrv', ['$resource', function($resource) {
   
-  return $resource('/api/benchmarks/:id', 
+  return $resource('/api/comps/:id', 
     { id: '@id' }, 
     { 'update': { method: 'PUT' }, 
-      'query': { url: '/api/sections/:section_id/benchmarks', params: { section_id: 'sectionId' }, isArray: true },
-      'save': { method: 'POST', url: '/api/sections/:section_id/benchmarks', params: { section_id: '@section_id' } },
-      'up': { method: 'PUT', url: '/api/benchmarks/:id/up', isArray: true },
-      'down': { method: 'PUT', url: '/api/benchmarks/:id/down', isArray: true }
+      'query': { url: '/api/sections/:section_id/comps', params: { section_id: 'sectionId' }, isArray: true },
+      'save': { method: 'POST', url: '/api/sections/:section_id/comps', params: { section_id: '@section_id' } },
+      'up': { method: 'PUT', url: '/api/comps/:id/up', isArray: true },
+      'down': { method: 'PUT', url: '/api/comps/:id/down', isArray: true }
     });
 }]);
 

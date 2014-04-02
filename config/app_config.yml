@@ -8,13 +8,13 @@ defaults: &defaults
         users: 5
         forms: 1
         sections: 3
-        benchmarks: 15
+        comps: 15
         reviews: 1
       premium:
         users: 500
         forms: 1000
         sections: 3000
-        benchmarks: 15000
+        comps: 15000
         reviews: 1000
 
 development:

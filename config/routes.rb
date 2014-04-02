@@ -42,7 +42,7 @@ FidoBakku::Application.routes.draw do
     end
     
     resources :sections, except: [:index, :show, :new, :edit] do 
-      resources :benchmarks, except: [:show, :new, :edit], shallow: true do 
+      resources :comps, except: [:show, :new, :edit], shallow: true do 
         member do 
           put 'up'
           put 'down'

@@ -7,10 +7,10 @@
       <div class="panel-heading">{{ section.name }}
         <span class="pull-right">
           <button class="btn btn-default fi-btn-slim" ng-click="moveSectionUp(section)">
-            <i class="fa fa-arrow-up fa-lg"></i>
+            <i class="fa fa-angle-up fa-lg"></i>
           </button>
           <button class="btn btn-default fi-btn-slim" ng-click="moveSectionDown(section)">
-            <i class="fa fa-arrow-down fa-lg"></i>
+            <i class="fa fa-angle-down fa-lg"></i>
           </button>
           <button class="btn btn-default fi-btn-slim" ng-click="editSection(section)">
             <i class="fa fa-edit fa-lg"></i>
@@ -21,8 +21,8 @@
         </span>
       </div>
       <!-- section benchmarks -->
-      <!-- div ng-include="'/templates/forms/manage_benchmarks.html'">
-      </div -->
+      <div ng-include="'/templates/forms/manage_comps.html'">
+      </div>
     </div>
     
     <!-- then the new/edit section form -->
@@ -45,7 +45,7 @@
         
         <div class="actions">
           <button ng-click="saveSection(eSection, eSectionForm.$valid)" type="button"
-            class="btn btn-default">Save</button>
+            class="btn btn-default btn-sm">Save</button>
         </div>
       </form>
       
