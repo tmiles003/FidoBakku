@@ -20,7 +20,7 @@ class Api::GoalsController < Api::ApiController
   # GET /api/goals/team
   # GET /api/goals/team.json
   def team
-    render json: []
+    render json: ::Goal.team_goals(@user)
   end
   
   # POST /api/goals
