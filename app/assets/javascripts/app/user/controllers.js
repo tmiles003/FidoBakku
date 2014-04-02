@@ -9,7 +9,7 @@ fiApp.controller('UserCtrl', ['$scope', '$routeParams', 'GoalsSrv', 'goals', 'No
   
   $scope.dueDate = function() {
     $('.input-group.date').datepicker({
-      format: 'dd/mm/yyyy',
+      format: 'd MM yyyy',
       startDate: '-1d',
       endDate: '+3y',
       startView: 2,

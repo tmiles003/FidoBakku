@@ -27,7 +27,6 @@ class Api::GoalsController < Api::ApiController
   # POST /api/goals.json
   def create
     @goal = ::Goal.new(goal_params) # :: forces root namespace
-    # @goal.user = @user
 
     respond_to do |format|
       if @goal.save

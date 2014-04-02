@@ -12,7 +12,16 @@
       <div class="panel-heading">
         <i class="fa fa-crosshairs"></i>
       </div>
-      <a href="{{ goal.goal_path }}">{{ goal.title }}</a>
+      <div class="row">
+        <div class="col-md-7 col-md-offset-1">
+          <a href="{{ goal.goal_path }}">{{ goal.title }}</a>
+        </div>
+        <div class="col-md-4 text-center">
+          {{ goal.due_date_parts.m }}<br>
+          {{ goal.due_date_parts.d }}<br>
+          {{ goal.due_date_parts.y }}
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -25,7 +34,16 @@
       <div class="panel-heading">
         <i class="fa fa-crosshairs"></i>
       </div>
-      <a href="{{ goal.goal_path }}">{{ goal.title }}</a>
+      <div class="row">
+        <div class="col-md-7 col-md-offset-1">
+          <a href="{{ goal.goal_path }}">{{ goal.title }}</a>
+        </div>
+        <div class="col-md-4 text-center">
+          {{ goal.due_date_parts.m }}<br>
+          {{ goal.due_date_parts.d }}<br>
+          {{ goal.due_date_parts.y }}
+        </div>
+      </div>
     </div>
   </div>
 </div>
