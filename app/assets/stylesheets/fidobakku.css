@@ -32,6 +32,10 @@ i.fa {
 .main-container {
 }
 
+.fi-btn-wide {
+  padding: 5px 20px;
+}
+
 .fi-btn-slim, .fi-btn-slim:hover {
   background-color: transparent;
   border-color: transparent;

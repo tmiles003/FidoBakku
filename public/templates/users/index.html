@@ -82,24 +82,29 @@
   </div>
   
   <div class="panel panel-default">
-    <div class="panel-heading">Add team</div>
+    <div class="panel-heading">
+      <span ng-hide="eTeam.id">Add team</span>
+      <span ng-show="eTeam.id">Update team</span>
+    </div>
     <!-- div class="panel-body">
     </div -->
     <div class="fi-panel-inner">
-      <form accept-charset="utf-8" novalidate name="editableTeamForm">
-        <input type="hidden" ng-model="editableTeam.id">
+      <form accept-charset="utf-8" novalidate name="eTeamForm">
+        <input type="hidden" ng-model="eTeam.id">
         
-        <div class="form-group" ng-class="{ 'has-error': editableTeamForm.team_name.$invalid && teamFormSubmitted }">
-          <label for="team_name" class="control-label">Team</label>
+        <div class="form-group" ng-class="{ 'has-error': eTeamForm.team_name.$invalid && teamFormSubmitted }">
+          <label for="team_name" class="sr-only">Team</label>
         
-          <input name="team_name" class="form-control" ng-model="editableTeam.name" type="text"
-            ng-required="true" ng-minlength="1" ng-maxlength="100">
-          <p ng-show="editableTeamForm.team_name.$invalid && teamFormSubmitted" 
+          <input name="team_name" class="form-control" ng-model="eTeam.name" type="text"
+            ng-required="true" ng-minlength="1" ng-maxlength="100" placeholder="Team name">
+          <p ng-show="eTeamForm.team_name.$invalid && teamFormSubmitted" 
             class="help-block">A name is required</p>
         </div>
         <div class="actions text-right">
-          <button ng-click="saveTeam(editableTeam, editableTeamForm.$valid)" type="button"
-            class="btn btn-default btn-success btn-sm text-right">Save</button>
+          <button ng-click="saveTeam(eTeam, eTeamForm.$valid)" type="button"
+            class="btn btn-default btn-success btn-sm text-right fi-btn-wide">Save</button>
+          <button ng-click="clearTeamForm()" class="btn btn-default btn-sm" title="Clear form">
+            <i class="fa fa-eraser fa-lg"></i></button>
         </div>
       </form>
     </div>
@@ -110,50 +115,56 @@
   <div class="col-md-3">
   
   <div class="panel panel-default">
-    <div class="panel-heading">Add user</div>
+    <div class="panel-heading">
+      <span ng-hide="eUser.id">Add user</span>
+      <span ng-show="eUser.id">Update user</span>
+    </div>
     <!-- div class="panel-body">
     </div -->
     <div class="fi-panel-inner">
 
-    <form accept-charset="utf-8" novalidate name="editableUserForm">
-      <input type="hidden" ng-model="editableUser.id">
+    <form accept-charset="utf-8" novalidate name="eUserForm">
+      <input type="hidden" ng-model="eUser.id">
       
-      <div class="form-group" ng-class="{ 'has-error': editableUserForm.user_name.$invalid 
+      <div class="form-group" ng-class="{ 'has-error': eUserForm.user_name.$invalid 
           && userFormSubmitted }">
-        <label for="user_name">Name</label>
-        <input name="user_name" class="form-control" ng-model="editableUser.name" type="text"
-          ng-required="true" ng-minlength="2" ng-maxlength="100">
-        <p ng-show="editableUserForm.user_name.$invalid && userFormSubmitted" 
+        <label for="user_name" class="sr-only">Name</label>
+        <input name="user_name" class="form-control" ng-model="eUser.name" type="text"
+          ng-required="true" ng-minlength="2" ng-maxlength="100" placeholder="Name">
+        <p ng-show="eUserForm.user_name.$invalid && userFormSubmitted" 
           class="help-block">A name is required</p>
       </div>
-      <div class="form-group" ng-class="{ 'has-error': editableUserForm.user_email.$invalid 
+      <div class="form-group" ng-class="{ 'has-error': eUserForm.user_email.$invalid 
           && userFormSubmitted }">
-        <label for="user_email">Email</label>
-        <input name="user_email" class="form-control" ng-model="editableUser.email" type="email"
-          ng-required="true">
-        <p ng-show="editableUserForm.user_email.$invalid && userFormSubmitted" 
+        <label for="user_email" class="sr-only">Email</label>
+        <input name="user_email" class="form-control" ng-model="eUser.email" type="email"
+          ng-required="true" placeholder="Email">
+        <p ng-show="eUserForm.user_email.$invalid && userFormSubmitted" 
           class="help-block">A valid email address is required</p>
       </div>
-      <div class="form-group" ng-class="{ 'has-error': editableUserForm.user_role.$invalid 
+      <div class="form-group" ng-class="{ 'has-error': eUserForm.user_role.$invalid 
           && userFormSubmitted }">
-        <label for="user_role">Access level</label>
-        <select name="user_role" ng-model="editableUser.role" class="form-control" 
+        <label for="user_role" class="sr-only">Access level</label>
+        <select name="user_role" ng-model="eUser.role" class="form-control" 
           ng-options="role.s as role.l for role in roles" ng-required="true">
+          <option value="">Access level</option>
         </select>
-        <p ng-show="editableUserForm.user_role.$invalid && userFormSubmitted" 
+        <p ng-show="eUserForm.user_role.$invalid && userFormSubmitted" 
           class="help-block">Access level must be set</p>
       </div>
       <div class="form-group">
-        <label for="user_team_id">Team</label>
-        <select name="user_team_id" ng-model="editableUser.team_id" class="form-control" 
+        <label for="user_team_id" class="sr-only">Team</label>
+        <select name="user_team_id" ng-model="eUser.team_id" class="form-control" 
           ng-options="team.id as team.name for team in teams">
-          <option value=""></option>
+          <option value="">Team</option>
         </select>
       </div>
 
       <div class="actions text-right">
-        <input ng-click="saveUser(editableUser, editableUserForm.$valid)" type="submit" value="Save"
-          class="btn btn-default btn-success btn-sm">
+        <input ng-click="saveUser(eUser, eUserForm.$valid)" type="submit" value="Save"
+          class="btn btn-default btn-success btn-sm fi-btn-wide">
+        <button ng-click="clearUserForm()" class="btn btn-default btn-sm" title="Clear form">
+          <i class="fa fa-eraser fa-lg"></i></button>
       </div>
       
     </form>

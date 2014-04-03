@@ -15,8 +15,8 @@ fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'users', 'TeamsSrv', 'teams
   var createUser = function(newUser) {
     UsersSrv.save(newUser, function(val, resp) {
       $scope.users.push(val);
-      $scope.editableUser = {};
-      $scope.editableUserForm.$setPristine();
+      $scope.eUser = {};
+      $scope.eUserForm.$setPristine();
       NotifSrv.success();
     });
   }
@@ -27,8 +27,8 @@ fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'users', 'TeamsSrv', 'teams
         return u.id === val.id;
       });
       _.extend(user, val); // update object with returned values
-      $scope.editableUser = {};
-      $scope.editableUserForm.$setPristine();
+      $scope.eUser = {};
+      $scope.eUserForm.$setPristine();
       NotifSrv.success();
     });
   }
@@ -47,7 +47,11 @@ fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'users', 'TeamsSrv', 'teams
   }
   
   $scope.editUser = function(user) {
-    $scope.editableUser = angular.copy(user);
+    $scope.eUser = angular.copy(user);
+  }
+  
+  $scope.clearUserForm = function() {
+    $scope.eUser = {};
   }
   
   $scope.deleteUser = function(user) {
@@ -62,8 +66,8 @@ fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'users', 'TeamsSrv', 'teams
   var createTeam = function(newTeam) {
     TeamsSrv.save(newTeam, function(val, resp) {
       $scope.teams.push(val);
-      $scope.editableTeam = {};
-      $scope.editableTeamForm.$setPristine();
+      $scope.eTeam = {};
+      $scope.eTeamForm.$setPristine();
       NotifSrv.success();
     });
   }
@@ -74,8 +78,8 @@ fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'users', 'TeamsSrv', 'teams
         return t.id === val.id;
       });
       _.extend(team, val); // update object with returned values
-      $scope.editableTeam = {};
-      $scope.editableTeamForm.$setPristine();
+      $scope.eTeam = {};
+      $scope.eTeamForm.$setPristine();
       NotifSrv.success();
     });
   }
@@ -94,7 +98,11 @@ fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'users', 'TeamsSrv', 'teams
   }
   
   $scope.editTeam = function(team) {
-    $scope.editableTeam = angular.copy(team);
+    $scope.eTeam = angular.copy(team);
+  }
+  
+  $scope.clearTeamForm = function() {
+    $scope.eTeam = {};
   }
   
   $scope.deleteTeam = function(team) {
