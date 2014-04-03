@@ -1,7 +1,8 @@
 /* fidobakku.css */
 
-/* #3e7965/#9cae59 - notification green */
-/* #76531e - page links */
+/* #48cfad, #37bc9b - green */
+/* #fc6e51, #e9573f - page links */
+/* #c43d4a - red */
 
 /* remove browser focus style(s) */
 *:focus {
@@ -16,13 +17,7 @@ html {
 /* more content below nav + footer space */
 body {
   background-color: #fff;
-  /* font-size: 16px;
-  font-weight: lighter; */
-  margin: 65px 0 45px 0;
-}
-
-label {
-  font-weight: normal;
+  margin: 50px 0 45px 0;
 }
 
 /* a bit of breathing space between the icon and text */
@@ -34,71 +29,7 @@ i.fa {
   color: #415b76 !important;
 } */
 
-.navbar-default {
-  background-color: #415b76;
-}
-
-.navbar-default .navbar-nav>li>a {
-  color: #fff;
-}
-.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus, 
-  .navbar-default .navbar-nav>li>a.active {
-  background-color: #34495e;
-  color: #fff;
-}
-
-.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
-  background-color: #34495e;
-}
-.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
-  color: #fff;
-}
-/* open on hover for computer users */
-ul.nav li.dropdown:hover > ul.dropdown-menu {
-  display: block;    
-}
-.dropdown-menu {
-  background-color: #415b76;
-  border: none;
-  padding: 0;
-}
-.dropdown-menu>li>a {
-  color: #fff;
-  padding-bottom: 15px;
-  padding-top: 15px;
-}
-.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
-  background-color: #34495e;
-  color: #fff;
-}
-
 .main-container {
-  padding-bottom: 20px;
-  padding-top: 20px;
-}
-
-.panel-default {
-  border-color: #415b76;
-}
-
-.panel-default > .panel-heading {
-  color: #fff;
-  background-color: #415b76;
-  /* font-style: italic; */
-  padding: 5px 15px;
-}
-
-.panel-default > .panel-heading i.fa {
-  color: #fff;
-}
-
-.panel-default .fi-panel-inner {
-  padding: 8px;
-}
-.panel-default .fi-panel-inner .fi-btn-short {
-  border: none;
-  padding: 2px 8px;
-  text-align: left;
 }
 
 .fi-btn-slim, .fi-btn-slim:hover {
@@ -106,17 +37,6 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
   border-color: transparent;
   line-height: 1em;
   padding: 1px 2px 1px;
-}
-
-.form-control:focus {
-  border-color: #415b76;
-}
-
-/* #reviewForm .ng-valid-pattern {
-  border-color: green;
-} */
-#reviewForm .ng-invalid-pattern {
-  border-color: red;
 }
 
 .footer {
@@ -130,17 +50,4 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
 .footer p {
   color: #558baa;
   margin: 5px 0;
-}
-
-/* toaster overrides */
-#toast-container > div.ng-enter {
-  -webkit-transition: none !important;
-  -moz-transition: none !important;
-  -ms-transition: none !important;
-  -o-transition: none !important;
-  transition: none !important;
-} 
-
-.toast {
-  border: 1px solid #fff;
 }

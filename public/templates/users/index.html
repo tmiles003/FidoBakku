@@ -1,26 +1,36 @@
 <!-- h1>Listing staff</h1 -->
 
 <div class="row">
+  
+  <div class="col-md-9">
+    <h1>Staff</h1>
+  
+    <p>Users help text</p>
+  </div>
+
+</div>
+
+<div class="row">
 
   <div class="col-md-9">
   
   <div class="panel panel-default">
-    <div class="panel-heading">No team</div>
+    <!-- div class="panel-heading">No team</div -->
     <!-- div class="panel-body">
     </div -->
     <table class="table table-hover">
       <tr ng-repeat="user in users | orderBy: '+name' | filter: { team_id: null }">
-        <td ng-switch on="user.role">
-          <i class="fa fa-font" ng-switch-when="admin"></i>
-          <i class="fa fa-briefcase" ng-switch-when="manager"></i>
-        </td>
         <td>
-          <!-- img ng-src="//secure.gravatar.com/avatar/{{ user.email_hash }}?s=25&d=identicon" alt="" -->
+          <img ng-src="//secure.gravatar.com/avatar/{{ user.email_hash }}?s=25&d=mm" alt="">
         </td>
         <td>
           <a href="{{ user.user_path }}">{{ user.name }}</a>
         </td>
         <td>{{ user.email }}</td>
+        <td ng-switch on="user.role">
+          <i class="fa fa-font" ng-switch-when="admin"></i>
+          <i class="fa fa-briefcase" ng-switch-when="manager"></i>
+        </td>
         <td class="text-right">
           <button class="btn btn-default fi-btn-slim" ng-click="editUser(user)">
             <i class="fa fa-edit fa-lg"></i>
@@ -48,17 +58,17 @@
     </div -->
     <table class="table table-hover">
       <tr ng-repeat="user in users | orderBy: '+name' | filter: { team_id: team.id }">
-        <td ng-switch on="user.role">
-          <i class="fa fa-font" ng-switch-when="admin"></i>
-          <i class="fa fa-briefcase" ng-switch-when="manager"></i>
-        </td>
         <td>
-          <!-- img ng-src="//secure.gravatar.com/avatar/{{ user.email_hash }}?s=25&d=identicon" alt="" -->
+          <img ng-src="//secure.gravatar.com/avatar/{{ user.email_hash }}?s=25&d=mm" alt="">
         </td>
         <td>
           <a href="{{ user.user_path }}">{{ user.name }}</a>
         </td>
         <td>{{ user.email }}</td>
+        <td ng-switch on="user.role" class="text-right">
+          <i class="fa fa-font" ng-switch-when="admin"></i>
+          <i class="fa fa-briefcase" ng-switch-when="manager"></i>
+        </td>
         <td class="text-right">
           <button class="btn btn-default fi-btn-slim" ng-click="editUser(user)">
             <i class="fa fa-edit fa-lg"></i>
@@ -72,7 +82,7 @@
   </div>
   
   <div class="panel panel-default">
-    <div class="panel-heading">Team form</div>
+    <div class="panel-heading">Add team</div>
     <!-- div class="panel-body">
     </div -->
     <div class="fi-panel-inner">
@@ -87,9 +97,9 @@
           <p ng-show="editableTeamForm.team_name.$invalid && teamFormSubmitted" 
             class="help-block">A name is required</p>
         </div>
-        <div class="actions">
+        <div class="actions text-right">
           <button ng-click="saveTeam(editableTeam, editableTeamForm.$valid)" type="button"
-            class="btn btn-default btn-sm text-right">Save</button>
+            class="btn btn-default btn-success btn-sm text-right">Save</button>
         </div>
       </form>
     </div>
@@ -100,7 +110,7 @@
   <div class="col-md-3">
   
   <div class="panel panel-default">
-    <div class="panel-heading">Form</div>
+    <div class="panel-heading">Add user</div>
     <!-- div class="panel-body">
     </div -->
     <div class="fi-panel-inner">
@@ -141,9 +151,9 @@
         </select>
       </div>
 
-      <div class="actions">
+      <div class="actions text-right">
         <input ng-click="saveUser(editableUser, editableUserForm.$valid)" type="submit" value="Save"
-          class="btn btn-default btn-sm">
+          class="btn btn-default btn-success btn-sm">
       </div>
       
     </form>

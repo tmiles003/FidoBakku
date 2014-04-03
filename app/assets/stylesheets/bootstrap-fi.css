@@ -1,0 +1,118 @@
+/* override bootstrap styles */
+
+/*399*/
+h1, .h1, h2, .h2, h3, .h3 {
+  color: #415b76;
+  margin: 15px 0 15px 30px;
+}
+
+/*445*/
+h1, .h1 {
+  font-size: 30px;
+}
+
+/*1650*/
+label {
+  font-weight: normal;
+}
+
+/*1708*/
+.form-control:focus {
+  border-color: #415b76;
+}
+
+/*1895*/
+.has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, 
+  .has-error .radio-inline, .has-error .checkbox-inline {
+  color: #c43d4a;
+}
+.has-error .form-control {
+  border-color: #c43d4a;
+}
+
+/*2041*/
+.btn-default {
+  background-color: #fff;
+  border-color: #fff;
+}
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
+  background-color: #fff;
+  border-color: #fff;
+}
+.btn-success {
+  color: #fff;
+  background-color: #37bc9b;
+  border-color: #37bc9b;
+}
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
+  background-color: #48cfad;
+  border-color: #48cfad;
+}
+
+/*2328*/
+.btn-sm, .btn-group-sm > .btn {
+  padding: 5px 20px;
+}
+
+/*3010*/
+.dropdown-menu {
+  background-color: #415b76;
+  border: none;
+  padding: 0;
+}
+
+/* open on hover for computer users */
+ul.nav li.dropdown:hover > ul.dropdown-menu {
+  display: block;    
+}
+
+/*3040*/
+.dropdown-menu>li>a {
+  color: #fff;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+
+/*3049*/
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
+  background-color: #34495e;
+  color: #fff;
+}
+
+/*3941*/
+.navbar-default {
+  background-color: #415b76;
+}
+.navbar-default .navbar-nav>li>a {
+  color: #fff;
+}
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus, 
+  .navbar-default .navbar-nav>li>a.active {
+  background-color: #34495e;
+  color: #fff;
+}
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
+  background-color: #34495e;
+}
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
+  color: #fff;
+}
+
+/*4953*/
+.panel-default {
+}
+.panel-default > .panel-heading {
+  color: #fff;
+  background-color: #415b76;
+}
+.panel-default > .panel-heading i.fa {
+  color: #fff;
+}
+.panel-default .fi-panel-inner {
+  padding: 8px;
+}
+.panel-default .fi-panel-inner .fi-btn-short {
+  border: none;
+  padding: 2px 8px;
+  text-align: left;
+}

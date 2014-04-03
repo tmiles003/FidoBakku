@@ -1,0 +1,22 @@
+/* toaster overrides */
+
+#toast-container > div.ng-enter {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}
+
+.toast {
+  border: 1px solid #fff;
+}
+.toast-success {
+  background-color: #37bc9b;
+}
+.toast-error {
+  background-color: #c43d4a;
+}
+.toast-info {
+  background-color: #415b76; /* CHANGE ME */
+}
