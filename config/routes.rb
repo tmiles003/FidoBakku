@@ -49,7 +49,7 @@ FidoBakku::Application.routes.draw do
         end
       end
     end
-    resources :forms, except: [:show, :new] do
+    resources :forms, except: [:new] do
       collection do 
         get 'list'
       end

@@ -2,13 +2,19 @@ class Api::FormsController < Api::ApiController
   
   load_and_authorize_resource
   
-  before_action :set_form, only: [:update, :user, :destroy]
+  before_action :set_form, only: [:show, :update, :user, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_form
 
   # GET /api/forms
   # GET /api/forms.json
   def index
     render json: @account.forms
+  end
+  
+  # GET /api/forms/1
+  # GET /api/forms/1.json
+  def show
+    render json: @form
   end
   
   # GET /api/forms/list

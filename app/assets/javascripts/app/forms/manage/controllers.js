@@ -3,12 +3,14 @@
 /* Controllers */
 
 fiApp.controller('SectionsCtrl', ['$scope', '$http', '$routeParams', '$filter', 
-                  'SectionsSrv', 'sections', 'NotifSrv', 
+                  'form', 'SectionsSrv', 'sections', 'NotifSrv', 
                   function($scope, $http, $routeParams, $filter, 
-                           SectionsSrv, sections, NotifSrv) {
+                           form, SectionsSrv, sections, NotifSrv) {
   
-  $scope.formId = $routeParams.id;
+  // $scope.formId = $routeParams.id;
   $scope.sections = sections;
+  $scope.form = form;
+  
   $scope.eSection = {};
   $scope.submitted = false;
   $http.get('/api/users/list').success(function(list) { 
@@ -16,7 +18,7 @@ fiApp.controller('SectionsCtrl', ['$scope', '$http', '$routeParams', '$filter',
   });
   
   var createSection = function(newSection) {
-    SectionsSrv.save({ form_id: $scope.formId, section: newSection }, function(val, resp) {
+    SectionsSrv.save({ form_id: $scope.form.id, section: newSection }, function(val, resp) {
       $scope.sections.push(val);
       $scope.eSection = {};
       $scope.eSectionForm.$setPristine();
@@ -25,7 +27,7 @@ fiApp.controller('SectionsCtrl', ['$scope', '$http', '$routeParams', '$filter',
   }
   
   var updateSection = function(section) {
-    section.$update({ form_id: $scope.formId }, function(val, resp) {
+    section.$update({ form_id: $scope.form.id }, function(val, resp) {
       var section = _.find($scope.sections, function(t) {
         return t.id === val.id;
       });
@@ -82,8 +84,14 @@ fiApp.controller('SectionsCtrl', ['$scope', '$http', '$routeParams', '$filter',
     $scope.eSection = angular.copy(section);
   }
   
+  $scope.clearForm = function() {
+    $scope.submitted = false;
+    $scope.eSection = {};
+    $scope.eSectionForm.$setPristine();
+  }
+  
   $scope.deleteSection = function(section) {
-    section.$delete({ form_id: $scope.formId }).then(function() {
+    section.$delete({ form_id: $scope.form.id }).then(function() {
       $scope.sections = _.without($scope.sections, section);
       NotifSrv.success();
     });

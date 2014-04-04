@@ -51,7 +51,9 @@ fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'users', 'TeamsSrv', 'teams
   }
   
   $scope.clearUserForm = function() {
+    $scope.userFormSubmitted = false;
     $scope.eUser = {};
+    $scope.eUserForm.$setPristine();
   }
   
   $scope.deleteUser = function(user) {
@@ -102,7 +104,9 @@ fiApp.controller('UsersCtrl', ['$scope', 'UsersSrv', 'users', 'TeamsSrv', 'teams
   }
   
   $scope.clearTeamForm = function() {
+    $scope.teamFormSubmitted = false;
     $scope.eTeam = {};
+    $scope.eTeamForm.$setPristine();
   }
   
   $scope.deleteTeam = function(team) {

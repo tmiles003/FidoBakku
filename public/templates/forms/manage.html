@@ -1,4 +1,11 @@
 <!-- h1>Form#edit</h1 -->
+<div class="row">
+  <div class="col-md-9">
+    <h1>{{ form.name }}</h1>
+    
+    <p>Sections help text</p>
+  </div>
+</div>
 
 <div class="row">
   <div class="col-md-9">
@@ -27,7 +34,10 @@
     
     <!-- then the new/edit section form -->
     <div class="panel panel-default">
-      <div class="panel-heading">Section form</div>
+      <div class="panel-heading">
+        <span ng-hide="eSection.id">Add section</span>
+        <span ng-show="eSection.id">Update section</span>
+      </div>
       <!-- div class="panel-body">
       </div -->
       <div class="fi-panel-inner">
@@ -36,16 +46,19 @@
         <input type="hidden" ng-model="eSection.id">
         
         <div class="form-group" ng-class="{ 'has-error': eSectionForm.section_name.$invalid && submitted }">
-          <label for="section_name" class="control-label">Section</label>
+          <label for="section_name" class="sr-only">Section</label>
           <input name="section_name" class="form-control" ng-model="eSection.name" type="text"
-            ng-required="true" ng-minlength="4" ng-maxlength="100">
+            ng-required="true" ng-minlength="4" ng-maxlength="100" placeholder="Section">
           <p ng-show="eSectionForm.section_name.$invalid && submitted" 
             class="help-block">A section is required</p>
         </div>
         
-        <div class="actions">
+        <div class="actions text-right">
           <button ng-click="saveSection(eSection, eSectionForm.$valid)" type="button"
-            class="btn btn-default btn-sm">Save</button>
+            class="btn btn-default btn-success btn-sm fi-btn-wide">Save</button>
+          <button ng-click="clearForm()" class="btn btn-default btn-sm">
+            <i class="fa fa-eraser" tooltip="Clear form" 
+              tooltip-placement="bottom" tooltip-popup-delay="1500"></i></button>
         </div>
       </form>
       

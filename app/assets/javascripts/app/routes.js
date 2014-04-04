@@ -71,8 +71,11 @@ fiApp.config(['$routeProvider', '$locationProvider',
     templateUrl: '/templates/forms/manage.html', 
     controller: 'SectionsCtrl',
     resolve: {
+      form: function(FormsSrv, $route) {
+        return FormsSrv.get({ id: $route.current.params.id })['$promise'];
+      },
       sections: function(SectionsSrv, $route) { 
-        return SectionsSrv.query({ form_id: $route.current.params.id });
+        return SectionsSrv.query({ form_id: $route.current.params.id })['$promise'];
       }
     }
   });
