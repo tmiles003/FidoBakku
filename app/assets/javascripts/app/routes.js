@@ -81,12 +81,12 @@ fiApp.config(['$routeProvider', '$locationProvider',
   });
   
   // list all the reviews
-  $routeProvider.when('/reviews', { 
-    templateUrl: '/templates/reviews/index.html', 
-    controller: 'ReviewsCtrl', 
+  $routeProvider.when('/evaluations', { 
+    templateUrl: '/templates/evaluations/index.html', 
+    controller: 'EvaluationsCtrl', 
     resolve: {
-      reviews: function(ReviewsSrv) { 
-        return ReviewsSrv.query()['$promise']; 
+      evaluations: function(EvaluationsSrv) { 
+        return EvaluationsSrv.query()['$promise']; 
       }
     }
   });

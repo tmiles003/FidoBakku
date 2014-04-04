@@ -9,13 +9,13 @@ defaults: &defaults
         forms: 1
         sections: 3
         comps: 15
-        reviews: 1
+        evaluations: 1
       premium:
         users: 500
         forms: 1000
         sections: 3000
         comps: 15000
-        reviews: 1000
+        evaluations: 1000
 
 development:
   <<: *defaults

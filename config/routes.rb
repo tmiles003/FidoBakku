@@ -66,7 +66,7 @@ FidoBakku::Application.routes.draw do
       end
     end
     
-    resources :reviews, except: [:new, :edit] do 
+    resources :evaluations, except: [:new, :edit] do 
       collection do 
         get 'statuses'
       end

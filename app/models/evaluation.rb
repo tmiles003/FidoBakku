@@ -1,14 +1,14 @@
-class Review < ActiveRecord::Base
+class Evaluation < ActiveRecord::Base
   
   include Upgradable
   
-  STATUS = %w[setup review feedback closed archived]
+  STATUS = %w[setup open feedback closed archived]
 	
   scope :in_account, ->(account_id) { where('account_id = ?', account_id) }
   
-  has_many :user_reviews, foreign_key: :review_id
+  has_many :user_evaluations, foreign_key: :evaluation_id
   
-  before_validation :check_plan_reviews, on: :create
+  before_validation :check_plan_evaluations, on: :create
   
   validates :title, length: {
     in: 4..250,
