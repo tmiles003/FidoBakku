@@ -54,7 +54,9 @@ FidoBakku::Application.routes.draw do
         get 'list'
       end
       member do
-        put 'user/:user_id' => 'forms#user'
+        get 'users'
+        put 'users/:user_id/assign' => 'forms#assign_user'
+        put 'users/:user_id/remove' => 'forms#remove_user'
       end
       resources :sections, only: [:index], shallow: true do 
         member do 

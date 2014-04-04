@@ -27,9 +27,10 @@ fiApp.factory('CompsSrv', ['$resource', function($resource) {
 
 fiApp.factory('FormUserSrv', ['$resource', function($resource) {
   
-  return $resource('/api/forms/:id/user/:user_id', 
+  return $resource('/api/forms/:id/users/:user_id', 
     { id: '@id', user_id: '@userId' }, 
-    { 
-      'update': { method: 'PUT' }
+    { 'query': { isArray: false },
+      'assign': { method: 'PUT', url: '/api/forms/:id/users/:user_id/assign' },
+      'remove': { method: 'PUT', url: '/api/forms/:id/users/:user_id/remove' }
     });
 }]);

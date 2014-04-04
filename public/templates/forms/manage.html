@@ -73,14 +73,24 @@
       <!-- div class="panel-body">
       </div -->
       <div class="fi-panel-inner" ng-controller="FormUserCtrl">
-        <!-- filter with a drop-down. role/team -->
-        <select name="user_role" ng-model="role" class="form-control" 
-          ng-options="role.s as role.l for role in roles">
+        {{ selection }}
+        <select ng-model="team_id" class="form-control" 
+          ng-options="team.id as team.name for team in teams">
+          <option value="">Filter by team</option>
         </select>
-        <hr>
-        <button ng-repeat="user in users | orderBy: '+name' | filter: role" 
-          form-user user="user" ng-click="updateFormAssignment(user.id)"
-          type="button" class="btn btn-default btn-block fi-btn-short">{{ user.name }}</button>
+        <!-- div class="btn-group-vertical">
+          <button ng-repeat="user in users | orderBy: '+name' | filter: { team_id: team_id }" 
+            ng-model="selection.id" btn-checkbox
+            type="button" class="btn btn-default">{{ user.name }}</button>
+        </div -->
+        <div ng-class="{ 'checkbox': true, 'fi-form-user': true, 'fi-form-user-sel': formUsers[user.id] }" 
+          ng-repeat="user in users | orderBy: '+name' | filter: { team_id: team_id }">
+          <label>
+            <input type="checkbox" ng-model="formUsers[user.id]" ng-change="assign(user.id, formUsers[user.id])">
+            {{ user.name }}
+          </label>
+        </div>
+        
       </div>
     </div>
   </div>

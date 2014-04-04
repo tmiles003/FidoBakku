@@ -2,7 +2,7 @@ class Api::FormsController < Api::ApiController
   
   load_and_authorize_resource
   
-  before_action :set_form, only: [:show, :update, :user, :destroy]
+  before_action :set_form, only: [:show, :update, :assign_user, :remove_user, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_form
 
   # GET /api/forms
@@ -15,6 +15,16 @@ class Api::FormsController < Api::ApiController
   # GET /api/forms/1.json
   def show
     render json: @form
+  end
+  
+  # GET /api/forms/1/users
+  # GET /api/forms/1/users.json
+  def users
+    users = Hash.new
+    ::FormUser.where(form_id: @form.id).each { |form_user| 
+      users[form_user.user_id] = true
+    }
+    render json: users
   end
   
   # GET /api/forms/list
@@ -52,14 +62,25 @@ class Api::FormsController < Api::ApiController
     end
   end
   
-  # PATCH/PUT /api/forms/1/user/1
-  # PATCH/PUT /api/forms/1/user/1.json
-  def user
-    @form_user = ::User.find(params[:user_id])
-    #logger.info 'assigning form to user'
-    # clear any existing assignments
+  # PATCH/PUT /api/forms/1/users/1
+  # PATCH/PUT /api/forms/1/users/1.json
+  def assign_user
+    @form_user = ::FormUser.find_by(user_id: params[:user_id])
+    @form_user.destroy unless @form_user.nil?
     
-    # assign
+    @form_user = ::FormUser.new(form_id: params[:id], user_id: params[:user_id])
+    @form_user.save
+        
+    head :no_content
+  end
+
+  # PATCH/PUT /api/forms/1/users/1
+  # PATCH/PUT /api/forms/1/users/1.json
+  def remove_user
+    @form_user = ::FormUser.find_by(user_id: params[:user_id])
+    @form_user.destroy unless @form_user.nil?
+    
+    head :no_content
   end
 
   # DELETE /api/forms/1

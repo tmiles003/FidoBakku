@@ -1,5 +1,6 @@
 /* fidobakku.css */
 
+/* #415b76 - blue */
 /* #48cfad, #37bc9b - green */
 /* #fc6e51, #e9573f - page links */
 /* #c43d4a - red */
@@ -30,6 +31,14 @@ i.fa {
 } */
 
 .main-container {
+}
+
+.fi-form-user {
+  padding: 3px 25px 3px;
+}
+.fi-form-user-sel {
+  background-color: #415b76;
+  color: #fff;
 }
 
 .fi-btn-wide {

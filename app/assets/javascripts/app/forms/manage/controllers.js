@@ -7,15 +7,12 @@ fiApp.controller('SectionsCtrl', ['$scope', '$http', '$routeParams', '$filter',
                   function($scope, $http, $routeParams, $filter, 
                            form, SectionsSrv, sections, NotifSrv) {
   
-  // $scope.formId = $routeParams.id;
-  $scope.sections = sections;
   $scope.form = form;
+  $scope.sections = sections;
   
   $scope.eSection = {};
   $scope.submitted = false;
-  $http.get('/api/users/list').success(function(list) { 
-    $scope.users = list; 
-  });
+  
   
   var createSection = function(newSection) {
     SectionsSrv.save({ form_id: $scope.form.id, section: newSection }, function(val, resp) {
@@ -185,19 +182,38 @@ fiApp.controller('CompsCtrl', ['$scope', 'CompsSrv', 'NotifSrv', '$filter',
 }]);
 
 fiApp.controller('FormUserCtrl', ['$scope', '$http', '$routeParams',
-                  'UsersSrv', 'FormUserSrv',
-                  function($scope, $http, $routeParams, UsersSrv, FormUserSrv) {
+                  'TeamsSrv', 'UsersSrv', 'FormUserSrv',
+                  function($scope, $http, $routeParams, 
+                            TeamsSrv, UsersSrv, FormUserSrv) {
   
   $scope.formId = $routeParams.id;
-  $scope.roles = [];
-  UsersSrv.getRoles(function(roles) {
-    $scope.roles = roles;
+  
+  $scope.teams = [];
+  TeamsSrv.query(function(teams) {
+    $scope.teams = teams;
   });
   
-  $scope.updateFormAssignment = function(userId) {
-    FormUserSrv.update({ id: $scope.formId, userId: userId }, function(val, resp) {
-      console.log( val );
-    });
+  $scope.users = [];
+  UsersSrv.query(function(users) {
+    $scope.users = users;
+  });
+  
+  $scope.formUsers = {};
+  FormUserSrv.query({ id: $scope.formId }, function(formUsers) {
+    $scope.formUsers = formUsers;
+  });
+  
+  $scope.assign = function(id, add) {
+    if (true == add) {
+      FormUserSrv.assign({ id: $scope.formId, userId: id }, function(s) {
+        console.log( 'add form user' );
+      });
+    }
+    else {
+      FormUserSrv.remove({ id: $scope.formId, userId: id }, function(s) {
+        console.log( 'delete form user' );
+      });
+    }
   }
   
 }]);
