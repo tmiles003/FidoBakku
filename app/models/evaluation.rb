@@ -16,6 +16,10 @@ class Evaluation < ActiveRecord::Base
     too_long: 'Too long'
   }
   
+  def to_param
+    [id, self.slug].join('/')
+  end
+  
 	# pretty urls, no other use
   def slug
     self.title.downcase.gsub(/[^a-z0-9]/, '-').squeeze('-')

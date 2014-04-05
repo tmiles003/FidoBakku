@@ -19,9 +19,9 @@
     <!-- div class="panel-body">
     </div -->
     <table class="table table-hover">
-      <tr ng-repeat="evaluation in evaluations | orderBy: '-created'">
+      <tr ng-repeat="evaluation in evaluations | orderBy: '-created_at'">
         <td>
-          <a href="{{ evaluation.manage_path }}">{{ evaluation.title }}</a>
+          <a href="{{ evaluation.evaluation_path }}">{{ evaluation.title }}</a>
         </td>
         <td>
           {{ evaluation.status }}

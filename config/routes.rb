@@ -15,7 +15,7 @@ FidoBakku::Application.routes.draw do
   get 'user/:id' => 'welcome#application', as: :user_manage
   get 'goal/:id' => 'welcome#application', as: :goal_manage
   get 'form/:id' => 'welcome#application', as: :form_manage
-  #get 'reviews/:id/:slug' => 'welcome#application', as: :review_manage
+  get 'evaluations/:id' => 'welcome#application', as: :evaluation_manage
   #get 'review/:id/:name' => 'welcome#application', as: :user_review
   #get 'feedback/:id/:name' => 'welcome#application', as: :user_feedback
   
