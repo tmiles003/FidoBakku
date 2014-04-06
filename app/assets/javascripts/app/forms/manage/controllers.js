@@ -182,9 +182,9 @@ fiApp.controller('CompsCtrl', ['$scope', 'CompsSrv', 'NotifSrv', '$filter',
 }]);
 
 fiApp.controller('FormUserCtrl', ['$scope', '$http', '$routeParams',
-                  'TeamsSrv', 'UsersSrv', 'FormUserSrv',
+                  'TeamsSrv', 'UsersSrv', 'FormUserSrv', 'NotifSrv',
                   function($scope, $http, $routeParams, 
-                            TeamsSrv, UsersSrv, FormUserSrv) {
+                            TeamsSrv, UsersSrv, FormUserSrv, NotifSrv) {
   
   $scope.formId = $routeParams.id;
   
@@ -199,19 +199,19 @@ fiApp.controller('FormUserCtrl', ['$scope', '$http', '$routeParams',
   });
   
   $scope.formUsers = {};
-  FormUserSrv.query({ id: $scope.formId }, function(formUsers) {
+  FormUserSrv.users({ id: $scope.formId }, function(formUsers) {
     $scope.formUsers = formUsers;
   });
   
   $scope.assign = function(id, add) {
     if (true == add) {
       FormUserSrv.assign({ id: $scope.formId, userId: id }, function(s) {
-        console.log( 'add form user' );
+        NotifSrv.success();
       });
     }
     else {
       FormUserSrv.remove({ id: $scope.formId, userId: id }, function(s) {
-        console.log( 'delete form user' );
+        NotifSrv.success();
       });
     }
   }

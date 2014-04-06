@@ -62,4 +62,22 @@ fiApp.controller('EvaluationsCtrl', ['$scope', 'EvaluationsSrv', 'NotifSrv', 'ev
     });
   }
   
+  $scope.today = function() {
+    $scope.dt = new Date();
+  };
+  $scope.today();
+  $scope.showWeeks = false;
+  $scope.dateOptions = {
+    'year-format': "'yy'",
+    'starting-day': 1
+  };
+  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate'];
+  $scope.format = $scope.formats[0];
+  $scope.datePick = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+
+    $scope.opened = true;
+  }
+  
 }]);
