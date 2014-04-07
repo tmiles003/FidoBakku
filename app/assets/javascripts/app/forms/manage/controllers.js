@@ -25,8 +25,8 @@ fiApp.controller('SectionsCtrl', ['$scope', '$http', '$routeParams', '$filter',
   
   var updateSection = function(section) {
     section.$update({ form_id: $scope.form.id }, function(val, resp) {
-      var section = _.find($scope.sections, function(t) {
-        return t.id === val.id;
+      var section = _.find($scope.sections, function(s) {
+        return s.id === val.id;
       });
       _.extend(section, val); // update object with returned values
       $scope.eSection = {};
@@ -115,8 +115,8 @@ fiApp.controller('CompsCtrl', ['$scope', 'CompsSrv', 'NotifSrv', '$filter',
   
   var updateComp = function(comp) {
     comp.$update(function(val, resp) {
-      var comp = _.find($scope.comps, function(b) {
-        return b.id === val.id;
+      var comp = _.find($scope.comps, function(c) {
+        return c.id === val.id;
       });
       _.extend(comp, val); // update object with returned values
       $scope.eComp = {};
@@ -198,19 +198,15 @@ fiApp.controller('FormUserCtrl', ['$scope', '$http', '$routeParams',
     $scope.users = users;
   });
   
-  $scope.assign = function(id, add) {
-    if (true == add) {
-      FormUserSrv.assign({ id: $scope.formId, userId: id }, function(val) {
-        // update user in list
-        NotifSrv.success();
+  $scope.assign = function(id) {
+    FormUserSrv.assign({ id: $scope.formId, userId: id }, function(val) {
+      // update user in list
+      var user = _.find($scope.users, function(u) {
+        return u.id === val.id;
       });
-    }
-    else {
-      FormUserSrv.remove({ id: $scope.formId, userId: id }, function(val) {
-        // update user in list
-        NotifSrv.success();
-      });
-    }
+      _.extend(user, val);
+      NotifSrv.success();
+    });
   }
   
 }]);

@@ -78,8 +78,11 @@
           <option value="">Filter by team</option>
         </select>
         <hr>
-        <button ng-repeat="user in users | orderBy: '+name' | filter: { team_id: team_id }"
-          class="btn btn-default">{{ user.name }}</button>
+        <div class="fi-form-user-list">
+        <button ng-repeat="user in users | orderBy: '+name' | filter: { team_id: team_id }" 
+          ng-click="assign(user.id)" fi-form-user="user"
+          class="btn btn-default fi-form-user">{{ user.name }}</button>
+        </div>
       </div>
     </div>
   </div>

@@ -4,15 +4,14 @@ class Api::FormUsersController < Api::ApiController
   
   before_action :set_form
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_form
-  before_action :set_form_user, except: [:users]
-  rescue_from ActiveRecord::RecordNotFound, with: :invalid_form_user
+  before_action :set_form_user, only: [:assign]
   
   # GET /api/forms/1/users
   # GET /api/forms/1/users.json
   def users
     users = @account.users
-      .joins('left join form_users on form_users.user_id = users.id')
-      .where('form_users.user_id is null OR form_users.form_id = ?', @form.id)
+      .joins('LEFT JOIN form_users ON form_users.user_id = users.id')
+      .where('form_users.user_id IS NULL OR form_users.form_id = ?', @form.id)
     
     render json: users
   end
@@ -20,18 +19,14 @@ class Api::FormUsersController < Api::ApiController
   # PATCH/PUT /api/forms/1/assign/1
   # PATCH/PUT /api/forms/1/assign/1.json
   def assign
-    @form_user.form = @form
-    @form_user.save
+    if @form_user.new_record? # assign user to form
+      @form_user.form = @form
+      @form_user.save
+    else # clear assignment
+      @form_user.destroy
+    end
         
-    head :created
-  end
-
-  # PATCH/PUT /api/forms/1/remove/1
-  # PATCH/PUT /api/forms/1/remove/1.json
-  def remove
-    @form_user.destroy
-    
-    head :no_content
+    render json: @form_user.user
   end
   
   private
@@ -47,16 +42,6 @@ class Api::FormUsersController < Api::ApiController
     
     def set_form_user
       @form_user = ::FormUser.find_or_initialize_by(user_id: params[:user_id])
-    end
-    
-    def invalid_form_user
-      #logger.info 'invalid_form_user'
-      head :no_content
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def form_user_params
-      params.require(:form_user).permit(:id, :user_id)
     end
     
 end
