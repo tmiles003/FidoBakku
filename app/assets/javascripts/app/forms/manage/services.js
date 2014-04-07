@@ -29,7 +29,7 @@ fiApp.factory('FormUserSrv', ['$resource', function($resource) {
   
   return $resource('/api/forms/:id', 
     { id: '@id', user_id: '@userId' }, 
-    { 'users': { url: '/api/forms/:id/users', isArray: false },
+    { 'users': { url: '/api/forms/:id/users', isArray: true },
       'assign': { method: 'PUT', url: '/api/forms/:id/assign/:user_id' },
       'remove': { method: 'PUT', url: '/api/forms/:id/remove/:user_id' }
     });

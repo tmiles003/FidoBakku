@@ -10,10 +10,9 @@ class Api::FormUsersController < Api::ApiController
   # GET /api/forms/1/users
   # GET /api/forms/1/users.json
   def users
-    users = Hash.new
-    ::FormUser.where(form_id: @form.id).each { |form_user| 
-      users[form_user.user_id] = true
-    }
+    users = @account.users
+      .joins('left join form_users on form_users.user_id = users.id')
+      .where('form_users.user_id is null OR form_users.form_id = ?', @form.id)
     
     render json: users
   end
@@ -21,9 +20,7 @@ class Api::FormUsersController < Api::ApiController
   # PATCH/PUT /api/forms/1/assign/1
   # PATCH/PUT /api/forms/1/assign/1.json
   def assign
-    @form_user.destroy unless @form_user.nil?
-    
-    @form_user = ::FormUser.new(form_id: params[:id], user_id: params[:user_id])
+    @form_user.form = @form
     @form_user.save
         
     head :created
@@ -49,7 +46,7 @@ class Api::FormUsersController < Api::ApiController
     end
     
     def set_form_user
-      @form_user = ::FormUser.find_or_initialize_by(form_id: params[:id], user_id: params[:user_id])
+      @form_user = ::FormUser.find_or_initialize_by(user_id: params[:user_id])
     end
     
     def invalid_form_user

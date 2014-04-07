@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :email_hash, :name, :role, :team_id, :user_path
+  attributes :id, :email, :email_hash, :name, :role, :team_id, :form_id, :user_path
   
   def email_hash
     OpenSSL::Digest::MD5.new(object.email).hexdigest
@@ -7,6 +7,10 @@ class UserSerializer < ActiveModel::Serializer
   
   def team_id
     object.team.nil? ? nil : object.team.id
+  end
+  
+  def form_id
+    object.form.nil? ? nil : object.form.id
   end
   
   def user_path

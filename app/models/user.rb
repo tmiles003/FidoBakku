@@ -21,9 +21,9 @@ class User < ActiveRecord::Base
   
   has_many :goals, dependent: :destroy
   
+  has_one :form_user
   has_one :form, through: :form_user
-  
-  has_many :user_reviews
+  has_many :form_users
   
   def to_param
     [id, self.slug].join('/')

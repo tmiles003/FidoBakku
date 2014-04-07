@@ -77,19 +77,9 @@
           ng-options="team.id as team.name for team in teams">
           <option value="">Filter by team</option>
         </select>
-        <!-- div class="btn-group-vertical">
-          <button ng-repeat="user in users | orderBy: '+name' | filter: { team_id: team_id }" 
-            ng-model="selection.id" btn-checkbox
-            type="button" class="btn btn-default">{{ user.name }}</button>
-        </div -->
-        <div ng-class="{ 'checkbox': true, 'fi-form-user': true, 'fi-form-user-sel': formUsers[user.id] }" 
-          ng-repeat="user in users | orderBy: '+name' | filter: { team_id: team_id }">
-          <label>
-            <input type="checkbox" ng-model="formUsers[user.id]" ng-change="assign(user.id, formUsers[user.id])">
-            {{ user.name }}
-          </label>
-        </div>
-        
+        <hr>
+        <button ng-repeat="user in users | orderBy: '+name' | filter: { team_id: team_id }"
+          class="btn btn-default">{{ user.name }}</button>
       </div>
     </div>
   </div>

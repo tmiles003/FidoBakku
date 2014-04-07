@@ -194,23 +194,20 @@ fiApp.controller('FormUserCtrl', ['$scope', '$http', '$routeParams',
   });
   
   $scope.users = [];
-  UsersSrv.query(function(users) {
+  FormUserSrv.users({ id: $scope.formId }, function(users) {
     $scope.users = users;
-  });
-  
-  $scope.formUsers = {};
-  FormUserSrv.users({ id: $scope.formId }, function(formUsers) {
-    $scope.formUsers = formUsers;
   });
   
   $scope.assign = function(id, add) {
     if (true == add) {
-      FormUserSrv.assign({ id: $scope.formId, userId: id }, function(s) {
+      FormUserSrv.assign({ id: $scope.formId, userId: id }, function(val) {
+        // update user in list
         NotifSrv.success();
       });
     }
     else {
-      FormUserSrv.remove({ id: $scope.formId, userId: id }, function(s) {
+      FormUserSrv.remove({ id: $scope.formId, userId: id }, function(val) {
+        // update user in list
         NotifSrv.success();
       });
     }
