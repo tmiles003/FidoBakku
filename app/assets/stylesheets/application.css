@@ -15,6 +15,7 @@
  *= require flat
  *= require bootstrap-fi
  *= require toaster-fi
+ *= require fonts
  *= require fidobakku
  *= require_self
  * require_tree .

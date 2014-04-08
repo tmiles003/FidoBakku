@@ -8,6 +8,16 @@
   transition: none !important;
 }
 
+#toast-container > .toast-info {
+  background-image: url('/images/toast-info.png') !important;
+}
+#toast-container > .toast-error {
+  background-image: url('/images/toast-error.png') !important;
+}
+#toast-container > .toast-success {
+  background-image: url('/images/toast-success.png') !important;
+}
+
 .toast {
   border: 1px solid #fff;
 }

@@ -57,7 +57,6 @@ class Api::UsersController < Api::ApiController
   # PATCH/PUT /api/users/1
   # PATCH/PUT /api/users/1.json
   def update
-    logger.info @account_user.to_yaml
     respond_to do |format|
       if @account_user.update(user_params)
         

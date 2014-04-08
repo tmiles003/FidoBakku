@@ -8,7 +8,7 @@
     </li>
   <% end %>
     <li>
-      <a href="/#/goals" active-nav-link="active"><i class="fa fa-crosshairs fa-lg"></i> Goals</a>
+      <a href="/#/goals" active-nav-link="active"><i class="fa fa-dot-circle-o fa-lg"></i> Goals</a>
     </li>
   <% if can? :index, Form # admins + managers only %>
     <li>
@@ -17,7 +17,7 @@
   <% end %>
   <% if can? :index, Evaluation # admins + managers only %>
     <li>
-      <a href="/#/evaluations" active-nav-link="active"><i class="fa fa-book fa-lg"></i> Evaluations</a>
+      <a href="/#/evaluations" active-nav-link="active"><i class="fa fa-file-text-o fa-lg"></i> Evaluations</a>
     </li>
   <% end %>
   </ul>

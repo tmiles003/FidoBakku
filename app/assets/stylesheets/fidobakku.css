@@ -1,5 +1,4 @@
 /* fidobakku.css */
-@import url('//fonts.googleapis.com/css?family=Roboto');
 
 /* #415b76, #34495e - blue */
 /* #48cfad, #37bc9b - green */
@@ -19,8 +18,6 @@ html {
 /* more content below nav + footer space */
 body {
   background-color: #fff;
-  font-family: 'Roboto', sans-serif;
-  /* font-size: 16px; */
   margin: 50px 0 45px 0;
 }
 

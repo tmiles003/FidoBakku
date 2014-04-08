@@ -1,0 +1,19 @@
+/* font style/size */
+@import url('//fonts.googleapis.com/css?family=Roboto');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+.dropdown-menu {
+  font-size: 16px;
+}
+
+.form-control {
+  font-size: 16px;
+}
+
+.btn-sm {
+  font-size: 14px;
+}
