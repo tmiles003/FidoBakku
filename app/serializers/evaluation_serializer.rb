@@ -1,11 +1,11 @@
 class EvaluationSerializer < ActiveModel::Serializer
-  attributes :id, :title, :status, :created_at, :evaluation_path
+  attributes :id, :user_id, :created_at, :manage_path
   
   def created_at
     object.created_at.strftime('%s') unless object.created_at.nil?
   end
   
-  def evaluation_path
+  def manage_path
     root_path(anchor: evaluation_manage_path(object))
   end
   

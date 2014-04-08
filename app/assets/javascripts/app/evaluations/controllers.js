@@ -2,82 +2,56 @@
 
 /* Controllers */
 
-fiApp.controller('EvaluationsCtrl', ['$scope', 'EvaluationsSrv', 'NotifSrv', 'evaluations',
-                  function($scope, EvaluationsSrv, NotifSrv, evaluations) {
+fiApp.controller('EvaluationSessionsCtrl', ['$scope', 'EvaluationSessionsSrv', 'NotifSrv', 'sessions',
+                  function($scope, EvaluationSessionsSrv, NotifSrv, sessions) {
   
-  $scope.evaluations = evaluations;
-  $scope.statuses = [];
-  EvaluationsSrv.getStatuses(function(statuses) {
-    $scope.statuses = statuses;
-  });
+  $scope.sessions = sessions;
   
-  var createEvaluation = function(newEvaluation) {
-    EvaluationsSrv.save(newEvaluation, function(val, resp) {
-      $scope.evaluations.push(val);
-      $scope.eEvaluation = {};
-      $scope.eEvaluationForm.$setPristine();
+  var createSession = function(newSession) {
+    EvaluationSessionsSrv.save(newSession, function(val, resp) {
+      $scope.sessions.push(val);
+      $scope.eSession = {};
+      $scope.eSessionForm.$setPristine();
       NotifSrv.success();
     });
   }
   
-  var updateEvaluation = function(evaluation) {
-    evaluation.$update(function(val, resp) {
-      var evaluation = _.find($scope.evaluations, function(e) {
-        return e.id === val.id;
+  var updateSession = function(session) {
+    session.$update(function(val, resp) {
+      var session = _.find($scope.sessions, function(s) {
+        return s.id === val.id;
       });
-      _.extend(evaluation, val); // update object with returned values
-      $scope.eEvaluation = {};
-      $scope.eEvaluationForm.$setPristine();
+      _.extend(session, val); // update object with returned values
+      $scope.eSession = {};
+      $scope.eSessionForm.$setPristine();
       NotifSrv.success();
     });
   }
   
-  $scope.saveEvaluation = function(evaluation, isValid) {
+  $scope.saveSession = function(session, isValid) {
     $scope.submitted = true;
     if (isValid) {
       $scope.submitted = false;
-      if (evaluation.id) {
-        updateEvaluation(evaluation);
+      if (session.id) {
+        updateSession(session);
       }
       else {
-        createEvaluation(evaluation);
+        createSession(session);
       }
     }
   }
   
-  $scope.editEvaluation = function(evaluation) {
-    $scope.eEvaluation = angular.copy(evaluation);
-  }
-  
   $scope.clearForm = function() {
     $scope.submitted = false;
-    $scope.eEvaluation = {};
-    $scope.eEvaluationForm.$setPristine();
+    $scope.eSession = {};
+    $scope.eSessionForm.$setPristine();
   }
   
-  $scope.deleteEvaluation = function(evaluation) {
-    evaluation.$delete().then(function() {
-      $scope.evaluations = _.without($scope.evaluations, evaluation);
+  $scope.deleteSession = function(session) {
+    session.$delete().then(function() {
+      $scope.sessions = _.without($scope.sessions, session);
       NotifSrv.success();
     });
-  }
-  
-  $scope.today = function() {
-    $scope.dt = new Date();
-  };
-  $scope.today();
-  $scope.showWeeks = false;
-  $scope.dateOptions = {
-    'year-format': "'yy'",
-    'starting-day': 1
-  };
-  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate'];
-  $scope.format = $scope.formats[0];
-  $scope.datePick = function($event) {
-    $event.preventDefault();
-    $event.stopPropagation();
-
-    $scope.opened = true;
   }
   
 }]);

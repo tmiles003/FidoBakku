@@ -80,13 +80,13 @@ fiApp.config(['$routeProvider', '$locationProvider',
     }
   });
   
-  // list all the reviews
+  // list all the evaluation sessions
   $routeProvider.when('/evaluations', { 
     templateUrl: '/templates/evaluations/index.html', 
-    controller: 'EvaluationsCtrl', 
+    controller: 'EvaluationSessionsCtrl', 
     resolve: {
-      evaluations: function(EvaluationsSrv) { 
-        return EvaluationsSrv.query()['$promise']; 
+      sessions: function(EvaluationSessionsSrv) { 
+        return EvaluationSessionsSrv.query()['$promise']; 
       }
     }
   });

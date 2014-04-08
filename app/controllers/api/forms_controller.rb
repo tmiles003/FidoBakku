@@ -28,7 +28,7 @@ class Api::FormsController < Api::ApiController
   # POST /api/forms.json
   def create
     @form = ::Form.new(form_params) # :: forces root namespace
-    @form.account_id = @account.id
+    @form.account = @account
     @form._account = @account
 
     respond_to do |format|

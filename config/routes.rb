@@ -16,7 +16,6 @@ FidoBakku::Application.routes.draw do
   get 'goal/:id' => 'welcome#application', as: :goal_manage
   get 'form/:id' => 'welcome#application', as: :form_manage
   get 'evaluations/:id' => 'welcome#application', as: :evaluation_manage
-  #get 'review/:id/:name' => 'welcome#application', as: :user_review
   #get 'feedback/:id/:name' => 'welcome#application', as: :user_feedback
   
   namespace :api, defaults: { format: :json } do
@@ -65,12 +64,10 @@ FidoBakku::Application.routes.draw do
       end
     end
     
-    resources :evaluations, except: [:new, :edit] do 
-      collection do 
-        get 'statuses'
-      end
-    end
-    resources :user_reviews, except: [:new, :edit]
+    resources :evaluation_sessions, except: [:new, :edit]
+    resources :evaluations, except: [:new, :edit]
+    
+    #resources :user_reviews, except: [:new, :edit]
     resources :comments, except: [:show, :new, :create, :edit]
     
     resource :account, controller: :account, only: [:show, :update, :destroy]

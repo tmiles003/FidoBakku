@@ -11,11 +11,6 @@ class Api::EvaluationsController < Api::ApiController
     render json: @account.evaluations
   end
   
-  # GET /api/evaluations/statuses
-  def statuses
-    render json: ::Evaluation::STATUS, each_serializer: EvaluationStatusSerializer
-  end
-  
   # GET /api/evaluations/1
   # GET /api/evaluations/1.json
   def show
@@ -71,6 +66,6 @@ class Api::EvaluationsController < Api::ApiController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def evaluation_params
-      params.require(:evaluation).permit(:title, :status)
+      params.require(:evaluation).permit(:user_id)
     end
 end

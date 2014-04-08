@@ -1,65 +1,82 @@
-<!-- h1>Manage review assignments</h1 -->
+<!-- h1>Listing reviews</h1 -->
+
+<div class="row">
+  
+  <div class="col-md-8">
+    <h1>Evaluation sessions</h1>
+  
+    <p>Evaluation sessions help text</p>
+  </div>
+
+</div>
 
 <div class="row">
 
-  <div class="col-md-9">
+  <div class="col-md-8">
   
   <div class="panel panel-default">
-    <div class="panel-heading">User reviews</div>
-    <ul class="list-group">
-      <li class="list-group-item" ng-repeat="userReview in userReviews">
-        <div class="col-md-3">{{ userReview.reviewer_name }}</div>
-        <div class="col-md-3">{{ userReview.form_name }}</div>
-        <div class="col-md-3">{{ userReview.user_name }}</div>
-        <div class="col-md-3">
-          <button class="btn btn-default btn-xs" data-ng-click="editUserReview(userReview)">Edit</button>
-          <button class="btn btn-default btn-xs" data-ng-click="deleteUserReview(userReview)">Delete</button>
-        </div>
-        <div style="clear:both;"></div>
-      </li>
-    </ul>
+    <!-- div class="panel-heading">Evaluations</div -->
+    <!-- div class="panel-body">
+    </div -->
+    <table class="table table-hover">
+      <tr ng-repeat="evaluation in evaluations | orderBy: '-created_at'">
+        <td>
+          <a href="{{ evaluation.evaluation_path }}">{{ evaluation.title }}</a>
+        </td>
+        <td>
+          {{ evaluation.status }}
+        </td>
+        <td class="text-right">
+          <button class="btn btn-default fi-btn-slim" ng-click="editEvaluation(evaluation)">
+            <i class="fa fa-edit fa-lg"></i>
+          </button>
+          <button class="btn btn-default fi-btn-slim" ng-click="deleteEvaluation(evaluation)">
+            <i class="fa fa-trash-o fa-lg"></i>
+          </button>
+        </td>
+      </tr>
+    </table>
   </div>
   
   </div>
 
-  <div class="col-md-3">
-    <form novalidate name="editableUserReviewForm">
-      <input type="hidden" ng-model="editableUserReview.id">
+  <div class="col-md-4">
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <span ng-hide="eEvaluation.id">New evaluation</span>
+      <span ng-show="eEvaluation.id">Update evaluation</span>
+    </div>
+    <!-- div class="panel-body">
+    </div -->
+    <div class="fi-panel-inner">
+
+    <form accept-charset="utf-8" novalidate name="eEvaluationForm">
+      <input type="hidden" ng-model="eEvaluation.id">
       
-      <div class="form-group" ng-class="{ 'has-error': editableUserReviewForm.reviewer_id.$invalid && submitted }">
-        <label for="reviewer_id">Reviewer</label>
-        <!-- multiple name="reviewer_id[]" -->
-        <select name="reviewer_id" class="form-control" ng-model="editableUserReview.reviewer_id" 
-          ng-options="user.id as user.name for user in users" ng-required="true">
+      <div class="form-group" ng-class="{ 'has-error': eEvaluationForm.evaluation_user.$invalid && submitted }">
+        <label for="evaluation_user" class="sr-only">User</label>
+        <select name="evaluation_user" ng-model="eEvaluation.user_id" class="form-control" 
+          ng-options="user.id as user.name group by ucFirst(user.role) for user in users | 
+            orderBy: ['+role_sort', '+name']" 
+          ng-required="true">
+          <option value="">Select a user</option>
         </select>
-        <p ng-show="editableUserReviewForm.reviewer_id.$invalid && submitted" 
-          class="help-block">A reviewer is required</p>
+        <p ng-show="eEvaluationForm.evaluation_user.$invalid && submitted" 
+          class="help-block">A user must be selected</p>
       </div>
       
-      <div class="form-group" ng-class="{ 'has-error': editableUserReviewForm.form_id.$invalid && submitted }">
-        <label for="form_id">Form</label>
-        <select name="form_id" class="form-control" ng-model="editableUserReview.form_id"
-          ng-options="form.id as form.name for form in forms" ng-required="true">
-        </select>
-        <p ng-show="editableUserReviewForm.form_id.$invalid && submitted" 
-          class="help-block">A form is required</p>
-      </div>
-      
-      <div class="form-group" ng-class="{ 'has-error': editableUserReviewForm.user_id.$invalid && submitted }">
-        <label for="user_id">Reviewee</label>
-        <select name="user_id" class="form-control" ng-model="editableUserReview.user_id" 
-          ng-options="user.id as user.name for user in users" ng-required="true">
-        </select>
-        <p ng-show="editableUserReviewForm.user_id.$invalid && submitted" 
-          class="help-block">A user is required</p>
-      </div>
-      
-      <div class="actions">
-        <input ng-click="saveUserReview(editableUserReview, editableUserReviewForm.$valid)" 
-          class="btn btn-default btn-sm" type="submit" value="Submit">
+      <div class="actions text-right">
+        <input ng-click="saveEvaluation(eEvaluation, eEvaluationForm.$valid)" type="submit" value="Save"
+          class="btn btn-default btn-success btn-sm fi-btn-wide">
+        <button ng-click="clearForm()" class="btn btn-default btn-sm" title="Clear form">
+          <i class="fa fa-eraser fa-lg"></i></button>
       </div>
       
     </form>
+    
+    </div>
+  </div>
   </div>
 
 </div>

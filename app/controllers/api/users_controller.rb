@@ -26,11 +26,11 @@ class Api::UsersController < Api::ApiController
     render json: ::User::ROLES, :each_serializer => RoleSerializer
   end
   
-  # used in user_reviews, account
+  # used in user_evaluations, account
   # GET /api/users/list
   # GET /api/users/list.json
   def list
-    @users = @account.account_users.in_role(params[:role])
+    render json: @account.account_users.in_role(params[:role])
     #render json: @users # @account.account_users.in_role(params[:role])
   end
 

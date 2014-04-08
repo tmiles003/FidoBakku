@@ -2,59 +2,47 @@
 
 /* Controllers */
 
-fiApp.controller('ReviewsManageCtrl', ['$scope', 'ReviewsSrv', 'UserReviewsSrv', 
-                    'NotifSrv', '$routeParams', '$http', 'userReviews', 
-                  function($scope, Reviews, UserReviewsSrv, NotifSrv, $routeParams, $http, userReviews) {
+fiApp.controller('EvaluationsCtrl', ['$scope', 'EvaluationsSrv', 'UsersSrv', 'NotifSrv', 'evaluations',
+                  function($scope, EvaluationsSrv, UsersSrv, NotifSrv, evaluations) {
   
-  $scope.reviewId = $routeParams.id;
-  $scope.userReviews = userReviews; // get user reviews for this review
-  $http.get('/api/users/list').success(function(list) { 
-    $scope.users = list; 
-  });
-  $http.get('/api/forms/list').success(function(list) { 
-    $scope.forms = list; 
+  $scope.evaluations = evaluations;
+  $scope.users = [];
+  UsersSrv.query(function(users) {
+    $scope.users = users;
   });
   
-  var createUserReview = function(newUserReview) {
-    UserReviewsSrv.save({ user_review: newUserReview, review_id: $scope.reviewId }, function(val, resp) {
-      $scope.userReviews = UserReviewsSrv.query({ review_id: $scope.reviewId }); // improve
-      $scope.editableUserReview = {};
-      $scope.editableUserReviewForm.$setPristine();
+  var createEvaluation = function(newEvaluation) {
+    EvaluationsSrv.save(newEvaluation, function(val, resp) {
+      $scope.evaluations.push(val);
+      $scope.eEvaluation = {};
+      $scope.eEvaluationForm.$setPristine();
       NotifSrv.success();
     });
   }
   
-  var updateUserReview = function(userReview) {
-    userReview.$update({ review_id: $scope.reviewId }, function(val, resp) {
-      $scope.userReviews = UserReviewsSrv.query({ review_id: $scope.reviewId }); // improve
-      $scope.editableUserReview = {};
-      $scope.editableUserReviewForm.$setPristine();
-      NotifSrv.success();
-    });
-  }
-  
-  $scope.saveUserReview = function(userReview, isValid) {
+  $scope.saveEvaluation = function(evaluation, isValid) {
     $scope.submitted = true;
     if (isValid) {
       $scope.submitted = false;
-      if (userReview.id) {
-        updateUserReview(userReview);
-      }
-      else {
-        createUserReview(userReview);
-      }
+      createEvaluation(evaluation);
     }
   }
   
-  $scope.editUserReview = function(userReview) {
-    $scope.editableUserReview = angular.copy(userReview);
+  $scope.clearForm = function() {
+    $scope.submitted = false;
+    $scope.eEvaluation = {};
+    $scope.eEvaluationForm.$setPristine();
   }
   
-  $scope.deleteUserReview = function(userReview) {
-    userReview.$delete(function() {
-      $scope.userReviews = _.without($scope.userReviews, userReview);
+  $scope.deleteEvaluation = function(evaluation) {
+    evaluation.$delete().then(function() {
+      $scope.evaluations = _.without($scope.evaluations, evaluation);
       NotifSrv.success();
     });
+  }
+  
+  $scope.ucFirst = function(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1) + 's';
   }
   
 }]);

@@ -3,9 +3,9 @@
 <div class="row">
   
   <div class="col-md-8">
-    <h1>Evaluations</h1>
+    <h1>Evaluation sessions</h1>
   
-    <p>Evaluations help text</p>
+    <p>Evaluation sessions help text</p>
   </div>
 
 </div>
@@ -15,22 +15,19 @@
   <div class="col-md-8">
   
   <div class="panel panel-default">
-    <!-- div class="panel-heading">Evaluations</div -->
+    <!-- div class="panel-heading">Evaluation sessions</div -->
     <!-- div class="panel-body">
     </div -->
     <table class="table table-hover">
-      <tr ng-repeat="evaluation in evaluations | orderBy: '-created_at'">
+      <tr ng-repeat="session in sessions | orderBy: '-created_at'">
         <td>
-          <a href="{{ evaluation.evaluation_path }}">{{ evaluation.title }}</a>
-        </td>
-        <td>
-          {{ evaluation.status }}
+          <a href="{{ session.manage_path }}">{{ session.title }}</a>
         </td>
         <td class="text-right">
-          <button class="btn btn-default fi-btn-slim" ng-click="editEvaluation(evaluation)">
+          <button class="btn btn-default fi-btn-slim" ng-click="editSession(session)">
             <i class="fa fa-edit fa-lg"></i>
           </button>
-          <button class="btn btn-default fi-btn-slim" ng-click="deleteEvaluation(evaluation)">
+          <button class="btn btn-default fi-btn-slim" ng-click="deleteSession(session)">
             <i class="fa fa-trash-o fa-lg"></i>
           </button>
         </td>
@@ -44,50 +41,26 @@
   
   <div class="panel panel-default">
     <div class="panel-heading">
-      <span ng-hide="eEvaluation.id">New evaluation</span>
-      <span ng-show="eEvaluation.id">Update evaluation</span>
+      <span ng-hide="eSession.id">New session</span>
+      <span ng-show="eSession.id">Update session</span>
     </div>
     <!-- div class="panel-body">
     </div -->
     <div class="fi-panel-inner">
 
-    <form accept-charset="utf-8" novalidate name="eEvaluationForm">
-      <input type="hidden" ng-model="eEvaluation.id">
+    <form accept-charset="utf-8" novalidate name="eSessionForm">
+      <input type="hidden" ng-model="eSession.id">
       
-      <div class="form-group" ng-class="{ 'has-error': eEvaluationForm.evaluation_title.$invalid && submitted }">
-        <label for="evaluation_title" class="sr-only">Evaluation</label>
-        <input name="evaluation_title" class="form-control" ng-model="eEvaluation.title" type="text" 
-          ng-required="true" ng-minlength="2" ng-maxlength="100" placeholder="Title">
-        <p ng-show="eEvaluationForm.evaluation_title.$invalid && submitted" 
-          class="help-block">A title is required</p>
+      <div class="form-group" ng-class="{ 'has-error': eSessionForm.session_title.$invalid && submitted }">
+        <label for="session_title" class="sr-only">Title</label>
+        <input name="session_title" class="form-control" ng-model="eSession.title" type="text"
+          ng-required="true" ng-minlength="2" ng-maxlength="200" placeholder="Title">
+        <p ng-show="eSessionForm.session_title.$invalid && submitted" 
+          class="help-block">A title must be set</p>
       </div>
       
-      <div class="form-group" ng-class="{ 'has-error': eEvaluationForm.evaluation_status.$invalid 
-          && submitted }">
-        <label for="evaluation_status" class="sr-only">Status</label>
-        <select name="evaluation_status" ng-model="eEvaluation.status" class="form-control" 
-          ng-options="status.s as status.l for status in statuses" ng-required="true">
-          <option value="">Status</option>
-        </select>
-        <p ng-show="eEvaluationForm.evaluation_status.$invalid && submitted" 
-          class="help-block">A status must be selected</p>
-      </div>
-      
-      <div class="form-group">
-        <div class="input-group">
-          <input type="text" class="form-control"
-            datepicker-popup="{{ format }}" ng-model="dt" is-open="opened"
-            datepicker-options="dateOptions">
-          <span class="input-group-btn">
-            <button class="btn btn-default" ng-click="datePick($event)">
-              <i class="fa fa-calendar"></i>
-            </button>
-          </span>
-        </div>
-      </div>
-
       <div class="actions text-right">
-        <input ng-click="saveEvaluation(eEvaluation, eEvaluationForm.$valid)" type="submit" value="Save"
+        <input ng-click="saveSession(eSession, eSessionForm.$valid)" type="submit" value="Save"
           class="btn btn-default btn-success btn-sm fi-btn-wide">
         <button ng-click="clearForm()" class="btn btn-default btn-sm" title="Clear form">
           <i class="fa fa-eraser fa-lg"></i></button>

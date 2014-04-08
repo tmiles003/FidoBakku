@@ -20,7 +20,7 @@ class Account < ActiveRecord::Base
   
   has_many :forms
   
-  has_many :evaluations
+  has_many :evaluation_sessions
   
   protected
   

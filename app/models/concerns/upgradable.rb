@@ -43,8 +43,8 @@ module Upgradable
     check_plan_limit 'comps', num_comps
   end
   
-  def check_plan_evaluations
-    check_plan_limit 'evaluations', _account.evaluations.count
+  def check_plan_evaluation_sessions
+    check_plan_limit 'evaluation_sessions', _account.evaluation_sessions.count
   end
   
 end

@@ -18,7 +18,7 @@ class UserEvaluation < ActiveRecord::Base
   end
   
   def update_progress
-    # get benchmark ids from form id
+    # get comp ids from form id
     comp_ids = UserEvaluation.find_by_sql ["SELECT c.id FROM comps c 
         JOIN sections s ON s.id = c.topic_id 
         JOIN forms f ON f.id = s.form_id 
