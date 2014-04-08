@@ -2,12 +2,16 @@ class Api::EvaluationSessionsController < Api::ApiController
   
   load_and_authorize_resource
   
-  before_action :set_evaluation_session, only: [:show, :update, :destroy]
-
   # GET /api/evaluation_sessions
   # GET /api/evaluation_sessions.json
   def index
     render json: @account.evaluation_sessions
+  end
+
+  # GET /api/evaluation_sessions/1
+  # GET /api/evaluation_sessions/1.json
+  def show
+    render json: @evaluation_session
   end
 
   # POST /api/evaluation_sessions
@@ -49,9 +53,6 @@ class Api::EvaluationSessionsController < Api::ApiController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_evaluation_session
-      @evaluation_session = ::EvaluationSession.find(params[:id])
-    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def evaluation_session_params

@@ -1,5 +1,12 @@
 class EvaluationSerializer < ActiveModel::Serializer
+  
   attributes :id, :user_id, :created_at, :manage_path
+  has_one :user
+  
+  def user
+    #object.user.where(id: scope)
+    ::User.find(object.user_id)
+  end
   
   def created_at
     object.created_at.strftime('%s') unless object.created_at.nil?

@@ -91,13 +91,29 @@ fiApp.config(['$routeProvider', '$locationProvider',
     }
   });
   
-  // single review
-  $routeProvider.when('/reviews/:id/:slug', { 
-    templateUrl: '/templates/reviews/manage.html', 
-    controller: 'ReviewsManageCtrl',
+  $routeProvider.when('/session/:id/:slug', { 
+    templateUrl: '/templates/evaluations/session.html', 
+    controller: 'EvaluationsCtrl', 
     resolve: {
-      userReviews: function(UserReviewsSrv, $route) {
-        return UserReviewsSrv.query({ review_id: $route.current.params.id })['$promise'];
+      session: function(EvaluationSessionsSrv, $route) {
+        return EvaluationSessionsSrv.get({ id: $route.current.params.id })['$promise'];
+      },
+      evaluations: function(EvaluationsSrv, $route) { 
+        return EvaluationsSrv.query({ session_id: $route.current.params.id })['$promise'];
+      }
+    }
+  });
+  
+  // manage 1 evaluation (assign, etc)
+  $routeProvider.when('/evaluations/:id/:name', { 
+    templateUrl: '/templates/evaluations/user.html', 
+    controller: 'UserEvaluationsCtrl',
+    resolve: {
+      evaluation: function(EvaluationsSrv, $route) {
+        return EvaluationsSrv.get({ id: $route.current.params.id })['$promise'];
+      },
+      userEvaluations: function(UserEvaluationsSrv, $route) {
+        return UserEvaluationsSrv.query({ evaluation_id: $route.current.params.id })['$promise'];
       }
     }
   });

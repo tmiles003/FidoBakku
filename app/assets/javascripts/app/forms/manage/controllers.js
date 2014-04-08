@@ -13,7 +13,6 @@ fiApp.controller('SectionsCtrl', ['$scope', '$http', '$routeParams', '$filter',
   $scope.eSection = {};
   $scope.submitted = false;
   
-  
   var createSection = function(newSection) {
     SectionsSrv.save({ form_id: $scope.form.id, section: newSection }, function(val, resp) {
       $scope.sections.push(val);

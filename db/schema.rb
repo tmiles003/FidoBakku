@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140408030850) do
+ActiveRecord::Schema.define(version: 20140408114746) do
 
   create_table "account_users", force: true do |t|
     t.integer "account_id"
@@ -55,10 +55,8 @@ ActiveRecord::Schema.define(version: 20140408030850) do
   end
 
   create_table "evaluations", force: true do |t|
-    t.integer  "account_id"
+    t.integer  "session_id"
     t.integer  "user_id"
-    t.boolean  "visible"
-    t.boolean  "editable"
     t.datetime "created_at"
   end
 
@@ -110,8 +108,8 @@ ActiveRecord::Schema.define(version: 20140408030850) do
     t.string  "name"
   end
 
-  create_table "user_reviews", force: true do |t|
-    t.integer  "review_id"
+  create_table "user_evaluations", force: true do |t|
+    t.integer  "evaluation_id"
     t.integer  "user_id"
     t.integer  "form_id"
     t.integer  "reviewer_id"

@@ -6,7 +6,7 @@ class EvaluationSession < ActiveRecord::Base
   
   belongs_to :account
   
-  has_many :user_evaluations, foreign_key: :evaluation_id
+  has_many :evaluations, foreign_key: :session_id
   
   before_validation :check_plan_evaluation_sessions, on: :create
   

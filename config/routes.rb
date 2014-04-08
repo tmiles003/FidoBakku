@@ -15,6 +15,7 @@ FidoBakku::Application.routes.draw do
   get 'user/:id' => 'welcome#application', as: :user_manage
   get 'goal/:id' => 'welcome#application', as: :goal_manage
   get 'form/:id' => 'welcome#application', as: :form_manage
+  get 'session/:id' => 'welcome#application', as: :session_manage
   get 'evaluations/:id' => 'welcome#application', as: :evaluation_manage
   #get 'feedback/:id/:name' => 'welcome#application', as: :user_feedback
   
@@ -64,10 +65,11 @@ FidoBakku::Application.routes.draw do
       end
     end
     
-    resources :evaluation_sessions, except: [:new, :edit]
+    # keep routes shorts
+    resources :eval_sessions, controller: :evaluation_sessions, except: [:new, :edit]
     resources :evaluations, except: [:new, :edit]
+    resources :user_evals, controller: :user_evaluations, only: [:index, :create, :destroy]
     
-    #resources :user_reviews, except: [:new, :edit]
     resources :comments, except: [:show, :new, :create, :edit]
     
     resource :account, controller: :account, only: [:show, :update, :destroy]

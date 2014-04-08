@@ -2,10 +2,11 @@
 
 /* Controllers */
 
-fiApp.controller('EvaluationsCtrl', ['$scope', 'EvaluationsSrv', 'UsersSrv', 'NotifSrv', 'evaluations',
-                  function($scope, EvaluationsSrv, UsersSrv, NotifSrv, evaluations) {
+fiApp.controller('UserEvaluationsCtrl', ['$scope', 'UserEvaluationsSrv', 'UsersSrv', 'NotifSrv', 'evaluation', 'userEvaluations',
+                  function($scope, UserEvaluationsSrv, UsersSrv, NotifSrv, evaluation, userEvaluations) {
   
-  $scope.evaluations = evaluations;
+  $scope.evaluation = evaluation;
+  $scope.userEvaluations = userEvaluations;
   $scope.users = [];
   UsersSrv.query(function(users) {
     $scope.users = users;
@@ -39,10 +40,6 @@ fiApp.controller('EvaluationsCtrl', ['$scope', 'EvaluationsSrv', 'UsersSrv', 'No
       $scope.evaluations = _.without($scope.evaluations, evaluation);
       NotifSrv.success();
     });
-  }
-  
-  $scope.ucFirst = function(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1) + 's';
   }
   
 }]);

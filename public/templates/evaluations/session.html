@@ -3,9 +3,9 @@
 <div class="row">
   
   <div class="col-md-8">
-    <h1>Evaluation sessions</h1>
+    <h1>Evaluations</h1>
   
-    <p>Evaluation sessions help text</p>
+    <p>Evaluations help text</p>
   </div>
 
 </div>
@@ -21,15 +21,9 @@
     <table class="table table-hover">
       <tr ng-repeat="evaluation in evaluations | orderBy: '-created_at'">
         <td>
-          <a href="{{ evaluation.evaluation_path }}">{{ evaluation.title }}</a>
-        </td>
-        <td>
-          {{ evaluation.status }}
+          <a href="{{ evaluation.manage_path }}">{{ evaluation.user.name }}</a>
         </td>
         <td class="text-right">
-          <button class="btn btn-default fi-btn-slim" ng-click="editEvaluation(evaluation)">
-            <i class="fa fa-edit fa-lg"></i>
-          </button>
           <button class="btn btn-default fi-btn-slim" ng-click="deleteEvaluation(evaluation)">
             <i class="fa fa-trash-o fa-lg"></i>
           </button>

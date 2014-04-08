@@ -2,54 +2,42 @@
 
 /* Controllers */
 
-fiApp.controller('EvaluationSessionsCtrl', ['$scope', 'EvaluationSessionsSrv', 'NotifSrv', 'sessions',
-                  function($scope, EvaluationSessionsSrv, NotifSrv, sessions) {
+fiApp.controller('EvaluationsCtrl', ['$scope', 'EvaluationsSrv', 'UsersSrv', 'NotifSrv', 'session', 'evaluations',
+                  function($scope, EvaluationsSrv, UsersSrv, NotifSrv, session, evaluations) {
   
-  $scope.sessions = sessions;
+  $scope.session = session;
+  $scope.evaluations = evaluations;
+  $scope.users = [];
+  UsersSrv.query(function(users) {
+    $scope.users = users;
+  });
   
-  var createSession = function(newSession) {
-    EvaluationSessionsSrv.save(newSession, function(val, resp) {
-      $scope.sessions.push(val);
-      $scope.eSession = {};
-      $scope.eSessionForm.$setPristine();
+  var createEvaluation = function(newEvaluation) {
+    EvaluationsSrv.save({ session_id: $scope.session.id, evaluation: newEvaluation }, function(val, resp) {
+      $scope.evaluations.push(val);
+      $scope.eEvaluation = {};
+      $scope.eEvaluationForm.$setPristine();
       NotifSrv.success();
     });
   }
   
-  var updateSession = function(session) {
-    session.$update(function(val, resp) {
-      var session = _.find($scope.sessions, function(s) {
-        return s.id === val.id;
-      });
-      _.extend(session, val); // update object with returned values
-      $scope.eSession = {};
-      $scope.eSessionForm.$setPristine();
-      NotifSrv.success();
-    });
-  }
-  
-  $scope.saveSession = function(session, isValid) {
+  $scope.saveEvaluation = function(evaluation, isValid) {
     $scope.submitted = true;
     if (isValid) {
       $scope.submitted = false;
-      if (session.id) {
-        updateSession(session);
-      }
-      else {
-        createSession(session);
-      }
+      createEvaluation(evaluation);
     }
   }
   
   $scope.clearForm = function() {
     $scope.submitted = false;
-    $scope.eSession = {};
-    $scope.eSessionForm.$setPristine();
+    $scope.eEvaluation = {};
+    $scope.eEvaluationForm.$setPristine();
   }
   
-  $scope.deleteSession = function(session) {
-    session.$delete().then(function() {
-      $scope.sessions = _.without($scope.sessions, session);
+  $scope.deleteEvaluation = function(evaluation) {
+    evaluation.$delete().then(function() {
+      $scope.evaluations = _.without($scope.evaluations, evaluation);
       NotifSrv.success();
     });
   }

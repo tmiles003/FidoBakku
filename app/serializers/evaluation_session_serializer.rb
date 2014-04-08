@@ -6,6 +6,6 @@ class EvaluationSessionSerializer < ActiveModel::Serializer
   end
   
   def manage_path
-    root_path(anchor: evaluation_manage_path(object))
+    root_path(anchor: session_manage_path(object))
   end
 end

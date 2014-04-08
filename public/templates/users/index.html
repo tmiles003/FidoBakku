@@ -19,7 +19,7 @@
     <!-- div class="panel-body">
     </div -->
     <table class="table table-hover">
-      <tr ng-repeat="user in users | orderBy: '+name' | filter: { team_id: null }">
+      <tr ng-repeat="user in users | orderBy: '+name' | filter: { team: null }">
         <td>
           <img ng-src="//secure.gravatar.com/avatar/{{ user.email_hash }}?s=25&d=mm" alt="">
         </td>
@@ -57,7 +57,7 @@
     <!-- div class="panel-body">
     </div -->
     <table class="table table-hover">
-      <tr ng-repeat="user in users | orderBy: '+name' | filter: { team_id: team.id }">
+      <tr ng-repeat="user in users | orderBy: '+name' | filter: { team: team.id }">
         <td>
           <img ng-src="//secure.gravatar.com/avatar/{{ user.email_hash }}?s=25&d=mm" alt="">
         </td>
