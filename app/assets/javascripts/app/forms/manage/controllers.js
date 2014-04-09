@@ -2,9 +2,9 @@
 
 /* Controllers */
 
-fiApp.controller('SectionsCtrl', ['$scope', '$http', '$routeParams', '$filter', 
+fiApp.controller('SectionsCtrl', ['$scope', '$filter', 
                   'form', 'SectionsSrv', 'sections', 'NotifSrv', 
-                  function($scope, $http, $routeParams, $filter, 
+                  function($scope, $filter, 
                            form, SectionsSrv, sections, NotifSrv) {
   
   $scope.form = form;
@@ -180,9 +180,58 @@ fiApp.controller('CompsCtrl', ['$scope', 'CompsSrv', 'NotifSrv', '$filter',
   
 }]);
 
-fiApp.controller('FormUserCtrl', ['$scope', '$http', '$routeParams',
+fiApp.controller('FormPartCtrl', ['$scope', '$routeParams', '$http', 'FormPartSrv', 'NotifSrv',
+                  function($scope, $routeParams, $http, FormPartSrv, NotifSrv) {
+  
+  var formId = $routeParams.id;
+  $scope.sharedForms = [];
+  $http.get('/api/forms?shared=1').success(function(sharedForms) {
+    $scope.sharedForms = sharedForms;
+  });
+  $scope.sharedForm = {};
+  FormPartSrv.query({ form_id: formId }, function(sharedForm) { 
+    $scope.sharedForm = sharedForm;
+  });
+  
+  var createShared = function(newShared) {
+    FormPartSrv.save({ form_id: formId, form_part: newShared }, function(val, resp) {
+      $scope.sharedForm = val;
+      NotifSrv.success();
+    });
+  }
+  
+  var updateShared = function(shared) {
+    shared.$update(function(val, resp) {
+      $scope.sharedForm = val;
+      NotifSrv.success();
+    });
+  }
+  
+  var deleteShared = function(shared) {
+    shared.$delete().then(function(val) {
+      $scope.sharedForm = val;
+      NotifSrv.success();
+    });
+  }
+  
+  $scope.saveShared = function(shared) {
+    if (shared.id) {
+      if (shared.part_id)
+        updateShared(shared);
+      else
+        deleteShared(shared);
+    }
+    else {
+      if (shared.part_id)
+        createShared(shared);
+    }
+  }
+  
+}]);
+
+fiApp.controller('FormUserCtrl', ['$scope', '$routeParams',
                   'TeamsSrv', 'UsersSrv', 'FormUserSrv', 'NotifSrv',
-                  function($scope, $http, $routeParams, 
+                  function($scope, $routeParams, 
                             TeamsSrv, UsersSrv, FormUserSrv, NotifSrv) {
   
   $scope.formId = $routeParams.id;

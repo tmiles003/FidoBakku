@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140408114746) do
+ActiveRecord::Schema.define(version: 20140409075606) do
 
   create_table "account_users", force: true do |t|
     t.integer "account_id"
@@ -60,6 +60,13 @@ ActiveRecord::Schema.define(version: 20140408114746) do
     t.datetime "created_at"
   end
 
+  create_table "form_parts", force: true do |t|
+    t.integer "form_id"
+    t.integer "part_id"
+  end
+
+  add_index "form_parts", ["form_id", "part_id"], name: "index_form_part_on_form_id_and_part_id", unique: true, using: :btree
+
   create_table "form_users", force: true do |t|
     t.integer "form_id"
     t.integer "user_id"
@@ -71,8 +78,7 @@ ActiveRecord::Schema.define(version: 20140408114746) do
   create_table "forms", force: true do |t|
     t.integer  "account_id"
     t.string   "name"
-    t.boolean  "component"
-    t.integer  "parent"
+    t.boolean  "shared"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

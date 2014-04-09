@@ -54,8 +54,8 @@ FidoBakku::Application.routes.draw do
         get 'list'
       end
       member do
-        get 'users' => 'form_users#users'
-        put 'assign/:user_id' => 'form_users#assign'
+        get 'users' => 'form_users#users' # index
+        put 'assign/:user_id' => 'form_users#assign' # update
       end
       resources :sections, only: [:index], shallow: true do 
         member do 
@@ -64,6 +64,7 @@ FidoBakku::Application.routes.draw do
         end
       end
     end
+    resources :form_parts, only: [:index, :create, :update, :destroy]
     
     # keep routes shorts
     resources :eval_sessions, controller: :evaluation_sessions, except: [:new, :edit]

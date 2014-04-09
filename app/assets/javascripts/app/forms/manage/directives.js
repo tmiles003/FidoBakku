@@ -9,7 +9,7 @@ fiApp.directive('fiFormUser', [function() {
       user: '=fiFormUser'
     },
     link: function(scope, element, attrs, controller) {
-      scope.$watch('user.form_id', function(newVal, oldVal) {
+      scope.$watch('user.form', function(newVal, oldVal) {
         if (newVal !== null)
           element.addClass('fi-form-user-sel');
         else

@@ -7,7 +7,7 @@ fiApp.controller('AccountCtrl', ['$scope', 'AccountSrv', 'NotifSrv', '$http', 'a
   
   $scope.account = account;
   $scope.admins = [];
-  $http.get('/api/users/list?role[]=admin').success(function(list) { 
+  $http.get('/api/users?role[]=admin').success(function(list) { 
     $scope.admins = list;
   });
   

@@ -12,6 +12,7 @@ class Api::FormUsersController < Api::ApiController
     users = @account.users
       .joins('LEFT JOIN form_users ON form_users.user_id = users.id')
       .where('form_users.user_id IS NULL OR form_users.form_id = ?', @form.id)
+      .includes(:form, :team)
     
     render json: users
   end
@@ -25,7 +26,7 @@ class Api::FormUsersController < Api::ApiController
     else # clear assignment
       @form_user.destroy
     end
-        
+    
     render json: @form_user.user
   end
   
@@ -36,7 +37,7 @@ class Api::FormUsersController < Api::ApiController
     end
     
     def invalid_form
-      #logger.info 'invalid_form'
+      logger.info 'no form with this id'
       head :no_content
     end
     

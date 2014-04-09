@@ -8,9 +8,11 @@ class Form < ActiveRecord::Base
   
   belongs_to :account 
   
+  has_many :form_users, dependent: :destroy
+  
   before_validation :check_plan_forms, on: :create
   
-  # don't delete form if associated with user review
+  # don't delete form if associated with user evaluation
   
   validates :name, length: {
     in: 4..250,
@@ -18,6 +20,10 @@ class Form < ActiveRecord::Base
     too_long: 'Too long'
   }
   
+  scope :sharable, lambda { |shared|
+    where('shared' => shared) unless shared.nil?
+  }
+
   def to_param
     [id, self.slug].join('/')
   end

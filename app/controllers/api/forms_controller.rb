@@ -8,7 +8,7 @@ class Api::FormsController < Api::ApiController
   # GET /api/forms
   # GET /api/forms.json
   def index
-    render json: @account.forms
+    render json: @account.forms.sharable(params[:shared])
   end
   
   # GET /api/forms/1
@@ -17,13 +17,6 @@ class Api::FormsController < Api::ApiController
     render json: @form
   end
   
-  # GET /api/forms/list
-  # GET /api/forms/list.json
-  def list
-    @account = @current_user.account
-    render json: @account.forms
-  end
-
   # POST /api/forms
   # POST /api/forms.json
   def create
@@ -33,6 +26,8 @@ class Api::FormsController < Api::ApiController
 
     respond_to do |format|
       if @form.save
+        ::FormPart.find_or_create_by(form_id: @form.id, part_id: @form.id)
+        
         format.json { render json: @form, status: :created }
       else
         format.json { render json: @form.errors, status: :unprocessable_entity }
@@ -73,6 +68,6 @@ class Api::FormsController < Api::ApiController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def form_params
-      params.require(:form).permit(:name, :component, :parent)
+      params.require(:form).permit(:name, :shared)
     end
 end

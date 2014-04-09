@@ -19,7 +19,7 @@
     <!-- div class="panel-body">
     </div -->
     <table class="table table-hover">
-      <tr ng-repeat="form in forms | filter: { component: false } | orderBy: '+name'">
+      <tr ng-repeat="form in forms | filter: { shared: false } | orderBy: '+name'">
         <td>
           <a href="{{ form.form_path }}">{{ form.name }}</a>
         </td>
@@ -39,11 +39,11 @@
   </div>
   
   <div class="panel panel-default">
-    <div class="panel-heading">Components</div>
+    <div class="panel-heading">Sharable forms</div>
     <!-- div class="panel-body">
     </div -->
     <table class="table table-hover">
-      <tr ng-repeat="form in forms | filter: { component: true } | orderBy: '+name'">
+      <tr ng-repeat="form in forms | filter: { shared: true } | orderBy: '+name'">
         <td>
           <a href="{{ form.form_path }}">{{ form.name }}</a>
         </td>
@@ -88,7 +88,7 @@
 
       <div class="checkbox">
         <label>
-          <input type="checkbox" ng-model="eForm.component"> Component
+          <input type="checkbox" ng-model="eForm.shared"> Sharable
         </label>
       </div>
 

@@ -44,7 +44,7 @@ fiApp.controller('FormsCtrl', ['$scope', 'FormsSrv', 'NotifSrv', 'forms',
   $scope.clearForm = function() {
     $scope.submitted = false;
     $scope.eForm = {};
-    $scope.eForm.$setPristine();
+    $scope.eFormForm.$setPristine();
   }
   
   $scope.editForm = function(form) {

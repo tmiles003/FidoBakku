@@ -1,9 +1,9 @@
 class FormSerializer < ActiveModel::Serializer
-  attributes :id, :name, :component, :parent, :form_path
+  attributes :id, :name, :shared, :form_path
   
   # null != false...
-  def component
-    !!object.component
+  def shared
+    !!object.shared
   end
   
   def form_path
