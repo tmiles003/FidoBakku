@@ -25,6 +25,10 @@ class User < ActiveRecord::Base
   has_one :form, through: :form_user
   has_many :form_users
   
+  scope :in_role, lambda { |role|
+    where('role' => role) unless role.nil?
+  }
+
   def to_param
     [id, self.slug].join('/')
   end

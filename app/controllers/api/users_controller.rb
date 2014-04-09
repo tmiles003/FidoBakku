@@ -6,7 +6,7 @@ class Api::UsersController < Api::ApiController
   # GET /api/users
   # GET /api/users.json
   def index
-    render json: @account.users
+    render json: @account.users.includes(:form, :team).in_role(params[:role])
   end
   
   # GET /api/users/current
@@ -26,14 +26,6 @@ class Api::UsersController < Api::ApiController
     render json: ::User::ROLES, :each_serializer => RoleSerializer
   end
   
-  # used in user_evaluations, account
-  # GET /api/users/list
-  # GET /api/users/list.json
-  def list
-    render json: @account.account_users.in_role(params[:role])
-    #render json: @users # @account.account_users.in_role(params[:role])
-  end
-
   # POST /api/users
   # POST /api/users.json
   def create

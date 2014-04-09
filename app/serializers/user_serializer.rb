@@ -1,5 +1,7 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :email_hash, :name, :role, :role_sort, :team, :form, :user_path
+  attributes :id, :email, :email_hash, :name, :role, :role_sort, :user_path
+  has_one :form
+  has_one :team
   
   def email_hash
     OpenSSL::Digest::MD5.new(object.email).hexdigest
@@ -14,14 +16,6 @@ class UserSerializer < ActiveModel::Serializer
     else # admin
       30
     end
-  end
-  
-  def team
-    object.team.nil? ? nil : object.team
-  end
-  
-  def form
-    object.form.nil? ? nil : object.form
   end
   
   def user_path
