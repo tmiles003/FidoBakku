@@ -9,6 +9,8 @@ fiApp.controller('UserEvaluationCtrl', ['$scope', '$http', '$routeParams',
   
   $scope.evaluation = evaluation;
   $scope.scores = angular.fromJson(evaluation.scores);
+  
+  // console.log( evaluation.form_ids );
 
   /* var isLoading = true;
   $scope.$watchCollection('scores', function() { // console.log( $scope.evaluation );
