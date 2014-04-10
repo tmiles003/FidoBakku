@@ -2,6 +2,7 @@ class Api::UsersController < Api::ApiController
   
   load_and_authorize_resource
   before_action :set_account_user, only: [:show, :edit, :update, :destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_user
   
   # GET /api/users
   # GET /api/users.json
@@ -32,33 +33,29 @@ class Api::UsersController < Api::ApiController
     @new_user = ::User.new(user_params) # :: forces root namespace
     @new_user._account = @account
     
-    respond_to do |format|
-      if @new_user.save
-        @user.account.users << @new_user # 
-        
-        @team_user = ::TeamUser.new(user_id: @new_user.id, team_id: params[:team_id])
-        @team_user.save
-        
-        format.json { render json: @new_user, status: :created }
-      else
-        format.json { render json: @new_user.errors, status: :unprocessable_entity }
-      end
+    if @new_user.save
+      @user.account.users << @new_user
+      
+      @team_user = ::TeamUser.find_or_initiliaze_by(user_id: @new_user.id, team_id: params[:team_id])
+      @team_user.save
+      
+      render json: @new_user, status: :created
+    else
+      render json: @new_user.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /api/users/1
   # PATCH/PUT /api/users/1.json
   def update
-    respond_to do |format|
-      if @account_user.update(user_params)
-        
-        @team_user = ::TeamUser.find_or_create_by(user_id: @account_user.id)
-        @team_user.update(team_id: params[:team_id])
-        
-        format.json { render json: @account_user }
-      else
-        format.json { render json: @account_user.errors, status: :unprocessable_entity }
-      end
+    if @account_user.update(user_params)
+      
+      @team_user = ::TeamUser.find_or_create_by(user_id: @account_user.id)
+      @team_user.update(team_id: params[:team_id])
+      
+      render json: @account_user
+    else
+      render json: @account_user.errors, status: :unprocessable_entity
     end
   end
 
@@ -66,15 +63,18 @@ class Api::UsersController < Api::ApiController
   # DELETE /api/users/1.json
   def destroy
     @account_user.destroy # unless @user.id != @current_user.id
-    respond_to do |format|
-      format.json { head :no_content }
-    end
+    head :no_content
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_account_user
-      @account_user = ::User.find(params[:id])
+      @account_user = ::User.find(params[:id]) # in account!
+    end
+    
+    def invalid_user
+      logger.warn 'no user with this id'
+      head :no_content
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

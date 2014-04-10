@@ -24,26 +24,22 @@ class Api::FormsController < Api::ApiController
     @form.account = @account
     @form._account = @account
 
-    respond_to do |format|
-      if @form.save
-        ::FormPart.find_or_create_by(form_id: @form.id, part_id: @form.id)
-        
-        format.json { render json: @form, status: :created }
-      else
-        format.json { render json: @form.errors, status: :unprocessable_entity }
-      end
+    if @form.save
+      ::FormPart.find_or_create_by(form_id: @form.id, part_id: @form.id)
+      
+      render json: @form, status: :created
+    else
+      render json: @form.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /api/forms/1
   # PATCH/PUT /api/forms/1.json
   def update
-    respond_to do |format|
-      if @form.update(form_params)
-        format.json { head :no_content }
-      else
-        format.json { render json: @form.errors, status: :unprocessable_entity }
-      end
+    if @form.update(form_params)
+      render json: @form
+    else
+      render json: @form.errors, status: :unprocessable_entity
     end
   end
   
@@ -51,9 +47,7 @@ class Api::FormsController < Api::ApiController
   # DELETE /api/forms/1.json
   def destroy
     @form.destroy
-    respond_to do |format|
-      format.json { head :no_content }
-    end
+    head :no_content
   end
 
   private
@@ -63,6 +57,7 @@ class Api::FormsController < Api::ApiController
     end
     
     def invalid_form
+      logger.warn 'no form with this id'
       head :no_content
     end
 

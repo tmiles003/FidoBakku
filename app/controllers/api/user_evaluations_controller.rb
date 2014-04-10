@@ -20,24 +20,20 @@ class Api::UserEvaluationsController < Api::ApiController
     @user_evaluation = ::UserReview.new(user_evaluation_params)
     #logger.info user_evaluation_params.to_yaml
 
-    respond_to do |format|
-      if @user_evaluation.save
-        format.json { render json: @user_evaluation, status: :created }
-      else
-        format.json { render json: @user_evaluation.errors, status: :unprocessable_entity }
-      end
+    if @user_evaluation.save
+      render json: @user_evaluation, status: :created
+    else
+      render json: @user_evaluation.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /api/user_evals/1
   # PATCH/PUT /api/user_evals/1.json
   def update
-    respond_to do |format|
-      if @user_evaluation.update(user_evaluation_params)
-        format.json { render json: @user_evaluation }
-      else
-        format.json { render json: @user_evaluation.errors, status: :unprocessable_entity }
-      end
+    if @user_evaluation.update(user_evaluation_params)
+      render json: @user_evaluation
+    else
+      render json: @user_evaluation.errors, status: :unprocessable_entity
     end
   end
 
@@ -45,9 +41,7 @@ class Api::UserEvaluationsController < Api::ApiController
   # DELETE /api/user_evals/1.json
   def destroy
     @user_evaluation.destroy
-    respond_to do |format|
-      format.json { head :no_content }
-    end
+    head :no_content
   end
 
   private

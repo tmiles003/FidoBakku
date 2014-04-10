@@ -2,7 +2,7 @@ class Api::CompsController < Api::ApiController
   
   before_action :set_section, only: [:index, :create]
   before_action :set_comp, only: [:update, :up, :down, :destroy]
-  #
+  
   before_action :set_comp_above, only: [:up]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_comp_above
   before_action :set_comp_below, only: [:down]
@@ -21,25 +21,21 @@ class Api::CompsController < Api::ApiController
     @comp.next_ordr
     @comp._account = @account
 
-    respond_to do |format|
-      if @comp.save
-        @section.comps << @comp
-        format.json { render json: @comp, status: :created }
-      else
-        format.json { render json: @comp.errors, status: :unprocessable_entity }
-      end
+    if @comp.save
+      @section.comps << @comp
+      render json: @comp, status: :created
+    else
+      render json: @comp.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /api/comps/1
   # PATCH/PUT /api/comps/1.json
   def update
-    respond_to do |format|
-      if @comp.update(comp_params)
-        format.json { render json: @comp, status: :created }
-      else
-        format.json { render json: @comp.errors, status: :unprocessable_entity }
-      end
+    if @comp.update(comp_params)
+      render json: @comp, status: :created
+    else
+      render json: @comp.errors, status: :unprocessable_entity
     end
   end
   
@@ -49,11 +45,7 @@ class Api::CompsController < Api::ApiController
     @comp.update(ordr: @comp_above.ordr)
     @comp_above.update(ordr: ordr)
     
-    @comps = Array.[](@comp, @comp_above)
-    
-    respond_to do |format|
-      format.json { render json: @comps }
-    end
+    render json: Array.[](@comp, @comp_above)
   end
   
   # PUT /api/comps/1/down.json
@@ -62,20 +54,14 @@ class Api::CompsController < Api::ApiController
     @comp.update(ordr: @comp_below.ordr)
     @comp_below.update(ordr: ordr)
     
-    @comps = Array.[](@comp, @comp_below)
-    
-    respond_to do |format|
-      format.json { render json: @comps }
-    end
+    render json: Array.[](@comp, @comp_below)
   end
 
   # DELETE /api/comps/1
   # DELETE /api/comps/1.json
   def destroy
     @comp.destroy
-    respond_to do |format|
-      format.json { head :no_content }
-    end
+    head :no_content
   end
 
   private
@@ -89,7 +75,7 @@ class Api::CompsController < Api::ApiController
     end
     
     def invalid_comp
-      logger.info 'invalid comp'
+      logger.info 'no comp with this id'
       head :no_content
     end
     

@@ -5,7 +5,6 @@ class Api::TeamsController < Api::ApiController
   # GET /api/teams
   # GET /api/teams.json
   def index
-    #@teams = @account.teams
     render json: @account.teams
   end
 
@@ -15,24 +14,20 @@ class Api::TeamsController < Api::ApiController
     @team = ::Team.new(team_params)
     @team.account = @account
 
-    respond_to do |format|
-      if @team.save
-        format.json { render json: @team, status: :created }
-      else
-        format.json { render json: @team.errors, status: :unprocessable_entity }
-      end
+    if @team.save
+      render json: @team, status: :created
+    else
+      render json: @team.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /api/teams/1
   # PATCH/PUT /api/teams/1.json
   def update
-    respond_to do |format|
-      if @team.update(team_params)
-        format.json { render json: @team }
-      else
-        format.json { render json: @team.errors, status: :unprocessable_entity }
-      end
+    if @team.update(team_params)
+      render json: @team
+    else
+      render json: @team.errors, status: :unprocessable_entity
     end
   end
 
@@ -40,9 +35,7 @@ class Api::TeamsController < Api::ApiController
   # DELETE /api/teams/1.json
   def destroy
     @team.destroy
-    respond_to do |format|
-      format.json { head :no_content }
-    end
+    head :no_content
   end
 
   private

@@ -21,24 +21,20 @@ class Api::EvaluationSessionsController < Api::ApiController
     @evaluation_session.account = @account
     @evaluation_session._account = @account
 
-    respond_to do |format|
-      if @evaluation_session.save
-        format.json { render json: @evaluation_session, status: :created }
-      else
-        format.json { render json: @evaluation_session.errors, status: :unprocessable_entity }
-      end
+    if @evaluation_session.save
+      render json: @evaluation_session, status: :created
+    else
+      render json: @evaluation_session.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /api/evaluation_sessions/1
   # PATCH/PUT /api/evaluation_sessions/1.json
   def update
-    respond_to do |format|
-      if @evaluation_session.update(evaluation_session_params)
-        format.json { render json: @evaluation_session }
-      else
-        format.json { render json: @evaluation_session.errors, status: :unprocessable_entity }
-      end
+    if @evaluation_session.update(evaluation_session_params)
+      render json: @evaluation_session
+    else
+      render json: @evaluation_session.errors, status: :unprocessable_entity
     end
   end
 
@@ -46,9 +42,7 @@ class Api::EvaluationSessionsController < Api::ApiController
   # DELETE /api/evaluation_sessions/1.json
   def destroy
     @evaluation_session.destroy
-    respond_to do |format|
-      format.json { head :no_content }
-    end
+    head :no_content
   end
 
   private

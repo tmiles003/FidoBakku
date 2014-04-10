@@ -26,24 +26,20 @@ class Api::SectionsController < Api::ApiController
     @section.next_ordr
     @section._account = @account
 
-    respond_to do |format|
-      if @section.save
-        format.json { render json: @section, status: :created }
-      else
-        format.json { render json: @section.errors, status: :unprocessable_entity }
-      end
+    if @section.save
+      render json: @section, status: :created
+    else
+      render json: @section.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /api/sections/1
   # PATCH/PUT /api/sections/1.json
   def update
-    respond_to do |format|
-      if @section.update(section_params)
-        format.json { render json: @section }
-      else
-        format.json { render json: @section.errors, status: :unprocessable_entity }
-      end
+    if @section.update(section_params)
+      render json: @section
+    else
+      render json: @section.errors, status: :unprocessable_entity
     end
   end
   
@@ -53,11 +49,7 @@ class Api::SectionsController < Api::ApiController
     @section.update(ordr: @section_above.ordr)
     @section_above.update(ordr: ordr)
     
-    @sections = Array.[](@section, @section_above)
-    
-    respond_to do |format|
-      format.json { render json: @sections }
-    end
+    render json: Array.[](@section, @section_above)
   end
   
   # PUT /api/sections/1/down.json
@@ -66,20 +58,14 @@ class Api::SectionsController < Api::ApiController
     @section.update(ordr: @section_below.ordr)
     @section_below.update(ordr: ordr)
     
-    @sections = Array.[](@section, @section_below)
-    
-    respond_to do |format|
-      format.json { render json: @sections }
-    end
+    render json: Array.[](@section, @section_below)
   end
 
   # DELETE /api/sections/1
   # DELETE /api/sections/1.json
   def destroy
     @section.destroy
-    respond_to do |format|
-      format.json { head :no_content }
-    end
+    head :no_content
   end
 
   private

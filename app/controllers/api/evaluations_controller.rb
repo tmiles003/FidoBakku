@@ -23,24 +23,20 @@ class Api::EvaluationsController < Api::ApiController
     @evaluation = ::Evaluation.new(evaluation_params) # :: forces root namespace
     @evaluation.session_id = @evaluation_session.id
 
-    respond_to do |format|
-      if @evaluation.save
-        format.json { render json: @evaluation, status: :created }
-      else
-        format.json { render json: @evaluation.errors, status: :unprocessable_entity }
-      end
+    if @evaluation.save
+      render json: @evaluation, status: :created
+    else
+      render json: @evaluation.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /api/evaluations/1
   # PATCH/PUT /api/evaluations/1.json
   def update
-    respond_to do |format|
-      if @evaluation.update(evaluation_params)
-        format.json { head :no_content }
-      else
-        format.json { render json: @evaluation.errors, status: :unprocessable_entity }
-      end
+    if @evaluation.update(evaluation_params)
+      render json: @evaluation
+    else
+      render json: @evaluation.errors, status: :unprocessable_entity
     end
   end
 
@@ -48,9 +44,7 @@ class Api::EvaluationsController < Api::ApiController
   # DELETE /api/evaluations/1.json
   def destroy
     @evaluation.destroy
-    respond_to do |format|
-      format.json { head :no_content }
-    end
+    head :no_content
   end
 
   private
@@ -60,7 +54,7 @@ class Api::EvaluationsController < Api::ApiController
     end
     
     def invalid_evaluation_session
-      logger.info 'no evaluation_session with this id'
+      logger.info 'no evaluation session with this id'
       head :no_content
     end
 
