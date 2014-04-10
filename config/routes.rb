@@ -74,6 +74,7 @@ FidoBakku::Application.routes.draw do
     resources :evaluations, except: [:new, :edit]
     resources :user_evals, controller: :user_evaluations, except: [:new, :update, :edit]
     resources :user_evaluation, only: [:show, :update]
+    get 'user_evaluation_form' => 'user_evaluation#form'
     
     resources :comments, except: [:show, :new, :create, :edit]
     

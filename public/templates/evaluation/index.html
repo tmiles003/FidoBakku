@@ -1,6 +1,29 @@
 <h1>Evaluation</h1>
 
-<form name="reviewForm" id="reviewForm" novalidate>
+<div class="row" ng-repeat="form in forms">
+  <div class="col-md-12">
+  <!-- {{ form }} -->
+  
+  <div class="panel panel-default" ng-repeat="section in form.sections | orderBy: '+ordr'">
+    <div class="panel-heading">
+      {{ section.name }}
+    </div>
+    
+    <table class="table table-hover">
+      <tr ng-repeat="comp in section.comps | orderBy: '+ordr'">
+        <td>{{ comp.content }}</td>
+        <!-- td class="" style="width:70px;">
+          <input type="text" ng-model="scores[benchmark.id]"
+            ng-pattern="/^(\?|[1-4](?:.5)?|5)$/" class="form-control text-center">
+        </td -->
+      </tr>
+    </table>
+  </div>
+  
+  </div>
+</div>
+
+<!-- form name="reviewForm" id="reviewForm" novalidate>
 <div class="row" ng-repeat="topic in form.topics | orderBy: '+ordr'">
   
   <div class="col-md-12">
@@ -24,4 +47,4 @@
   </div>
 
 </div>
-</form>
+</form -->
