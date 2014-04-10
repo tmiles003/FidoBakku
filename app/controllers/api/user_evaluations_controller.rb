@@ -11,13 +11,13 @@ class Api::UserEvaluationsController < Api::ApiController
   # GET /api/user_evals
   # GET /api/user_evals.json
   def index
-    render json: @evaluation.user_evaluations
+    render json: @evaluation.user_evaluations, each_serializer: UserEvaluationsSerializer
   end
   
   # GET /api/user_evals/1
   # GET /api/user_evals/1.json
   def show
-    render json: @user_evaluation
+    render json: @user_evaluation, serializer: UserEvaluationsSerializer
   end
   
   # POST /api/user_evals
@@ -27,17 +27,7 @@ class Api::UserEvaluationsController < Api::ApiController
     #logger.info user_evaluation_params.to_yaml
 
     if @user_evaluation.save
-      render json: @user_evaluation, status: :created
-    else
-      render json: @user_evaluation.errors, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /api/user_evals/1
-  # PATCH/PUT /api/user_evals/1.json
-  def update
-    if @user_evaluation.update(user_evaluation_scores_params)
-      render json: @user_evaluation
+      render json: @user_evaluation, status: :created, serializer: UserEvaluationsSerializer
     else
       render json: @user_evaluation.errors, status: :unprocessable_entity
     end
@@ -62,7 +52,7 @@ class Api::UserEvaluationsController < Api::ApiController
     end
     
     def set_user_evaluation
-      # for this user id? / evaluator_id
+      # for this user id?
       @user_evaluation = ::UserEvaluation.find(params[:id])
     end
     
@@ -74,9 +64,5 @@ class Api::UserEvaluationsController < Api::ApiController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_evaluation_params
       params.require(:user_evaluation).permit(:user_id, :form_id, :evaluation_id, :evaluator_id)
-    end
-    
-    def user_evaluation_scores_params
-      params.require(:user_evaluation).permit(:scores)
     end
 end

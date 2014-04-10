@@ -1,5 +1,7 @@
 FidoBakku::Application.routes.draw do
   
+  get "user_evaluation/show"
+  get "user_evaluation/update"
   root 'welcome#index'
   
   resources :account, only: [:create, :new]
@@ -70,7 +72,8 @@ FidoBakku::Application.routes.draw do
     # keep routes shorts
     resources :eval_sessions, controller: :evaluation_sessions
     resources :evaluations, except: [:new, :edit]
-    resources :user_evals, controller: :user_evaluations, except: [:new, :edit]
+    resources :user_evals, controller: :user_evaluations, except: [:new, :update, :edit]
+    resources :user_evaluation, only: [:show, :update]
     
     resources :comments, except: [:show, :new, :create, :edit]
     

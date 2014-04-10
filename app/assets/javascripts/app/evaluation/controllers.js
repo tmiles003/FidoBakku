@@ -10,7 +10,7 @@ fiApp.controller('UserEvaluationCtrl', ['$scope', '$http', '$routeParams',
   $scope.evaluation = evaluation;
   $scope.scores = angular.fromJson(evaluation.scores);
 
-  var isLoading = true;
+  /* var isLoading = true;
   $scope.$watchCollection('scores', function() { // console.log( $scope.evaluation );
     UserEvaluationSrv.update({ id: $scope.evaluation.id },
       { scores: JSON.stringify($scope.scores) }, function() {
@@ -19,5 +19,5 @@ fiApp.controller('UserEvaluationCtrl', ['$scope', '$http', '$routeParams',
         else 
           isLoading = false;
       });
-  });
+  }); */
 }]);

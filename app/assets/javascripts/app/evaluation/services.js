@@ -2,9 +2,9 @@
 
 /* Services */
 
-fiApp.factory('UserEvaluationSrv', ['$resource', '$http', function($resource, $http) {
+fiApp.factory('UserEvaluationSrv', ['$resource', function($resource) {
   
-  return $resource('/api/user_evals/:id', 
+  return $resource('/api/user_evaluation/:id', 
     { id: '@id' }, 
     { 'update': { method: 'PUT' } 
   });

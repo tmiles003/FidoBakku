@@ -9,6 +9,7 @@ class Form < ActiveRecord::Base
   belongs_to :account 
   
   has_many :form_users, dependent: :destroy
+  has_many :form_parts
   
   before_validation :check_plan_forms, on: :create
   

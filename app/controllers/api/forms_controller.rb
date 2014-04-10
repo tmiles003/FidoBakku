@@ -25,8 +25,6 @@ class Api::FormsController < Api::ApiController
     @form._account = @account
 
     if @form.save
-      ::FormPart.find_or_create_by(form_id: @form.id, part_id: @form.id)
-      
       render json: @form, status: :created
     else
       render json: @form.errors, status: :unprocessable_entity
