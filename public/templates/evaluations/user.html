@@ -2,10 +2,37 @@
 
 <div class="row">
   
-  <div class="col-md-8">
+  <div class="col-md-9">
     <h1>User evaluation</h1>
   
     <p>User evaluation help text</p>
   </div>
 
+</div>
+
+<div class="row">
+  <div class="col-md-9">
+  <!-- pretty graph here -->
+  </div>
+  
+  <div class="col-md-3">
+    <!-- tabbed user lists -->
+    <div class="panel panel-default">
+      <div class="panel-heading">Users</div>
+      <!-- div class="panel-body">
+      </div -->
+      <div class="fi-panel-inner">
+        <select ng-model="team_id" class="form-control" 
+          ng-options="team.id as team.name for team in teams">
+          <option value="">Filter by team</option>
+        </select>
+        <hr>
+        <div class="fi-eval-user-list">
+        <button ng-repeat="user in users | orderBy: '+name' | filter: { team: team_id }" 
+          ng-click="assign(user.id)" fi-evaluation-user="user"
+          class="btn btn-default fi-eval-user">{{ user.name }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -19,8 +19,8 @@ class UserEvaluation < ActiveRecord::Base
   
   def update_progress
     # get comp ids from form id
-    comp_ids = UserEvaluation.find_by_sql ["SELECT c.id FROM comps c 
-        JOIN sections s ON s.id = c.topic_id 
+    comp_ids = UserEvaluation.find_by_sql ["SELECT c.id FROM competencies c 
+        JOIN sections s ON s.id = c.section_id 
         JOIN forms f ON f.id = s.form_id 
       WHERE f.id = ?", form_id]
     
@@ -30,7 +30,7 @@ class UserEvaluation < ActiveRecord::Base
     scores_tmp = Hash.new
     
     # loop through the comp ids
-    comp_ids.each { |b|
+    comp_ids.each { |c|
       c_id = c.id.to_s # set the id as a string, to use as key
       # if hash has key and value is not empty
       if scores_h.has_key?(c_id) && !scores_h[c_id].to_s.empty?

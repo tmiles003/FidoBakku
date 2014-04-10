@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140409075606) do
+ActiveRecord::Schema.define(version: 20140410041214) do
 
   create_table "account_users", force: true do |t|
     t.integer "account_id"
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20140409075606) do
     t.integer "part_id"
   end
 
-  add_index "form_parts", ["form_id", "part_id"], name: "index_form_part_on_form_id_and_part_id", unique: true, using: :btree
+  add_index "form_parts", ["form_id", "part_id"], name: "index_form_parts_on_form_id_and_part_id", unique: true, using: :btree
 
   create_table "form_users", force: true do |t|
     t.integer "form_id"
@@ -118,8 +118,8 @@ ActiveRecord::Schema.define(version: 20140409075606) do
     t.integer  "evaluation_id"
     t.integer  "user_id"
     t.integer  "form_id"
-    t.integer  "reviewer_id"
-    t.string   "reviewer_name"
+    t.integer  "evaluator_id"
+    t.string   "evaluator_name"
     t.text     "scores"
     t.integer  "progress"
     t.datetime "created_at"

@@ -17,7 +17,7 @@ class Api::UserEvaluationsController < Api::ApiController
   # POST /api/user_evals
   # POST /api/user_evals.json
   def create
-    @user_evaluation = ::UserReview.new(user_evaluation_params)
+    @user_evaluation = ::UserEvaluation.new(user_evaluation_params)
     #logger.info user_evaluation_params.to_yaml
 
     if @user_evaluation.save
@@ -67,6 +67,6 @@ class Api::UserEvaluationsController < Api::ApiController
     
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_evaluation_params
-      params.require(:user_evaluation).permit(:user_id)
+      params.require(:user_evaluation).permit(:user_id, :form_id, :evaluation_id, :evaluator_id)
     end
 end

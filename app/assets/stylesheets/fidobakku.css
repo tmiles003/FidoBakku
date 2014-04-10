@@ -33,12 +33,12 @@ i.fa {
 .main-container {
 }
 
-.fi-form-user-list {
+.fi-form-user-list, .fi-eval-user-list {
   display: inline-block;
   width: 100%;
   max-width: 100%;
 }
-.fi-form-user {
+.fi-form-user, .fi-eval-user {
   background-color: #ddd;
   color: #415b76;
   display: block;
@@ -49,10 +49,10 @@ i.fa {
   width: 100%;
   max-width: 100%;
 }
-.fi-form-user:hover {
+.fi-form-user:hover, .fi-eval-user:hover {
   background-color: #ccc;
 }
-.fi-form-user-sel {
+.fi-form-user-sel, .fi-eval-user-sel {
   background-color: #415b76;
   color: #fff;
 }
