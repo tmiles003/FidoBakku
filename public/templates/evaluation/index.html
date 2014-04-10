@@ -1,0 +1,27 @@
+<h1>Evaluation</h1>
+
+<form name="reviewForm" id="reviewForm" novalidate>
+<div class="row" ng-repeat="topic in form.topics | orderBy: '+ordr'">
+  
+  <div class="col-md-12">
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      {{ topic.name }}
+    </div>
+    
+    <table class="table table-hover">
+      <tr ng-repeat="benchmark in topic.benchmarks | orderBy: '+ordr'">
+        <td>{{ benchmark.content }}</td>
+        <td class="" style="width:70px;">
+          <input type="text" ng-model="scores[benchmark.id]"
+            ng-pattern="/^(\?|[1-4](?:.5)?|5)$/" class="form-control text-center">
+        </td>
+      </tr>
+    </table>
+  </div>
+  
+  </div>
+
+</div>
+</form>

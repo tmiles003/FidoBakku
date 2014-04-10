@@ -4,11 +4,21 @@ class UserEvaluation < ActiveRecord::Base
   
   has_one :user, primary_key: :user_id, foreign_key: :id
   has_one :form, primary_key: :form_id, foreign_key: :id #, -> { includes :topics }
-  has_one :reviewer, class_name: 'User', primary_key: :reviewer_id, foreign_key: :id
-  has_one :comment, foreign_key: :evaluation_id
+  has_one :evaluation, primary_key: :evaluation_id, foreign_key: :id
+  #has_one :reviewer, class_name: 'User', primary_key: :reviewer_id, foreign_key: :id
+  #has_one :comment, foreign_key: :user_evaluation_id
   
   after_validation :initial_setup, on: :create
   before_save :update_progress
+  
+  def to_param
+    [id, self.name].join('/')
+  end
+  
+  # pretty urls, no other use
+  def name
+    ::User.find(self.user_id).slug
+  end
   
   protected
   

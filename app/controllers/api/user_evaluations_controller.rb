@@ -5,13 +5,19 @@ class Api::UserEvaluationsController < Api::ApiController
   before_action :set_evaluation, only: [:index]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_evaluation
   
-  before_action :set_user_evaluation, only: [:update, :destroy]
+  before_action :set_user_evaluation, only: [:show, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_user_evaluation
   
   # GET /api/user_evals
   # GET /api/user_evals.json
   def index
     render json: @evaluation.user_evaluations
+  end
+  
+  # GET /api/user_evals/1
+  # GET /api/user_evals/1.json
+  def show
+    render json: @user_evaluation
   end
   
   # POST /api/user_evals
@@ -30,7 +36,7 @@ class Api::UserEvaluationsController < Api::ApiController
   # PATCH/PUT /api/user_evals/1
   # PATCH/PUT /api/user_evals/1.json
   def update
-    if @user_evaluation.update(user_evaluation_params)
+    if @user_evaluation.update(user_evaluation_scores_params)
       render json: @user_evaluation
     else
       render json: @user_evaluation.errors, status: :unprocessable_entity
@@ -56,7 +62,7 @@ class Api::UserEvaluationsController < Api::ApiController
     end
     
     def set_user_evaluation
-      # for this user id?
+      # for this user id? / evaluator_id
       @user_evaluation = ::UserEvaluation.find(params[:id])
     end
     
@@ -68,5 +74,9 @@ class Api::UserEvaluationsController < Api::ApiController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_evaluation_params
       params.require(:user_evaluation).permit(:user_id, :form_id, :evaluation_id, :evaluator_id)
+    end
+    
+    def user_evaluation_scores_params
+      params.require(:user_evaluation).permit(:scores)
     end
 end

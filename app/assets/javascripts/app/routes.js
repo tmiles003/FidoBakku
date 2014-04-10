@@ -119,12 +119,12 @@ fiApp.config(['$routeProvider', '$locationProvider',
   });
   
   // user review
-  $routeProvider.when('/review/:id/:name', { 
-    templateUrl: '/templates/review/index.html', 
-    controller: 'UserReviewsCtrl',
+  $routeProvider.when('/evaluation/:id/:name', { 
+    templateUrl: '/templates/evaluation/index.html', 
+    controller: 'UserEvaluationCtrl',
     resolve: {
-      review: function(UserReviewsSrv, $route) {
-        return UserReviewsSrv.get({ id: $route.current.params.id })['$promise']; 
+      evaluation: function(UserEvaluationSrv, $route) {
+        return UserEvaluationSrv.get({ id: $route.current.params.id })['$promise']; 
       }
     }
   });

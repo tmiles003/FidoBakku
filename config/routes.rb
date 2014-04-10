@@ -17,12 +17,13 @@ FidoBakku::Application.routes.draw do
   get 'form/:id' => 'welcome#application', as: :form_manage
   get 'session/:id' => 'welcome#application', as: :session_manage
   get 'evaluations/:id' => 'welcome#application', as: :evaluation_manage
+  get 'evaluation/:id' => 'welcome#application', as: :user_evaluation
   #get 'feedback/:id/:name' => 'welcome#application', as: :user_feedback
   
   namespace :api, defaults: { format: :json } do
     
     get 'session' => 'session#index'
-    #get 'dashboard/reviews' => 'dashboard#reviews'
+    get 'dashboard/evaluations' => 'dashboard#evaluations'
     #get 'dashboard/feedbacks' => 'dashboard#feedbacks'
     
     resources :users, except: [:new] do 
@@ -67,9 +68,9 @@ FidoBakku::Application.routes.draw do
     resources :form_parts, only: [:index, :create, :update, :destroy]
     
     # keep routes shorts
-    resources :eval_sessions, controller: :evaluation_sessions, except: [:new, :edit]
+    resources :eval_sessions, controller: :evaluation_sessions
     resources :evaluations, except: [:new, :edit]
-    resources :user_evals, controller: :user_evaluations, only: [:index, :create, :destroy]
+    resources :user_evals, controller: :user_evaluations, except: [:new, :edit]
     
     resources :comments, except: [:show, :new, :create, :edit]
     
