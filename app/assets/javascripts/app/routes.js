@@ -8,19 +8,94 @@ fiApp.config(['$routeProvider', '$locationProvider',
     controller: 'DashboardCtrl' 
   });
   
-  $routeProvider.when('/staff', { 
-    templateUrl: '/templates/users/index.html', 
-    controller: 'UsersCtrl', 
+  /* admin routes first */
+  
+  $routeProvider.when('/admin/staff', { 
+    templateUrl: '/templates/admin/users/index.html', 
+    controller: 'UsersAdminCtrl', 
     resolve: { 
-      users: function(UsersSrv) { 
-        return UsersSrv.query()['$promise']; 
+      users: function(UsersAdminSrv) { 
+        return UsersAdminSrv.query()['$promise']; 
       },
-      teams: function(TeamsSrv) {
-        return TeamsSrv.query()['$promise'];
+      teams: function(TeamsAdminSrv) {
+        return TeamsAdminSrv.query()['$promise'];
       }
     }
   });
   
+  $routeProvider.when('/admin/forms', { 
+    templateUrl: '/templates/admin/forms/index.html', 
+    controller: 'FormsAdminCtrl', 
+    resolve: {
+      forms: function(FormsAdminSrv) { 
+        return FormsAdminSrv.query()['$promise']; 
+      }
+    }
+  });
+  
+  $routeProvider.when('/admin/form/:id/:slug', { 
+    templateUrl: '/templates/admin/forms/manage.html', 
+    controller: 'FormSectionsAdminCtrl',
+    resolve: {
+      form: function(FormsAdminSrv, $route) {
+        return FormsAdminSrv.get({ id: $route.current.params.id })['$promise'];
+      },
+      sections: function(FormSectionsAdminSrv, $route) { 
+        return FormSectionsAdminSrv.query({ form_id: $route.current.params.id })['$promise'];
+      }
+    }
+  });
+  
+  // list all the evaluation sessions
+  $routeProvider.when('/admin/evaluations', { 
+    templateUrl: '/templates/admin/evaluations/index.html', 
+    controller: 'EvaluationSessionsAdminCtrl', 
+    resolve: {
+      sessions: function(EvaluationSessionsAdminSrv) { 
+        return EvaluationSessionsAdminSrv.query()['$promise']; 
+      }
+    }
+  });
+  
+  $routeProvider.when('/admin/session/:id/:slug', { 
+    templateUrl: '/templates/admin/evaluations/session.html', 
+    controller: 'EvaluationsAdminCtrl', 
+    resolve: {
+      session: function(EvaluationSessionsAdminSrv, $route) {
+        return EvaluationSessionsAdminSrv.get({ id: $route.current.params.id })['$promise'];
+      },
+      evaluations: function(EvaluationsAdminSrv, $route) { 
+        return EvaluationsAdminSrv.query({ session_id: $route.current.params.id })['$promise'];
+      }
+    }
+  });
+  
+  // manage 1 evaluation (assign, etc)
+  $routeProvider.when('/admin/evaluations/:id/:name', { 
+    templateUrl: '/templates/admin/evaluations/user.html', 
+    controller: 'UserEvaluationsAdminCtrl',
+    resolve: {
+      evaluation: function(EvaluationsAdminSrv, $route) {
+        return EvaluationsAdminSrv.get({ id: $route.current.params.id })['$promise'];
+      },
+      userEvaluations: function(UserEvaluationsAdminSrv, $route) {
+        return UserEvaluationsAdminSrv.query({ evaluation_id: $route.current.params.id })['$promise'];
+      }
+    }
+  });
+  
+  $routeProvider.when('/admin/account', { 
+    templateUrl: '/templates/admin/account/index.html', 
+    controller: 'AccountAdminCtrl',
+    resolve: {
+      account: function(AccountAdminSrv) {
+        return AccountAdminSrv.get()['$promise'];
+      }
+    }
+  });
+  
+  
+  /* routes for everyone */
   $routeProvider.when('/user/:id/:name', { 
     templateUrl: '/templates/user/index.html', 
     controller: 'UserCtrl',
@@ -57,67 +132,6 @@ fiApp.config(['$routeProvider', '$locationProvider',
     }
   });
   
-  $routeProvider.when('/forms', { 
-    templateUrl: '/templates/forms/index.html', 
-    controller: 'FormsCtrl', 
-    resolve: {
-      forms: function(FormsSrv) { 
-        return FormsSrv.query()['$promise']; 
-      }
-    }
-  });
-  
-  $routeProvider.when('/form/:id/:slug', { 
-    templateUrl: '/templates/forms/manage.html', 
-    controller: 'SectionsCtrl',
-    resolve: {
-      form: function(FormsSrv, $route) {
-        return FormsSrv.get({ id: $route.current.params.id })['$promise'];
-      },
-      sections: function(SectionsSrv, $route) { 
-        return SectionsSrv.query({ form_id: $route.current.params.id })['$promise'];
-      }
-    }
-  });
-  
-  // list all the evaluation sessions
-  $routeProvider.when('/evaluations', { 
-    templateUrl: '/templates/evaluations/index.html', 
-    controller: 'EvaluationSessionsCtrl', 
-    resolve: {
-      sessions: function(EvaluationSessionsSrv) { 
-        return EvaluationSessionsSrv.query()['$promise']; 
-      }
-    }
-  });
-  
-  $routeProvider.when('/session/:id/:slug', { 
-    templateUrl: '/templates/evaluations/session.html', 
-    controller: 'EvaluationsCtrl', 
-    resolve: {
-      session: function(EvaluationSessionsSrv, $route) {
-        return EvaluationSessionsSrv.get({ id: $route.current.params.id })['$promise'];
-      },
-      evaluations: function(EvaluationsSrv, $route) { 
-        return EvaluationsSrv.query({ session_id: $route.current.params.id })['$promise'];
-      }
-    }
-  });
-  
-  // manage 1 evaluation (assign, etc)
-  $routeProvider.when('/evaluations/:id/:name', { 
-    templateUrl: '/templates/evaluations/user.html', 
-    controller: 'UserEvaluationsCtrl',
-    resolve: {
-      evaluation: function(EvaluationsSrv, $route) {
-        return EvaluationsSrv.get({ id: $route.current.params.id })['$promise'];
-      },
-      userEvaluations: function(UserEvaluationsSrv, $route) {
-        return UserEvaluationsSrv.query({ evaluation_id: $route.current.params.id })['$promise'];
-      }
-    }
-  });
-  
   // user review
   $routeProvider.when('/evaluation/:id/:name', { 
     templateUrl: '/templates/evaluation/index.html', 
@@ -134,16 +148,6 @@ fiApp.config(['$routeProvider', '$locationProvider',
     templateUrl: '/templates/feedback/index.html', 
     controller: 'FeedbackCtrl'
     // , resolve: {}
-  });
-  
-  $routeProvider.when('/account', { 
-    templateUrl: '/templates/account/index.html', 
-    controller: 'AccountCtrl',
-    resolve: {
-      account: function(AccountSrv) {
-        return AccountSrv.get()['$promise'];
-      }
-    }
   });
   
   $routeProvider.when('/profile', { 

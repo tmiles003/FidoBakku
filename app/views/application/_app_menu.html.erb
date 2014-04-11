@@ -4,7 +4,7 @@
     </li>
   <% if can? :manage, User # admins only %>
     <li>
-      <a href="/#/staff" active-nav-link="active"><i class="fa fa-users fa-lg"></i> Staff</a>
+      <a href="/#/admin/staff" active-nav-link="active"><i class="fa fa-users fa-lg"></i> Staff</a>
     </li>
   <% end %>
     <li>
@@ -12,12 +12,12 @@
     </li>
   <% if can? :index, Form # admins + managers only %>
     <li>
-      <a href="/#/forms" active-nav-link="active"><i class="fa fa-list-alt fa-lg"></i> Forms</a>
+      <a href="/#/admin/forms" active-nav-link="active"><i class="fa fa-list-alt fa-lg"></i> Forms</a>
     </li>
   <% end %>
   <% if can? :index, Evaluation # admins + managers only %>
     <li>
-      <a href="/#/evaluations" active-nav-link="active"><i class="fa fa-file-text-o fa-lg"></i> Evaluations</a>
+      <a href="/#/admin/evaluations" active-nav-link="active"><i class="fa fa-file-text-o fa-lg"></i> Evaluations</a>
     </li>
   <% end %>
   </ul>
@@ -30,7 +30,7 @@
       <ul class="dropdown-menu">
       <% if can? :show, Account # admins only %>
         <li>
-          <a href="/#/account"><i class="fa fa-cog fa-lg"></i> Account</a>
+          <a href="/#/admin/account"><i class="fa fa-cog fa-lg"></i> Account</a>
         </li>
       <% end %>
         <li>

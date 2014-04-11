@@ -2,7 +2,7 @@ class Form < ActiveRecord::Base
   
   include Upgradable
   
-  has_many :sections, dependent: :destroy
+  has_many :form_sections, dependent: :destroy
   
   scope :in_account, ->(account_id) { where('account_id = ?', account_id) }
   
@@ -10,8 +10,6 @@ class Form < ActiveRecord::Base
   
   has_many :form_users, dependent: :destroy
   has_many :form_parts
-  
-  before_validation :check_plan_forms, on: :create
   
   # don't delete form if associated with user evaluation
   

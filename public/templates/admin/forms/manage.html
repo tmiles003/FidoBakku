@@ -1,0 +1,124 @@
+<!-- h1>Form#edit</h1 -->
+<div class="row">
+  <div class="col-md-9">
+    <h1>{{ form.name }}</h1>
+    
+    <p>Sections help text</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-9">
+  <!-- shared form -->
+  <div class="panel panel-default">
+      <!-- div class="panel-heading">Shared form</div -->
+      <div class="panel-body">
+        Attach shared form
+      </div>
+      <div class="fi-panel-inner" ng-controller="FormPartCtrl">
+        <div class="row">
+          <form accept-charset="utf-8" novalidate name="eSharedForm">
+          <div class="col-md-9 form-group">
+            <select name="shared_form" ng-model="sharedForm.part_id" class="form-control" 
+              ng-options="form.id as form.name for form in sharedForms | orderBy: '+name'">
+              <option value="">Shared forms</option>
+            </select>
+          </div>
+          <div class="col-md-3 actions">
+            <button ng-click="saveShared(sharedForm)" type="button"
+              class="btn btn-default btn-success btn-sm fi-btn-wide">Save</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <!-- sections -->
+    <div class="panel panel-default" ng-repeat="section in sections | orderBy: '+ordr'">
+      <div class="panel-heading">{{ section.name }}
+        <span class="pull-right">
+          <button class="btn btn-default fi-btn-slim" ng-click="moveSectionUp(section)">
+            <i class="fa fa-angle-up fa-lg"></i>
+          </button>
+          <button class="btn btn-default fi-btn-slim" ng-click="moveSectionDown(section)">
+            <i class="fa fa-angle-down fa-lg"></i>
+          </button>
+          <button class="btn btn-default fi-btn-slim" ng-click="editSection(section)">
+            <i class="fa fa-edit fa-lg"></i>
+          </button>
+          <button class="btn btn-default fi-btn-slim" ng-click="deleteSection(section)">
+            <i class="fa fa-trash-o fa-lg"></i>
+          </button>
+        </span>
+      </div>
+      <!-- section benchmarks -->
+      <div ng-include="'/templates/admin/forms/manage_comps.html'">
+      </div>
+    </div>
+    
+    <!-- then the new/edit section form -->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <span ng-hide="eSection.id">Add new section</span>
+        <span ng-show="eSection.id">Update section</span>
+      </div>
+      <!-- div class="panel-body">
+      </div -->
+      <div class="fi-panel-inner">
+        <div class="row">
+          <form accept-charset="utf-8" novalidate name="eSectionForm">
+            <input type="hidden" ng-model="eSection.id">
+            
+          <div class="col-md-9 form-group" ng-class="{ 'has-error': eSectionForm.section_name.$invalid && submitted }">
+            <label for="section_name" class="sr-only">Section</label>
+            <input name="section_name" class="form-control" ng-model="eSection.name" type="text"
+              ng-required="true" ng-minlength="4" ng-maxlength="100" placeholder="Section">
+            <p ng-show="eSectionForm.section_name.$invalid && submitted" 
+              class="help-block">A section is required</p>
+          </div>
+          
+          <div class="col-md-3 actions">
+            <button ng-click="saveSection(eSection, eSectionForm.$valid)" type="button"
+              class="btn btn-default btn-success btn-sm fi-btn-wide">Save</button>
+            <button ng-click="clearForm()" class="btn btn-default btn-sm">
+              <i class="fa fa-eraser" tooltip="Clear form" 
+                tooltip-placement="bottom" tooltip-popup-delay="1500"></i></button>
+          </div>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-3">
+    <!-- tabbed user lists -->
+    <div class="panel panel-default" ng-hide="{{ form.shared }}">
+      <div class="panel-heading">Users</div>
+      <!-- div class="panel-body">
+      </div -->
+      <div class="fi-panel-inner" ng-controller="FormUserAdminCtrl">
+        <select ng-model="team_id" class="form-control" 
+          ng-options="team.id as team.name for team in teams">
+          <option value="">Filter by team</option>
+        </select>
+        <hr>
+        <div class="fi-form-user-list">
+        <button ng-repeat="user in users | orderBy: '+name' | filter: { team: team_id }" 
+          ng-click="assign(user.id)" fi-form-user="user"
+          class="btn btn-default fi-form-user">{{ user.name }}</button>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default" ng-show="{{ form.shared }}">
+      <div class="panel-heading">Forms</div>
+      <!-- div class="panel-body">
+      </div -->
+      <div class="fi-panel-inner">
+        <!-- ng-controller="FormComponentCtrl" -->
+        <hr>
+        
+      </div>
+    </div>
+  </div>
+</div>

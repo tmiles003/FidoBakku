@@ -2,11 +2,11 @@
 
 /* Controllers */
 
-fiApp.controller('FooterCtrl', ['$scope', 'UsersSrv', 'SessionSrv', 
-                  function($scope, UsersSrv, SessionSrv) {
+fiApp.controller('FooterCtrl', ['$scope', 'UsersAdminSrv', 'SessionSrv', 
+                  function($scope, UsersAdminSrv, SessionSrv) {
   
   $scope.user = '';
-  UsersSrv.current(function(user) {
+  UsersAdminSrv.current(function(user) { // FIXME
     $scope.user = user;
   });
   

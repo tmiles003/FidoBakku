@@ -14,11 +14,14 @@ FidoBakku::Application.routes.draw do
   
   get 'user/:id' => 'welcome#application', as: :user_manage
   get 'goal/:id' => 'welcome#application', as: :goal_manage
-  get 'form/:id' => 'welcome#application', as: :form_manage
-  get 'session/:id' => 'welcome#application', as: :session_manage
-  get 'evaluations/:id' => 'welcome#application', as: :evaluation_manage
   get 'evaluation/:id' => 'welcome#application', as: :user_evaluation
   get 'feedback/:id' => 'welcome#application', as: :evaluation_feedback
+  
+  namespace :admin, defaults: { format: :json } do
+    get 'form/:id' => 'welcome#application', as: :form_manage
+    get 'session/:id' => 'welcome#application', as: :session_manage
+    get 'evaluations/:id' => 'welcome#application', as: :evaluation_manage
+  end
   
   namespace :api, defaults: { format: :json } do
     
@@ -26,57 +29,62 @@ FidoBakku::Application.routes.draw do
     get 'dashboard/evaluations' => 'dashboard#evaluations'
     get 'dashboard/feedbacks' => 'dashboard#feedbacks'
     
-    resources :users, except: [:new] do 
-      collection do 
-        get 'current'
-        get 'list'
-        get 'roles'
-      end
-    end
-    
-    resources :teams, except: [:show, :new, :edit]
-    
     resources :goals, except: [:new, :edit] do
       collection do
         get 'team'
       end
     end
     
-    resources :sections, except: [:index, :show, :new, :edit] do 
-      resources :comps, except: [:show, :new, :edit], shallow: true do 
-        member do 
-          put 'up'
-          put 'down'
+    namespace :admin do
+      resources :users, except: [:new] do 
+        collection do 
+          get 'current'
+          get 'list'
+          get 'roles'
         end
       end
-    end
-    resources :forms, except: [:new] do
-      collection do 
-        get 'list'
-      end
-      member do
-        get 'users' => 'form_users#users' # index
-        put 'assign/:user_id' => 'form_users#assign' # update
-      end
-      resources :sections, only: [:index], shallow: true do 
-        member do 
-          put 'up'
-          put 'down'
+      resources :teams, except: [:show, :new, :edit]
+      
+      resources :form_sections, except: [:index, :show, :new, :edit] do 
+        resources :form_comps, except: [:show, :new, :edit], shallow: true do 
+          member do 
+            put 'up'
+            put 'down'
+          end
         end
       end
+      resources :forms, except: [:new] do
+        collection do 
+          get 'list'
+        end
+        member do
+          get 'users' => 'form_users#users' # index
+          put 'assign/:user_id' => 'form_users#assign' # update
+        end
+        resources :form_sections, only: [:index], shallow: true do 
+          member do 
+            put 'up'
+            put 'down'
+          end
+        end
+      end
+      
+      resources :evaluation_sessions
+      resources :evaluations, except: [:new, :edit]
+      resources :user_evaluations, except: [:new, :update, :edit]
+      
+      resource :account, controller: :account, only: [:show, :update, :destroy]
+    
     end
+    
     resources :form_parts, only: [:index, :create, :update, :destroy]
     
     # keep routes shorts
-    resources :eval_sessions, controller: :evaluation_sessions
-    resources :evaluations, except: [:new, :edit]
-    resources :user_evals, controller: :user_evaluations, except: [:new, :update, :edit]
     resources :user_evaluation, only: [:show, :update]
     get 'user_evaluation_form' => 'user_evaluation#form'
     
     resources :comments, except: [:show, :new, :create, :edit]
     
-    resource :account, controller: :account, only: [:show, :update, :destroy]
     resource :user, path: '/profile', controller: :profile, only: [:update]
     
   end

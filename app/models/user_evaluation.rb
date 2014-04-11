@@ -33,9 +33,9 @@ class UserEvaluation < ActiveRecord::Base
     
     parts = ::FormPart.get_parts form_id
     parts.each { |part_id|
-      sections = ::Section.where(form_id: part_id)
+      sections = ::FormSection.where(form_id: part_id)
       sections.each { |section_id| 
-        comp_ids << ::Comp.where(section_id: section_id).ids
+        comp_ids << ::FormComp.where(section_id: section_id).ids
       }
     }
     comp_ids = comp_ids.flatten

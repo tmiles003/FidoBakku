@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140410041214) do
+ActiveRecord::Schema.define(version: 20140411054927) do
 
   create_table "account_users", force: true do |t|
     t.integer "account_id"
@@ -39,14 +39,6 @@ ActiveRecord::Schema.define(version: 20140410041214) do
     t.datetime "updated_at"
   end
 
-  create_table "competencies", force: true do |t|
-    t.integer  "section_id"
-    t.text     "content"
-    t.integer  "ordr"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "evaluation_sessions", force: true do |t|
     t.integer  "account_id"
     t.string   "title"
@@ -60,12 +52,28 @@ ActiveRecord::Schema.define(version: 20140410041214) do
     t.datetime "created_at"
   end
 
+  create_table "form_competencies", force: true do |t|
+    t.integer  "form_section_id"
+    t.text     "content"
+    t.integer  "ordr"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "form_parts", force: true do |t|
     t.integer "form_id"
     t.integer "part_id"
   end
 
   add_index "form_parts", ["form_id", "part_id"], name: "index_form_parts_on_form_id_and_part_id", unique: true, using: :btree
+
+  create_table "form_sections", force: true do |t|
+    t.integer  "form_id"
+    t.string   "name"
+    t.integer  "ordr"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "form_users", force: true do |t|
     t.integer "form_id"
@@ -91,14 +99,6 @@ ActiveRecord::Schema.define(version: 20140410041214) do
     t.boolean  "is_private",  default: false
     t.boolean  "is_complete", default: false
     t.datetime "created_at"
-  end
-
-  create_table "sections", force: true do |t|
-    t.integer  "form_id"
-    t.string   "name"
-    t.integer  "ordr"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "team_users", force: true do |t|
