@@ -19,7 +19,7 @@ fiApp.controller('UserEvaluationCtrl', ['$scope', '$http', '$routeParams',
     
   });
 
-  /* var isLoading = true;
+  var isLoading = true;
   $scope.$watchCollection('scores', function() { // console.log( $scope.evaluation );
     UserEvaluationSrv.update({ id: $scope.evaluation.id },
       { scores: JSON.stringify($scope.scores) }, function() {
@@ -28,5 +28,5 @@ fiApp.controller('UserEvaluationCtrl', ['$scope', '$http', '$routeParams',
         else 
           isLoading = false;
       });
-  }); */
+  });
 }]);
