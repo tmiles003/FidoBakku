@@ -1,9 +1,10 @@
 class UserEvaluationDashboardSerializer < ActiveModel::Serializer
-  attributes :id, :name, :progress, :evaluation_path
+  attributes :id, :user, :progress, :evaluation_path
   
-  def name
-    user = ::User.find(object.user_id)
-    user.name
+  def user
+    #user = ::User.find(object.user_id)
+    #user.name
+    ::User.select('name, MD5(email) AS email_hash').find(object.user_id)
   end
   
   def evaluation_path

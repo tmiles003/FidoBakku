@@ -16,7 +16,13 @@
       <table class="table table-hover">
         <tr ng-repeat="evaluation in evaluations | orderBy: '+name'">
           <td>
-            <a href="{{ evaluation.evaluation_path }}">{{ evaluation.name }}</a>
+            <img ng-src="//secure.gravatar.com/avatar/{{ evaluation.user.email_hash }}?s=25&d=mm" alt="">
+          </td>
+          <td>
+            <a href="{{ evaluation.evaluation_path }}">{{ evaluation.user.name }}</a>
+          </td>
+          <td>
+            {{ evaluation.progress }}%
           </td>
         </tr>
       </table>
