@@ -1,4 +1,4 @@
-class UserSerializer < ActiveModel::Serializer
+class Admin::UserSerializer < ActiveModel::Serializer
   attributes :id, :email, :email_hash, :name, :role, :role_sort, :user_path
   has_one :form
   has_one :team

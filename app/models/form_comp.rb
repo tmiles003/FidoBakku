@@ -2,8 +2,6 @@ class FormComp < ActiveRecord::Base
   
   self.table_name = 'form_competencies'
   
-  include Upgradable
-  
   belongs_to :form_section
   
   def next_ordr

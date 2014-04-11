@@ -1,4 +1,4 @@
-class Api::FormPartsController < Api::ApiController
+class Api::Admin::FormPartsController < Api::ApiController
   
   load_and_authorize_resource
   
@@ -6,39 +6,35 @@ class Api::FormPartsController < Api::ApiController
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_form
   before_action :set_form_part, only: [:update, :destroy]
   
-  # GET /api/form_parts
-  # GET /api/form_parts.json
+  # GET /api/admin/form_parts.json
   def index
     @form_part = ::FormPart.where(form_id: params[:form_id]).where.not(part_id: params[:form_id]).take
     @form_part ||= ::FormPart.new(form_id: params[:form_id])
     
-    render json: @form_part
+    render json: @form_part, serializer: ::Admin::FormPartSerializer
   end
   
-  # POST /api/form_parts
-  # POST /api/form_parts.json
+  # POST /api/admin/form_parts.json
   def create
     @form_part = ::FormPart.new(form_part_params)
     
     if @form_part.save
-      render json: @form_part
+      render json: @form_part, serializer: ::Admin::FormPartSerializer
     else
       render json: @form_part.errors, status: :unprocessable_entity
     end
   end
   
-  # PATCH/PUT /api/form_parts/1
-  # PATCH/PUT /api/form_parts/1.json
+  # PATCH/PUT /api/admin/form_parts/1.json
   def update
     if @form_part.update(form_part_params)
-      render json: @form_part
+      render json: @form_part, serializer: ::Admin::FormPartSerializer
     else
       render json: @form_part.errors, status: :unprocessable_entity
     end
   end
 
-  # DELETE /api/form_parts/1
-  # DELETE /api/form_parts/1.json
+  # DELETE /api/admin/form_parts/1.json
   def destroy
     @form_part.destroy
     render json: ::FormPart.new(form_id: @form_part.form_id)

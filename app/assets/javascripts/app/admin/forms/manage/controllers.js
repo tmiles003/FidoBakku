@@ -180,8 +180,8 @@ fiApp.controller('FormCompsAdminCtrl', ['$scope', 'FormCompsAdminSrv', 'NotifSrv
   
 }]);
 
-fiApp.controller('FormPartCtrl', ['$scope', '$routeParams', '$http', 'FormPartSrv', 'NotifSrv',
-                  function($scope, $routeParams, $http, FormPartSrv, NotifSrv) {
+fiApp.controller('FormPartAdminCtrl', ['$scope', '$routeParams', '$http', 'FormPartAdminSrv', 'NotifSrv',
+                  function($scope, $routeParams, $http, FormPartAdminSrv, NotifSrv) {
   
   var formId = $routeParams.id;
   $scope.sharedForms = [];
@@ -189,12 +189,12 @@ fiApp.controller('FormPartCtrl', ['$scope', '$routeParams', '$http', 'FormPartSr
     $scope.sharedForms = sharedForms;
   });
   $scope.sharedForm = {};
-  FormPartSrv.query({ form_id: formId }, function(sharedForm) { 
+  FormPartAdminSrv.query({ form_id: formId }, function(sharedForm) { 
     $scope.sharedForm = sharedForm;
   });
   
   var createShared = function(newShared) {
-    FormPartSrv.save({ form_id: formId, form_part: newShared }, function(val, resp) {
+    FormPartAdminSrv.save({ form_id: formId, form_part: newShared }, function(val, resp) {
       $scope.sharedForm = val;
       NotifSrv.success();
     });

@@ -2,37 +2,33 @@ class Api::Admin::TeamsController < Api::ApiController
   
   before_action :set_team, only: [:update, :destroy]
 
-  # GET /api/teams
-  # GET /api/teams.json
+  # GET /api/admin/teams.json
   def index
-    render json: @account.teams
+    render json: @account.teams, each_serializer: ::Admin::TeamSerializer
   end
 
-  # POST /api/teams
-  # POST /api/teams.json
+  # POST /api/admin/teams.json
   def create
     @team = ::Team.new(team_params)
     @team.account = @account
 
     if @team.save
-      render json: @team, status: :created
+      render json: @team, status: :created, serializer: ::Admin::TeamSerializer
     else
       render json: @team.errors, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /api/teams/1
-  # PATCH/PUT /api/teams/1.json
+  # PATCH/PUT /api/admin/teams/1.json
   def update
     if @team.update(team_params)
-      render json: @team
+      render json: @team, serializer: ::Admin::TeamSerializer
     else
       render json: @team.errors, status: :unprocessable_entity
     end
   end
 
-  # DELETE /api/teams/1
-  # DELETE /api/teams/1.json
+  # DELETE /api/admin/teams/1.json
   def destroy
     @team.destroy
     head :no_content

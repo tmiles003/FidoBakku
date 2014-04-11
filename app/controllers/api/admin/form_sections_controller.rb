@@ -13,55 +13,51 @@ class Api::Admin::FormSectionsController < Api::ApiController
   before_action :set_section_below, only: [:down]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_section_below
   
-  # GET /api/sections
-  # GET /api/sections.json
+  # GET /api/admin/form_sections.json
   def index
-    render json: @form.form_sections
+    render json: @form.form_sections, each_serializer: ::Admin::FormSectionSerializer
   end
 
-  # POST /api/sections
-  # POST /api/sections.json
+  # POST /api/admin/form_sections.json
   def create
     @form_section = ::FormSection.new(form_section_params)
     @form_section.next_ordr # move to model callback
 
     if @form_section.save
-      render json: @form_section, status: :created
+      render json: @form_section, status: :created, serializer: ::Admin::FormSectionSerializer
     else
       render json: @form_section.errors, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /api/sections/1
-  # PATCH/PUT /api/sections/1.json
+  # PATCH/PUT /api/admin/form_sections/1.json
   def update
     if @form_section.update(form_section_params)
-      render json: @form_section
+      render json: @form_section, serializer: ::Admin::FormSectionSerializer
     else
       render json: @form_section.errors, status: :unprocessable_entity
     end
   end
   
-  # PUT /api/sections/1/up.json
+  # PUT /api/admin/form_sections/1/up.json
   def up
     ordr = @form_section.ordr
     @form_section.update(ordr: @form_section_above.ordr)
     @form_section_above.update(ordr: ordr)
     
-    render json: Array.[](@form_section, @form_section_above)
+    render json: Array.[](@form_section, @form_section_above), each_serializer: ::Admin::FormSectionSerializer
   end
   
-  # PUT /api/sections/1/down.json
+  # PUT /api/admin/form_sections/1/down.json
   def down
     ordr = @form_section.ordr
     @form_section.update(ordr: @form_section_below.ordr)
     @form_section_below.update(ordr: ordr)
     
-    render json: Array.[](@form_section, @form_section_below)
+    render json: Array.[](@form_section, @form_section_below), each_serializer: ::Admin::FormSectionSerializer
   end
 
-  # DELETE /api/sections/1
-  # DELETE /api/sections/1.json
+  # DELETE /api/admin/form_sections/1.json
   def destroy
     @form_section.destroy
     head :no_content

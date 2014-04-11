@@ -68,6 +68,7 @@ FidoBakku::Application.routes.draw do
           end
         end
       end
+      resources :form_parts, only: [:index, :create, :update, :destroy]
       
       resources :evaluation_sessions
       resources :evaluations, except: [:new, :edit]
@@ -76,8 +77,6 @@ FidoBakku::Application.routes.draw do
       resource :account, controller: :account, only: [:show, :update, :destroy]
     
     end
-    
-    resources :form_parts, only: [:index, :create, :update, :destroy]
     
     # keep routes shorts
     resources :user_evaluation, only: [:show, :update]

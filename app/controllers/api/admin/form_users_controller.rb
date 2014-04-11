@@ -6,19 +6,17 @@ class Api::Admin::FormUsersController < Api::ApiController
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_form
   before_action :set_form_user, only: [:assign]
   
-  # GET /api/forms/1/users
-  # GET /api/forms/1/users.json
+  # GET /api/admin/forms/1/users.json
   def users
     users = @account.users
       .joins('LEFT JOIN form_users ON form_users.user_id = users.id')
       .where('form_users.user_id IS NULL OR form_users.form_id = ?', @form.id)
       .includes(:form, :team)
     
-    render json: users
+    render json: users, each_serializer: ::Admin::UserSerializer
   end
 
-  # PATCH/PUT /api/forms/1/assign/1
-  # PATCH/PUT /api/forms/1/assign/1.json
+  # PATCH/PUT /api/admin/forms/1/assign/1.json
   def assign
     if @form_user.new_record? # assign user to form
       @form_user.form = @form
@@ -27,7 +25,7 @@ class Api::Admin::FormUsersController < Api::ApiController
       @form_user.destroy
     end
     
-    render json: @form_user.user
+    render json: @form_user.user, serializer: ::Admin::UserSerializer
   end
   
   private

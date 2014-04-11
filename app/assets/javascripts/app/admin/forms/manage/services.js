@@ -25,9 +25,9 @@ fiApp.factory('FormCompsAdminSrv', ['$resource', function($resource) {
     });
 }]);
 
-fiApp.factory('FormPartSrv', ['$resource', function($resource) {
+fiApp.factory('FormPartAdminSrv', ['$resource', function($resource) {
   
-  return $resource('/api/form_parts/:id', 
+  return $resource('/api/admin/form_parts/:id', 
     { id: '@id' }, 
     { 'query': { isArray: false },
       'update': { method: 'PUT' }

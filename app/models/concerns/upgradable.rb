@@ -25,24 +25,6 @@ module Upgradable
     
   end
   
-  def check_plan_users
-    check_plan_limit 'users', _account.account_users.count
-  end
-  
-  def check_plan_forms
-    check_plan_limit 'forms', _account.forms.count
-  end
-  
-  def check_plan_sections
-    num_sections = Account.joins(forms: :sections).where(id: _account.id).count
-    check_plan_limit 'sections', num_sections
-  end
-  
-  def check_plan_comps
-    num_comps = Account.joins(forms: [{sections: :comps}]).where(id: _account.id).count
-    check_plan_limit 'comps', num_comps
-  end
-  
   def check_plan_evaluation_sessions
     check_plan_limit 'evaluation_sessions', _account.evaluation_sessions.count
   end

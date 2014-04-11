@@ -1,7 +1,5 @@
 class Form < ActiveRecord::Base
   
-  include Upgradable
-  
   has_many :form_sections, dependent: :destroy
   
   scope :in_account, ->(account_id) { where('account_id = ?', account_id) }

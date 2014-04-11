@@ -5,43 +5,38 @@ class Api::Admin::EvaluationsController < Api::ApiController
   before_action :set_evaluation_session, only: [:index, :create]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_evaluation_session
   
-  # GET /api/evaluations
-  # GET /api/evaluations.json
+  # GET /api/admin/evaluations.json
   def index
     render json: @evaluation_session.evaluations, each_serializer: ::Admin::EvaluationSerializer
   end
   
-  # GET /api/evaluations/1
-  # GET /api/evaluations/1.json
+  # GET /api/admin/evaluations/1.json
   def show
     render json: @evaluation, serializer: ::Admin::EvaluationSerializer
   end
 
-  # POST /api/evaluations
-  # POST /api/evaluations.json
+  # POST /api/admin/evaluations.json
   def create
     @evaluation = ::Evaluation.new(evaluation_params) # :: forces root namespace
     @evaluation.session_id = @evaluation_session.id
 
     if @evaluation.save
-      render json: @evaluation, status: :created
+      render json: @evaluation, status: :created, serializer: ::Admin::EvaluationSerializer
     else
       render json: @evaluation.errors, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /api/evaluations/1
-  # PATCH/PUT /api/evaluations/1.json
+  # PATCH/PUT /api/admin/evaluations/1.json
   def update
     if @evaluation.update(evaluation_params)
-      render json: @evaluation
+      render json: @evaluation, serializer: ::Admin::EvaluationSerializer
     else
       render json: @evaluation.errors, status: :unprocessable_entity
     end
   end
 
-  # DELETE /api/evaluations/1
-  # DELETE /api/evaluations/1.json
+  # DELETE /api/admin/evaluations/1.json
   def destroy
     @evaluation.destroy
     head :no_content

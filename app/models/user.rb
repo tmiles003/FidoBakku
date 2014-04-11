@@ -1,12 +1,10 @@
 class User < ActiveRecord::Base
   
   include UsersHelper
-  include Upgradable
   
   ROLES = %w[employee manager admin]
   
   before_validation :initial_setup, on: :create
-  before_validation :check_plan_users, on: :create
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -24,6 +22,9 @@ class User < ActiveRecord::Base
   has_one :form_user
   has_one :form, through: :form_user
   has_many :form_users
+  
+  has_many :evaluations, dependent: :destroy
+  #has_many :user_evaluations, dependent: :destroy # (as reviewer - remove id, update name)
   
   scope :in_role, lambda { |role|
     where('role' => role) unless role.nil?

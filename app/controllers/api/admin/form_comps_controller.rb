@@ -8,56 +8,52 @@ class Api::Admin::FormCompsController < Api::ApiController
   before_action :set_comp_below, only: [:down]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_comp_below
 
-  # GET /api/sections/:section_id/comps
-  # GET /api/sections/:section_id/comps.json
+  # GET /api/admin/form_sections/:form_section_id/form_comps.json
   def index
-    render json: @form_section.form_comps
+    render json: @form_section.form_comps, each_serializer: ::Admin::FormCompSerializer
   end
   
-  # POST /api/comps
-  # POST /api/comps.json
+  # POST /api/admin/form_comps.json
   def create
     @form_comp = ::FormComp.new(form_comp_params)
     @form_comp.next_ordr
 
     if @form_comp.save
       @form_section.form_comps << @form_comp
-      render json: @form_comp, status: :created
+      render json: @form_comp, status: :created, serializer: ::Admin::FormCompSerializer
     else
       render json: @form_comp.errors, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /api/comps/1
-  # PATCH/PUT /api/comps/1.json
+  # PATCH/PUT /api/admin/form_comps/1.json
   def update
     if @form_comp.update(form_comp_params)
-      render json: @form_comp, status: :created
+      render json: @form_comp, status: :created, serializer: ::Admin::FormCompSerializer
     else
       render json: @form_comp.errors, status: :unprocessable_entity
     end
   end
   
-  # PUT /api/comps/1/up.json
+  # PUT /api/admin/form_comps/1/up.json
   def up
     ordr = @form_comp.ordr
     @form_comp.update(ordr: @form_comp_above.ordr)
     @form_comp_above.update(ordr: ordr)
     
-    render json: Array.[](@form_comp, @form_comp_above)
+    render json: Array.[](@form_comp, @form_comp_above), each_serializer: ::Admin::FormCompSerializer
   end
   
-  # PUT /api/comps/1/down.json
+  # PUT /api/admin/form_comps/1/down.json
   def down
     ordr = @form_comp.ordr
     @form_comp.update(ordr: @form_comp_below.ordr)
     @form_comp_below.update(ordr: ordr)
     
-    render json: Array.[](@form_comp, @form_comp_below)
+    render json: Array.[](@form_comp, @form_comp_below), each_serializer: ::Admin::FormCompSerializer
   end
 
-  # DELETE /api/comps/1
-  # DELETE /api/comps/1.json
+  # DELETE /api/admin/comps/1.json
   def destroy
     @form_comp.destroy
     head :no_content

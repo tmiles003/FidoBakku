@@ -5,44 +5,38 @@ class Api::Admin::FormsController < Api::ApiController
   before_action :set_form, only: [:show, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_form
 
-  # GET /api/forms
-  # GET /api/forms.json
+  # GET /api/admin/forms.json
   def index
     render json: @account.forms.sharable(params[:shared]), each_serializer: ::Admin::FormSerializer
   end
   
-  # GET /api/forms/1
-  # GET /api/forms/1.json
+  # GET /api/admin/forms/1.json
   def show
     render json: @form, serializer: ::Admin::FormSerializer
   end
   
-  # POST /api/forms
-  # POST /api/forms.json
+  # POST /api/admin/forms.json
   def create
     @form = ::Form.new(form_params) # :: forces root namespace
     @form.account = @account
-    @form._account = @account
 
     if @form.save
-      render json: @form, status: :created
+      render json: @form, status: :created, serializer: ::Admin::FormSerializer
     else
       render json: @form.errors, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /api/forms/1
-  # PATCH/PUT /api/forms/1.json
+  # PATCH/PUT /api/admin/forms/1.json
   def update
     if @form.update(form_params)
-      render json: @form
+      render json: @form, serializer: ::Admin::FormSerializer
     else
       render json: @form.errors, status: :unprocessable_entity
     end
   end
   
-  # DELETE /api/forms/1
-  # DELETE /api/forms/1.json
+  # DELETE /api/admin/forms/1.json
   def destroy
     @form.destroy
     head :no_content
