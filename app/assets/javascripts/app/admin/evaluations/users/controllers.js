@@ -22,9 +22,9 @@ fiApp.controller('UserEvaluationsAdminCtrl', ['$scope',
   
   $scope.assign = function(evaluator_id) {
     var data = {};
-    data.user_id = $scope.evaluation.user_id;
+    // data.user_id = $scope.evaluation.user_id;
     data.evaluation_id = $scope.evaluation.id;
-    data.form_id = $scope.evaluation.user.form.id;
+    // data.form_id = $scope.evaluation.user.form.id;
     data.evaluator_id = evaluator_id;
     // console.log( data );
     UserEvaluationsAdminSrv.save({ user_evaluation: data }, function(userEvaluation) {

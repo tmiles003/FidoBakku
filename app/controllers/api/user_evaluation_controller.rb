@@ -8,23 +8,21 @@ class Api::UserEvaluationController < Api::ApiController
   before_action :set_user_evaluation_form, only: [:form]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_user_evaluation_form
   
-  # GET /api/user_evaluation/1
   # GET /api/user_evaluation/1.json
   def show
     render json: @user_evaluation, serializer: UserEvaluationSerializer
   end
   
-  # GET /api/user_evaluation_form/1
-  # GET /api/user_evaluation_form/1.json
+  # GET /api/user_evaluation/form.json
   def form
     render json: @user_evaluation_form, serializer: UserEvaluationFormSerializer
   end
   
-  # PATCH/PUT /api/user_evaluation/1
   # PATCH/PUT /api/user_evaluation/1.json
   def update
     if @user_evaluation.update(user_evaluation_params)
-      render json: @user_evaluation
+      render nothing: true, status: :ok # no need to send data back, just "ok"
+      #render json: @user_evaluation
     else
       render json: @user_evaluation.errors, status: :unprocessable_entity
     end

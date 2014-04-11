@@ -1,15 +1,10 @@
 class UserEvaluation < ActiveRecord::Base
   
   belongs_to :evaluation
-  
-  has_one :user, primary_key: :user_id, foreign_key: :id
-  has_one :form, primary_key: :form_id, foreign_key: :id #, -> { includes :topics }
-  has_one :evaluation, primary_key: :evaluation_id, foreign_key: :id
-  #has_one :reviewer, class_name: 'User', primary_key: :reviewer_id, foreign_key: :id
-  #has_one :comment, foreign_key: :user_evaluation_id
+  has_one :evaluator, class_name: 'User', primary_key: :evaluator_id, foreign_key: :id
   
   after_validation :initial_setup, on: :create
-  before_save :update_progress
+  before_update :update_progress
   
   def to_param
     [id, self.name].join('/')
@@ -17,7 +12,7 @@ class UserEvaluation < ActiveRecord::Base
   
   # pretty urls, no other use
   def name
-    ::User.find(self.user_id).slug
+    self.evaluation.user.slug
   end
   
   protected
@@ -31,11 +26,11 @@ class UserEvaluation < ActiveRecord::Base
     # get comp ids from form id
     comp_ids = []
     
-    parts = ::FormPart.get_parts form_id
+    parts = ::FormPart.get_parts self.evaluation.form_id
     parts.each { |part_id|
       sections = ::FormSection.where(form_id: part_id)
       sections.each { |section_id| 
-        comp_ids << ::FormComp.where(section_id: section_id).ids
+        comp_ids << ::FormComp.where(form_section_id: section_id).ids
       }
     }
     comp_ids = comp_ids.flatten

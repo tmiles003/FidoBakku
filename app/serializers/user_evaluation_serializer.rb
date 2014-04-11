@@ -8,7 +8,7 @@ class UserEvaluationSerializer < ActiveModel::Serializer
   end
   
   def form_ids
-    ::FormPart.get_parts object.form_id
+    [] # ::FormPart.get_parts object.form_id
   end
   
 end

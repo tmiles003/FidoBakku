@@ -8,33 +8,29 @@ class Api::Admin::UserEvaluationsController < Api::ApiController
   before_action :set_user_evaluation, only: [:show, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_user_evaluation
   
-  # GET /api/user_evals
-  # GET /api/user_evals.json
+  # GET /api/admin/user_evaluations.json
   def index
-    render json: @evaluation.user_evaluations, each_serializer: UserEvaluationsSerializer
+    render json: @evaluation.user_evaluations.includes(:evaluator), 
+      each_serializer: ::Admin::UserEvaluationSerializer
   end
   
-  # GET /api/user_evals/1
-  # GET /api/user_evals/1.json
+  # GET /api/admin/user_evaluations/1.json
   def show
-    render json: @user_evaluation, serializer: UserEvaluationsSerializer
+    render json: @user_evaluation, serializer: ::Admin::UserEvaluationSerializer
   end
   
-  # POST /api/user_evals
-  # POST /api/user_evals.json
+  # POST /api/admin/user_evaluations.json
   def create
     @user_evaluation = ::UserEvaluation.new(user_evaluation_params)
-    #logger.info user_evaluation_params.to_yaml
-
+    
     if @user_evaluation.save
-      render json: @user_evaluation, status: :created, serializer: UserEvaluationsSerializer
+      render json: @user_evaluation, status: :created, serializer: ::Admin::UserEvaluationSerializer
     else
       render json: @user_evaluation.errors, status: :unprocessable_entity
     end
   end
 
-  # DELETE /api/user_evals/1
-  # DELETE /api/user_evals/1.json
+  # DELETE /api/admin/user_evaluations/1.json
   def destroy
     @user_evaluation.destroy
     head :no_content
@@ -63,6 +59,6 @@ class Api::Admin::UserEvaluationsController < Api::ApiController
     
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_evaluation_params
-      params.require(:user_evaluation).permit(:user_id, :form_id, :evaluation_id, :evaluator_id)
+      params.require(:user_evaluation).permit(:evaluation_id, :evaluator_id)
     end
 end

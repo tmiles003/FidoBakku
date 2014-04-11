@@ -30,10 +30,6 @@ class User < ActiveRecord::Base
     where('role' => role) unless role.nil?
   }
 
-  def to_param
-    [id, self.slug].join('/')
-  end
-  
   def initial_setup
     if name.nil?
       self.name = 'New User'
@@ -43,6 +39,10 @@ class User < ActiveRecord::Base
       self.role = 'employee'
     end
     self.password = gen_random_password
+  end
+  
+  def to_param
+    [id, self.slug].join('/')
   end
   
   # pretty urls, no other use

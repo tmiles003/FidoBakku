@@ -1,6 +1,6 @@
 class EvaluationSession < ActiveRecord::Base
   
-  include Upgradable
+  #include Upgradable
   
   scope :in_account, ->(account_id) { where('account_id = ?', account_id) }
   
@@ -8,7 +8,7 @@ class EvaluationSession < ActiveRecord::Base
   
   has_many :evaluations, foreign_key: :session_id
   
-  before_validation :check_plan_evaluation_sessions, on: :create
+  #before_validation :check_plan_evaluation_sessions, on: :create
   
   validates :title, length: {
     in: 2..250,

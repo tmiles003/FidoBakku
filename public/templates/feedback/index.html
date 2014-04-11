@@ -1,2 +1,23 @@
 <h1>Feedback</h1>
 
+<div class="row" ng-repeat="form in forms | orderBy: '+ordr'">
+  <div class="col-md-12">
+  <!-- {{ form }} -->
+  
+  <div class="panel panel-default" ng-repeat="section in form.form_sections | orderBy: '+ordr'">
+    <div class="panel-heading">
+      {{ section.name }}
+    </div>
+    
+    <table class="table table-hover">
+      <tr ng-repeat="comp in section.form_comps | orderBy: '+ordr'">
+        <td>{{ comp.content }}</td>
+        <td class="text-right">
+          
+        </td>
+      </tr>
+    </table>
+  </div>
+  
+  </div>
+</div>

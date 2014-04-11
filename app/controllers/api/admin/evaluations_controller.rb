@@ -7,7 +7,8 @@ class Api::Admin::EvaluationsController < Api::ApiController
   
   # GET /api/admin/evaluations.json
   def index
-    render json: @evaluation_session.evaluations, each_serializer: ::Admin::EvaluationSerializer
+    render json: @evaluation_session.evaluations.includes(:user), 
+      each_serializer: ::Admin::EvaluationSerializer
   end
   
   # GET /api/admin/evaluations/1.json

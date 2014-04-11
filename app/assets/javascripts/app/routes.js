@@ -143,11 +143,15 @@ fiApp.config(['$routeProvider', '$locationProvider',
     }
   });
   
-  // review feedback
+  // evaluation feedback
   $routeProvider.when('/feedback/:id/:name', { 
     templateUrl: '/templates/feedback/index.html', 
-    controller: 'FeedbackCtrl'
-    // , resolve: {}
+    controller: 'FeedbackCtrl',
+    resolve: {
+      evaluation: function(FeedbackSrv, $route) {
+        return FeedbackSrv.get({ id: $route.current.params.id })['$promise']; 
+      }
+    }
   });
   
   $routeProvider.when('/profile', { 
