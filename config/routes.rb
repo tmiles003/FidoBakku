@@ -1,7 +1,5 @@
 FidoBakku::Application.routes.draw do
   
-  get "user_evaluation/show"
-  get "user_evaluation/update"
   root 'welcome#index'
   
   resources :account, only: [:create, :new]
@@ -20,13 +18,13 @@ FidoBakku::Application.routes.draw do
   get 'session/:id' => 'welcome#application', as: :session_manage
   get 'evaluations/:id' => 'welcome#application', as: :evaluation_manage
   get 'evaluation/:id' => 'welcome#application', as: :user_evaluation
-  #get 'feedback/:id/:name' => 'welcome#application', as: :user_feedback
+  get 'feedback/:id' => 'welcome#application', as: :evaluation_feedback
   
   namespace :api, defaults: { format: :json } do
     
     get 'session' => 'session#index'
     get 'dashboard/evaluations' => 'dashboard#evaluations'
-    #get 'dashboard/feedbacks' => 'dashboard#feedbacks'
+    get 'dashboard/feedbacks' => 'dashboard#feedbacks'
     
     resources :users, except: [:new] do 
       collection do 
