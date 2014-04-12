@@ -57,4 +57,28 @@ class UserEvaluation < ActiveRecord::Base
     self.ratings = ActiveSupport::JSON.encode ratings_tmp
   end
   
+  def self.user_ratings evaluation_id, user_id, roles = nil
+    ratings = nil
+    
+    if roles.nil?
+      user_eval = ::UserEvaluation.select('ratings')
+        .where(evaluation_id: evaluation_id)
+        .where(evaluator_id: user_id)
+        .take
+        
+      ratings = ActiveSupport::JSON.decode user_eval.ratings unless user_eval.nil?
+    else
+      user_evals = ::UserEvaluation.select('ratings')
+        .where(evaluation_id: evaluation_id)
+        .where.not(evaluator_id: user_id)
+        .joins(:evaluator)
+        .where('users.role in (?)', roles)
+      
+      logger.info user_evals.count
+      ratings = nil
+    end
+    
+    ratings
+  end
+  
 end
