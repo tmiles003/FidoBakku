@@ -1,5 +1,6 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email_hash, :user_path
+  attributes :name, :email_hash
+  #:id, , :user_path
   
   def email_hash
     OpenSSL::Digest::MD5.new(object.email).hexdigest

@@ -18,45 +18,43 @@ class UserEvaluation < ActiveRecord::Base
   protected
   
   def initial_setup
-    self.scores = ActiveSupport::JSON.encode Hash.new
+    self.ratings = ActiveSupport::JSON.encode Hash.new
     self.progress = 0
   end
   
-  def update_progress
-    # get comp ids from form id
-    comp_ids = []
-    
+  def update_progress    
     parts = ::FormPart.get_parts self.evaluation.form_id
-    parts.each { |part_id|
-      sections = ::FormSection.where(form_id: part_id)
-      sections.each { |section_id| 
-        comp_ids << ::FormComp.where(form_section_id: section_id).ids
-      }
+    form_ids = []
+    parts.each { |part|
+      form_ids << part['form_id']
     }
-    comp_ids = comp_ids.flatten
     
-    # decode the scores string into a hash
-    scores_h = ActiveSupport::JSON.decode scores
-    # create temp hash for scores
-    scores_tmp = Hash.new
+    comp_ids = ::Form.select('form_competencies.id')
+      .where(id: form_ids)
+      .joins(form_sections: :form_comps)
+    
+    # decode the ratings string into a hash
+    ratings_h = ActiveSupport::JSON.decode ratings
+    # create temp hash for ratings
+    ratings_tmp = Hash.new
     
     # loop through the comp ids
     comp_ids.each { |c|
-      c_id = c.to_s # set the id as a string, to use as key
+      c_id = c.id.to_s # set the id as a string, to use as key
       # if hash has key and value is not empty
-      if scores_h.has_key?(c_id) && !scores_h[c_id].to_s.empty?
+      if ratings_h.has_key?(c_id) && !ratings_h[c_id].to_s.empty?
         # store it in the temp hash
-        scores_tmp[c_id] = scores_h[c_id]
+        ratings_tmp[c_id] = ratings_h[c_id]
       end
-      # this ensures a clean scores hash is saved
+      # this ensures a clean ratings hash is saved
     }
     
     # the difference between the 2 hashes is the completion progress
     unless comp_ids.empty?
-      self.progress = ((scores_tmp.count / comp_ids.count.to_f) * 100).to_i
+      self.progress = ((ratings_tmp.count / comp_ids.count.to_f) * 100).to_i
     end
      
-    self.scores = ActiveSupport::JSON.encode scores_tmp
+    self.ratings = ActiveSupport::JSON.encode ratings_tmp
   end
   
 end

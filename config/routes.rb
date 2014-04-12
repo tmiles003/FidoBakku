@@ -29,6 +29,8 @@ FidoBakku::Application.routes.draw do
     get 'dashboard/evaluations' => 'dashboard#evaluations'
     get 'dashboard/feedbacks' => 'dashboard#feedbacks'
     
+    get 'form' => 'form#index'
+    
     resources :goals, except: [:new, :edit] do
       collection do
         get 'team'

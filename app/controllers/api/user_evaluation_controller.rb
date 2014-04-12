@@ -10,7 +10,7 @@ class Api::UserEvaluationController < Api::ApiController
   
   # GET /api/user_evaluation/1.json
   def show
-    render json: @user_evaluation, serializer: UserEvaluationSerializer
+    render json: @user_evaluation, serializer: ::Evaluation::UserEvaluationSerializer
   end
   
   # GET /api/user_evaluation/form.json
@@ -21,8 +21,8 @@ class Api::UserEvaluationController < Api::ApiController
   # PATCH/PUT /api/user_evaluation/1.json
   def update
     if @user_evaluation.update(user_evaluation_params)
-      render nothing: true, status: :ok # no need to send data back, just "ok"
-      #render json: @user_evaluation
+      #render nothing: true, status: :ok # no need to send data back, just "ok"
+      render json: @user_evaluation.progress
     else
       render json: @user_evaluation.errors, status: :unprocessable_entity
     end
@@ -52,6 +52,6 @@ class Api::UserEvaluationController < Api::ApiController
     
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_evaluation_params
-      params.require(:user_evaluation).permit(:scores)
+      params.require(:user_evaluation).permit(:ratings)
     end
 end

@@ -137,7 +137,7 @@ fiApp.config(['$routeProvider', '$locationProvider',
     templateUrl: '/templates/evaluation/index.html', 
     controller: 'UserEvaluationCtrl',
     resolve: {
-      evaluation: function(UserEvaluationSrv, $route) {
+      userEvaluation: function(UserEvaluationSrv, $route) {
         return UserEvaluationSrv.get({ id: $route.current.params.id })['$promise']; 
       }
     }

@@ -4,18 +4,22 @@ class Form < ActiveRecord::Base
   
   scope :in_account, ->(account_id) { where('account_id = ?', account_id) }
   
-  belongs_to :account 
+  belongs_to :account
+  
+  # don't delete form if associated with evaluation
+  #belongs_to :evaluation
   
   has_many :form_users, dependent: :destroy
-  has_many :form_parts
-  
-  # don't delete form if associated with user evaluation
+  has_many :form_parts, dependent: :destroy
   
   validates :name, length: {
-    in: 4..250,
+    in: 2..250,
     too_short: 'Too short',
     too_long: 'Too long'
   }
+  
+  # dynamic ordering when generating form
+  attr_accessor :ordr
   
   scope :sharable, lambda { |shared|
     where('shared' => shared) unless shared.nil?
