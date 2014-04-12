@@ -3,20 +3,16 @@
 /* Controllers */
 
 fiApp.controller('FeedbackCtrl', ['$scope', '$http', 
-                 'FeedbackSrv', 'evaluation', 'NotifSrv', 
+                 'FeedbackSrv', 'feedback', 'NotifSrv', 
                   function($scope, $http, 
-                           FeedbackSrv, evaluation, NotifSrv) {
+                           FeedbackSrv, feedback, NotifSrv) {
   
-  $scope.evaluation = evaluation;
-  $scope.scores = angular.fromJson(evaluation.scores);
+  $scope.feedback = feedback;
   
   $scope.forms = [];
-  _.each(evaluation.form_ids, function(form_id) {
-    $http.get('/api/feedback/form', { params: { form_id: form_id } })
-      .success(function(form) {
-        $scope.forms.push(form);
-      });
-  });
-  // re-order forms correctly
+  $http.get('/api/form', { params: { form_id: feedback.form_id } })
+    .success(function(forms) {
+      $scope.forms = forms;
+    });
 
 }]);

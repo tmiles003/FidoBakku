@@ -1,6 +1,6 @@
 class Admin::UserEvaluationSerializer < ActiveModel::Serializer
   
-  attributes :id, :progress, :scores
+  attributes :id, :progress
   has_one :evaluator
   
 end

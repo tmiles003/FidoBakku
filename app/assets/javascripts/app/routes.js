@@ -138,7 +138,7 @@ fiApp.config(['$routeProvider', '$locationProvider',
     controller: 'UserEvaluationCtrl',
     resolve: {
       userEvaluation: function(UserEvaluationSrv, $route) {
-        return UserEvaluationSrv.get({ id: $route.current.params.id })['$promise']; 
+        return UserEvaluationSrv.get({ id: $route.current.params.id })['$promise'];
       }
     }
   });
@@ -148,7 +148,7 @@ fiApp.config(['$routeProvider', '$locationProvider',
     templateUrl: '/templates/feedback/index.html', 
     controller: 'FeedbackCtrl',
     resolve: {
-      evaluation: function(FeedbackSrv, $route) {
+      feedback: function(FeedbackSrv, $route) {
         return FeedbackSrv.get({ id: $route.current.params.id })['$promise']; 
       }
     }

@@ -6,7 +6,7 @@ class Api::DashboardController < Api::ApiController
   end
   
   def feedbacks
-    #render json: ::Evaluation.all, each_serializer: Dashboard::EvaluationSerializer
+    render json: ::Evaluation.all, each_serializer: Dashboard::EvaluationSerializer
   end
   
 end

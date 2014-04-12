@@ -11,7 +11,6 @@ fiApp.controller('UserEvaluationCtrl', ['$scope', '$http',
   $scope.ratings = angular.fromJson(userEvaluation.ratings);
   
   $scope.forms = [];
-  
   $http.get('/api/form', { params: { form_id: userEvaluation.evaluation.form_id } })
     .success(function(forms) {
       $scope.forms = forms;
