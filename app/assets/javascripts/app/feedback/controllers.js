@@ -3,9 +3,9 @@
 /* Controllers */
 
 fiApp.controller('FeedbackCtrl', ['$scope', '$http', 
-                 'FeedbackSrv', 'feedback', 'NotifSrv', 
+                 'FeedbackSrv', 'feedback', 'CommentsSrv', 'NotifSrv', 
                   function($scope, $http, 
-                           FeedbackSrv, feedback, NotifSrv) {
+                           FeedbackSrv, feedback, CommentsSrv, NotifSrv) {
   
   $scope.feedback = feedback;
   
@@ -14,5 +14,13 @@ fiApp.controller('FeedbackCtrl', ['$scope', '$http',
     .success(function(forms) {
       $scope.forms = forms;
     });
+  
+  $scope.eComment = feedback.comment;
+  $scope.saveComment = function(eComment) {
+    CommentsSrv.update({ id: eComment.id, comment: eComment }, function(val, resp) {
+      $scope.eComment = val;
+      NotifSrv.success();
+    });
+  }
 
 }]);

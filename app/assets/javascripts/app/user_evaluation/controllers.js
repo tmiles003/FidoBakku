@@ -3,9 +3,9 @@
 /* Controllers */
 
 fiApp.controller('UserEvaluationCtrl', ['$scope', '$http', 
-                 'UserEvaluationSrv', 'userEvaluation', 'NotifSrv', 
+                 'UserEvaluationSrv', 'userEvaluation', 'CommentsSrv', 'NotifSrv', 
                   function($scope, $http, 
-                           UserEvaluationSrv, userEvaluation, NotifSrv) {
+                           UserEvaluationSrv, userEvaluation, CommentsSrv, NotifSrv) {
   
   $scope.userEvaluation = userEvaluation;
   $scope.ratings = angular.fromJson(userEvaluation.ratings);
@@ -26,5 +26,13 @@ fiApp.controller('UserEvaluationCtrl', ['$scope', '$http',
       });
     }
   }, true);
+  
+  $scope.eComment = userEvaluation.comment;
+  $scope.saveComment = function(eComment) {
+    CommentsSrv.update({ id: eComment.id, comment: eComment }, function(val, resp) {
+      $scope.eComment = val;
+      NotifSrv.success();
+    });
+  }
 
 }]);

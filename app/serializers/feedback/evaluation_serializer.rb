@@ -2,6 +2,7 @@ class Feedback::EvaluationSerializer < ActiveModel::Serializer
   
   attributes :form_id, :ratings
   has_one :user
+  has_one :comment, serializer: ::Feedback::CommentSerializer
   
   def ratings
     mine = ::UserEvaluation.user_ratings object.id, object.form_id, object.user_id
@@ -14,6 +15,10 @@ class Feedback::EvaluationSerializer < ActiveModel::Serializer
     ratings['manager'] = manager
     
     ratings
+  end
+  
+  def comment
+    ::Comment.find_or_create_by(evaluation_id: object.id)
   end
   
 end

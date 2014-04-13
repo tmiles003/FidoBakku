@@ -77,7 +77,6 @@ FidoBakku::Application.routes.draw do
       resources :user_evaluations, except: [:new, :update, :edit]
       
       resource :account, controller: :account, only: [:show, :update, :destroy]
-    
     end
     
     resources :user_evaluation, only: [:show, :update] do
@@ -92,10 +91,9 @@ FidoBakku::Application.routes.draw do
       end
     end
     
-    #resources :comments, except: [:show, :new, :create, :edit]
+    resources :comments, except: [:new, :create, :edit]
     
     resource :user, path: '/profile', controller: :profile, only: [:update]
-    
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

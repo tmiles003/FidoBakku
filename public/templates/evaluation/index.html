@@ -2,7 +2,6 @@
 
 <div class="row" ng-repeat="form in forms | orderBy: '-ordr'">
   <div class="col-md-12">
-  <!-- {{ form }} -->
   
   <div class="panel panel-default" ng-repeat="section in form.form_sections | orderBy: '+ordr'">
     <div class="panel-heading">
@@ -25,5 +24,33 @@
     </table>
   </div>
   
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+    <!-- div class="panel-heading">
+      Comment
+    </div -->
+    <div class="panel-body">
+      Comment
+    </div>
+    
+    <div class="clearfix">
+      <form accept-charset="utf-8" novalidate name="eCommentForm">
+        <div class="col-md-10 form-group">
+          <label for="content" class="sr-only">Comment</label>
+          <textarea class="form-control" name="content" ng-model="eComment.content" 
+            rows="5" placeholder="..."></textarea>
+        </div>
+        <div class="col-md-2 actions">
+          <button ng-click="saveComment(eComment)" type="button"
+            class="btn btn-default btn-success btn-sm fi-btn-wide">Save</button>
+        </div>
+      </form>
+    </div>
+    
+    </div>
   </div>
 </div>
