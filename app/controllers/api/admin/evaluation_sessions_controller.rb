@@ -16,7 +16,6 @@ class Api::Admin::EvaluationSessionsController < Api::ApiController
   def create
     @evaluation_session = ::EvaluationSession.new(evaluation_session_params)
     @evaluation_session.account = @account
-    @evaluation_session._account = @account # Upgradable
 
     if @evaluation_session.save
       render json: @evaluation_session, status: :created, serializer: ::Admin::EvaluationSessionSerializer

@@ -7,7 +7,7 @@ class Evaluation < ActiveRecord::Base
   has_one :user, primary_key: :user_id, foreign_key: :id
   has_one :form, primary_key: :form_id, foreign_key: :id
   
-  has_many :user_evaluations
+  has_many :user_evaluations, dependent: :destroy
   
   before_save :assign_user_form_id, on: :create
   
