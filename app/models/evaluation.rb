@@ -2,7 +2,7 @@ class Evaluation < ActiveRecord::Base
   
   include Upgradable
   
-  belongs_to :evaluation_session
+  belongs_to :evaluation_session, primary_key: :id, foreign_key: :session_id
   
   has_one :user, primary_key: :user_id, foreign_key: :id
   has_one :form, primary_key: :form_id, foreign_key: :id

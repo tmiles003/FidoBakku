@@ -2,24 +2,11 @@
 
 /* Controllers */
 
-fiApp.controller('UserCtrl', ['$scope', '$routeParams', 'GoalsSrv', 'goals', 'NotifSrv', 
-                  function($scope, $routeParams, GoalsSrv, goals, NotifSrv) {
+fiApp.controller('UserCtrl', ['$scope', '$routeParams', 'user', 'GoalsSrv', 'NotifSrv', 
+                  function($scope, $routeParams, user, GoalsSrv, NotifSrv) {
   
-  $scope.goals = goals;
-  
-  $scope.dueDate = function() {
-    $('.input-group.date').datepicker({
-      format: 'd MM yyyy',
-      startDate: '-1d',
-      endDate: '+3y',
-      startView: 2,
-      weekStart: 1,
-      orientation: 'auto',
-      clearBtn: true,
-      keyboardNavigation: false,
-      autoclose: true
-    });
-  }
+  $scope.user = user;
+  // $scope.goals = goals;
   
   var createGoal = function(newGoal) {
     _.extend(newGoal, { user_id: $routeParams.id }); // assign user_id to goal

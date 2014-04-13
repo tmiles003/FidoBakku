@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   
   has_many :goals, dependent: :destroy
   
-  has_one :form_user
+  has_one :form_user, dependent: :destroy
   has_one :form, through: :form_user
   has_many :form_users
   

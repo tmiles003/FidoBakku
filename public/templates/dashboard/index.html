@@ -42,4 +42,21 @@
       </table>
     </div>
   </div>
+  
+  <div class="col-md-4">
+    <h2>Users</h2>
+    <div class="panel panel-default">
+      <table class="table table-hover">
+        <tr ng-repeat="user in users | orderBy: '+name'">
+          <td>
+            <img ng-src="//secure.gravatar.com/avatar/{{ user.email_hash }}?s=25&d=mm" alt="">
+          </td>
+          <td>
+            <a href="{{ user.user_path }}">{{ user.name }}</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  
 </div>

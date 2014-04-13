@@ -28,7 +28,10 @@ FidoBakku::Application.routes.draw do
     get 'session' => 'session#index'
     get 'dashboard/evaluations' => 'dashboard#evaluations'
     get 'dashboard/feedbacks' => 'dashboard#feedbacks'
+    get 'dashboard/users' => 'dashboard#users'
     
+    resources :users, only: [:show]
+    #get 'teams' => 'teams#index'
     get 'form' => 'form#index'
     
     resources :goals, except: [:new, :edit] do

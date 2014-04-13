@@ -9,4 +9,8 @@ class Api::DashboardController < Api::ApiController
     render json: ::Evaluation.all, each_serializer: Dashboard::EvaluationSerializer
   end
   
+  def users
+    render json: ::User.all, each_serializer: Dashboard::UserSerializer
+  end
+  
 end

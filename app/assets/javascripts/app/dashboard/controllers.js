@@ -14,4 +14,9 @@ fiApp.controller('DashboardCtrl', ['$scope', '$http', function($scope, $http) {
     $scope.feedbacks = feedbacks;
   });
   
+  $scope.users = [];
+  $http.get('/api/dashboard/users').success(function(users) {
+    $scope.users = users;
+  });
+  
 }]);
