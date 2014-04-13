@@ -12,8 +12,14 @@
     <table class="table">
       <tr ng-repeat="comp in section.form_comps | orderBy: '+ordr'">
         <td>{{ comp.content }}</td>
-        <td class="text-right">
-          
+        <td ng-if="feedback.ratings.mine">
+          {{ feedback.ratings.mine[comp.id] }}
+        </td>
+        <td ng-if="feedback.ratings.peers">
+          {{ feedback.ratings.peers[comp.id] }}
+        </td>
+        <td ng-if="feedback.ratings.manager">
+          {{ feedback.ratings.manager[comp.id] }}
         </td>
       </tr>
     </table>

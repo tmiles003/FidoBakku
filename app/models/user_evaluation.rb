@@ -57,28 +57,54 @@ class UserEvaluation < ActiveRecord::Base
     self.ratings = ActiveSupport::JSON.encode ratings_tmp
   end
   
-  def self.user_ratings evaluation_id, user_id, roles = nil
-    ratings = nil
+  def self.user_ratings evaluation_id, form_id, user_id, roles = nil
+    # get all the form parts
+    parts = ::FormPart.get_parts form_id
+    form_ids = []
+    parts.each { |part|
+      form_ids << part['form_id']
+    }
+    
+    # should have a rating for each of the comps - this is the "master hash"
+    comp_ids = ::Form.select('form_competencies.id')
+      .where(id: form_ids)
+      .joins(form_sections: :form_comps)
     
     if roles.nil?
-      user_eval = ::UserEvaluation.select('ratings')
+      user_evals = ::UserEvaluation.select('ratings')
         .where(evaluation_id: evaluation_id)
         .where(evaluator_id: user_id)
-        .take
-        
-      ratings = ActiveSupport::JSON.decode user_eval.ratings unless user_eval.nil?
     else
       user_evals = ::UserEvaluation.select('ratings')
         .where(evaluation_id: evaluation_id)
         .where.not(evaluator_id: user_id)
         .joins(:evaluator)
         .where('users.role in (?)', roles)
-      
-      logger.info user_evals.count
-      ratings = nil
     end
+  
+    user_rating = nil
+    user_ratings = []
+    user_evals.each { |user_eval| 
+      user_rating = ActiveSupport::JSON.decode user_eval.ratings
+      user_ratings << user_rating
+    }
     
-    ratings
+    all_ratings = Hash.new
+    comp_ids.each { |comp|
+      user_ratings.each { |user_rating|
+        comp_id = comp.id.to_s
+        if user_rating.has_key?(comp_id)
+          (all_ratings[comp_id] ||= []) << user_rating[comp_id].to_i
+        end
+      }
+    }
+    
+    avg_ratings = Hash.new
+    all_ratings.each_pair { |id, ratings|
+      avg_ratings[id] = (ratings.reduce(:+).to_f / ratings.size).round(1)
+    }
+    
+    avg_ratings = avg_ratings.empty? ? nil : avg_ratings
   end
   
 end

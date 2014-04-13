@@ -4,9 +4,9 @@ class Feedback::EvaluationSerializer < ActiveModel::Serializer
   has_one :user
   
   def ratings
-    mine = ::UserEvaluation.user_ratings object.id, object.user_id
-    peers = ::UserEvaluation.user_ratings object.id, object.user_id, ['user']
-    manager = ::UserEvaluation.user_ratings object.id, object.user_id, ['manager','admin']
+    mine = ::UserEvaluation.user_ratings object.id, object.form_id, object.user_id
+    peers = ::UserEvaluation.user_ratings object.id, object.form_id, object.user_id, ['user']
+    manager = ::UserEvaluation.user_ratings object.id, object.form_id, object.user_id, ['manager','admin']
     
     ratings = Hash.new
     ratings['mine'] = mine
