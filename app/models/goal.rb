@@ -10,8 +10,6 @@ class Goal < ActiveRecord::Base
   
   # validate user_id is you or someone in the admin/manager's team
   
-  default_scope { order(due_date: :asc) }
-  
   scope :for_user, lambda { |user, param|
     user_id = param.nil? ? user.id : param.to_i
     where(user_id: user_id)

@@ -1,6 +1,7 @@
 class GoalSerializer < ActiveModel::Serializer
-  attributes :id, :user_id, :title, :content, :due_date, :due_date_ts, :due_date_parts, 
-    :is_private, :is_complete, :goal_path
+  
+  attributes :id, :title, :content, :private, :done, :goal_path
+  has_one :user
   
   def due_date
     object.due_date.strftime('%e %B %Y').strip unless object.due_date.nil?

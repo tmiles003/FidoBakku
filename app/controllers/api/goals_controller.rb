@@ -2,60 +2,43 @@ class Api::GoalsController < Api::ApiController
   
   load_and_authorize_resource
   
-  before_action :set_goal, only: [:update, :user, :destroy]
+  before_action :set_goal, only: [:update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_goal
   
-  # GET /api/goals
   # GET /api/goals.json
   def index
     render json: ::Goal.for_user(@user, params[:user_id]).with_limit(params[:limit])
   end
   
-  # GET /api/goals/1
   # GET /api/goals/1.json
   def show
     render json: @goal
   end
   
-  # GET /api/goals/team
-  # GET /api/goals/team.json
-  def team
-    render json: ::Goal.team_goals(@user)
-  end
-  
-  # POST /api/goals
   # POST /api/goals.json
   def create
     @goal = ::Goal.new(goal_params) # :: forces root namespace
 
-    respond_to do |format|
-      if @goal.save
-        format.json { render json: @goal, status: :created }
-      else
-        format.json { render json: @goal.errors, status: :unprocessable_entity }
-      end
+    if @goal.save
+      render json: @goal, status: :created
+    else
+      render json: @goal.errors, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /api/goals/1
   # PATCH/PUT /api/goals/1.json
   def update
-    respond_to do |format|
-      if @goal.update(goal_params)
-        format.json { render json: @goal, status: :created }
-      else
-        format.json { render json: @goal.errors, status: :unprocessable_entity }
-      end
+    if @goal.update(goal_params)
+      render json: @goal, status: :created
+    else
+      render json: @goal.errors, status: :unprocessable_entity
     end
   end
   
-  # DELETE /api/goals/1
   # DELETE /api/goals/1.json
   def destroy
     @goal.destroy
-    respond_to do |format|
-      format.json { head :no_content }
-    end
+    head :no_content
   end
 
   private
@@ -65,6 +48,7 @@ class Api::GoalsController < Api::ApiController
     end
     
     def invalid_goal
+      logger.warn 'no goal with this id'
       head :no_content
     end
 

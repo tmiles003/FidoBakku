@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140413055645) do
+ActiveRecord::Schema.define(version: 20140413113908) do
 
   create_table "account_users", force: true do |t|
     t.integer "account_id"
@@ -102,9 +102,8 @@ ActiveRecord::Schema.define(version: 20140413055645) do
     t.integer  "user_id"
     t.string   "title"
     t.text     "content"
-    t.date     "due_date"
-    t.boolean  "is_private",  default: false
-    t.boolean  "is_complete", default: false
+    t.boolean  "private",    default: false
+    t.boolean  "done",       default: false
     t.datetime "created_at"
   end
 

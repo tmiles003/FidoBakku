@@ -2,14 +2,7 @@
 
 /* Controllers */
 
-fiApp.controller('GoalsCtrl', ['$scope', 'user', 'GoalsSrv', 'goals', 'NotifSrv', 
-                  function($scope, user, GoalsSrv, goals, NotifSrv) {
-  
-  $scope.user = user;
-  $scope.goals = goals;
-  $scope.teamGoals = [];
-  GoalsSrv.team(function(teamGoals) {
-    $scope.teamGoals = teamGoals;
-  });
+fiApp.controller('GoalsCtrl', ['$scope', 'GoalsSrv', 'goals', 'NotifSrv', 
+                  function($scope, GoalsSrv, goals, NotifSrv) {
   
 }]);

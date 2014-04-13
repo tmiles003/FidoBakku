@@ -94,7 +94,6 @@ fiApp.config(['$routeProvider', '$locationProvider',
     }
   });
   
-  
   /* routes for everyone */
   $routeProvider.when('/user/:id/:name', { 
     templateUrl: '/templates/user/index.html', 
@@ -102,9 +101,6 @@ fiApp.config(['$routeProvider', '$locationProvider',
     resolve: {
       user: function(UsersSrv, $route) { 
         return UsersSrv.get({ id: $route.current.params.id });
-      },
-      goals: function(GoalsSrv, $route) { 
-        return GoalsSrv.query({ user_id: $route.current.params.id })['$promise']; 
       }
     }
   });
@@ -112,10 +108,7 @@ fiApp.config(['$routeProvider', '$locationProvider',
   $routeProvider.when('/goals', { 
     templateUrl: '/templates/goals/index.html', 
     controller: 'GoalsCtrl', 
-    resolve: { 
-      user: function(UsersSrv) {
-        return UsersSrv.current()['$promise'];
-      },
+    resolve: {
       goals: function(GoalsSrv) { 
         return GoalsSrv.query({ limit: 3 })['$promise']; 
       }
