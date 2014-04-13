@@ -1,10 +1,14 @@
 class Admin::UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :email_hash, :name, :role, :role_sort, :user_path
+  attributes :id, :email, :email_hash, :name, :team_id, :role, :role_sort, :user_path
   has_one :form
-  has_one :team
+  #has_one :team, serializer: ::Admin::TeamSerializer
   
   def email_hash
     OpenSSL::Digest::MD5.new(object.email).hexdigest
+  end
+  
+  def team_id
+    object.team.nil? ? nil : object.team.id
   end
   
   # allows group sorting in evaluations user picker
