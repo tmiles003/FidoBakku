@@ -14,12 +14,12 @@ class Api::Admin::UsersController < Api::ApiController
   # GET /api/users/current
   # GET /api/users/current.json
   def current
-    render json: @user, serializer: CurrentUserSerializer
+    render json: @user, serializer: BaseUserSerializer
   end
   
   # GET /api/admin/users/1.json
   def show
-    render json: @account_user, serializer: CurrentUserSerializer
+    render json: @account_user, serializer: BaseUserSerializer
   end
   
   # GET /api/admin/users/roles.json

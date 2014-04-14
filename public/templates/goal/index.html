@@ -1,3 +1,68 @@
-<!-- h1>Goal</h1 -->
+<h2>Goal "{{ goal.title }}"</h2>
 
-1 goal
+<div class="row">
+  <div class="col-md-8">
+    {{ goal.content }}
+  </div>
+  
+  <div class="col-md-4">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+  
+    <div class="panel panel-default">
+      <!-- div class="panel-heading">Comments</div -->
+      <div class="panel-body">
+        Comments
+      </div>
+    
+      <table class="table table-hover">
+        <tr ng-repeat="comment in comments | orderBy: '+created_at'">
+          <td style="width:5%;">
+            <img ng-src="//secure.gravatar.com/avatar/{{ comment.user.email_hash }}?s=30&d=mm" alt="">
+          </td>
+          <td style="white-space:nowrap;width:15%;">
+            {{ comment.user.name }}
+          </td>
+          <td>
+            {{ comment.content }}
+          </td>
+          <td style="width:5%">
+            <button class="btn btn-default fi-btn-slim" ng-click="deleteComment(comment)">
+              <i class="fa fa-trash-o fa-lg"></i>
+          </td>
+        </tr>
+      </table>
+    </div>
+      
+    <div class="panel panel-default">
+      <!-- div class="panel-body">
+        Add Comment
+      </div -->
+      
+      <div class="fi-panel-inner">
+        <form accept-charset="utf-8" novalidate name="eCommentForm">
+         
+          <div class="form-group" ng-class="{ 'has-error': eCommentForm.comment_content.$invalid && submitted }">
+            <label for="comment_content" class="sr-only">Comment</label>
+            <textarea class="form-control" name="comment_content" ng-model="eComment.content"
+              ng-required="true" ng-minlength="2" rows="2" placeholder="Add comment"></textarea>
+            <p ng-show="eCommentForm.comment_content.$invalid && submitted" 
+              class="help-block">Comment is required</p>
+          </div>
+          <div class="actions text-right">
+            <button ng-click="saveComment(eComment, eCommentForm.$valid)" type="button"
+              class="btn btn-default btn-success btn-sm fi-btn-wide">Save</button>
+            <button ng-click="clearForm()" class="btn btn-default btn-sm">
+              <i class="fa fa-eraser" tooltip="Clear form" 
+                tooltip-placement="bottom" tooltip-popup-delay="1500"></i></button>
+          </div>
+        </form>
+      </div>
+      
+    </div>
+    
+  </div>
+</div>

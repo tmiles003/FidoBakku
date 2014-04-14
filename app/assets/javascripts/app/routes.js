@@ -105,22 +105,12 @@ fiApp.config(['$routeProvider', '$locationProvider',
     }
   });
   
-  $routeProvider.when('/goals', { 
-    templateUrl: '/templates/goals/index.html', 
-    controller: 'GoalsCtrl', 
-    resolve: {
-      goals: function(GoalsSrv) { 
-        return GoalsSrv.query({ limit: 3 })['$promise']; 
-      }
-    }
-  });
-  
   $routeProvider.when('/goal/:id/:slug', { 
     templateUrl: '/templates/goal/index.html', 
     controller: 'GoalCtrl',
     resolve: {
-      goal: function(GoalsSrv, $route) { 
-        return GoalsSrv.get({ id: $route.current.params.id });
+      goal: function(GoalSrv, $route) { 
+        return GoalSrv.get({ id: $route.current.params.id })['$promise'];
       }
     }
   });

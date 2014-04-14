@@ -94,7 +94,7 @@ FidoBakku::Application.routes.draw do
       end
     end
     
-    resources :comments, except: [:new, :create, :edit]
+    resources :comments, except: [:new, :edit]
     
     resource :user, path: '/profile', controller: :profile, only: [:update]
   end

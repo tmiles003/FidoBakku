@@ -3,11 +3,19 @@ class Api::CommentsController < Api::ApiController
   load_and_authorize_resource
   
   before_action :set_comment, only: [:update, :destroy]
-
-  # GET /api/comments.json
-  def index
-  end
   
+  # POST /api/comments.json
+  def create
+    @comment = ::Comment.new(comment_params) # :: forces root namespace
+    @comment.user = @user
+
+    if @comment.save
+      render json: @comment, status: :created, serializer: @comment.serializer
+    else
+      render json: @comment.errors, status: :unprocessable_entity
+    end
+  end
+
   # PATCH/PUT /api/comments/1.json
   def update
     @comment.user = current_user
@@ -32,6 +40,6 @@ class Api::CommentsController < Api::ApiController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:content)
+      params.require(:comment).permit(:goal_id, :content)
     end
 end

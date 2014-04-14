@@ -1,7 +1,7 @@
 class Feedback::EvaluationSerializer < ActiveModel::Serializer
   
   attributes :form_id, :ratings
-  has_one :user
+  has_one :user, serializer: ::Feedback::UserSerializer
   has_one :comment, serializer: ::Feedback::CommentSerializer
   
   def ratings

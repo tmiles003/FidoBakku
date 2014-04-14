@@ -27,10 +27,10 @@ fiApp.controller('UserEvaluationCtrl', ['$scope', '$http',
     }
   }, true);
   
-  $scope.eComment = userEvaluation.comment;
-  $scope.saveComment = function(eComment) {
-    CommentsSrv.update({ id: eComment.id, comment: eComment }, function(val, resp) {
-      $scope.eComment = val;
+  $scope.comment = userEvaluation.comment;
+  $scope.saveComment = function(comment) {
+    CommentsSrv.update({ id: comment.id, comment: comment }, function(val, resp) {
+      $scope.comment = val;
       NotifSrv.success();
     });
   }

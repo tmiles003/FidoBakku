@@ -1,11 +1,8 @@
-class Admin::UserSerializer < ActiveModel::Serializer
+class Admin::UserSerializer < BaseUserSerializer
+  
   attributes :id, :email, :email_hash, :name, :team_id, :role, :role_sort, :user_path
   has_one :form
   #has_one :team, serializer: ::Admin::TeamSerializer
-  
-  def email_hash
-    OpenSSL::Digest::MD5.new(object.email).hexdigest
-  end
   
   def team_id
     object.team.nil? ? nil : object.team.id
@@ -20,10 +17,6 @@ class Admin::UserSerializer < ActiveModel::Serializer
     else # admin
       30
     end
-  end
-  
-  def user_path
-    root_path(anchor: user_manage_path(object))
   end
   
 end

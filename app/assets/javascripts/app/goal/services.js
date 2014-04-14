@@ -2,7 +2,7 @@
 
 /* Services */
 
-fiApp.factory('GoalsSrv', ['$resource', function($resource) {
+fiApp.factory('GoalSrv', ['$resource', function($resource) {
   
   return $resource('/api/goals/:id', 
     { id: '@id' }, 

@@ -2,8 +2,8 @@
 
 /* Controllers */
 
-fiApp.controller('UserCtrl', ['$scope', '$routeParams', 'user', 'GoalsSrv', 'NotifSrv', 
-                  function($scope, $routeParams, user, GoalsSrv, NotifSrv) {
+fiApp.controller('UserCtrl', ['$scope', '$routeParams', 'user', 'GoalSrv', 'NotifSrv', 
+                  function($scope, $routeParams, user, GoalSrv, NotifSrv) {
   
   $scope.user = user;
   $scope.goals = user.goals;
@@ -11,7 +11,7 @@ fiApp.controller('UserCtrl', ['$scope', '$routeParams', 'user', 'GoalsSrv', 'Not
   
   var createGoal = function(newGoal) {
     _.extend(newGoal, { user_id: $routeParams.id }); // assign user_id to goal
-    GoalsSrv.save(newGoal, function(val, resp) {
+    GoalSrv.save(newGoal, function(val, resp) {
       $scope.goals.push(val);
       $scope.eGoal = {};
       $scope.eGoalForm.$setPristine();
