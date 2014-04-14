@@ -2,14 +2,14 @@
 
 <div class="row">
   <div class="col-md-8">
-    <h1>Dashboard</h1>
+    <h2>Dashboard</h2>
   
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-4">
-    <h2>Evaluations to do</h2>
+    <h3>Evaluations to do</h3>
     <div class="panel panel-default">
       <table class="table table-hover">
         <tr ng-repeat="evaluation in evaluations | orderBy: '+name'">
@@ -28,7 +28,7 @@
   </div>
   
   <div class="col-md-4">
-    <h2>Feedbacks to do</h2>
+    <h3>Feedbacks to do</h3>
     <div class="panel panel-default">
       <table class="table table-hover">
         <tr ng-repeat="feedback in feedbacks | orderBy: '+name'">
@@ -44,7 +44,7 @@
   </div>
   
   <div class="col-md-4">
-    <h2>Users</h2>
+    <h3>Users</h3>
     <div class="panel panel-default">
       <table class="table table-hover">
         <tr ng-repeat="user in users | orderBy: '+name'">

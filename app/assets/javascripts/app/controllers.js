@@ -10,10 +10,10 @@ fiApp.controller('FooterCtrl', ['$scope', 'UsersAdminSrv', 'SessionSrv',
     $scope.user = user;
   });
   
-  $scope.account = '';
+  /* $scope.account = '';
   SessionSrv.getAccount().then(function(re) {
     $scope.account = re.account;
-  });
+  }); */
   
   /* SessionSrv.getData(function(data) {
     $scope.user = data.user.name;

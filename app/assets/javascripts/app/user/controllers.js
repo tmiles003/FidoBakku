@@ -6,7 +6,8 @@ fiApp.controller('UserCtrl', ['$scope', '$routeParams', 'user', 'GoalsSrv', 'Not
                   function($scope, $routeParams, user, GoalsSrv, NotifSrv) {
   
   $scope.user = user;
-  // $scope.goals = goals;
+  $scope.goals = user.goals;
+  $scope.evaluations = user.evaluations;
   
   var createGoal = function(newGoal) {
     _.extend(newGoal, { user_id: $routeParams.id }); // assign user_id to goal
@@ -45,6 +46,12 @@ fiApp.controller('UserCtrl', ['$scope', '$routeParams', 'user', 'GoalsSrv', 'Not
   
   $scope.editGoal = function(goal) {
     $scope.eGoal = angular.copy(goal);
+  }
+  
+  $scope.clearForm = function() {
+    $scope.submitted = false;
+    $scope.eGoal = {};
+    $scope.eGoalForm.$setPristine();
   }
   
   $scope.deleteGoal = function(goal) {

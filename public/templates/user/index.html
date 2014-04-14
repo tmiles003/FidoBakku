@@ -1,7 +1,18 @@
-<!-- h1>Listing user</h1 -->
 
 <div class="row">
+  <div class="col-md-2 text-right">
+    <img ng-src="//secure.gravatar.com/avatar/{{ user.email_hash }}?s=80&d=mm" alt="">
+  </div>
+  <div class="col-md-6">
+    <h2>{{ user.name }}</h2>
+    <h4>{{ user.team.name }}</h4>
+  </div>
+  <div class="col-md-4">
+    <!-- h1>{{ user.team.name }}</h1 -->
+  </div>
+</div>
 
+<div class="row">
   <div class="col-md-8">
   
   <div class="panel panel-default">
@@ -9,15 +20,9 @@
     <!-- div class="panel-body">
     </div -->
     <table class="table table-hover">
-      <tr ng-repeat="goal in goals | orderBy: '+due_date_ts'">
+      <tr ng-repeat="goal in goals">
         <td>
-          {{ goal.title }}
-        </td>
-        <td>
-          {{ goal.due_date }}
-        </td>
-        <td>
-          <i class="fa fa-lock" ng-show="goal.is_private"></i>
+          <a href="{{ goal.goal_path }}">{{ goal.title }}</a>
         </td>
         <td class="text-right">
           <button class="btn btn-default fi-btn-slim" ng-click="editGoal(goal)">
@@ -30,54 +35,39 @@
       </tr>
     </table>
   </div>
-  
   </div>
 
   <div class="col-md-4">
-
+  
   <div class="panel panel-default">
-    <div class="panel-heading">Form</div>
+    <div class="panel-heading">
+      <span ng-hide="eGoal.id">Add new goal</span>
+      <span ng-show="eGoal.id">Update goal</span>
+    </div>
     <!-- div class="panel-body">
     </div -->
     <div class="fi-panel-inner">
 
     <form accept-charset="utf-8" novalidate name="eGoalForm">
-      <input type="hidden" ng-model="eGoal.id">
-      
       <div class="form-group" ng-class="{ 'has-error': eGoalForm.goal_title.$invalid && submitted }">
-        <label for="goal_title">Goal</label>
+        <label for="goal_title" class="sr-only">Title</label>
         <input name="goal_title" class="form-control" ng-model="eGoal.title" type="text" 
-          ng-required="true" ng-minlength="2" ng-maxlength="100">
+          ng-required="true" ng-minlength="2" ng-maxlength="100" placeholder="Title">
         <p ng-show="eGoalForm.goal_title.$invalid && submitted" 
           class="help-block">A title is required</p>
       </div>
-      
       <div class="form-group">
-        <label for="goal_content">Description</label>
-        <textarea name="goal_content" class="form-control" ng-model="eGoal.content"></textarea>
+        <label for="goal_content" class="sr-only">Description</label>
+        <textarea name="goal_content" class="form-control" ng-model="eGoal.content" rows="3"
+          placeholder="Description"></textarea>
       </div>
-      
-      <div class="form-group">
-        <label for="goal_due_date">Due</label>
-        <div class="input-group date">
-          <input name="goal_due_date" class="form-control" ng-model="eGoal.due_date" type="text">
-          <span class="input-group-btn">
-            <button class="btn btn-default" ng-click="dueDate()">
-              <i class="fa fa-calendar"></i>
-            </button>
-          </span>
-        </div>
-      </div>
-      
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" ng-model="eGoal.is_private"> Private
-        </label>
-      </div>
-
-      <div class="actions">
+      <!-- attach to evaluation -->
+      <div class="actions text-right">
         <input ng-click="saveGoal(eGoal, eGoalForm.$valid)" type="submit" value="Save"
-          class="btn btn-default btn-sm">
+          class="btn btn-default btn-success btn-sm fi-btn-wide">
+        <button ng-click="clearForm()" class="btn btn-default btn-sm">
+          <i class="fa fa-eraser" tooltip="Clear form" 
+            tooltip-placement="bottom" tooltip-popup-delay="1500"></i></button>
       </div>
       
     </form>

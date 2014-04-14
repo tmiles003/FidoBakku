@@ -1,15 +1,15 @@
 /* override bootstrap styles */
 
 /*399*/
-h1, .h1, h2, .h2, h3, .h3 {
+h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
   color: #415b76;
   margin: 15px 0 15px 30px;
 }
 
 /*445*/
-h1, .h1 {
+/* h1, .h1 {
   font-size: 30px;
-}
+} */
 
 /*1650*/
 label {

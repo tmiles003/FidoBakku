@@ -1,9 +1,8 @@
-<!-- h1>Listing forms</h1 -->
 
 <div class="row">
   
   <div class="col-md-9">
-    <h1>Forms</h1>
+    <h2>Forms</h2>
   
     <p>Forms help text</p>
   </div>
@@ -76,8 +75,6 @@
     <div class="fi-panel-inner">
 
     <form accept-charset="utf-8" novalidate name="eFormForm">
-      <input type="hidden" ng-model="eForm.id">
-      
       <div class="form-group" ng-class="{ 'has-error': eFormForm.form_name.$invalid && submitted }">
         <label for="form_name" class="sr-only">Form name</label>
         <input name="form_name" class="form-control" ng-model="eForm.name" type="text" 

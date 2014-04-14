@@ -100,7 +100,7 @@ fiApp.config(['$routeProvider', '$locationProvider',
     controller: 'UserCtrl',
     resolve: {
       user: function(UsersSrv, $route) { 
-        return UsersSrv.get({ id: $route.current.params.id });
+        return UsersSrv.get({ id: $route.current.params.id })['$promise'];
       }
     }
   });

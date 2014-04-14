@@ -1,4 +1,4 @@
-class UserSerializer < ActiveModel::Serializer
+class CurrentUserSerializer < ActiveModel::Serializer
   attributes :name, :email_hash
   #:id, , :user_path
   
