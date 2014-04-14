@@ -7,7 +7,8 @@ class Api::GoalsController < Api::ApiController
   
   # GET /api/goals.json
   def index
-    render json: ::Goal.for_user(@user, params[:user_id]).with_limit(params[:limit])
+    logger.warn 'this should not be in use'
+    #render json: ::Goal.for_user(@user, params[:user_id]).with_limit(params[:limit])
   end
   
   # GET /api/goals/1.json

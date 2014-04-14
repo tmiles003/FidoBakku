@@ -56,11 +56,11 @@
         <p ng-show="eGoalForm.goal_title.$invalid && submitted" 
           class="help-block">A title is required</p>
       </div>
-      <div class="form-group">
+      <!-- div class="form-group">
         <label for="goal_content" class="sr-only">Description</label>
         <textarea name="goal_content" class="form-control" ng-model="eGoal.content" rows="3"
           placeholder="Description"></textarea>
-      </div>
+      </div -->
       <!-- attach to evaluation -->
       <div class="actions text-right">
         <input ng-click="saveGoal(eGoal, eGoalForm.$valid)" type="submit" value="Save"
