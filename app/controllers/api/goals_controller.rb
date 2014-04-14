@@ -12,7 +12,7 @@ class Api::GoalsController < Api::ApiController
   
   # GET /api/goals/1.json
   def show
-    render json: @goal
+    render json: @goal, serializer: ::Goal::GoalSerializer
   end
   
   # POST /api/goals.json
@@ -20,7 +20,7 @@ class Api::GoalsController < Api::ApiController
     @goal = ::Goal.new(goal_params) # :: forces root namespace
 
     if @goal.save
-      render json: @goal, status: :created
+      render json: @goal, status: :created, serializer: ::User::GoalSerializer
     else
       render json: @goal.errors, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class Api::GoalsController < Api::ApiController
   # PATCH/PUT /api/goals/1.json
   def update
     if @goal.update(goal_params)
-      render json: @goal, status: :created
+      render json: @goal, serializer: ::Goal::GoalSerializer
     else
       render json: @goal.errors, status: :unprocessable_entity
     end
@@ -44,7 +44,7 @@ class Api::GoalsController < Api::ApiController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_goal
-      @goal = ::Goal.find(params[:id])
+      @goal = ::Goal.find(params[:id]) # for this user/in account
     end
     
     def invalid_goal
@@ -54,6 +54,6 @@ class Api::GoalsController < Api::ApiController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def goal_params
-      params.require(:goal).permit(:user_id, :title, :content, :due_date, :is_private, :is_complete)
+      params.require(:goal).permit(:user_id, :title, :content, :private, :done)
     end
 end
