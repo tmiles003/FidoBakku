@@ -59,8 +59,12 @@ class Api::Admin::UsersController < Api::ApiController
 
   # DELETE /api/admin/users/1.json
   def destroy
-    @account_user.destroy # unless @user.id != @current_user.id
-    head :no_content
+    if @account_user.id != current_user.id
+      @account_user.destroy
+      head :no_content
+    else
+      render nothing: true, status: :unprocessable_entity
+    end
   end
 
   private
