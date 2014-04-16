@@ -37,10 +37,11 @@
     <div class="panel panel-default" ng-repeat="section in sections | orderBy: '+ordr'">
       <div class="panel-heading">{{ section.name }}
         <span class="pull-right">
-          <button class="btn btn-default fi-btn-slim" ng-click="moveSectionUp(section)">
+          <button class="btn btn-default fi-btn-slim" ng-click="moveSectionUp(section)" ng-hide="$first"
+            ng-class="{ 'fi-fa-margin': $last }">
             <i class="fa fa-angle-up fa-lg"></i>
           </button>
-          <button class="btn btn-default fi-btn-slim" ng-click="moveSectionDown(section)">
+          <button class="btn btn-default fi-btn-slim" ng-click="moveSectionDown(section)" ng-hide="$last">
             <i class="fa fa-angle-down fa-lg"></i>
           </button>
           <button class="btn btn-default fi-btn-slim" ng-click="editSection(section)">

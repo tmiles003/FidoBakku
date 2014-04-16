@@ -17,7 +17,7 @@
     <!-- div class="panel-heading">Evaluations</div -->
     <!-- div class="panel-body">
     </div -->
-    <table class="table table-hover">
+    <table class="table">
       <tr ng-repeat="evaluation in evaluations | orderBy: '-created_at'">
         <td>
           <a href="{{ evaluation.manage_path }}">{{ evaluation.user.name }}</a>
@@ -44,27 +44,26 @@
     </div -->
     <div class="fi-panel-inner">
 
-    <form accept-charset="utf-8" novalidate name="eEvaluationForm">
-      <div class="form-group" ng-class="{ 'has-error': eEvaluationForm.evaluation_user.$invalid && submitted }">
-        <label for="evaluation_user" class="sr-only">User</label>
-        <select name="evaluation_user" ng-model="eEvaluation.user_id" class="form-control" 
-          ng-options="user.id as user.name group by ucFirst(user.role) for user in users | 
-            orderBy: ['+role_sort', '+name']" 
-          ng-required="true">
-          <option value="">Select a user</option>
-        </select>
-        <p ng-show="eEvaluationForm.evaluation_user.$invalid && submitted" 
-          class="help-block">A user must be selected</p>
-      </div>
-      
-      <div class="actions text-right">
-        <input ng-click="saveEvaluation(eEvaluation, eEvaluationForm.$valid)" type="submit" value="Save"
-          class="btn btn-default btn-success btn-sm fi-btn-wide">
-        <button ng-click="clearForm()" class="btn btn-default btn-sm" title="Clear form">
-          <i class="fa fa-eraser fa-lg"></i></button>
-      </div>
-      
-    </form>
+      <form accept-charset="utf-8" novalidate name="eEvaluationForm">
+        <div class="form-group" ng-class="{ 'has-error': eEvaluationForm.evaluation_user.$invalid && submitted }">
+          <label for="evaluation_user" class="sr-only">User</label>
+          <select name="evaluation_user" ng-model="eEvaluation.user_id" class="form-control" 
+            ng-options="user.id as user.name group by ucFirst(user.role) for user in users | 
+              orderBy: ['+role_sort', '+name']" 
+            ng-required="true">
+            <option value="">Select a user</option>
+          </select>
+          <p ng-show="eEvaluationForm.evaluation_user.$invalid && submitted" 
+            class="help-block">A user must be selected</p>
+        </div>
+        
+        <div class="actions text-right">
+          <input ng-click="saveEvaluation(eEvaluation, eEvaluationForm.$valid)" type="submit" value="Save"
+            class="btn btn-default btn-success btn-sm fi-btn-wide">
+          <button ng-click="clearForm()" class="btn btn-default btn-sm" title="Clear form">
+            <i class="fa fa-eraser fa-lg"></i></button>
+        </div>
+      </form>
     
     </div>
   </div>

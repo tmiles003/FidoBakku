@@ -11,7 +11,7 @@
   <div class="col-md-4">
     <h3>Evaluations to do</h3>
     <div class="panel panel-default">
-      <table class="table table-hover">
+      <table class="table">
         <tr ng-repeat="evaluation in evaluations | orderBy: '+name'">
           <td>
             <img ng-src="//secure.gravatar.com/avatar/{{ evaluation.evaluation.user.email_hash }}?s=25&d=mm" alt="">
@@ -30,7 +30,7 @@
   <div class="col-md-4">
     <h3>Feedbacks to do</h3>
     <div class="panel panel-default">
-      <table class="table table-hover">
+      <table class="table">
         <tr ng-repeat="feedback in feedbacks | orderBy: '+name'">
           <td>
             <img ng-src="//secure.gravatar.com/avatar/{{ feedback.user.email_hash }}?s=25&d=mm" alt="">
@@ -46,7 +46,7 @@
   <div class="col-md-4">
     <h3>Users</h3>
     <div class="panel panel-default">
-      <table class="table table-hover">
+      <table class="table">
         <tr ng-repeat="user in users | orderBy: '+name'">
           <td>
             <img ng-src="//secure.gravatar.com/avatar/{{ user.email_hash }}?s=25&d=mm" alt="">

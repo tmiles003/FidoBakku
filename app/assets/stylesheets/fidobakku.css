@@ -21,16 +21,34 @@ body {
   margin: 50px 0 45px 0;
 }
 
-/* a bit of breathing space between the icon and text */
-i.fa {
-  margin-right: 4px;
-}
-
 /* a {
   color: #415b76 !important;
 } */
 
 .main-container {
+}
+
+.fi-5pc {
+  width: 5%;
+  white-space: nowrap;
+}
+
+.fi-15pc {
+  width: 15%;
+  white-space: nowrap;
+}
+
+.panel-default .fi-panel-inner {
+  padding: 8px;
+}
+.panel-default .fi-panel-inner .fi-btn-short {
+  border: none;
+  padding: 2px 8px;
+  text-align: left;
+}
+
+.fi-fa-margin {
+  margin-right: 22px;
 }
 
 .fi-comps-table {
@@ -42,12 +60,12 @@ i.fa {
   resize: vertical;
 }
 
-.fi-form-user-list, .fi-eval-user-list {
+/* .fi-form-user-list, .fi-eval-user-list {
   display: inline-block;
   width: 100%;
   max-width: 100%;
-}
-.fi-form-user { /*, .fi-eval-user { */
+} */
+.fi-form-user {
   color: #415b76;
   font-size: 15px;
   text-align: left;
@@ -55,7 +73,7 @@ i.fa {
 .fi-form-user:hover {
   background-color: #ddd;
 }
-.fi-form-user.active { /*, .fi-eval-user { */
+.fi-form-user.active {
   background-color: #415b76;
   color: #fff;
 }

@@ -17,20 +17,20 @@
     <!-- div class="panel-heading">No team</div -->
     <!-- div class="panel-body">
     </div -->
-    <table class="table table-hover">
+    <table class="table">
       <tr ng-repeat="user in users | orderBy: '+name' | filter: { team_id: null }">
-        <td>
+        <td class="fi-5pc">
           <img ng-src="//secure.gravatar.com/avatar/{{ user.email_hash }}?s=25&d=mm" alt="">
         </td>
         <td>
           <a href="{{ user.user_path }}">{{ user.name }}</a>
         </td>
         <td>{{ user.email }}</td>
-        <td ng-switch on="user.role">
+        <td ng-switch on="user.role" class="fi-5pc">
           <i class="fa fa-font" ng-switch-when="admin"></i>
           <i class="fa fa-briefcase" ng-switch-when="manager"></i>
         </td>
-        <td class="text-right">
+        <td class="text-right fi-5pc">
           <button class="btn btn-default fi-btn-slim" ng-click="editUser(user)">
             <i class="fa fa-edit fa-lg"></i>
           </button>
@@ -55,20 +55,20 @@
     </div>
     <!-- div class="panel-body">
     </div -->
-    <table class="table table-hover">
+    <table class="table">
       <tr ng-repeat="user in users | orderBy: '+name' | filter: { team_id: team.id }">
-        <td>
+        <td class="fi-5pc">
           <img ng-src="//secure.gravatar.com/avatar/{{ user.email_hash }}?s=25&d=mm" alt="">
         </td>
         <td>
           <a href="{{ user.user_path }}">{{ user.name }}</a>
         </td>
         <td>{{ user.email }}</td>
-        <td ng-switch on="user.role" class="text-right">
+        <td ng-switch on="user.role" class="text-right fi-5pc">
           <i class="fa fa-font" ng-switch-when="admin"></i>
           <i class="fa fa-briefcase" ng-switch-when="manager"></i>
         </td>
-        <td class="text-right">
+        <td class="text-right fi-5pc">
           <button class="btn btn-default fi-btn-slim" ng-click="editUser(user)">
             <i class="fa fa-edit fa-lg"></i>
           </button>

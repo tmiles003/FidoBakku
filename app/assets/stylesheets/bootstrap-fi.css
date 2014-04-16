@@ -100,14 +100,4 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
   color: #fff;
   background-color: #415b76;
 }
-.panel-default > .panel-heading i.fa {
-  color: #fff;
-}
-.panel-default .fi-panel-inner {
-  padding: 8px;
-}
-.panel-default .fi-panel-inner .fi-btn-short {
-  border: none;
-  padding: 2px 8px;
-  text-align: left;
-}
+

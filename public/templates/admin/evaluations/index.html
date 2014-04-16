@@ -17,7 +17,7 @@
     <!-- div class="panel-heading">Evaluation sessions</div -->
     <!-- div class="panel-body">
     </div -->
-    <table class="table table-hover">
+    <table class="table">
       <tr ng-repeat="session in sessions | orderBy: '-created_at'">
         <td>
           <a href="{{ session.manage_path }}">{{ session.title }}</a>
@@ -47,23 +47,22 @@
     </div -->
     <div class="fi-panel-inner">
 
-    <form accept-charset="utf-8" novalidate name="eSessionForm">
-      <div class="form-group" ng-class="{ 'has-error': eSessionForm.session_title.$invalid && submitted }">
-        <label for="session_title" class="sr-only">Title</label>
-        <input name="session_title" class="form-control" ng-model="eSession.title" type="text"
-          ng-required="true" ng-minlength="2" ng-maxlength="200" placeholder="Title">
-        <p ng-show="eSessionForm.session_title.$invalid && submitted" 
-          class="help-block">A title must be set</p>
-      </div>
-      
-      <div class="actions text-right">
-        <input ng-click="saveSession(eSession, eSessionForm.$valid)" type="submit" value="Save"
-          class="btn btn-default btn-success btn-sm fi-btn-wide">
-        <button ng-click="clearForm()" class="btn btn-default btn-sm" title="Clear form">
-          <i class="fa fa-eraser fa-lg"></i></button>
-      </div>
-      
-    </form>
+      <form accept-charset="utf-8" novalidate name="eSessionForm">
+        <div class="form-group" ng-class="{ 'has-error': eSessionForm.session_title.$invalid && submitted }">
+          <label for="session_title" class="sr-only">Title</label>
+          <input name="session_title" class="form-control" ng-model="eSession.title" type="text"
+            ng-required="true" ng-minlength="2" ng-maxlength="200" placeholder="Title">
+          <p ng-show="eSessionForm.session_title.$invalid && submitted" 
+            class="help-block">A title must be set</p>
+        </div>
+        
+        <div class="actions text-right">
+          <input ng-click="saveSession(eSession, eSessionForm.$valid)" type="submit" value="Save"
+            class="btn btn-default btn-success btn-sm fi-btn-wide">
+          <button ng-click="clearForm()" class="btn btn-default btn-sm" title="Clear form">
+            <i class="fa fa-eraser fa-lg"></i></button>
+        </div>
+      </form>
     
     </div>
   </div>
