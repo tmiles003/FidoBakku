@@ -10,7 +10,7 @@
 <div class="row">
   <div class="col-md-9">
   <!-- shared form -->
-  <div class="panel panel-default">
+    <div class="panel panel-default">
       <!-- div class="panel-heading">Shared form</div -->
       <div class="panel-body">
         Attach shared form
@@ -51,6 +51,8 @@
           </button>
         </span>
       </div>
+    <!-- /div>
+    <div class="panel panel-default" -->
       <!-- section benchmarks -->
       <div ng-include="'/templates/admin/forms/manage_comps.html'">
       </div>
@@ -65,9 +67,9 @@
       <!-- div class="panel-body">
       </div -->
       <div class="fi-panel-inner">
-        <div class="row">
+        <!-- div class="row" -->
           <form accept-charset="utf-8" novalidate name="eSectionForm">
-            <div class="col-md-9 form-group" 
+            <div class="form-group" 
               ng-class="{ 'has-error': eSectionForm.section_name.$invalid && submitted }">
               <label for="section_name" class="sr-only">Section</label>
               <input name="section_name" class="form-control" ng-model="eSection.name" type="text"
@@ -76,7 +78,7 @@
                 class="help-block">A section is required</p>
             </div>
             
-            <div class="col-md-3 actions">
+            <div class="actions text-right">
               <button ng-click="saveSection(eSection, eSectionForm.$valid)" type="button"
                 class="btn btn-default btn-success btn-sm fi-btn-wide">Save</button>
               <button ng-click="clearForm()" class="btn btn-default btn-sm">
@@ -84,18 +86,19 @@
                   tooltip-placement="bottom" tooltip-popup-delay="1500"></i></button>
             </div>
           </form>
-        </div>
-        
+        <!-- /div -->
       </div>
+      
     </div>
   </div>
   
   <div class="col-md-3">
     <!-- tabbed user lists -->
     <div class="panel panel-default" ng-hide="{{ form.shared }}">
-      <div class="panel-heading">Users</div>
-      <!-- div class="panel-body">
-      </div -->
+      <!-- div class="panel-heading">Users</div -->
+      <div class="panel-body">
+        Assigned users
+      </div>
       <div class="fi-panel-inner" ng-controller="FormUserAdminCtrl">
         <select ng-model="team_id" class="form-control" 
           ng-options="team.id as team.name for team in teams">

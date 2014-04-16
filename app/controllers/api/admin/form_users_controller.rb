@@ -8,7 +8,7 @@ class Api::Admin::FormUsersController < Api::ApiController
   
   # GET /api/admin/forms/1/users.json
   def users
-    users = @account.users
+    users = @user.account.users
       .joins('LEFT JOIN form_users ON form_users.user_id = users.id')
       .where('form_users.user_id IS NULL OR form_users.form_id = ?', @form.id)
       .includes(:form, :team)
@@ -31,7 +31,7 @@ class Api::Admin::FormUsersController < Api::ApiController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_form
-      @form = ::Form.in_account(@account.id).find(params[:id])
+      @form = ::Form.in_account(@user.account.id).find(params[:id])
     end
     
     def invalid_form

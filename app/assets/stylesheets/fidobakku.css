@@ -33,6 +33,15 @@ i.fa {
 .main-container {
 }
 
+.fi-comps-table {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+
+.fi-vresize {
+  resize: vertical;
+}
+
 .fi-form-user-list, .fi-eval-user-list {
   display: inline-block;
   width: 100%;

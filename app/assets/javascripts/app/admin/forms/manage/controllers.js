@@ -124,6 +124,10 @@ fiApp.controller('FormCompsAdminCtrl', ['$scope', 'FormCompsAdminSrv', 'NotifSrv
     });
   }
   
+  $scope.logThis = function(t) {
+    console.log(t);
+  }
+  
   $scope.saveComp = function(comp, isValid) {
     $scope.submitted = true;
     if (isValid) {

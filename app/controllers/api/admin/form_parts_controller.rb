@@ -43,7 +43,7 @@ class Api::Admin::FormPartsController < Api::ApiController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_form
-      @form = ::Form.in_account(@account.id).find(params[:form_id])
+      @form = ::Form.in_account(@user.account.id).find(params[:form_id])
     end
     
     def invalid_form
