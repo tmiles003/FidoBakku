@@ -105,10 +105,13 @@
           <option value="">Filter by team</option>
         </select>
         <hr>
-        <div class="fi-form-user-list">
-        <button ng-repeat="user in users | orderBy: '+name' | filter: { team: team_id }" 
-          ng-click="assign(user.id)" fi-form-user="user"
-          class="btn btn-default fi-form-user">{{ user.name }}</button>
+        <div class="btn-group-vertical btn-group-justified">
+          <div class="btn-group">
+            <button ng-repeat="user in users | orderBy: '+name' | filter: { team_id: team_id }" 
+              ng-click="assign(user.id)" btn-checkbox ng-model="user.form" 
+              ng-class="{ active: user.form }"
+              class="btn btn-default fi-form-user">{{ user.name }}</button>
+          </div>
         </div>
       </div>
     </div>

@@ -47,21 +47,15 @@ i.fa {
   width: 100%;
   max-width: 100%;
 }
-.fi-form-user, .fi-eval-user {
-  background-color: #ddd;
+.fi-form-user { /*, .fi-eval-user { */
   color: #415b76;
-  display: block;
-  float: left;
-  margin: 2px 0 2px 0;
-  padding: 6px 12px 6px 12px;
+  font-size: 15px;
   text-align: left;
-  width: 100%;
-  max-width: 100%;
 }
-.fi-form-user:hover, .fi-eval-user:hover {
-  background-color: #ccc;
+.fi-form-user:hover {
+  background-color: #ddd;
 }
-.fi-form-user-sel, .fi-eval-user-sel {
+.fi-form-user.active { /*, .fi-eval-user { */
   background-color: #415b76;
   color: #fff;
 }

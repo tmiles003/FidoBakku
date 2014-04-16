@@ -233,12 +233,12 @@ fiApp.controller('FormPartAdminCtrl', ['$scope', '$routeParams', '$http', 'FormP
   
 }]);
 
-fiApp.controller('FormUserAdminCtrl', ['$scope', '$routeParams',
-                  'TeamsAdminSrv', 'UsersAdminSrv', 'FormUserAdminSrv', 'NotifSrv',
-                  function($scope, $routeParams, 
-                            TeamsAdminSrv, UsersAdminSrv, FormUserAdminSrv, NotifSrv) {
+fiApp.controller('FormUserAdminCtrl', ['$scope', 
+                  'TeamsAdminSrv', 'FormUserAdminSrv', 'NotifSrv',
+                  function($scope,
+                           TeamsAdminSrv, FormUserAdminSrv, NotifSrv) {
   
-  $scope.formId = $routeParams.id;
+  $scope.formId = $scope.$parent.form.id;
   
   $scope.teams = [];
   TeamsAdminSrv.query(function(teams) {
@@ -252,11 +252,6 @@ fiApp.controller('FormUserAdminCtrl', ['$scope', '$routeParams',
   
   $scope.assign = function(id) {
     FormUserAdminSrv.assign({ id: $scope.formId, userId: id }, function(val) {
-      // update user in list
-      var user = _.find($scope.users, function(u) {
-        return u.id === val.id;
-      });
-      _.extend(user, val);
       NotifSrv.success();
     });
   }

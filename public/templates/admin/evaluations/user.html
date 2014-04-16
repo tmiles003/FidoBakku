@@ -27,9 +27,9 @@
         </select>
         <hr>
         <div class="fi-eval-user-list">
-        <button ng-repeat="user in users | orderBy: '+name' | filter: { team: team_id }" 
-          ng-click="assign(user.id)" fi-evaluation-user="user"
-          class="btn btn-default fi-eval-user">{{ user.name }}</button>
+          <button ng-repeat="user in users | orderBy: '+name' | filter: { team: team_id }" 
+            ng-click="assign(user.id)" fi-evaluation-user="user"
+            class="btn btn-default fi-eval-user">{{ user.name }}</button>
         </div>
       </div>
     </div>
