@@ -2,10 +2,22 @@
 
 <div class="row">
   <div class="col-md-8">
-    {{ goal.content }}
+    <form accept-charset="utf-8" novalidate name="eGoalForm">
+      <div class="form-group" ng-class="{ 'has-error': eGoalForm.goal_content.$dirty }">
+        <label for="goal_content" class="sr-only">Goal details</label>
+        <textarea name="goal_content" ng-model="goal.content"
+          class="form-control" style="resize:none;"
+          >{{ goal.content }}</textarea>
+      </div>
+      <div class="actions text-right" ng-show="eGoalForm.goal_content.$dirty">
+        <button ng-click="saveGoal(goal)" type="button"
+          class="btn btn-default btn-success btn-sm fi-btn-wide">Save</button>
+      </div>
+    </form>
   </div>
   
   <div class="col-md-4">
+    <h3>{{ user.evaluation.session.title }}</h3>
   </div>
 </div>
 

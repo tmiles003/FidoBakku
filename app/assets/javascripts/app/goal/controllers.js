@@ -9,6 +9,13 @@ fiApp.controller('GoalCtrl', ['$scope', 'GoalSrv', 'goal', 'CommentsSrv', 'Notif
   $scope.comments = goal.comments;
   $scope.eComment = { goal_id: $scope.goal.id };
   
+  $scope.saveGoal = function(goal) {
+    GoalSrv.update({ id: goal.id, goal: goal }, function(val, resp) {
+      $scope.eGoalForm.$setPristine();
+      NotifSrv.success();
+    });
+  }
+  
   $scope.saveComment = function(comment, isValid) {
     $scope.submitted = true;
     if (isValid) {
