@@ -4,7 +4,7 @@ class Api::Admin::EvaluationSessionsController < Api::ApiController
   
   # GET /api/admin/evaluation_sessions.json
   def index
-    render json: @account.evaluation_sessions, each_serializer: ::Admin::EvaluationSessionSerializer
+    render json: @user.account.evaluation_sessions, each_serializer: ::Admin::EvaluationSessionSerializer
   end
 
   # GET /api/admin/evaluation_sessions/1.json
@@ -15,7 +15,7 @@ class Api::Admin::EvaluationSessionsController < Api::ApiController
   # POST /api/admin/evaluation_sessions.json
   def create
     @evaluation_session = ::EvaluationSession.new(evaluation_session_params)
-    @evaluation_session.account = @account
+    @evaluation_session.account = @user.account
 
     if @evaluation_session.save
       render json: @evaluation_session, status: :created, serializer: ::Admin::EvaluationSessionSerializer

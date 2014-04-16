@@ -7,7 +7,7 @@ class Api::Admin::FormsController < Api::ApiController
 
   # GET /api/admin/forms.json
   def index
-    render json: @account.forms.sharable(params[:shared]), each_serializer: ::Admin::FormSerializer
+    render json: @user.account.forms.sharable(params[:shared]), each_serializer: ::Admin::FormSerializer
   end
   
   # GET /api/admin/forms/1.json
@@ -18,7 +18,7 @@ class Api::Admin::FormsController < Api::ApiController
   # POST /api/admin/forms.json
   def create
     @form = ::Form.new(form_params) # :: forces root namespace
-    @form.account = @account
+    @form.account = @user.account
 
     if @form.save
       render json: @form, status: :created, serializer: ::Admin::FormSerializer
@@ -45,7 +45,7 @@ class Api::Admin::FormsController < Api::ApiController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_form
-      @form = ::Form.in_account(@account.id).find(params[:id])
+      @form = ::Form.in_account(@user.account.id).find(params[:id])
     end
     
     def invalid_form

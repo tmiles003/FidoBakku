@@ -46,7 +46,7 @@ class Api::Admin::EvaluationsController < Api::ApiController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_evaluation_session
-      @evaluation_session = ::EvaluationSession.in_account(@account.id).find(params[:session_id])
+      @evaluation_session = ::EvaluationSession.in_account(@user.account.id).find(params[:session_id])
     end
     
     def invalid_evaluation_session

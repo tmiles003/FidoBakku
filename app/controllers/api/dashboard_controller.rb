@@ -10,7 +10,7 @@ class Api::DashboardController < Api::ApiController
   end
   
   def users
-    render json: @account.users, each_serializer: Dashboard::UserSerializer
+    render json: @user.account.users, each_serializer: Dashboard::UserSerializer
   end
   
 end
