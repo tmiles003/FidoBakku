@@ -1,7 +1,6 @@
 class Goal < ActiveRecord::Base
   
   belongs_to :user
-  belongs_to :evaluation, primary_key: :evaluation_id, foreign_key: :id
   has_many :comments, primary_key: :id, foreign_key: :goal_id
   
   validates :title, length: {

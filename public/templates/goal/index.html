@@ -1,12 +1,20 @@
-<h2>Goal "{{ goal.title }}"</h2>
 
 <div class="row">
   <div class="col-md-8">
+    <h2>Goal "{{ goal.title }}"</h2>
+  </div>
+  <div class="col-md-4">
+    Back to user
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8" id="fi-goal-content">
     <form accept-charset="utf-8" novalidate name="eGoalForm">
-      <div class="form-group" ng-class="{ 'has-error': eGoalForm.goal_content.$dirty }">
+      <div class="form-group">
         <label for="goal_content" class="sr-only">Goal details</label>
-        <textarea name="goal_content" ng-model="goal.content"
-          class="form-control" style="resize:none;"
+        <textarea name="goal_content" ng-model="goal.content" rows="6"
+          class="form-control" placeholder="Goal details"
           >{{ goal.content }}</textarea>
       </div>
       <div class="actions text-right" ng-show="eGoalForm.goal_content.$dirty">
@@ -17,7 +25,19 @@
   </div>
   
   <div class="col-md-4">
-    <h3>{{ user.evaluation.session.title }}</h3>
+    <h3>{{ goal.evaluation_session.title }}</h3>
+    <form accept-charset="utf-8" novalidate name="eGoalDueForm">
+      <div class="input-group">
+        <label for="goal_due_date" class="sr-only">Due date</label>
+          <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" 
+            is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" 
+            date-disabled="disabled(date, mode)" close-text="Close">
+          <span class="input-group-btn">
+            <button class="btn btn-default" ng-click="open($event)">
+              <i class="fa fa-calendar"></i></button>
+          </span>
+      </div>
+    </form>
   </div>
 </div>
 
