@@ -3,7 +3,7 @@
 /* #415b76, #34495e - blue */
 /* #48cfad, #37bc9b - green */
 /* #fc6e51, #e9573f - page links */
-/* #c43d4a - red */
+/* #c43d4a, #c9505c red dark/light */
 
 /* remove browser focus style(s) */
 *:focus {
@@ -35,6 +35,11 @@ body {
 
 .fi-15pc {
   width: 15%;
+  white-space: nowrap;
+}
+
+.fi-35pc {
+  width: 35%;
   white-space: nowrap;
 }
 

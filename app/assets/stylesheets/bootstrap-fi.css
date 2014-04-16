@@ -48,6 +48,22 @@ label {
   background-color: #48cfad;
   border-color: #48cfad;
 }
+.btn-primary {
+  background-color: #415b76;
+  border-color: #415b76;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+  background-color: #546b83;
+  border-color: #546b83;
+}
+.btn-danger {
+  background-color: #c43d4a;
+  border-color: #c43d4a;
+}
+.btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open .dropdown-toggle.btn-danger {
+  background-color: #c9505c;
+  border-color: #c9505c;
+}
 
 /*3010*/
 .dropdown-menu {
@@ -101,3 +117,30 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
   background-color: #415b76;
 }
 
+/*5087*/
+.modal {
+  top: 20% !important;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.modal.fade .modal-dialog {
+  -webkit-transition: none !important;
+     -moz-transition: none !important;
+       -o-transition: none !important;
+          transition: none !important;
+  -webkit-transform: none !important;
+      -ms-transform: none !important;
+          transform: none !important;
+}
+.modal.in .modal-dialog {
+  -webkit-transform: none !important;
+      -ms-transform: none !important;
+          transform: none !important;
+}
+.modal-backdrop {
+  background-color: #fff;
+}
+.modal-backdrop.in {
+  filter: alpha(opacity=75);
+  opacity: .75;
+}

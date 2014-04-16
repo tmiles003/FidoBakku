@@ -2,8 +2,10 @@
 
 /* Controllers */
 
-fiApp.controller('FormsAdminCtrl', ['$scope', 'FormsAdminSrv', 'NotifSrv', 'forms', 
-                  function($scope, FormsAdminSrv, NotifSrv, forms) {
+fiApp.controller('FormsAdminCtrl', ['$scope', '$modal', 
+                 'FormsAdminSrv', 'NotifSrv', 'forms', 
+                  function($scope, $modal, 
+                           FormsAdminSrv, NotifSrv, forms) {
   
   $scope.forms = forms; // resolved in route definition
   
@@ -51,8 +53,29 @@ fiApp.controller('FormsAdminCtrl', ['$scope', 'FormsAdminSrv', 'NotifSrv', 'form
     $scope.eForm = angular.copy(form);
   }
   
-  $scope.deleteForm = function(form) {
-    form.$delete().then(function() {
+  $scope.deleteConfirm = function(form) {
+    var modalInstance = $modal
+      .open({
+        templateUrl: '/templates/admin/forms/form-delete.html',
+        controller: deleteFormCtrl,
+        resolve: {
+          form: function() { return form; }
+        }
+      })
+      .result.then(function(form) {
+        deleteForm(form);
+      });
+  }
+  
+  var deleteFormCtrl = function($scope, $modalInstance, form) {
+    $scope.form = form;
+    $scope.delete = function() {
+      $modalInstance.close($scope.form);
+    }
+  }
+  
+  var deleteForm = function(form) {
+    form.$delete(function() {
       $scope.forms = _.without($scope.forms, form);
       NotifSrv.success();
     });

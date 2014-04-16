@@ -2,8 +2,10 @@
 
 /* Controllers */
 
-fiApp.controller('EvaluationsAdminCtrl', ['$scope', 'EvaluationsAdminSrv', 'UsersAdminSrv', 'NotifSrv', 'session', 'evaluations',
-                  function($scope, EvaluationsAdminSrv, UsersAdminSrv, NotifSrv, session, evaluations) {
+fiApp.controller('EvaluationsAdminCtrl', ['$scope', '$modal', 
+                 'EvaluationsAdminSrv', 'UsersAdminSrv', 'NotifSrv', 'session', 'evaluations',
+                  function($scope, $modal, 
+                           EvaluationsAdminSrv, UsersAdminSrv, NotifSrv, session, evaluations) {
   
   $scope.session = session;
   $scope.evaluations = evaluations;
@@ -35,8 +37,29 @@ fiApp.controller('EvaluationsAdminCtrl', ['$scope', 'EvaluationsAdminSrv', 'User
     $scope.eEvaluationForm.$setPristine();
   }
   
-  $scope.deleteEvaluation = function(evaluation) {
-    evaluation.$delete().then(function() {
+  $scope.deleteConfirm = function(evaluation) {
+    var modalInstance = $modal
+      .open({
+        templateUrl: '/templates/admin/evaluations/evaluation-delete.html',
+        controller: deleteEvaluationCtrl,
+        resolve: {
+          evaluation: function() { return evaluation; }
+        }
+      })
+      .result.then(function(evaluation) {
+        deleteEvaluation(evaluation);
+      });
+  }
+  
+  var deleteEvaluationCtrl = function($scope, $modalInstance, evaluation) {
+    $scope.evaluation = evaluation;
+    $scope.delete = function() {
+      $modalInstance.close($scope.evaluation);
+    }
+  }
+  
+  var deleteEvaluation = function(evaluation) {
+    evaluation.$delete(function() {
       $scope.evaluations = _.without($scope.evaluations, evaluation);
       NotifSrv.success();
     });

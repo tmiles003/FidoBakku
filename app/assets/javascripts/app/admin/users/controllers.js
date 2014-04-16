@@ -2,8 +2,10 @@
 
 /* Controllers */
 
-fiApp.controller('UsersAdminCtrl', ['$scope', 'UsersAdminSrv', 'users', 'TeamsAdminSrv', 'teams', 'NotifSrv', 
-                  function($scope, UsersAdminSrv, users, TeamsAdminSrv, teams, NotifSrv) {
+fiApp.controller('UsersAdminCtrl', ['$scope', '$modal', 
+                 'UsersAdminSrv', 'users', 'TeamsAdminSrv', 'teams', 'NotifSrv', 
+                  function($scope, $modal,
+                           UsersAdminSrv, users, TeamsAdminSrv, teams, NotifSrv) {
   
   $scope.users = users;
   $scope.teams = teams;
@@ -56,9 +58,30 @@ fiApp.controller('UsersAdminCtrl', ['$scope', 'UsersAdminSrv', 'users', 'TeamsAd
     $scope.eUserForm.$setPristine();
   }
   
-  $scope.deleteUser = function(user) {
+  $scope.deleteConfirm = function(user) {
+    var modalInstance = $modal
+      .open({
+        templateUrl: '/templates/admin/users/user-delete.html',
+        controller: deleteUserCtrl,
+        resolve: {
+          user: function() { return user; }
+        }
+      })
+      .result.then(function(user) {
+        deleteUser(user);
+      });
+  }
+  
+  var deleteUserCtrl = function($scope, $modalInstance, user) {
+    $scope.user = user;
+    $scope.delete = function() {
+      $modalInstance.close($scope.user);
+    }
+  }
+  
+  var deleteUser = function(user) {
     user.$delete(function() {
-      $scope.users = _.without($scope.users, user); // "blind-up" row before trashing?
+      $scope.users = _.without($scope.users, user);
       NotifSrv.success();
     });
   }
