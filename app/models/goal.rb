@@ -1,7 +1,7 @@
 class Goal < ActiveRecord::Base
   
   belongs_to :user
-  has_many :comments, primary_key: :id, foreign_key: :goal_id
+  has_many :comments, primary_key: :id, foreign_key: :goal_id, dependent: :destroy
   
   validates :title, length: {
     in: 2..100,

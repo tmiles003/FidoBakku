@@ -21,8 +21,6 @@
     </table>
     
     <form accept-charset="utf-8" novalidate name="eCompForm">
-      <input type="hidden" ng-model="eComp.id">
-
       <div class="form-group" ng-class="{ 'has-error': eCompForm.comp_content.$invalid && submitted }">
         <label for="comp_content" class="sr-only">Competency</label>
         <textarea class="form-control" name="comp_content" ng-model="eComp.content" 

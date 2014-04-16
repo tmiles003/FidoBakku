@@ -89,8 +89,6 @@
     </div -->
     <div class="fi-panel-inner">
       <form accept-charset="utf-8" novalidate name="eTeamForm">
-        <input type="hidden" ng-model="eTeam.id">
-        
         <div class="form-group" ng-class="{ 'has-error': eTeamForm.team_name.$invalid && teamFormSubmitted }">
           <label for="team_name" class="sr-only">Team</label>
         
@@ -123,8 +121,6 @@
     <div class="fi-panel-inner">
 
     <form accept-charset="utf-8" novalidate name="eUserForm">
-      <input type="hidden" ng-model="eUser.id">
-      
       <div class="form-group" ng-class="{ 'has-error': eUserForm.user_name.$invalid 
           && userFormSubmitted }">
         <label for="user_name" class="sr-only">Name</label>

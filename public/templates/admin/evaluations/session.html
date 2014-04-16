@@ -45,8 +45,6 @@
     <div class="fi-panel-inner">
 
     <form accept-charset="utf-8" novalidate name="eEvaluationForm">
-      <input type="hidden" ng-model="eEvaluation.id">
-      
       <div class="form-group" ng-class="{ 'has-error': eEvaluationForm.evaluation_user.$invalid && submitted }">
         <label for="evaluation_user" class="sr-only">User</label>
         <select name="evaluation_user" ng-model="eEvaluation.user_id" class="form-control" 

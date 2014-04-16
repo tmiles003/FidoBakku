@@ -38,7 +38,7 @@
   </div>
   
   <div class="panel panel-default">
-    <div class="panel-heading">Sharable forms</div>
+    <div class="panel-heading">Shared forms</div>
     <!-- div class="panel-body">
     </div -->
     <table class="table table-hover">
@@ -74,30 +74,29 @@
     </div -->
     <div class="fi-panel-inner">
 
-    <form accept-charset="utf-8" novalidate name="eFormForm">
-      <div class="form-group" ng-class="{ 'has-error': eFormForm.form_name.$invalid && submitted }">
-        <label for="form_name" class="sr-only">Form name</label>
-        <input name="form_name" class="form-control" ng-model="eForm.name" type="text" 
-          ng-required="true" ng-minlength="2" ng-maxlength="100" placeholder="Form name">
-        <p ng-show="eFormForm.form_name.$invalid && submitted" 
-          class="help-block">A name is required</p>
-      </div>
+      <form accept-charset="utf-8" novalidate name="eFormForm">
+        <div class="form-group" ng-class="{ 'has-error': eFormForm.form_name.$invalid && submitted }">
+          <label for="form_name" class="sr-only">Form name</label>
+          <input name="form_name" class="form-control" ng-model="eForm.name" type="text" 
+            ng-required="true" ng-minlength="2" ng-maxlength="100" placeholder="Form name">
+          <p ng-show="eFormForm.form_name.$invalid && submitted" 
+            class="help-block">A name is required</p>
+        </div>
 
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" ng-model="eForm.shared"> Sharable
-        </label>
-      </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="eForm.shared"> Shared
+          </label>
+        </div>
 
-      <div class="actions text-right">
-        <input ng-click="saveForm(eForm, eFormForm.$valid)" type="submit" value="Save"
-          class="btn btn-default btn-success btn-sm fi-btn-wide">
-        <button ng-click="clearForm()" class="btn btn-default btn-sm">
-          <i class="fa fa-eraser" tooltip="Clear form" 
-            tooltip-placement="bottom" tooltip-popup-delay="1500"></i></button>
-      </div>
-      
-    </form>
+        <div class="actions text-right">
+          <input ng-click="saveForm(eForm, eFormForm.$valid)" type="submit" value="Save"
+            class="btn btn-default btn-success btn-sm fi-btn-wide">
+          <button ng-click="clearForm()" class="btn btn-default btn-sm">
+            <i class="fa fa-eraser" tooltip="Clear form" 
+              tooltip-placement="bottom" tooltip-popup-delay="1500"></i></button>
+        </div>
+      </form>
 
     </div>
   </div>
