@@ -2,8 +2,8 @@
 
 /* Controllers */
 
-fiApp.controller('GoalCtrl', ['$scope', 'GoalSrv', 'goal', 'CommentsSrv', 'NotifSrv', 
-                  function($scope, GoalSrv, goal, CommentsSrv, NotifSrv) {
+fiApp.controller('GoalCtrl', ['$scope', '$modal', 'GoalSrv', 'goal', 'CommentsSrv', 'NotifSrv', 
+                  function($scope, $modal, GoalSrv, goal, CommentsSrv, NotifSrv) {
   
   $scope.goal = goal;
   $scope.comments = goal.comments;
@@ -57,7 +57,28 @@ fiApp.controller('GoalCtrl', ['$scope', 'GoalSrv', 'goal', 'CommentsSrv', 'Notif
     $scope.eCommentForm.$setPristine();
   }
   
-  $scope.deleteComment = function(comment) {
+  $scope.deleteConfirm = function(comment) {
+    var modalInstance = $modal
+      .open({
+        templateUrl: '/templates/goal/comment-delete.html',
+        controller: deleteCommentCtrl,
+        resolve: {
+          comment: function() { return comment; }
+        }
+      })
+      .result.then(function(comment) {
+        deleteComment(comment);
+      });
+  }
+  
+  var deleteCommentCtrl = function($scope, $modalInstance, comment) {
+    $scope.comment = comment;
+    $scope.delete = function() {
+      $modalInstance.close($scope.comment);
+    }
+  }
+  
+  var deleteComment = function(comment) {
     CommentsSrv.delete({ id: comment.id }, function() {
       $scope.comments = _.without($scope.comments, comment);
       NotifSrv.success();
