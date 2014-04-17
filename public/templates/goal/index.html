@@ -41,20 +41,6 @@
   
   <div class="col-md-4">
     <h3 class="text-center"><small>Session:</small> {{ goal.evaluation_session.title }}</h3>
-    <!-- form accept-charset="utf-8" novalidate name="eGoalDueForm">
-      <div class="form-group">
-        <label for="goal_due_date" class="sr-only">Due date</label>
-        <div class="input-group">
-          <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" 
-            is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" 
-            date-disabled="disabled(date, mode)" close-text="Close">
-          <span class="input-group-btn">
-            <button class="btn btn-default" ng-click="open($event)">
-              <i class="fa fa-calendar"></i></button>
-          </span>
-        </div>
-      </div>
-    </form -->
   </div>
 </div>
 
@@ -63,12 +49,12 @@
   
     <div class="panel panel-default">
       <!-- div class="panel-heading">Comments</div -->
-      <div class="panel-body">
+      <!-- div class="panel-body">
         Comments
-      </div>
+      </div -->
     
       <table class="table table-hover">
-        <tr ng-repeat="comment in comments | orderBy: '+created_at'">
+        <tr ng-repeat="comment in comments | orderBy: '+created_at_ts'">
           <td class="fi-5pc">
             <img ng-src="//secure.gravatar.com/avatar/{{ comment.user.email_hash }}?s=30&d=mm" alt="">
           </td>
@@ -76,6 +62,9 @@
             {{ comment.user.name }}
           </td>
           <td class="fi-nl2br">{{ comment.content }}</td>
+          <!-- td class="fi-5pc">
+            {{ comment.created_at }}
+          </td -->
           <td class="fi-5pc">
             <button class="btn btn-default fi-btn-slim" ng-click="deleteConfirm(comment)">
               <i class="fa fa-trash-o fa-lg"></i>
