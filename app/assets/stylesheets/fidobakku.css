@@ -43,6 +43,10 @@ body {
   white-space: nowrap;
 }
 
+.fi-nl2br {
+  white-space: pre-line;
+}
+
 .panel-default .fi-panel-inner {
   padding: 8px;
 }

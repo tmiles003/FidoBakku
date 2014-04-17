@@ -23,7 +23,7 @@ i.fa {
   margin: 3px 0;
 }
 
-.panel-heading i.fa {
+.navbar i.fa, .panel-heading i.fa {
   color: #fff;
 }
 

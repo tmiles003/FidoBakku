@@ -2,7 +2,7 @@
   <!-- div -->
     <table class="table fi-comps-table">
       <tr ng-repeat="comp in comps | orderBy: '+ordr'">
-        <td>{{ comp.content }}</td>
+        <td class="fi-nl2br">{{ comp.content }}</td>
         <td class="text-right">
           <button class="btn btn-default fi-btn-slim" ng-click="moveCompUp(comp)" ng-hide="$first"
              ng-class="{ 'fi-fa-margin': $last }">
