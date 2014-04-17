@@ -3,7 +3,7 @@
 var fiApp = angular.module('fiApp', [
   'ngRoute',
   'ngResource',
-  'ui.bootstrap',
+  'ui.bootstrap', 'ui-bootstrap-tpls',
   'toaster'
 ]);
 

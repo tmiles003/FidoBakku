@@ -18,7 +18,8 @@
 //= require angular/angular-route.min
 //= require angular/angular-resource.min
 //= require angular/angular-animate.min
-//= require angular-ui/ui-bootstrap-tpls-0.10.0
+//= require angular-ui/ui-bootstrap-0.10.0.min
+//= require app/ui-bootstrap-tpls
 //= require toaster/toaster
 //= require app/app.js
 //= require app/routes.js
