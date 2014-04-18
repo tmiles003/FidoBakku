@@ -1,4 +1,4 @@
-class Api::Admin::EvaluationSessionsController < Api::ApiController
+class Api::Admin::EvaluationSessionsController < Api::Admin::ApiController
   
   #authorize_resource
   

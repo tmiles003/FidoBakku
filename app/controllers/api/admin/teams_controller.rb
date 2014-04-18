@@ -1,4 +1,4 @@
-class Api::Admin::TeamsController < Api::ApiController
+class Api::Admin::TeamsController < Api::Admin::ApiController
   
   #authorize_resource
   

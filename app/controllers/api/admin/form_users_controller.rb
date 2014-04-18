@@ -1,4 +1,4 @@
-class Api::Admin::FormUsersController < Api::ApiController
+class Api::Admin::FormUsersController < Api::Admin::ApiController
   
   #authorize_resource
   
