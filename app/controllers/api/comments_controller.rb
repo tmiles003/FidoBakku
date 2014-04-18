@@ -1,6 +1,6 @@
 class Api::CommentsController < Api::ApiController
   
-  load_and_authorize_resource
+  #authorize_resource
   
   before_action :set_comment, only: [:update, :destroy]
   

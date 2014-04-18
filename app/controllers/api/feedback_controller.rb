@@ -1,6 +1,6 @@
 class Api::FeedbackController < Api::ApiController
   
-  #load_and_authorize_resource
+  #authorize_resource
   
   before_action :set_evaluation, only: [:show]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_evaluation

@@ -1,5 +1,7 @@
 class Api::Admin::FormCompsController < Api::ApiController
   
+  #authorize_resource
+  
   before_action :set_form_section, only: [:index, :create]
   before_action :set_form_comp, only: [:update, :up, :down, :destroy]
   

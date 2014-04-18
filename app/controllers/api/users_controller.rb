@@ -1,6 +1,6 @@
 class Api::UsersController < Api::ApiController
   
-  load_and_authorize_resource
+  #authorize_resource
   
   before_action :set_account_user, only: [:show]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_user

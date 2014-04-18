@@ -1,6 +1,6 @@
 class Api::Admin::AccountController < Api::ApiController
   
-  load_and_authorize_resource
+  #authorize_resource
   
   # GET /api/account.json
   def show

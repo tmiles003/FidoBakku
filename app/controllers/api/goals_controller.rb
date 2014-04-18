@@ -1,6 +1,6 @@
 class Api::GoalsController < Api::ApiController
   
-  load_and_authorize_resource
+  #authorize_resource
   
   before_action :set_goal, only: [:update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_goal

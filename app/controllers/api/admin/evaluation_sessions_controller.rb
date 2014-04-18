@@ -1,6 +1,6 @@
 class Api::Admin::EvaluationSessionsController < Api::ApiController
   
-  load_and_authorize_resource
+  #authorize_resource
   
   # GET /api/admin/evaluation_sessions.json
   def index

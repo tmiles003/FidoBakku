@@ -1,5 +1,7 @@
 class Api::Admin::TeamsController < Api::ApiController
   
+  #authorize_resource
+  
   before_action :set_team, only: [:update, :destroy]
 
   # GET /api/admin/teams.json
