@@ -25,8 +25,13 @@ body {
   color: #415b76 !important;
 } */
 
-.main-container {
+.fi-dropdown-menu {
+  background-color: #415b76;
+  border: none;
+  padding: 0;
 }
+
+.main-container {}
 
 .fi-5pc {
   width: 5%;
@@ -107,6 +112,13 @@ body {
   color: #415b76;
   resize: none;
 }
+
+.fi-due-date, .fi-due-date:hover, .fi-due-date:active, .fi-due-date:focus {
+  border: 1px solid #ccc;
+}
+/* .fi-due-date:focus {
+  border-color: #415b76;
+} */
 
 .footer {
   background-color: #fff;

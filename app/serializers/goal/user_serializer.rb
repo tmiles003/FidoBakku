@@ -4,7 +4,6 @@ class Goal::UserSerializer < BaseUserSerializer
     hash = super
     hash.delete(:id)
     hash.delete(:email)
-    hash.delete(:user_path)
     
     hash
   end

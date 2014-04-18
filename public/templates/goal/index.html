@@ -1,10 +1,10 @@
 
 <div class="row">
   <div class="col-md-8">
-    <h2>Goal "{{ goal.title }}"</h2>
+    <h2><small>Goal:</small> {{ goal.title }}</h2>
   </div>
   <div class="col-md-4">
-    Back to user
+  <a href="{{ goal.user.user_path }}">Back to {{ goal.user.name }}</a>
   </div>
 </div>
 
@@ -26,12 +26,21 @@
     <form accept-charset="utf-8" novalidate name="eGoalDueForm" class="form-horizontal">
       <div class="form-group">
         <label for="goal_due_date" class="col-md-3 control-label">Due date</label>
-        <div class="input-group col-md-8">
-          <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" 
-            is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" 
-            date-disabled="disabled(date, mode)" close-text="Close">
+        <div class="input-group col-md-6">
+          <!--
+            datepicker-popup="{{ format }}" ng-model="dt" 
+            is-open="opened" datepicker-options="dateOptions" 
+            date-disabled="disabled(date, mode)" 
+          -->
+          <input type="text" class="form-control" 
+            is-open="opened" 
+            ng-model="goal.due_date"
+            datepicker-popup="{{ format }}" 
+            show-button-bar="false" 
+            datepicker-options="datePickerOptions" 
+            min="minDate">
           <span class="input-group-btn">
-            <button class="btn btn-default" ng-click="open($event)">
+            <button class="btn btn-default fi-due-date" ng-click="openDatePicker($event)">
               <i class="fa fa-calendar"></i></button>
           </span>
         </div>
@@ -40,20 +49,20 @@
   </div>
   
   <div class="col-md-4">
-    <h3 class="text-center"><small>Session:</small> {{ goal.evaluation_session.title }}</h3>
+    <h3><small>Session:</small> {{ goal.evaluation_session.title }}</h3>
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-12">
   
-    <div class="panel panel-default">
+    <div class="panel panel-default" ng-show="comments.length">
       <!-- div class="panel-heading">Comments</div -->
       <!-- div class="panel-body">
         Comments
       </div -->
     
-      <table class="table table-hover">
+      <table class="table">
         <tr ng-repeat="comment in comments | orderBy: '+created_at_ts'">
           <td class="fi-5pc">
             <img ng-src="//secure.gravatar.com/avatar/{{ comment.user.email_hash }}?s=30&d=mm" alt="">

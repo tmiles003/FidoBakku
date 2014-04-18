@@ -55,6 +55,6 @@ class Api::GoalsController < Api::ApiController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def goal_params
-      params.require(:goal).permit(:user_id, :title, :content, :private, :done)
+      params.require(:goal).permit(:user_id, :title, :content, :due_date, :private, :done)
     end
 end

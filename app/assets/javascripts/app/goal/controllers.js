@@ -16,27 +16,29 @@ fiApp.controller('GoalCtrl', ['$scope', '$modal', 'GoalSrv', 'goal', 'CommentsSr
     });
   }
   
-  $scope.today = function() {
-    $scope.dt = new Date();
-  };
-  $scope.today();
-
-  $scope.showWeeks = true;
-  $scope.toggleWeeks = function () {
-    $scope.showWeeks = ! $scope.showWeeks;
-  };
-  $scope.open = function($event) {
+  $scope.format = 'd MMMM yyyy';
+  $scope.minDate = new Date();
+  
+  $scope.openDatePicker = function($event) {
     $event.preventDefault();
     $event.stopPropagation();
-
     $scope.opened = true;
   };
-  $scope.dateOptions = {
+  
+  $scope.$watch('goal.due_date', function(newVal, oldVal) {
+    console.log(newVal); console.log(oldVal);
+    if (newVal !== oldVal) {
+      goal.$update(function() {
+        NotifSrv.success();
+      });
+    }
+  });
+  
+  $scope.datePickerOptions = {
     'year-format': "'yy'",
-    'starting-day': 1
+    'starting-day': 1,
+    'show-weeks': false
   };
-  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate'];
-  $scope.format = $scope.formats[0];
   
   $scope.saveComment = function(comment, isValid) {
     $scope.submitted = true;

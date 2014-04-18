@@ -29,6 +29,10 @@ label {
 .has-error .form-control {
   border-color: #c43d4a;
 }
+.form-horizontal .control-label {
+  color: #999;
+  padding-top: 6px;
+}
 
 /*2041*/
 .btn-default {
@@ -65,13 +69,6 @@ label {
   border-color: #c9505c;
 }
 
-/*3010*/
-.dropdown-menu {
-  background-color: #415b76;
-  border: none;
-  padding: 0;
-}
-
 /* open on hover for computer users */
 ul.nav li.dropdown:hover > ul.dropdown-menu {
   display: block;    
@@ -88,6 +85,28 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
 .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
   background-color: #34495e;
   color: #fff;
+}
+
+/*3413*/
+.input-group .form-control:first-child,
+.input-group-addon:first-child,
+.input-group-btn:first-child > .btn,
+.input-group-btn:first-child > .btn-group > .btn,
+.input-group-btn:first-child > .dropdown-toggle,
+.input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle),
+.input-group-btn:last-child > .btn-group:not(:last-child) > .btn {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+.input-group .form-control:last-child,
+.input-group-addon:last-child,
+.input-group-btn:last-child > .btn,
+.input-group-btn:last-child > .btn-group > .btn,
+.input-group-btn:last-child > .dropdown-toggle,
+.input-group-btn:first-child > .btn:not(:first-child),
+.input-group-btn:first-child > .btn-group:not(:first-child) > .btn {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
 }
 
 /*3941*/
