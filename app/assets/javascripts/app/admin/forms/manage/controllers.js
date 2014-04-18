@@ -97,11 +97,24 @@ fiApp.controller('FormSectionsAdminCtrl', ['$scope', '$filter', '$modal',
   }
   
   $scope.deleteConfirm = function(section) {
-    // do stuff
+    var modalInstance = $modal
+      .open({
+        templateUrl: '/templates/admin/forms/section-delete.html',
+        controller: deleteSectionCtrl,
+        resolve: {
+          section: function() { return section; }
+        }
+      })
+      .result.then(function(section) {
+        deleteSection(section);
+      });
   }
   
-  var deleteSectionCtrol = function($scope, $modalInstance, section) {
-    //
+  var deleteSectionCtrl = function($scope, $modalInstance, section) {
+    $scope.section = section;
+    $scope.delete = function() {
+      $modalInstance.close($scope.section);
+    }
   }
   
   var deleteSection = function(section) {
@@ -196,19 +209,36 @@ fiApp.controller('FormCompsAdminCtrl', ['$scope', '$modal', '$filter',
   }
   
   $scope.clearForm = function() {
-    //
+    $scope.submitted = false;
+    $scope.eComp = {};
+    $scope.eCompForm.$setPristine();
   }
   
   $scope.deleteConfirm = function(comp) {
-    //
+    var modalInstance = $modal
+      .open({
+        templateUrl: '/templates/admin/forms/comp-delete.html',
+        controller: deleteCompCtrl,
+        resolve: {
+          comp: function() { return comp; }
+        }
+      })
+      .result.then(function(comp) {
+        deleteComp(comp);
+      });
   }
   
   var deleteCompCtrl = function($scope, $modalInstance, comp) {
-    //
+    $scope.comp = comp;
+    $scope.delete = function() {
+      $modalInstance.close($scope.comp);
+    }
   }
   
   var deleteComp = function(comp) {
-    // clear form
+    $scope.submitted = false;
+    $scope.eComp = {};
+    $scope.eCompForm.$setPristine();
     comp.$delete().then(function() {
       $scope.comps = _.without($scope.comps, comp);
       NotifSrv.success();
