@@ -2,7 +2,7 @@ class Api::UserEvaluationController < Api::ApiController
   
   #authorize_resource
   
-  before_action :set_user_evaluation, only: [:show]
+  before_action :set_user_evaluation, only: [:show, :update]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_user_evaluation
   
   before_action :set_user_evaluation_form, only: [:form]
@@ -15,6 +15,7 @@ class Api::UserEvaluationController < Api::ApiController
   
   # GET /api/user_evaluation/form.json
   def form
+    logger.warn 'this might not be in use (Api::UserEvaluationController#form)'
     render json: @user_evaluation_form, serializer: UserEvaluationFormSerializer
   end
   
