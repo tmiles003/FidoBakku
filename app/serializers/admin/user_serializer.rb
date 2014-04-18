@@ -1,7 +1,7 @@
 class Admin::UserSerializer < BaseUserSerializer
   
   attributes :id, :email, :email_hash, :name, :team_id, :role, :role_sort, :user_path
-  has_one :form, serializer: ::Admin::FormUserSerializer
+  has_one :form, serializer: ::Admin::UserFormSerializer
   #has_one :team, serializer: ::Admin::TeamSerializer
   
   def team_id
