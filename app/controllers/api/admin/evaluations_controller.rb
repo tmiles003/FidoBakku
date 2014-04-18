@@ -5,6 +5,9 @@ class Api::Admin::EvaluationsController < Api::Admin::ApiController
   before_action :set_evaluation_session, only: [:index, :create]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_evaluation_session
   
+  before_action :set_evaluation, only: [:show, :update, :destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_evaluation
+  
   # GET /api/admin/evaluations.json
   def index
     render json: @evaluation_session.evaluations.includes(:user), 
@@ -51,6 +54,15 @@ class Api::Admin::EvaluationsController < Api::Admin::ApiController
     
     def invalid_evaluation_session
       logger.info 'no evaluation session with this id'
+      head :no_content
+    end
+    
+    def set_evaluation
+      @evaluation = ::Evaluation.find(params[:id])
+    end
+    
+    def invalid_evaluation
+      logger.info 'no evaluation with this id'
       head :no_content
     end
 

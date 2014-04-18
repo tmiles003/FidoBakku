@@ -2,6 +2,9 @@ class Api::Admin::EvaluationSessionsController < Api::Admin::ApiController
   
   #authorize_resource
   
+  before_action :set_evaluation_session, only: [:show, :update, :destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_evaluation_session
+  
   # GET /api/admin/evaluation_sessions.json
   def index
     render json: @user.account.evaluation_sessions, each_serializer: ::Admin::EvaluationSessionSerializer
@@ -41,6 +44,14 @@ class Api::Admin::EvaluationSessionsController < Api::Admin::ApiController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_evaluation_session
+      @evaluation_session = ::EvaluationSession.in_account(@user.account.id).find(params[:id])
+    end
+    
+    def invalid_evaluation_session
+      logger.info 'no evaluation session with this id'
+      head :no_content
+    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def evaluation_session_params
