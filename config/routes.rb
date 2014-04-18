@@ -73,7 +73,7 @@ FidoBakku::Application.routes.draw do
           end
         end
       end
-      resources :form_parts, only: [:index, :create, :update, :destroy]
+      resources :form_parts, only: [:update]
       
       resources :evaluation_sessions
       resources :evaluations, except: [:new, :edit]

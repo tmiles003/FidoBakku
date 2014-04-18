@@ -2,16 +2,26 @@
 
 /* Controllers */
 
-fiApp.controller('FormSectionsAdminCtrl', ['$scope', '$filter', 
-                  'form', 'FormSectionsAdminSrv', 'sections', 'NotifSrv', 
-                  function($scope, $filter, 
-                           form, FormSectionsAdminSrv, sections, NotifSrv) {
+fiApp.controller('FormSectionsAdminCtrl', ['$scope', '$filter', '$modal',
+                  'form', 'FormSectionsAdminSrv', 'sections', 'FormPartAdminSrv', 'NotifSrv', 
+                  function($scope, $filter, $modal,
+                           form, FormSectionsAdminSrv, sections, FormPartAdminSrv, NotifSrv) {
   
   $scope.form = form;
+  $scope.form_part = new FormPartAdminSrv(form.form_part);
   $scope.sections = sections;
   
   $scope.eSection = {};
   $scope.submitted = false;
+  
+  // save part_id when updated
+  $scope.$watch('form_part.part_id', function(newVal, oldVal) {
+    if (newVal !== oldVal) {
+      $scope.form_part.$update(function() {
+        NotifSrv.success();
+      });
+    }
+  });
   
   var createSection = function(newSection) {
     FormSectionsAdminSrv.save({ form_id: $scope.form.id, form_section: newSection }, function(val, resp) {
@@ -86,7 +96,18 @@ fiApp.controller('FormSectionsAdminCtrl', ['$scope', '$filter',
     $scope.eSectionForm.$setPristine();
   }
   
-  $scope.deleteSection = function(section) {
+  $scope.deleteConfirm = function(section) {
+    // do stuff
+  }
+  
+  var deleteSectionCtrol = function($scope, $modalInstance, section) {
+    //
+  }
+  
+  var deleteSection = function(section) {
+    $scope.submitted = false;
+    $scope.eSection = {};
+    $scope.eSectionForm.$setPristine();
     section.$delete({ form_id: $scope.form.id }).then(function() {
       $scope.sections = _.without($scope.sections, section);
       NotifSrv.success();
@@ -95,11 +116,14 @@ fiApp.controller('FormSectionsAdminCtrl', ['$scope', '$filter',
   
 }]);
 
-fiApp.controller('FormCompsAdminCtrl', ['$scope', 'FormCompsAdminSrv', 'NotifSrv', '$filter', 
-                  function($scope, FormCompsAdminSrv, NotifSrv, $filter) {
+fiApp.controller('FormCompsAdminCtrl', ['$scope', '$modal', '$filter', 
+                 'FormCompsAdminSrv', 'NotifSrv', 
+                  function($scope, $modal, $filter, 
+                           FormCompsAdminSrv, NotifSrv) {
   
   $scope.sectionId = $scope.$parent.section.id;
   $scope.comps = FormCompsAdminSrv.query({ section_id: $scope.sectionId });
+  
   $scope.eComp = {};
   $scope.submitted = false;
   
@@ -122,10 +146,6 @@ fiApp.controller('FormCompsAdminCtrl', ['$scope', 'FormCompsAdminSrv', 'NotifSrv
       $scope.eCompForm.$setPristine();
       NotifSrv.success();
     });
-  }
-  
-  $scope.logThis = function(t) {
-    console.log(t);
   }
   
   $scope.saveComp = function(comp, isValid) {
@@ -175,60 +195,24 @@ fiApp.controller('FormCompsAdminCtrl', ['$scope', 'FormCompsAdminSrv', 'NotifSrv
     $scope.eComp = angular.copy(comp);
   }
   
-  $scope.deleteComp = function(comp) {
+  $scope.clearForm = function() {
+    //
+  }
+  
+  $scope.deleteConfirm = function(comp) {
+    //
+  }
+  
+  var deleteCompCtrl = function($scope, $modalInstance, comp) {
+    //
+  }
+  
+  var deleteComp = function(comp) {
+    // clear form
     comp.$delete().then(function() {
       $scope.comps = _.without($scope.comps, comp);
       NotifSrv.success();
     });
-  }
-  
-}]);
-
-fiApp.controller('FormPartAdminCtrl', ['$scope', '$routeParams', '$http', 'FormPartAdminSrv', 'NotifSrv',
-                  function($scope, $routeParams, $http, FormPartAdminSrv, NotifSrv) {
-  
-  var formId = $routeParams.id;
-  $scope.sharedForms = [];
-  $http.get('/api/admin/forms?shared=1').success(function(sharedForms) {
-    $scope.sharedForms = sharedForms;
-  });
-  $scope.sharedForm = {};
-  FormPartAdminSrv.query({ form_id: formId }, function(sharedForm) { 
-    $scope.sharedForm = sharedForm;
-  });
-  
-  var createShared = function(newShared) {
-    FormPartAdminSrv.save({ form_id: formId, form_part: newShared }, function(val, resp) {
-      $scope.sharedForm = val;
-      NotifSrv.success();
-    });
-  }
-  
-  var updateShared = function(shared) {
-    shared.$update(function(val, resp) {
-      $scope.sharedForm = val;
-      NotifSrv.success();
-    });
-  }
-  
-  var deleteShared = function(shared) {
-    shared.$delete().then(function(val) {
-      $scope.sharedForm = val;
-      NotifSrv.success();
-    });
-  }
-  
-  $scope.saveShared = function(shared) {
-    if (shared.id) {
-      if (shared.part_id)
-        updateShared(shared);
-      else
-        deleteShared(shared);
-    }
-    else {
-      if (shared.part_id)
-        createShared(shared);
-    }
   }
   
 }]);

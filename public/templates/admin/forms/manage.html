@@ -15,20 +15,18 @@
       <div class="panel-body">
         Attach shared form
       </div>
-      <div class="fi-panel-inner" ng-controller="FormPartAdminCtrl">
+      <div class="fi-panel-inner">
         <div class="row">
-          <form accept-charset="utf-8" novalidate name="eSharedForm">
-          <div class="col-md-9 form-group">
-            <select name="shared_form" ng-model="sharedForm.part_id" class="form-control" 
-              ng-options="form.id as form.name for form in sharedForms | orderBy: '+name'">
+          <div class="col-md-12 form-group">
+            <select name="shared_form" ng-model="form_part.part_id" class="form-control" 
+              ng-options="part.id as part.name for part in form.form_parts | orderBy: '+name'">
               <option value="">Shared forms</option>
             </select>
           </div>
-          <div class="col-md-3 actions">
+          <!-- div class="col-md-3 actions">
             <button ng-click="saveShared(sharedForm)" type="button"
               class="btn btn-default btn-success btn-sm fi-btn-wide">Save</button>
-          </div>
-          </form>
+          </div -->
         </div>
       </div>
     </div>
@@ -105,7 +103,7 @@
           ng-options="team.id as team.name for team in teams">
           <option value="">Filter by team</option>
         </select>
-        <hr>
+        <!-- hr -->
         <div class="btn-group-vertical btn-group-justified">
           <div class="btn-group">
             <button ng-repeat="user in users | orderBy: '+name' | filter: { team_id: team_id }" 
@@ -116,14 +114,15 @@
         </div>
       </div>
     </div>
-    <div class="panel panel-default" ng-show="{{ form.shared }}">
-      <div class="panel-heading">Forms</div>
-      <!-- div class="panel-body">
-      </div -->
+    <div class="panel panel-default" ng-show="{{ form.shared && form.children }}">
+      <!-- div class="panel-heading"></div -->
+      <div class="panel-body">
+        Used by
+      </div>
       <div class="fi-panel-inner">
-        <!-- ng-controller="FormComponentCtrl" -->
-        <hr>
-        
+        <ul>
+          <li ng-repeat="child in form.children | orderBy: '+name'">{{ child.name }}</li>
+        </ul>
       </div>
     </div>
   </div>

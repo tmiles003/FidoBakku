@@ -10,7 +10,9 @@ class Form < ActiveRecord::Base
   #belongs_to :evaluation
   
   has_many :form_users, dependent: :destroy
-  has_many :form_parts, dependent: :destroy
+  
+  has_many :form_parts, foreign_key: :part_id
+  has_many :children, through: :form_parts, source: :children
   
   validates :name, length: {
     in: 2..250,
@@ -21,8 +23,16 @@ class Form < ActiveRecord::Base
   # dynamic ordering when generating form
   attr_accessor :ordr
   
-  scope :sharable, lambda { |shared|
+  scope :parts, -> { where(shared: true).where.not(id: self.id) }
+  
+  # enables picking only shared forms
+  scope :shared, lambda { |shared|
     where('shared' => shared) unless shared.nil?
+  }
+  
+  # excludes the current form, if editing a shared one
+  scope :exclude, lambda { |exclude|
+    where.not('id' => exclude) unless exclude.nil?
   }
 
   def to_param

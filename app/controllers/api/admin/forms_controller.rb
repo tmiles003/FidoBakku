@@ -7,7 +7,9 @@ class Api::Admin::FormsController < Api::ApiController
 
   # GET /api/admin/forms.json
   def index
-    render json: @user.account.forms.sharable(params[:shared]), each_serializer: ::Admin::FormSerializer
+    logger.warn 'this should not be in use'
+    render json: @user.account.forms.shared(params[:shared]).exclude(params[:exclude]), 
+      each_serializer: ::Admin::FormSerializer
   end
   
   # GET /api/admin/forms/1.json
@@ -46,6 +48,7 @@ class Api::Admin::FormsController < Api::ApiController
     # Use callbacks to share common setup or constraints between actions.
     def set_form
       @form = ::Form.in_account(@user.account.id).find(params[:id])
+      #@form = ::Form.find(params[:id])
     end
     
     def invalid_form
