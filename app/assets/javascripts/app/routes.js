@@ -63,9 +63,6 @@ fiApp.config(['$routeProvider', '$locationProvider',
     resolve: {
       session: function(EvaluationSessionsAdminSrv, $route) {
         return EvaluationSessionsAdminSrv.get({ id: $route.current.params.id })['$promise'];
-      },
-      evaluations: function(EvaluationsAdminSrv, $route) { 
-        return EvaluationsAdminSrv.query({ session_id: $route.current.params.id })['$promise'];
       }
     }
   });
@@ -77,10 +74,10 @@ fiApp.config(['$routeProvider', '$locationProvider',
     resolve: {
       evaluation: function(EvaluationsAdminSrv, $route) {
         return EvaluationsAdminSrv.get({ id: $route.current.params.id })['$promise'];
-      },
+      } /* ,
       userEvaluations: function(UserEvaluationsAdminSrv, $route) {
         return UserEvaluationsAdminSrv.query({ evaluation_id: $route.current.params.id })['$promise'];
-      }
+      } */
     }
   });
   

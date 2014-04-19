@@ -49,6 +49,10 @@ fiApp.controller('EvaluationSessionsAdminCtrl', ['$scope', '$modal',
     $scope.eSessionForm.$setPristine();
   }
   
+  $scope.editSession = function(session) {
+    $scope.eSession = angular.copy(session);
+  }
+  
   $scope.deleteConfirm = function(session) {
     var modalInstance = $modal
       .open({
@@ -71,7 +75,10 @@ fiApp.controller('EvaluationSessionsAdminCtrl', ['$scope', '$modal',
   }
   
   var deleteSession = function(session) {
-    session.$delete(function() {
+    $scope.submitted = false;
+    $scope.eSession = {};
+    $scope.eSessionForm.$setPristine();
+    EvaluationSessionsAdminSrv.delete({ id: session.id }, function() {
       $scope.sessions = _.without($scope.sessions, session);
       NotifSrv.success();
     });

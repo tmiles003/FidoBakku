@@ -3,12 +3,12 @@
 /* Controllers */
 
 fiApp.controller('EvaluationsAdminCtrl', ['$scope', '$modal', 
-                 'EvaluationsAdminSrv', 'UsersAdminSrv', 'NotifSrv', 'session', 'evaluations',
+                 'EvaluationsAdminSrv', 'UsersAdminSrv', 'NotifSrv', 'session', 
                   function($scope, $modal, 
-                           EvaluationsAdminSrv, UsersAdminSrv, NotifSrv, session, evaluations) {
+                           EvaluationsAdminSrv, UsersAdminSrv, NotifSrv, session) {
   
   $scope.session = session;
-  $scope.evaluations = evaluations;
+  $scope.evaluations = session.evaluations;
   $scope.users = [];
   UsersAdminSrv.query(function(users) {
     $scope.users = users;
@@ -59,7 +59,10 @@ fiApp.controller('EvaluationsAdminCtrl', ['$scope', '$modal',
   }
   
   var deleteEvaluation = function(evaluation) {
-    evaluation.$delete(function() {
+    $scope.submitted = false;
+    $scope.eEvaluation = {};
+    $scope.eEvaluationForm.$setPristine();
+    EvaluationsAdminSrv.delete({ id: evaluation.id }, function() {
       $scope.evaluations = _.without($scope.evaluations, evaluation);
       NotifSrv.success();
     });

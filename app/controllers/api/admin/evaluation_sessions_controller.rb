@@ -1,13 +1,14 @@
 class Api::Admin::EvaluationSessionsController < Api::Admin::ApiController
   
-  authorize_resource
+  authorize_resource :evaluation_session, :parent => false
   
   prepend_before_filter :set_evaluation_session, only: [:show, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_evaluation_session
   
   # GET /api/admin/evaluation_sessions.json
   def index
-    render json: @user.account.evaluation_sessions, each_serializer: ::Admin::EvaluationSessionSerializer
+    render json: current_user.account.evaluation_sessions, 
+      each_serializer: ::Admin::EvaluationSessionSerializer
   end
 
   # GET /api/admin/evaluation_sessions/1.json
@@ -18,7 +19,7 @@ class Api::Admin::EvaluationSessionsController < Api::Admin::ApiController
   # POST /api/admin/evaluation_sessions.json
   def create
     @evaluation_session = ::EvaluationSession.new(evaluation_session_params)
-    @evaluation_session.account = @user.account
+    @evaluation_session.account = current_user.account
 
     if @evaluation_session.save
       render json: @evaluation_session, status: :created, serializer: ::Admin::EvaluationSessionSerializer
@@ -45,11 +46,12 @@ class Api::Admin::EvaluationSessionsController < Api::Admin::ApiController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_evaluation_session
-      @evaluation_session = ::EvaluationSession.in_account(@user.account.id).find(params[:id])
+      @evaluation_session = ::EvaluationSession.in_account(current_user.account.id).find(params[:id])
     end
     
     def invalid_evaluation_session
-      logger.info 'no evaluation session with this id'
+      logger.error 'No evaluation session with this id'
+      ## Redirect to sessions 302
       head :no_content
     end
 

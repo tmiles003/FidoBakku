@@ -13,7 +13,7 @@ class AbilityAdmin
     if 'manager' == user.role
       #can :manage, :all
       can :show, Account
-      can :read, Team
+      can :read, [User, Team]
       can :manage, [Goal, EvaluationSession, Evaluation, UserEvaluation]
       can :manage, [Form, FormSection, FormComp, FormPart, FormUser]
     end
