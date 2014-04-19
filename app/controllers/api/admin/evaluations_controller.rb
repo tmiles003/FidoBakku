@@ -59,11 +59,12 @@ class Api::Admin::EvaluationsController < Api::Admin::ApiController
     end
     
     def set_evaluation
-      @evaluation = ::Evaluation.find(params[:id])
+      @evaluation = ::Evaluation.in_account(current_user.account.id).find(params[:id])
     end
     
     def invalid_evaluation
-      logger.error 'no evaluation with this id'
+      logger.error 'No evaluation with this id'
+      ## redirect to sessions 302
       head :no_content
     end
 

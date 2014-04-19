@@ -3,12 +3,12 @@
 /* Controllers */
 
 fiApp.controller('UserEvaluationsAdminCtrl', ['$scope', 
-                 'UserEvaluationsAdminSrv', 'TeamsAdminSrv', 'UsersAdminSrv', 'NotifSrv', 'evaluation', 'userEvaluations',
+                 'UserEvaluationsAdminSrv', 'TeamsAdminSrv', 'UsersAdminSrv', 'NotifSrv', 'evaluation', 
                   function($scope, 
-                           UserEvaluationsAdminSrv, TeamsAdminSrv, UsersAdminSrv, NotifSrv, evaluation, userEvaluations) {
+                           UserEvaluationsAdminSrv, TeamsAdminSrv, UsersAdminSrv, NotifSrv, evaluation) {
   
   $scope.evaluation = evaluation;
-  $scope.userEvaluations = userEvaluations; console.log( userEvaluations );
+  $scope.userEvaluations = evaluation.userEvaluations;
   
   $scope.teams = [];
   TeamsAdminSrv.query(function(teams) {

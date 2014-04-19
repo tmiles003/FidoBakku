@@ -1,7 +1,9 @@
 class Admin::EvaluationSerializer < ActiveModel::Serializer
   
   attributes :id, :user_id, :created_at, :manage_path
+  # session - for return url
   has_one :user, serializer: ::Admin::EvaluationUserSerializer
+  has_many :user_evaluations
   
   def created_at
     object.created_at.strftime('%s') unless object.created_at.nil?
