@@ -2,22 +2,19 @@
 
 /* Controllers */
 
-fiApp.controller('FooterCtrl', ['$scope', 'UsersAdminSrv', 'SessionSrv', 
-                  function($scope, UsersAdminSrv, SessionSrv) {
+fiApp.controller('CurrentUserCtrl', ['$scope', 'CurrentUserSrv', 
+                  function($scope, CurrentUserSrv) {
   
   $scope.user = '';
-  UsersAdminSrv.current(function(user) { // FIXME
-    $scope.user = user;
+  
+  CurrentUserSrv.getUser().then(function(resp) {
+    $scope.user = resp;
   });
   
-  /* $scope.account = '';
-  SessionSrv.getAccount().then(function(re) {
-    $scope.account = re.account;
-  }); */
-  
-  /* SessionSrv.getData(function(data) {
-    $scope.user = data.user.name;
-    $scope.account = data.account.name;
-  }); */
+  $scope.$on('updateCurrUser', function() {
+    CurrentUserSrv.getUser().then(function(resp) { 
+      $scope.user = resp;
+    });
+  });
   
 }]);

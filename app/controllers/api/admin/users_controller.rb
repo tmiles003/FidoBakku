@@ -7,19 +7,13 @@ class Api::Admin::UsersController < Api::Admin::ApiController
   
   # GET /api/admin/users.json
   def index
-    render json: @user.account.users.includes(:form, :team).in_role(params[:role]),
+    render json: current_user.account.users.includes(:form, :team).in_role(params[:role]),
       each_serializer: ::Admin::UserSerializer
-  end
-  
-  # GET /api/users/current
-  # GET /api/users/current.json
-  def current
-    render json: @user, serializer: BaseUserSerializer
   end
   
   # GET /api/admin/users/1.json
   def show
-    logger.warn 'this should not be in use'
+    logger.warn 'This should not be in use'
     render nothing: true #json: @account_user, serializer: BaseUserSerializer
   end
   

@@ -25,7 +25,7 @@ FidoBakku::Application.routes.draw do
   
   namespace :api, defaults: { format: :json } do
     
-    get 'session' => 'session#index'
+    get 'current_user' => 'current_user#show'
     get 'dashboard/evaluations' => 'dashboard#evaluations'
     get 'dashboard/feedbacks' => 'dashboard#feedbacks'
     get 'dashboard/users' => 'dashboard#users'

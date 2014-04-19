@@ -2,16 +2,26 @@
 
 /* Controllers */
 
-fiApp.controller('UsersAdminCtrl', ['$scope', '$modal', 
-                 'UsersAdminSrv', 'users', 'TeamsAdminSrv', 'teams', 'NotifSrv', 
-                  function($scope, $modal,
-                           UsersAdminSrv, users, TeamsAdminSrv, teams, NotifSrv) {
+fiApp.controller('UsersAdminCtrl', ['$scope', '$rootScope', '$modal', 
+                 'UsersAdminSrv', 'users', 'TeamsAdminSrv', 'teams', 'CurrentUserSrv', 'NotifSrv', 
+                  function($scope, $rootScope, $modal,
+                           UsersAdminSrv, users, TeamsAdminSrv, teams, CurrentUserSrv, NotifSrv) {
   
   $scope.users = users;
   $scope.teams = teams;
   $scope.roles = [];
   UsersAdminSrv.getRoles(function(roles) {
     $scope.roles = roles;
+  });
+  
+  // watch for changes to the current user, to update CurrentUserCtrl
+  CurrentUserSrv.getUser().then(function(resp) {
+    $scope.currUser = _.find($scope.users, function(u) {
+      return u.id === resp.id;
+    });
+    $scope.$watchCollection('currUser', function() {
+      CurrentUserSrv.setUser($scope.currUser);
+    });
   });
   
   var createUser = function(newUser) {
