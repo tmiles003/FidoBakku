@@ -1,8 +1,8 @@
 class Api::Admin::FormSectionsController < Api::Admin::ApiController
   
-  #authorize_resource
+  authorize_resource
   
-  before_action :set_form, only: [:index]
+  prepend_before_filter :set_form, only: [:index]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_form
   
   before_action :set_form_section, only: [:update, :up, :down, :destroy]

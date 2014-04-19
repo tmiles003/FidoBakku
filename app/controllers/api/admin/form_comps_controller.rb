@@ -1,8 +1,8 @@
 class Api::Admin::FormCompsController < Api::Admin::ApiController
   
-  #authorize_resource
+  authorize_resource
   
-  before_action :set_form_section, only: [:index, :create]
+  prepend_before_filter :set_form_section, only: [:index, :create]
   before_action :set_form_comp, only: [:update, :up, :down, :destroy]
   
   before_action :set_comp_above, only: [:up]

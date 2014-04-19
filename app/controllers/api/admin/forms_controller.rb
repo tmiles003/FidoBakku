@@ -1,8 +1,8 @@
 class Api::Admin::FormsController < Api::Admin::ApiController
   
-  #authorize_resource
+  authorize_resource
   
-  before_action :set_form, only: [:show, :update, :destroy]
+  prepend_before_filter :set_form, only: [:show, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_form
 
   # GET /api/admin/forms.json

@@ -1,8 +1,8 @@
 class Api::Admin::FormPartsController < Api::Admin::ApiController
   
-  #authorize_resource
+  authorize_resource
   
-  before_action :set_form_part, only: [:update, :destroy]
+  prepend_before_filter :set_form_part, only: [:update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_form_part
   
   # PATCH/PUT /api/admin/form_parts/1.json

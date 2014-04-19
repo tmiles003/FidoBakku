@@ -1,8 +1,8 @@
 class Api::Admin::TeamsController < Api::Admin::ApiController
   
-  #authorize_resource
+  authorize_resource
   
-  before_action :set_team, only: [:update, :destroy]
+  prepend_before_filter :set_team, only: [:update, :destroy]
 
   # GET /api/admin/teams.json
   def index

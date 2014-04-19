@@ -2,30 +2,30 @@
     <li>
       <a href="/#/dashboard" active-nav-link="active"><i class="fa fa-dashboard fa-lg"></i> Dashboard</a>
     </li>
-  <% if can? :index, Evaluation # admins + managers only %>
+  <% if can? :create, Evaluation # admins + managers %>
     <li>
       <a href="/#/admin/evaluations" active-nav-link="active"><i class="fa fa-file-text-o fa-lg"></i> Evaluations</a>
     </li>
   <% end %>
-  <% if can? :index, Form # admins + managers only %>
+  <% if can? :create, Form # admins + managers %>
     <li>
       <a href="/#/admin/forms" active-nav-link="active"><i class="fa fa-list-alt fa-lg"></i> Forms</a>
     </li>
   <% end %>
-  <% if can? :manage, User # admins only %>
+  <% if can? :update, User # admins only %>
     <li>
       <a href="/#/admin/staff" active-nav-link="active"><i class="fa fa-users fa-lg"></i> Staff</a>
     </li>
   <% end %>
   </ul>
   <ul class="nav navbar-nav navbar-right" ng-controller="FooterCtrl">
-    <li style="padding-top:5px;">
+    <li style="padding-top:6px;">
       <img ng-src="//secure.gravatar.com/avatar/{{ user.email_hash }}?s=40&d=blank" alt="">
     </li>
     <li class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown">{{ user.name }} <b class="caret"></b></a>
       <ul class="dropdown-menu fi-dropdown-menu">
-      <% if can? :show, Account # admins only %>
+      <% if can? :show, Account # admins + managers %>
         <li>
           <a href="/#/admin/account"><i class="fa fa-cog fa-lg"></i> Account</a>
         </li>

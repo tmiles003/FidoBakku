@@ -1,8 +1,8 @@
 class Api::Admin::UsersController < Api::Admin::ApiController
   
-  #authorize_resource
+  authorize_resource
   
-  before_action :set_account_user, only: [:show, :edit, :update, :destroy]
+  prepend_before_filter :set_account_user, only: [:show, :edit, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_user
   
   # GET /api/admin/users.json

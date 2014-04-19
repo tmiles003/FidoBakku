@@ -1,8 +1,8 @@
 class Api::Admin::EvaluationSessionsController < Api::Admin::ApiController
   
-  #authorize_resource
+  authorize_resource
   
-  before_action :set_evaluation_session, only: [:show, :update, :destroy]
+  prepend_before_filter :set_evaluation_session, only: [:show, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_evaluation_session
   
   # GET /api/admin/evaluation_sessions.json

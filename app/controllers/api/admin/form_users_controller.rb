@@ -1,8 +1,8 @@
 class Api::Admin::FormUsersController < Api::Admin::ApiController
   
-  #authorize_resource
+  authorize_resource
   
-  before_action :set_form
+  prepend_before_filter :set_form
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_form
   before_action :set_form_user, only: [:assign]
   

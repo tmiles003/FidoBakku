@@ -1,6 +1,8 @@
 class Api::Admin::AccountController < Api::Admin::ApiController
   
-  #authorize_resource
+  authorize_resource
+  
+  prepend_before_filter 
   
   # GET /api/account.json
   def show
