@@ -37,7 +37,7 @@ class Api::UserEvaluationController < Api::ApiController
     end
     
     def invalid_user_evaluation
-      logger.warn 'no user evaluation with this id'
+      logger.warn 'No user evaluation with this id'
       head :no_content
     end
     
@@ -47,7 +47,7 @@ class Api::UserEvaluationController < Api::ApiController
     end
     
     def invalid_user_evaluation_form
-      logger.warn 'no form with this id'
+      logger.warn 'No form with this id'
       head :no_content
     end
     
