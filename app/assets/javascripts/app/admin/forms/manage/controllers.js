@@ -135,7 +135,10 @@ fiApp.controller('FormCompsAdminCtrl', ['$scope', '$modal', '$filter',
                            FormCompsAdminSrv, NotifSrv) {
   
   $scope.sectionId = $scope.$parent.section.id;
-  $scope.comps = FormCompsAdminSrv.query({ section_id: $scope.sectionId });
+  $scope.comps = [];
+  FormCompsAdminSrv.query({ section_id: $scope.sectionId }, function(comps) {
+    $scope.comps = comps;
+  });
   
   $scope.eComp = {};
   $scope.submitted = false;

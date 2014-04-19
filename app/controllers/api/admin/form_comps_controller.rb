@@ -3,7 +3,10 @@ class Api::Admin::FormCompsController < Api::Admin::ApiController
   authorize_resource
   
   prepend_before_filter :set_form_section, only: [:index, :create]
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_form_section
+  
   before_action :set_form_comp, only: [:update, :up, :down, :destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_form_comp
   
   before_action :set_comp_above, only: [:up]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_comp_above
@@ -18,10 +21,10 @@ class Api::Admin::FormCompsController < Api::Admin::ApiController
   # POST /api/admin/form_comps.json
   def create
     @form_comp = ::FormComp.new(form_comp_params)
+    @form_comp.form_section = @form_section
     @form_comp.next_ordr
 
     if @form_comp.save
-      @form_section.form_comps << @form_comp
       render json: @form_comp, status: :created, serializer: ::Admin::FormCompSerializer
     else
       render json: @form_comp.errors, status: :unprocessable_entity
@@ -64,15 +67,22 @@ class Api::Admin::FormCompsController < Api::Admin::ApiController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_form_section
-      @form_section = ::FormSection.find(params[:form_section_id])
-    end
-    
-    def set_form_comp
-      @form_comp = ::FormComp.find(params[:id])
+      @form_section = ::FormSection.in_account(current_user.account.id).find(params[:form_section_id])
     end
     
     def invalid_form_comp
-      logger.info 'no comp with this id'
+      logger.error 'No form section with this id'
+      ## rediret to forms 302
+      head :no_content
+    end
+    
+    def set_form_comp
+      @form_comp = ::FormComp.in_account(current_user.account.id).find(params[:id])
+    end
+    
+    def invalid_form_comp
+      logger.error 'No form comp with this id'
+      ## rediret to forms 302
       head :no_content
     end
     
@@ -82,7 +92,7 @@ class Api::Admin::FormCompsController < Api::Admin::ApiController
     end
     
     def invalid_comp_above
-      logger.info 'invalid comp above'
+      logger.warn 'Invalid comp above'
       head :no_content
     end
     
@@ -92,13 +102,12 @@ class Api::Admin::FormCompsController < Api::Admin::ApiController
     end
     
     def invalid_comp_below
-      logger.info 'invalid comp below'
+      logger.warn 'Invalid comp below'
       head :no_content
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def form_comp_params
       params.require(:form_comp).permit(:content)
-        .merge(form_section_id: params.require(:form_section_id))
     end
 end
