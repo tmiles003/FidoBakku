@@ -4,11 +4,12 @@ class Api::Admin::FormUsersController < Api::Admin::ApiController
   
   prepend_before_filter :set_form
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_form
+  
   before_action :set_form_user, only: [:assign]
   
   # GET /api/admin/forms/1/users.json
   def users
-    users = @user.account.users
+    users = current_user.account.users
       .joins('LEFT JOIN form_users ON form_users.user_id = users.id')
       .where('form_users.user_id IS NULL OR form_users.form_id = ?', @form.id)
       .includes(:form, :team)
@@ -31,11 +32,11 @@ class Api::Admin::FormUsersController < Api::Admin::ApiController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_form
-      @form = ::Form.in_account(@user.account.id).find(params[:id])
+      @form = ::Form.in_account(current_user.account.id).find(params[:id])
     end
     
     def invalid_form
-      logger.info 'no form with this id'
+      logger.error 'No form with this id'
       head :no_content
     end
     

@@ -2,7 +2,7 @@ class Api::Admin::FormSectionsController < Api::Admin::ApiController
   
   authorize_resource
   
-  prepend_before_filter :set_form, only: [:index]
+  prepend_before_filter :set_form, only: [:index, :create]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_form
   
   before_action :set_form_section, only: [:update, :up, :down, :destroy]
@@ -15,6 +15,7 @@ class Api::Admin::FormSectionsController < Api::Admin::ApiController
   
   # GET /api/admin/form_sections.json
   def index
+    logger.error 'this should not be in use (Api::Admin::FormSectionsController#index)'
     render json: @form.form_sections, each_serializer: ::Admin::FormSectionSerializer
   end
 
@@ -75,11 +76,12 @@ class Api::Admin::FormSectionsController < Api::Admin::ApiController
     end
     
     def set_form_section
-      @form_section = ::FormSection.find(params[:id])
+      @form_section = ::FormSection.in_account(current_user.account.id).find(params[:id])
     end
     
     def invalid_form_section
-      logger.info 'invalid form section'
+      logger.error 'No form section with this id'
+      ## redirect to forms 302
       head :no_content
     end
     

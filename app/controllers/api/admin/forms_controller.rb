@@ -7,8 +7,7 @@ class Api::Admin::FormsController < Api::Admin::ApiController
 
   # GET /api/admin/forms.json
   def index
-    logger.warn 'this should not be in use'
-    render json: @user.account.forms.shared(params[:shared]).exclude(params[:exclude]), 
+    render json: current_user.account.forms.shared(params[:shared]).exclude(params[:exclude]), 
       each_serializer: ::Admin::FormSerializer
   end
   
@@ -20,7 +19,7 @@ class Api::Admin::FormsController < Api::Admin::ApiController
   # POST /api/admin/forms.json
   def create
     @form = ::Form.new(form_params) # :: forces root namespace
-    @form.account = @user.account
+    @form.account = current_user.account
 
     if @form.save
       render json: @form, status: :created, serializer: ::Admin::FormSerializer
@@ -47,12 +46,12 @@ class Api::Admin::FormsController < Api::Admin::ApiController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_form
-      @form = ::Form.in_account(@user.account.id).find(params[:id])
-      #@form = ::Form.find(params[:id])
+      @form = ::Form.in_account(current_user.account.id).find(params[:id])
     end
     
     def invalid_form
-      logger.warn 'no form with this id'
+      logger.error 'No form with this id'
+      ## redirect to forms 302
       head :no_content
     end
 

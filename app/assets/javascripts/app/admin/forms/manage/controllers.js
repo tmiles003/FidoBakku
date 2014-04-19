@@ -3,18 +3,18 @@
 /* Controllers */
 
 fiApp.controller('FormSectionsAdminCtrl', ['$scope', '$filter', '$modal',
-                  'form', 'FormSectionsAdminSrv', 'sections', 'FormPartAdminSrv', 'NotifSrv', 
+                  'form', 'FormSectionsAdminSrv', 'FormPartAdminSrv', 'NotifSrv', 
                   function($scope, $filter, $modal,
-                           form, FormSectionsAdminSrv, sections, FormPartAdminSrv, NotifSrv) {
+                           form, FormSectionsAdminSrv, FormPartAdminSrv, NotifSrv) {
   
   $scope.form = form;
   $scope.form_part = new FormPartAdminSrv(form.form_part);
-  $scope.sections = sections;
+  $scope.sections = form.form_sections;
   
   $scope.eSection = {};
   $scope.submitted = false;
   
-  // save part_id when updated
+  // save part_id when changed
   $scope.$watch('form_part.part_id', function(newVal, oldVal) {
     if (newVal !== oldVal) {
       $scope.form_part.$update(function() {
@@ -121,7 +121,7 @@ fiApp.controller('FormSectionsAdminCtrl', ['$scope', '$filter', '$modal',
     $scope.submitted = false;
     $scope.eSection = {};
     $scope.eSectionForm.$setPristine();
-    section.$delete({ form_id: $scope.form.id }).then(function() {
+    FormSectionsAdminSrv.delete({ id: section.id }, function() {
       $scope.sections = _.without($scope.sections, section);
       NotifSrv.success();
     });
@@ -239,7 +239,7 @@ fiApp.controller('FormCompsAdminCtrl', ['$scope', '$modal', '$filter',
     $scope.submitted = false;
     $scope.eComp = {};
     $scope.eCompForm.$setPristine();
-    comp.$delete().then(function() {
+    comp.$delete(function() {
       $scope.comps = _.without($scope.comps, comp);
       NotifSrv.success();
     });

@@ -6,6 +6,12 @@ class FormSection < ActiveRecord::Base
   
   has_many :form_comps, dependent: :destroy
   
+  scope :in_account, ->(account_id) { 
+    joins(:form)
+    .where('account_id = ?', account_id)
+    .readonly(false) # required, otherwise record is "ReadOnly"
+  }
+  
   validates :name, length: {
     in: 4..250,
     too_short: 'Too short',

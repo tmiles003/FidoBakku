@@ -2,6 +2,7 @@ class Admin::FormSerializer < ActiveModel::Serializer
   
   attributes :id, :name, :shared, :form_path, :form_part, :form_parts
   has_many :children, serializer: ::Admin::FormFormPartSerializer
+  has_many :form_sections, serializer: ::Admin::FormSectionSerializer
   
   # null != false...
   def shared

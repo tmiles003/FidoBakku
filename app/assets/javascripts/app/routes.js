@@ -39,9 +39,6 @@ fiApp.config(['$routeProvider', '$locationProvider',
     resolve: {
       form: function(FormsAdminSrv, $route) {
         return FormsAdminSrv.get({ id: $route.current.params.id })['$promise'];
-      },
-      sections: function(FormSectionsAdminSrv, $route) { 
-        return FormSectionsAdminSrv.query({ form_id: $route.current.params.id })['$promise'];
       }
     }
   });
