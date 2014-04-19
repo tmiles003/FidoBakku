@@ -1,8 +1,8 @@
 class Api::UserEvaluationController < Api::ApiController
   
-  #authorize_resource
+  authorize_resource
   
-  before_action :set_user_evaluation, only: [:show, :update]
+  prepend_before_filter :set_user_evaluation, only: [:show, :update]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_user_evaluation
   
   before_action :set_user_evaluation_form, only: [:form]

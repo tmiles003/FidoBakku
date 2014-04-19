@@ -1,8 +1,8 @@
 class Api::FeedbackController < Api::ApiController
   
-  #authorize_resource
+  authorize_resource :evaluation, :parent => false
   
-  before_action :set_evaluation, only: [:show]
+  prepend_before_filter :set_evaluation, only: [:show]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_evaluation
   
   # GET /api/feedback/1.json

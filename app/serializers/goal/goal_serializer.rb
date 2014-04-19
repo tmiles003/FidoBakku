@@ -7,8 +7,9 @@ class Goal::GoalSerializer < ActiveModel::Serializer
   has_one :evaluation_session
   
   def evaluation_session
-    evaluation_session = object.user.evaluations.take.evaluation_session
-    ::Goal::EvaluationSessionSerializer.new( evaluation_session )
+    evaluation = object.user.evaluations.take
+    evaluation_session = evaluation.evaluation_session unless evaluation.nil?
+    ::Goal::EvaluationSessionSerializer.new( evaluation_session ) # for display only
   end
   
 end

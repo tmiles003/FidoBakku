@@ -1,8 +1,8 @@
 class Api::CommentsController < Api::ApiController
   
-  #authorize_resource
+  authorize_resource
   
-  before_action :set_comment, only: [:update, :destroy]
+  prepend_before_filter :set_comment, only: [:update, :destroy]
   
   # POST /api/comments.json
   def create

@@ -24,10 +24,12 @@ class Ability
     end
     
     if 'employee' == user.role
-      can :manage, :all
-      #can :manage, UserReview #, :user_id => user.id # where reviewer_id
-      #can :manage, Feedback # where reviewer_id?
-      #can :show, Account
+      #can :manage, :all
+      can :read, Form
+      can [:read, :update], UserEvaluation, :evaluator_id => user.id
+      can [:read, :update], Evaluation, :user_id => user.id
+      can [:read, :update], Goal, :user_id => user.id
+      can :manage, Comment, :user_id => user.id # only user's own comments
     end
     
     #

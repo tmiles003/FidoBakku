@@ -1,8 +1,8 @@
 class Api::FormController < Api::ApiController
   
-  #authorize_resource
+  authorize_resource
   
-  before_action :set_form
+  prepend_before_filter :set_form
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_form
   
   def index
@@ -21,7 +21,7 @@ class Api::FormController < Api::ApiController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_form
-      @form = ::Form.in_account(@user.account.id).find(params[:form_id])
+      @form = ::Form.find(params[:form_id]) # .in_account(@user.account.id)
     end
     
     def invalid_form
