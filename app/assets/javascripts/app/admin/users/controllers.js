@@ -80,6 +80,9 @@ fiApp.controller('UsersAdminCtrl', ['$scope', '$modal',
   }
   
   var deleteUser = function(user) {
+    $scope.userFormSubmitted = false;
+    $scope.eUser = {};
+    $scope.eUserForm.$setPristine();
     user.$delete(function() {
       $scope.users = _.without($scope.users, user);
       NotifSrv.success();

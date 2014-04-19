@@ -2,8 +2,10 @@
 
 /* Controllers */
 
-fiApp.controller('UserCtrl', ['$scope', '$routeParams', 'user', 'GoalSrv', 'NotifSrv', 
-                  function($scope, $routeParams, user, GoalSrv, NotifSrv) {
+fiApp.controller('UserCtrl', ['$scope', '$routeParams', '$modal', 
+                  'user', 'GoalSrv', 'NotifSrv', 
+                  function($scope, $routeParams, $modal, 
+                           user, GoalSrv, NotifSrv) {
   
   $scope.user = user;
   $scope.goals = user.goals;
@@ -54,8 +56,29 @@ fiApp.controller('UserCtrl', ['$scope', '$routeParams', 'user', 'GoalSrv', 'Noti
     $scope.eGoalForm.$setPristine();
   }
   
-  $scope.deleteGoal = function(goal) {
-    goal.$delete(function() {
+  $scope.deleteConfirm = function(goal) {
+    var modalInstance = $modal
+      .open({
+        templateUrl: '/templates/user/goal-delete.html',
+        controller: deleteGoalCtrl,
+        resolve: {
+          goal: function() { return goal; }
+        }
+      })
+      .result.then(function(goal) {
+        deleteGoal(goal);
+      });
+  }
+  
+  var deleteGoalCtrl = function($scope, $modalInstance, goal) {
+    $scope.goal = goal;
+    $scope.delete = function() {
+      $modalInstance.close($scope.goal);
+    }
+  }
+  
+  var deleteGoal = function(goal) {
+    GoalSrv.delete({ id: goal.id }, function() {
       $scope.goals = _.without($scope.goals, goal);
       NotifSrv.success();
     });
