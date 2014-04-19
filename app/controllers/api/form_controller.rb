@@ -21,11 +21,11 @@ class Api::FormController < Api::ApiController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_form
-      @form = ::Form.find(params[:form_id]) # .in_account(@user.account.id)
+      @form = ::Form.in_account(current_user.account.id).find(params[:form_id])
     end
     
     def invalid_form
-      logger.info 'no form with this id'
+      logger.warn 'No form with this id'
       head :no_content
     end
   
