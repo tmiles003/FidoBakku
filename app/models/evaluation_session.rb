@@ -2,7 +2,9 @@ class EvaluationSession < ActiveRecord::Base
   
   #include Upgradable
   
-  scope :in_account, ->(account_id) { where('account_id = ?', account_id) }
+  scope :in_account, ->(account_id) { 
+    where('account_id = ?', account_id) 
+  }
   
   belongs_to :account
   

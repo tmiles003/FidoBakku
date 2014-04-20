@@ -11,12 +11,6 @@ class Api::Admin::UsersController < Api::Admin::ApiController
       each_serializer: ::Admin::UserSerializer
   end
   
-  # GET /api/admin/users/1.json
-  def show
-    logger.warn 'This should not be in use'
-    render nothing: true #json: @account_user, serializer: BaseUserSerializer
-  end
-  
   # GET /api/admin/users/roles.json
   def roles
     render json: ::User::ROLES, :each_serializer => ::Admin::RoleSerializer
@@ -27,7 +21,7 @@ class Api::Admin::UsersController < Api::Admin::ApiController
     @new_user = ::User.new(user_params) # :: forces root namespace
     
     if @new_user.save
-      @user.account.users << @new_user
+      current_user.account.users << @new_user
       
       @team_user = ::TeamUser.find_or_initialize_by(user_id: @new_user.id, team_id: params[:team_id])
       @team_user.save
@@ -64,11 +58,11 @@ class Api::Admin::UsersController < Api::Admin::ApiController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_account_user
-      @account_user = ::User.find(params[:id]) # in account!
+      @account_user = ::User.in_account(current_user.account.id).find(params[:id])
     end
     
     def invalid_user
-      logger.warn 'no user with this id'
+      logger.error 'No user with this id'
       head :no_content
     end
 

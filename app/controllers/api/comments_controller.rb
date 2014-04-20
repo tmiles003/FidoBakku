@@ -7,7 +7,7 @@ class Api::CommentsController < Api::ApiController
   # POST /api/comments.json
   def create
     @comment = ::Comment.new(comment_params) # :: forces root namespace
-    @comment.user = @user
+    @comment.user = current_user
 
     if @comment.save
       render json: @comment, status: :created, serializer: @comment.serializer

@@ -28,6 +28,12 @@ class User < ActiveRecord::Base
   
   has_many :comments # don't delete comments left on others' stuff
   
+  scope :in_account, ->(account_id) { 
+    joins(:account)
+    .where('account_id = ?', account_id)
+    .readonly(false)
+  }
+  
   scope :in_role, lambda { |role|
     where('role' => role) unless role.nil?
   }

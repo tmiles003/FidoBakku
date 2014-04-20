@@ -6,13 +6,13 @@ class Api::Admin::TeamsController < Api::Admin::ApiController
 
   # GET /api/admin/teams.json
   def index
-    render json: @user.account.teams, each_serializer: ::Admin::TeamSerializer
+    render json: current_user.account.teams, each_serializer: ::Admin::TeamSerializer
   end
 
   # POST /api/admin/teams.json
   def create
     @team = ::Team.new(team_params)
-    @team.account = @user.account
+    @team.account = current_user.account
 
     if @team.save
       render json: @team, status: :created, serializer: ::Admin::TeamSerializer

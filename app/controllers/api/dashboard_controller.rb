@@ -1,7 +1,7 @@
 class Api::DashboardController < Api::ApiController
   
   def evaluations
-    render json: ::UserEvaluation.where(evaluator_id: @user.id).includes(evaluation: :user), 
+    render json: ::UserEvaluation.where(evaluator_id: current_user.id).includes(evaluation: :user), 
       each_serializer: Dashboard::UserEvaluationSerializer
   end
   
@@ -10,7 +10,7 @@ class Api::DashboardController < Api::ApiController
   end
   
   def users
-    render json: @user.account.users, each_serializer: Dashboard::UserSerializer
+    render json: current_user.account.users, each_serializer: Dashboard::UserSerializer
   end
   
 end

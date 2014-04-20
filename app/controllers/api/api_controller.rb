@@ -5,7 +5,7 @@ class Api::ApiController < ApplicationController
   
   rescue_from UpgradeHelper::LimitReached, with: :upgrade_needed
   
-  before_action :set_user
+  #before_action :set_user
   #before_action :set_account
   
   def default_serializer_options

@@ -2,7 +2,11 @@ class Evaluation < ActiveRecord::Base
   
   include Upgradable
   
-  scope :in_account, ->(account_id) { joins(:evaluation_session).where('account_id = ?', account_id) }
+  scope :in_account, ->(account_id) { 
+    joins(:evaluation_session)
+    .where('account_id = ?', account_id)
+    .readonly(false)
+  }
   
   belongs_to :evaluation_session, primary_key: :id, foreign_key: :session_id
   

@@ -2,7 +2,9 @@ class Form < ActiveRecord::Base
   
   has_many :form_sections, dependent: :destroy
   
-  scope :in_account, ->(account_id) { where('account_id = ?', account_id) }
+  scope :in_account, ->(account_id) { 
+    where('account_id = ?', account_id) 
+  }
   
   belongs_to :account
   
