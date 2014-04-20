@@ -1,9 +1,7 @@
 <h2>Update account</h2>
 
 <div class="row">
-
   <div class="col-md-8 col-md-offset-2">
-
     <form accept-charset="utf-8" novalidate name="accountForm" class="form-horizontal">
 
       <div class="form-group" ng-class="{ 'has-error': accountForm.account_name.$invalid 
@@ -27,14 +25,30 @@
         </div>
       </div>
       
-      <div class="actions">
+      <div class="actions text-right">
         <div class="col-md-5 col-md-offset-3">
-          <input ng-click="saveAccount(account, true)" type="submit" value="Save">
+          <input ng-click="saveAccount(account, true)" type="submit" value="Save"
+            class="btn btn-default btn-sm btn-success fi-btn-wide">
         </div>
       </div>
       
     </form>
-
   </div>
+</div>
 
+<h2>Delete account</h2>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <form accept-charset="utf-8" novalidate name="deleteAccountForm" class="form-horizontal">
+
+      <div class="actions text-right">
+        <div class="col-md-5 col-md-offset-3">
+          <input ng-click="deleteConfirm(account)" type="submit" value="Delete"
+            class="btn btn-default btn-sm btn-danger fi-btn-wide">
+        </div>
+      </div>
+      
+    </form>
+  </div>
 </div>

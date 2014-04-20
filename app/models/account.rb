@@ -13,14 +13,12 @@ class Account < ActiveRecord::Base
   
   validates :owner_id, presence: true, on: :update
   
-  has_many :account_users
+  has_many :evaluation_sessions, dependent: :destroy
+  has_many :forms, dependent: :destroy
+  has_many :teams, dependent: :destroy
+  
+  has_many :account_users, primary_key: :id, foreign_key: :account_id, dependent: :destroy
   has_many :users, through: :account_users
-  
-  has_many :teams
-  
-  has_many :forms
-  
-  has_many :evaluation_sessions
   
   protected
   

@@ -2,6 +2,8 @@ FidoBakku::Application.routes.draw do
   
   root 'welcome#index'
   
+  get 'done' => 'welcome#done'
+  
   resources :account, only: [:create, :new]
 
   devise_for :users, 

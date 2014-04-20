@@ -19,8 +19,13 @@ class Api::Admin::AccountController < Api::Admin::ApiController
     end
   end
   
-  # DELETE
-  # laterrr. cos special case
+  # DELETE /api/admin/account
+  def destroy
+    @account.destroy
+    session = nil
+    flash[:notice] = 'Account deleted'
+    render nothing: true, status: :ok
+  end
   
   private
     # Use callbacks to share common setup or constraints between actions.

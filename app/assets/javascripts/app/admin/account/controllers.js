@@ -2,8 +2,10 @@
 
 /* Controllers */
 
-fiApp.controller('AccountAdminCtrl', ['$scope', 'AccountAdminSrv', 'NotifSrv', '$http', 'account',
-                  function($scope, AccountAdminSrv, NotifSrv, $http, account) {
+fiApp.controller('AccountAdminCtrl', ['$scope', '$modal', '$window',
+                 'AccountAdminSrv', 'NotifSrv', '$http', 'account',
+                  function($scope, $modal, $window, 
+                           AccountAdminSrv, NotifSrv, $http, account) {
   
   $scope.account = account;
   $scope.admins = [];
@@ -26,12 +28,31 @@ fiApp.controller('AccountAdminCtrl', ['$scope', 'AccountAdminSrv', 'NotifSrv', '
     }
   }
   
-  /* $scope.deleteAccount = function(account) {
+  $scope.deleteConfirm = function(user) {
+    var modalInstance = $modal
+      .open({
+        templateUrl: '/templates/admin/account/account-delete.html',
+        controller: deleteAccountCtrl,
+        resolve: {
+          account: function() { return account; }
+        }
+      })
+      .result.then(function(account) {
+        deleteAccount(account);
+      });
+  }
+  
+  var deleteAccountCtrl = function($scope, $modalInstance, account) {
+    $scope.account = account;
+    $scope.delete = function() {
+      $modalInstance.close($scope.account);
+    }
+  }
+  
+  var deleteAccount = function(account) {
     account.$delete(function() {
-      NotifSrv.success();
-    }, function(resp) {
-      NotifSrv.error('Error'); // improve
+      $window.location.href = '/done';
     });
-  } */
+  }
   
 }]);
