@@ -19,7 +19,7 @@
         <div class="row">
           <div class="col-md-12 form-group">
             <select name="shared_form" ng-model="form_part.part_id" class="form-control" 
-              ng-options="part.id as part.name for part in form.form_parts | orderBy: '+name'">
+              ng-options="part.id as part.name for part in form.shared_forms | orderBy: '+name'">
               <option value="">Shared forms</option>
             </select>
           </div>

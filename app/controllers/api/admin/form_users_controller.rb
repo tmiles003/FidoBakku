@@ -14,7 +14,7 @@ class Api::Admin::FormUsersController < Api::Admin::ApiController
       .where('form_users.user_id IS NULL OR form_users.form_id = ?', @form.id)
       .includes(:form, :team)
     
-    render json: users, each_serializer: ::Admin::FormUserSerializer
+    render json: users, each_serializer: ::Admin::Form::UserSerializer
   end
 
   # PATCH/PUT /api/admin/forms/1/assign/1.json
@@ -26,7 +26,7 @@ class Api::Admin::FormUsersController < Api::Admin::ApiController
       @form_user.destroy
     end
     
-    render json: @form_user.user, serializer: ::Admin::FormUserSerializer
+    render json: @form_user.user, serializer: ::Admin::Form::UserSerializer
   end
   
   private

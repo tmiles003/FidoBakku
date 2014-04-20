@@ -1,4 +1,4 @@
-class Admin::FormUserSerializer < ActiveModel::Serializer
+class Admin::Form::UserSerializer < ActiveModel::Serializer
   
   attributes :id, :name, :team_id
   has_one :form, serializer: ::Admin::UserFormSerializer

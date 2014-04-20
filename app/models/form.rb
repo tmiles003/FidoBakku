@@ -25,7 +25,9 @@ class Form < ActiveRecord::Base
   # dynamic ordering when generating form
   attr_accessor :ordr
   
-  scope :parts, -> { where(shared: true).where.not(id: self.id) }
+  scope :parts, -> { 
+    where(shared: true).where.not(id: self.id)
+  }
   
   # enables picking only shared forms
   scope :shared, lambda { |shared|

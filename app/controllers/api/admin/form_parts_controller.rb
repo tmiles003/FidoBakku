@@ -8,7 +8,7 @@ class Api::Admin::FormPartsController < Api::Admin::ApiController
   # PATCH/PUT /api/admin/form_parts/1.json
   def update
     if @form_part.update(form_part_params)
-      render json: @form_part, serializer: ::Admin::FormPartSerializer
+      render json: @form_part, serializer: ::Admin::Form::FormPartSerializer
     else
       render json: @form_part.errors, status: :unprocessable_entity
     end
@@ -21,7 +21,7 @@ class Api::Admin::FormPartsController < Api::Admin::ApiController
     end
     
     def invalid_form_part
-      logger.info 'no form part with this id'
+      logger.error 'No form part with this id'
       head :no_content
     end
     

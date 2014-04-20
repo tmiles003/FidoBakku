@@ -15,7 +15,7 @@ class Api::Admin::FormCompsController < Api::Admin::ApiController
 
   # GET /api/admin/form_sections/:form_section_id/form_comps.json
   def index
-    render json: @form_section.form_comps, each_serializer: ::Admin::FormCompSerializer
+    render json: @form_section.form_comps, each_serializer: ::Admin::Form::CompSerializer
   end
   
   # POST /api/admin/form_comps.json
@@ -25,7 +25,7 @@ class Api::Admin::FormCompsController < Api::Admin::ApiController
     @form_comp.next_ordr
 
     if @form_comp.save
-      render json: @form_comp, status: :created, serializer: ::Admin::FormCompSerializer
+      render json: @form_comp, status: :created, serializer: ::Admin::Form::CompSerializer
     else
       render json: @form_comp.errors, status: :unprocessable_entity
     end
@@ -34,7 +34,7 @@ class Api::Admin::FormCompsController < Api::Admin::ApiController
   # PATCH/PUT /api/admin/form_comps/1.json
   def update
     if @form_comp.update(form_comp_params)
-      render json: @form_comp, status: :created, serializer: ::Admin::FormCompSerializer
+      render json: @form_comp, status: :created, serializer: ::Admin::Form::CompSerializer
     else
       render json: @form_comp.errors, status: :unprocessable_entity
     end
@@ -46,7 +46,7 @@ class Api::Admin::FormCompsController < Api::Admin::ApiController
     @form_comp.update(ordr: @form_comp_above.ordr)
     @form_comp_above.update(ordr: ordr)
     
-    render json: Array.[](@form_comp, @form_comp_above), each_serializer: ::Admin::FormCompSerializer
+    render json: Array.[](@form_comp, @form_comp_above), each_serializer: ::Admin::Form::CompSerializer
   end
   
   # PUT /api/admin/form_comps/1/down.json
@@ -55,7 +55,7 @@ class Api::Admin::FormCompsController < Api::Admin::ApiController
     @form_comp.update(ordr: @form_comp_below.ordr)
     @form_comp_below.update(ordr: ordr)
     
-    render json: Array.[](@form_comp, @form_comp_below), each_serializer: ::Admin::FormCompSerializer
+    render json: Array.[](@form_comp, @form_comp_below), each_serializer: ::Admin::Form::CompSerializer
   end
 
   # DELETE /api/admin/comps/1.json

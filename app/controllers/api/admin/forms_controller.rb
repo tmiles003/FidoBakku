@@ -13,7 +13,7 @@ class Api::Admin::FormsController < Api::Admin::ApiController
   
   # GET /api/admin/forms/1.json
   def show
-    render json: @form, serializer: ::Admin::FormSerializer
+    render json: @form, serializer: ::Admin::Form::FormSerializer
   end
   
   # POST /api/admin/forms.json
