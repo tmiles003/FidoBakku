@@ -120,6 +120,30 @@ body {
   border-color: #415b76;
 } */
 
+.fi-datepicker > .dropdown-menu {
+  padding: 8px;
+}
+.fi-datepicker > .dropdown-menu thead tr:first-child th > .btn-default {
+  color: #415b76;
+}
+.fi-datepicker > .dropdown-menu thead tr.h6 th {
+  color: #415b76;
+  padding: 4px;
+}
+.fi-datepicker > .dropdown-menu tbody tr .btn-default {
+  color: #415b76;
+}
+.fi-datepicker > .dropdown-menu tbody tr .btn-default[disabled] {
+  border: none;
+  color: #ddd;
+}
+.fi-datepicker > .dropdown-menu tbody tr .btn-default:hover {
+  border: 1px solid #ddd;
+}
+.fi-datepicker > .dropdown-menu tbody td {
+  padding: 2px;
+}
+
 .footer {
   background-color: #fff;
   /* border-top: 1px solid #558baa; */

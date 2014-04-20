@@ -4,8 +4,7 @@
 
 fiApp.factory('GoalSrv', ['$resource', function($resource) {
   
-  return $resource('/api/goals/:id', 
-    { id: '@id' }, 
-    { 'update': { method: 'PUT' }
+  return $resource('/api/goals/:id', { id: '@id' }, { 
+    'update': { method: 'PUT' }
   });
 }]);

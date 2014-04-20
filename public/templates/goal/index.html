@@ -4,7 +4,7 @@
     <h2><small>Goal:</small> {{ goal.title }}</h2>
   </div>
   <div class="col-md-4">
-  <a href="{{ goal.user.user_path }}">Back to {{ goal.user.name }}</a>
+    <p><a href="{{ goal.user.user_path }}">Back to {{ goal.user.name }}</a></p>
   </div>
 </div>
 
@@ -26,12 +26,7 @@
     <form accept-charset="utf-8" novalidate name="eGoalDueForm" class="form-horizontal">
       <div class="form-group">
         <label for="goal_due_date" class="col-md-3 control-label">Due date</label>
-        <div class="input-group col-md-6">
-          <!--
-            datepicker-popup="{{ format }}" ng-model="dt" 
-            is-open="opened" datepicker-options="dateOptions" 
-            date-disabled="disabled(date, mode)" 
-          -->
+        <div class="input-group col-md-6 fi-datepicker">
           <input type="text" class="form-control" 
             is-open="opened" 
             ng-model="goal.due_date"
