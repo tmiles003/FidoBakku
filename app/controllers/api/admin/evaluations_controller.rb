@@ -11,12 +11,12 @@ class Api::Admin::EvaluationsController < Api::Admin::ApiController
   # GET /api/admin/evaluations.json
   def index
     render json: @evaluation_session.evaluations.includes(:user), 
-      each_serializer: ::Admin::EvaluationSerializer
+      each_serializer: ::Admin::EvaluationSession::EvaluationSerializer
   end
   
   # GET /api/admin/evaluations/1.json
   def show
-    render json: @evaluation, serializer: ::Admin::EvaluationSerializer
+    render json: @evaluation, serializer: ::Admin::Evaluation::EvaluationSerializer
   end
 
   # POST /api/admin/evaluations.json
@@ -25,7 +25,7 @@ class Api::Admin::EvaluationsController < Api::Admin::ApiController
     @evaluation.session_id = @evaluation_session.id
 
     if @evaluation.save
-      render json: @evaluation, status: :created, serializer: ::Admin::EvaluationSerializer
+      render json: @evaluation, status: :created, serializer: ::Admin::EvaluationSession::EvaluationSerializer
     else
       render json: @evaluation.errors, status: :unprocessable_entity
     end
@@ -34,7 +34,7 @@ class Api::Admin::EvaluationsController < Api::Admin::ApiController
   # PATCH/PUT /api/admin/evaluations/1.json
   def update
     if @evaluation.update(evaluation_params)
-      render json: @evaluation, serializer: ::Admin::EvaluationSerializer
+      render json: @evaluation, serializer: ::Admin::EvaluationSession::EvaluationSerializer
     else
       render json: @evaluation.errors, status: :unprocessable_entity
     end
