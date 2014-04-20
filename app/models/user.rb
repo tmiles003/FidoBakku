@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   ROLES = %w[employee manager admin]
   
   before_validation :initial_setup, on: :create
+  after_create :form_user
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -19,7 +20,7 @@ class User < ActiveRecord::Base
   
   has_many :goals, dependent: :destroy
   
-  has_one :form_user, dependent: :destroy
+  has_one :form_user, primary_key: :id, foreign_key: :user_id, dependent: :destroy
   has_one :form, through: :form_user
   has_many :form_users
   
@@ -47,6 +48,10 @@ class User < ActiveRecord::Base
       self.role = 'employee'
     end
     self.password = gen_random_password
+  end
+  
+  def form_user
+    ::FormUser.find_or_create_by(user_id: self.id)
   end
   
   def to_param

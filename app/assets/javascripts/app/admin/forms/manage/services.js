@@ -32,12 +32,3 @@ fiApp.factory('FormPartAdminSrv', ['$resource', function($resource) {
     { 'update': { method: 'PUT' }
     });
 }]);
-
-fiApp.factory('FormUserAdminSrv', ['$resource', function($resource) {
-  
-  return $resource('/api/admin/forms/:id', 
-    { id: '@id', user_id: '@userId' }, 
-    { 'users': { url: '/api/admin/forms/:id/users', isArray: true },
-      'assign': { method: 'PUT', url: '/api/admin/forms/:id/assign/:user_id' }
-    });
-}]);

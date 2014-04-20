@@ -62,10 +62,6 @@ FidoBakku::Application.routes.draw do
         collection do 
           get 'list'
         end
-        member do
-          get 'users' => 'form_users#users' # index
-          put 'assign/:user_id' => 'form_users#assign' # update
-        end
         resources :form_sections, only: [:index], shallow: true do 
           member do 
             put 'up'
@@ -74,6 +70,7 @@ FidoBakku::Application.routes.draw do
         end
       end
       resources :form_parts, only: [:update]
+      resources :form_users, only: [:index, :update]
       
       resources :evaluation_sessions
       resources :evaluations, except: [:new, :edit]

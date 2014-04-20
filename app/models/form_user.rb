@@ -1,7 +1,7 @@
 class FormUser < ActiveRecord::Base
   
   belongs_to :form
-  belongs_to :user
+  belongs_to :user #, primary_key: :user_id
   
   def self.users(form_id)
     users = Hash.new

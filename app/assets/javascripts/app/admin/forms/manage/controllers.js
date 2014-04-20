@@ -249,28 +249,3 @@ fiApp.controller('FormCompsAdminCtrl', ['$scope', '$modal', '$filter',
   }
   
 }]);
-
-fiApp.controller('FormUserAdminCtrl', ['$scope', 
-                  'TeamsAdminSrv', 'FormUserAdminSrv', 'NotifSrv',
-                  function($scope,
-                           TeamsAdminSrv, FormUserAdminSrv, NotifSrv) {
-  
-  $scope.formId = $scope.$parent.form.id;
-  
-  $scope.teams = [];
-  TeamsAdminSrv.query(function(teams) {
-    $scope.teams = teams;
-  });
-  
-  $scope.users = [];
-  FormUserAdminSrv.users({ id: $scope.formId }, function(users) {
-    $scope.users = users;
-  });
-  
-  $scope.assign = function(id) {
-    FormUserAdminSrv.assign({ id: $scope.formId, userId: id }, function(val) {
-      NotifSrv.success();
-    });
-  }
-  
-}]);

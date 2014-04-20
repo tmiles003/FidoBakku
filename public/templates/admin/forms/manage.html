@@ -103,13 +103,13 @@
           ng-options="team.id as team.name for team in teams">
           <option value="">Filter by team</option>
         </select>
-        <!-- hr -->
+        <br><!-- hr -->
         <div class="btn-group-vertical btn-group-justified">
           <div class="btn-group">
-            <button ng-repeat="user in users | orderBy: '+name' | filter: { team_id: team_id }" 
-              ng-click="assign(user.id)" btn-checkbox ng-model="user.form" 
-              ng-class="{ active: user.form }"
-              class="btn btn-default fi-form-user">{{ user.name }}</button>
+            <button ng-repeat="form_user in form_users | orderBy: '+name' | filter: { team_id: team_id }" 
+              ng-click="updateAssignment(form_user)" btn-checkbox ng-model="form_user.assigned" 
+              ng-class="{ active: form_user.assigned }"
+              type="button" class="btn btn-default fi-form-user">{{ form_user.user.name }}</button>
           </div>
         </div>
       </div>
