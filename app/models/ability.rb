@@ -27,7 +27,7 @@ class Ability
     
     if 'employee' == user.role
       #can :manage, :all
-      can :read, Form, Team
+      can :read, [Form, Team]
       can [:read, :update], UserEvaluation, :evaluator_id => user.id
       can [:read, :update], Evaluation, :user_id => user.id
       can [:read, :update], Goal, :user_id => user.id
