@@ -7,8 +7,12 @@ class Api::Admin::UsersController < Api::Admin::ApiController
   
   # GET /api/admin/users.json
   def index
-    render json: current_user.account.users.includes(:form, :team).in_role(params[:role]),
-      each_serializer: ::Admin::UserSerializer
+    users = current_user.account.users
+      .includes(:form, :team)
+      .in_role(params[:role])
+      .has_form(params[:has_form])
+      
+    render json: users, each_serializer: ::Admin::UserSerializer
   end
   
   # GET /api/admin/users/roles.json

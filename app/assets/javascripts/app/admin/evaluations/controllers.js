@@ -10,7 +10,7 @@ fiApp.controller('EvaluationsAdminCtrl', ['$scope', '$modal',
   $scope.session = session;
   $scope.evaluations = session.evaluations;
   $scope.users = [];
-  UsersAdminSrv.query(function(users) {
+  UsersAdminSrv.query({ has_form: 1 }, function(users) {
     $scope.users = users;
   });
   

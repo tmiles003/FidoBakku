@@ -38,6 +38,10 @@ class User < ActiveRecord::Base
   scope :in_role, lambda { |role|
     where('role' => role) unless role.nil?
   }
+  
+  scope :has_form, lambda { |has_form|
+    joins(:form_users).where('form_id IS NOT NULL') unless has_form.nil?
+  }
 
   def initial_setup
     if name.nil?
