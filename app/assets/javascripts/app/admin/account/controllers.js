@@ -15,7 +15,6 @@ fiApp.controller('AccountAdminCtrl', ['$scope', 'AccountAdminSrv', 'NotifSrv', '
     account.$update(function(val, resp) {
       $scope.account = val;
       NotifSrv.success();
-      // refresh session details
     });
   }
   

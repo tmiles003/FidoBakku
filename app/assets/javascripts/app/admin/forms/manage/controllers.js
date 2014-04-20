@@ -33,7 +33,7 @@ fiApp.controller('FormSectionsAdminCtrl', ['$scope', '$filter', '$modal',
   }
   
   var updateSection = function(section) {
-    section.$update({ form_id: $scope.form.id }, function(val, resp) {
+    FormSectionsAdminSrv.update({ form_id: $scope.form.id, form_section: section }, function(val, resp) {
       var section = _.find($scope.sections, function(s) {
         return s.id === val.id;
       });

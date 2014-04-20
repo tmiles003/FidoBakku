@@ -34,7 +34,7 @@ fiApp.controller('UsersAdminCtrl', ['$scope', '$rootScope', '$modal',
   }
   
   var updateUser = function(user) {
-    user.$update(function(val, resp) {
+    UsersAdminSrv.update(user, function(val, resp) {
       var user = _.find($scope.users, function(u) {
         return u.id === val.id;
       });

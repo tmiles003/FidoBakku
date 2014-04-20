@@ -19,7 +19,7 @@ fiApp.controller('FormsAdminCtrl', ['$scope', '$modal',
   }
   
   var updateForm = function(form) {
-    form.$update(function(val, resp) {
+    FormsAdminSrv.update(form, function(val, resp) {
       var form = _.find($scope.forms, function(f) {
         return f.id === val.id;
       });

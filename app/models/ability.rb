@@ -14,9 +14,14 @@ class Ability
       #can :manage, :all
       can :show, Account
       can [:create, :read], [Form, Team]
-      can :manage, UserEvaluation, :evaluator_id => user.id
-      can :manage, Evaluation, :user_id => user.id
-      can :manage, Goal, :user_id => user.id
+      
+      # update own stuff, except for goals,
+      # but can see other people's stuff [kinda, need url for it]
+      can [:manage], UserEvaluation, :evaluator_id => user.id
+      can [:manage], Evaluation, :user_id => user.id
+      can [:create, :read, :destroy], [UserEvaluation, Evaluation]
+      can [:manage], Goal
+      
       can :manage, Comment, :user_id => user.id # only user's own comments
     end
     

@@ -22,7 +22,7 @@ fiApp.controller('UserCtrl', ['$scope', '$routeParams', '$modal',
   }
   
   var updateGoal = function(goal) {
-    goal.$update(function(val, resp) {
+    GoalSrv.update(goal, function(val, resp) {
       var goal = _.find($scope.goals, function(g) {
         return g.id === val.id;
       });
