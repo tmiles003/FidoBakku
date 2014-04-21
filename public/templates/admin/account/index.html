@@ -9,6 +9,7 @@
         <label for="account_name" class="col-md-3 control-label">Account name</label>
         <div class="col-md-5">
           <input name="account_name" class="form-control" ng-model="account.name" type="text"
+            ng-required="true" ng-minlength="1" ng-maxlength="100"
             ng-disabled="account.owner_id !== currentUser.id">
           <p ng-show="accountForm.account_name.$invalid && !accountForm.account_name.$pristine && submitted" 
             class="help-block">A name is required</p>

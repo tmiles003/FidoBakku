@@ -15,7 +15,7 @@ class Api::Admin::AccountController < Api::Admin::ApiController
     if @account.update(account_params)
       render json: @account, serializer: ::Admin::AccountSerializer
     else
-      render json: @account.errors
+      render json: @account.errors, status: :unprocessable_entity
     end
   end
   

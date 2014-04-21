@@ -6,7 +6,7 @@ class Api::ProfileController < Api::ApiController
       sign_in @user, :bypass => true
       head :no_content
     else
-      render json: @user.errors
+      render json: @user.errors, status: :unprocessable_entity
     end
   end
   

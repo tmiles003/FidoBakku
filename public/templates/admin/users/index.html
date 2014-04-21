@@ -125,7 +125,7 @@
           && userFormSubmitted }">
         <label for="user_name" class="sr-only">Name</label>
         <input name="user_name" class="form-control" ng-model="eUser.name" type="text"
-          ng-required="true" ng-minlength="2" ng-maxlength="100" placeholder="Name">
+          ng-required="true" ng-minlength="1" ng-maxlength="100" placeholder="Name">
         <p ng-show="eUserForm.user_name.$invalid && userFormSubmitted" 
           class="help-block">A name is required</p>
       </div>

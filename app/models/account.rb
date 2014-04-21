@@ -6,7 +6,7 @@ class Account < ActiveRecord::Base
   after_validation :initial_setup, on: :create
   
   validates :name, length: {
-    in: 2..250,
+    in: 1..250,
     too_short: 'Too short',
     too_long: 'Too long'
   }, on: :update

@@ -2,12 +2,13 @@
 
 /* Controllers */
 
-fiApp.controller('ProfileCtrl', ['$scope', '$http', function($scope, $http) {
+fiApp.controller('ProfileCtrl', ['$scope', '$http', 'NotifSrv', 
+                 function($scope, $http, NotifSrv) {
   
   $scope.saveForm = function(passwordForm) {
     $http.put('/api/profile.json', passwordForm)
       .success(function() {
-        // console.log( 'all ok' );
+        NotifSrv.success();
       });
   }
   
