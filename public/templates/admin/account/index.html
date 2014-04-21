@@ -20,14 +20,15 @@
         <div class="col-md-5">
           <select name="account_owner" ng-model="account.owner_id" class="form-control" 
             ng-options="admin.id as admin.name for admin in admins" ng-required="true"
-            ng-disabled="account.owner_id !== currentUser.id">
+            ng-disabled="(account.owner_id !== currentUser.id) && accountForm.account_owner.$pristine">
           </select>
           <p ng-show="accountForm.account_owner.$invalid && !accountForm.account_owner.$pristine && submitted" 
             class="help-block">An owner must be selected</p>
         </div>
       </div>
       
-      <div class="actions text-right" ng-if="account.owner_id == currentUser.id">
+      <div class="actions text-right" ng-if="(account.owner_id == currentUser.id) || 
+        ((account.owner_id !== currentUser.id) && !accountForm.account_owner.$pristine)">
         <div class="col-md-5 col-md-offset-3">
           <input ng-click="saveAccount(account, accountForm.$valid)" type="submit" value="Save"
             class="btn btn-default btn-sm btn-success fi-btn-wide">
