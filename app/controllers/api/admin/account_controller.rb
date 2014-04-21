@@ -23,7 +23,7 @@ class Api::Admin::AccountController < Api::Admin::ApiController
   def destroy
     @account.destroy
     session = nil
-    flash[:notice] = 'Account deleted'
+    flash[:notice] = t('admin.account.account_deleted')
     render nothing: true, status: :ok
   end
   
@@ -34,9 +34,9 @@ class Api::Admin::AccountController < Api::Admin::ApiController
     end
     
     def invalid_account
-      logger.error 'No account with this id'
-      ## redirect to dashboard
-      head :no_content
+      logger.error "No account found"
+      error = Hash['error', [t('admin.account.record_not_found')]]
+      render json: error, status: :not_found
     end
     
     # Never trust parameters from the scary internet, only allow the white list through.

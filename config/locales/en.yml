@@ -6,6 +6,7 @@ en:
   admin:
 
     account:
+      account_deleted: 'Account deleted'
       record_not_found: 'Account not found'
     profile:
       record_not_found: 'Profile not found'
