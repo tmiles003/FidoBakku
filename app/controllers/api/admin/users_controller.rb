@@ -55,7 +55,8 @@ class Api::Admin::UsersController < Api::Admin::ApiController
       @account_user.destroy
       head :no_content
     else
-      render nothing: true, status: :unprocessable_entity
+      error = Hash['error', [t('admin.users.self_delete')]]
+      render json: error, status: :unprocessable_entity
     end
   end
 
@@ -66,8 +67,9 @@ class Api::Admin::UsersController < Api::Admin::ApiController
     end
     
     def invalid_user
-      logger.error 'No user with this id'
-      head :no_content
+      logger.error "No user with this id: #{params[:id]}"
+      error = Hash['error', [t('admin.users.record_not_found')]]
+      render json: error, status: :not_found
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

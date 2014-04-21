@@ -43,10 +43,8 @@ FidoBakku::Application.routes.draw do
     end
     
     namespace :admin do
-      resources :users, except: [:new] do 
+      resources :users, except: [:new, :show, :edit] do 
         collection do 
-          get 'current'
-          get 'list'
           get 'roles'
         end
       end

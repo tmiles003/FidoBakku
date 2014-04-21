@@ -1,28 +1,30 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
+
+#en:
+#  hello: "Hello world"
 
 en:
-  hello: "Hello world"
+  admin:
 
-en:
+    account:
+      record_not_found: 'Account not found'
+    profile:
+      record_not_found: 'Profile not found'
+    users:
+      self_delete: 'Cannot delete yourself'
+      record_not_found: 'User not found'
+    evaluation_session:
+      record_not_found: 'Evaluation session not found'
+    evaluation:
+      record_not_found: 'Evaluation not found'
+    user_evaluation:
+      record_not_found: 'User evaluation not found'
+    forms:
+      record_not_found: 'Form not found'
+    form_section:
+      record_not_found: 'Form section not found'
+    form_comp:
+      record_not_found: 'Form competency not found'
+
   activerecord:
     errors:
       models:
@@ -41,6 +43,7 @@ en:
               blank: "Please Specify First Name"
             last_name:
               blank: "Please Specify Last Name"
+# example:
         pdf:
           attributes:
             name:

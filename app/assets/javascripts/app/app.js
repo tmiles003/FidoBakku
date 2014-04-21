@@ -16,7 +16,7 @@ fiApp.config(['$httpProvider', function($httpProvider) {
           $location.path('/');
         }
         // api errors when saving objects
-        else if (422 == rejection.status) {
+        else if (422 == rejection.status || 404 == rejection.status) {
           _.each(rejection.data, function(err) {
             NotifSrv.error(_.first(err));
           });
