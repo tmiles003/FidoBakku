@@ -7,13 +7,13 @@ class Api::Admin::AccountController < Api::Admin::ApiController
   
   # GET /api/account.json
   def show
-    render json: @account
+    render json: @account, serializer: ::Admin::AccountSerializer
   end
   
   # PATCH/PUT /api/account.json
   def update
     if @account.update(account_params)
-      render json: @account
+      render json: @account, serializer: ::Admin::AccountSerializer
     else
       render json: @account.errors
     end

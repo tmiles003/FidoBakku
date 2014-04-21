@@ -5,15 +5,15 @@
 fiApp.controller('CurrentUserCtrl', ['$scope', 'CurrentUserSrv', 
                   function($scope, CurrentUserSrv) {
   
-  $scope.user = '';
+  $scope.currentUser = '';
   
-  CurrentUserSrv.getUser().then(function(resp) {
-    $scope.user = resp;
+  CurrentUserSrv.getUser().then(function(currentUser) {
+    $scope.currentUser = currentUser;
   });
   
   $scope.$on('updateCurrUser', function() {
-    CurrentUserSrv.getUser().then(function(resp) { 
-      $scope.user = resp;
+    CurrentUserSrv.getUser().then(function(currentUser) { 
+      $scope.currentUser = currentUser;
     });
   });
   

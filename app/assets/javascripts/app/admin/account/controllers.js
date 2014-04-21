@@ -3,14 +3,17 @@
 /* Controllers */
 
 fiApp.controller('AccountAdminCtrl', ['$scope', '$modal', '$window',
-                 'AccountAdminSrv', 'NotifSrv', '$http', 'account',
+                 'AccountAdminSrv', 'account', 'CurrentUserSrv', 'NotifSrv',
                   function($scope, $modal, $window, 
-                           AccountAdminSrv, NotifSrv, $http, account) {
+                           AccountAdminSrv, account, CurrentUserSrv, NotifSrv) {
   
   $scope.account = account;
-  $scope.admins = [];
-  $http.get('/api/admin/users?role[]=admin').success(function(list) { 
-    $scope.admins = list;
+  $scope.admins = account.admins;
+  
+  $scope.currentUser = '';
+  
+  CurrentUserSrv.getUser().then(function(resp) {
+    $scope.currentUser = resp;
   });
   
   var updateAccount = function(account) {
