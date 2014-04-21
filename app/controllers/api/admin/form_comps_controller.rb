@@ -70,10 +70,10 @@ class Api::Admin::FormCompsController < Api::Admin::ApiController
       @form_section = ::FormSection.in_account(current_user.account.id).find(params[:form_section_id])
     end
     
-    def invalid_form_comp
-      logger.error 'No form section with this id'
-      ## rediret to forms 302
-      head :no_content
+    def invalid_form_section
+      logger.error "No form section with this id: #{params[:form_section_id]}"
+      error = Hash['error', [t('admin.form_sections.record_not_found')]]
+      render json: error, status: :not_found
     end
     
     def set_form_comp
@@ -81,9 +81,9 @@ class Api::Admin::FormCompsController < Api::Admin::ApiController
     end
     
     def invalid_form_comp
-      logger.error 'No form comp with this id'
-      ## rediret to forms 302
-      head :no_content
+      logger.error "No form competency with this id: #{params[:id]}"
+      error = Hash['error', [t('admin.form_comps.record_not_found')]]
+      render json: error, status: :not_found
     end
     
     def set_comp_above
@@ -92,8 +92,9 @@ class Api::Admin::FormCompsController < Api::Admin::ApiController
     end
     
     def invalid_comp_above
-      logger.warn 'Invalid comp above'
-      head :no_content
+      logger.error "Form competency above not found"
+      error = Hash['error', [t('admin.form_comps.above_not_found')]]
+      render json: error, status: :not_found
     end
     
     def set_comp_below
@@ -102,8 +103,9 @@ class Api::Admin::FormCompsController < Api::Admin::ApiController
     end
     
     def invalid_comp_below
-      logger.warn 'Invalid comp below'
-      head :no_content
+      logger.error "Form competency below not found"
+      error = Hash['error', [t('admin.form_comps.below_not_found')]]
+      render json: error, status: :not_found
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -13,18 +13,22 @@ en:
     users:
       self_delete: 'Cannot delete yourself'
       record_not_found: 'User not found'
-    evaluation_session:
+    evaluation_sessions:
       record_not_found: 'Evaluation session not found'
-    evaluation:
+    evaluations:
       record_not_found: 'Evaluation not found'
-    user_evaluation:
+    user_evaluations:
       record_not_found: 'User evaluation not found'
     forms:
       record_not_found: 'Form not found'
-    form_section:
+    form_sections:
       record_not_found: 'Form section not found'
-    form_comp:
+      above_not_found: 'Form section not found'
+      below_not_found: 'Form section not found'
+    form_comps:
       record_not_found: 'Form competency not found'
+      above_not_found: 'Form competency not found'
+      below_not_found: 'Form competency not found'
 
   activerecord:
     errors:

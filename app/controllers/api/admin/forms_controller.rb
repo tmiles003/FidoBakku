@@ -50,9 +50,9 @@ class Api::Admin::FormsController < Api::Admin::ApiController
     end
     
     def invalid_form
-      logger.error 'No form with this id'
-      ## redirect to forms 302
-      head :no_content
+      logger.error "No form with this id: #{params[:id]}"
+      error = Hash['error', [t('admin.forms.record_not_found')]]
+      render json: error, status: :not_found
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

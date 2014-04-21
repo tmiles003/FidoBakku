@@ -71,8 +71,9 @@ class Api::Admin::FormSectionsController < Api::Admin::ApiController
     end
     
     def invalid_form
-      logger.info 'no form with this id'
-      head :no_content
+      logger.error "No form with this id: #{params[:form_id]}"
+      error = Hash['error', [t('admin.forms.record_not_found')]]
+      render json: error, status: :not_found
     end
     
     def set_form_section
@@ -80,9 +81,9 @@ class Api::Admin::FormSectionsController < Api::Admin::ApiController
     end
     
     def invalid_form_section
-      logger.error 'No form section with this id'
-      ## redirect to forms 302
-      head :no_content
+      logger.error "No form section with this id: #{params[:id]}"
+      error = Hash['error', [t('admin.form_sections.record_not_found')]]
+      render json: error, status: :not_found
     end
     
     def set_section_above
@@ -91,8 +92,9 @@ class Api::Admin::FormSectionsController < Api::Admin::ApiController
     end
     
     def invalid_section_above
-      logger.info 'invalid section above'
-      head :no_content
+      logger.error "Section above invalid"
+      error = Hash['error', [t('admin.form_sections.above_not_found')]]
+      render json: error, status: :not_found
     end
     
     def set_section_below
@@ -101,8 +103,9 @@ class Api::Admin::FormSectionsController < Api::Admin::ApiController
     end
     
     def invalid_section_below
-      logger.info 'invalid section below'
-      head :no_content
+      logger.error "Section below invalid"
+      error = Hash['error', [t('admin.form_sections.below_not_found')]]
+      render json: error, status: :not_found
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
