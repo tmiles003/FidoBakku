@@ -18,12 +18,16 @@ html {
 /* more content below nav + footer space */
 body {
   background-color: #fff;
-  margin: 50px 0 45px 0;
+  margin: 60px 0 50px 0;
 }
 
 /* a {
   color: #415b76 !important;
 } */
+
+.navbar-nav.navbar-right:last-child {
+  margin-right: 0px;
+}
 
 .fi-dropdown-menu {
   background-color: #415b76;

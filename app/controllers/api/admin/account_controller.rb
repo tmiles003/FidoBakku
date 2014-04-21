@@ -5,12 +5,12 @@ class Api::Admin::AccountController < Api::Admin::ApiController
   prepend_before_filter :set_account
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_account
   
-  # GET /api/account.json
+  # GET /api/admin/account.json
   def show
     render json: @account, serializer: ::Admin::AccountSerializer
   end
   
-  # PATCH/PUT /api/account.json
+  # PATCH/PUT /api/admin/account.json
   def update
     if @account.update(account_params)
       render json: @account, serializer: ::Admin::AccountSerializer
@@ -30,7 +30,7 @@ class Api::Admin::AccountController < Api::Admin::ApiController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_account
-      @account = current_user.account
+      @account = current_user.account unless current_user.nil?
     end
     
     def invalid_account
