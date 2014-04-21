@@ -11,12 +11,12 @@ class Api::Admin::UserEvaluationsController < Api::Admin::ApiController
   # GET /api/admin/user_evaluations.json
   def index
     render json: @evaluation.user_evaluations.includes(:evaluator), 
-      each_serializer: ::Admin::UserEvaluationSerializer
+      each_serializer: ::Admin::Evaluation::UserEvaluationSerializer
   end
   
   # GET /api/admin/user_evaluations/1.json
   def show
-    render json: @user_evaluation, serializer: ::Admin::UserEvaluationSerializer
+    render json: @user_evaluation, serializer: ::Admin::Evaluation::UserEvaluationSerializer
   end
   
   # POST /api/admin/user_evaluations.json
@@ -24,7 +24,7 @@ class Api::Admin::UserEvaluationsController < Api::Admin::ApiController
     @user_evaluation = ::UserEvaluation.new(user_evaluation_params)
     
     if @user_evaluation.save
-      render json: @user_evaluation, status: :created, serializer: ::Admin::UserEvaluationSerializer
+      render json: @user_evaluation, status: :created, serializer: ::Admin::Evaluation::UserEvaluationSerializer
     else
       render json: @user_evaluation.errors, status: :unprocessable_entity
     end
