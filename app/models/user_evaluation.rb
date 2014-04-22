@@ -1,6 +1,7 @@
 class UserEvaluation < ActiveRecord::Base
   
   include InAccount
+  include Upgradable
   
   belongs_to :evaluation
   has_one :evaluator, class_name: 'User', primary_key: :evaluator_id, foreign_key: :id
@@ -8,6 +9,7 @@ class UserEvaluation < ActiveRecord::Base
   
   belongs_to :account
   
+  before_validation :check_plan, on: :create
   after_validation :initial_setup, on: :create
   before_update :update_progress
   

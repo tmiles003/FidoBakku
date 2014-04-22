@@ -1,7 +1,6 @@
 class Evaluation < ActiveRecord::Base
   
   include InAccount
-  include Upgradable
   
   belongs_to :evaluation_session
   belongs_to :account
@@ -11,8 +10,6 @@ class Evaluation < ActiveRecord::Base
   has_one :comment, primary_key: :id, foreign_key: :evaluation_id, dependent: :destroy
   
   has_many :user_evaluations, dependent: :destroy
-  
-  #before_validation :check_plan_evaluation, on: :create
   
   before_save :assign_user_form_id, on: :create
   

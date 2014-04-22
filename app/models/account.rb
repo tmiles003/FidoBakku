@@ -34,7 +34,7 @@ class Account < ActiveRecord::Base
   
   def initial_setup
     self.name = 'New Account'
-    self.plan = AppConfig.fidobakku['account_plan']
+    self.plan = AppConfig.fidobakku['initial_plan']
     self.expires_at = Date.today.advance(:days => AppConfig.fidobakku['demo_days'])
   end
   

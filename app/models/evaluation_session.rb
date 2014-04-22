@@ -6,8 +6,6 @@ class EvaluationSession < ActiveRecord::Base
   
   has_many :evaluations, dependent: :destroy
   
-  #before_validation :check_plan_evaluation_sessions, on: :create
-  
   validates :title, length: {
     in: 1..100
   }

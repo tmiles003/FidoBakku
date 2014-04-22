@@ -1,11 +1,14 @@
 class Goal < ActiveRecord::Base
   
   include InAccount
+  include Upgradable
   
   belongs_to :user
   has_many :comments, primary_key: :id, foreign_key: :goal_id, dependent: :destroy
   
   belongs_to :account
+  
+  before_validation :check_plan, on: :create
   
   validates :title, length: {
     in: 1..100

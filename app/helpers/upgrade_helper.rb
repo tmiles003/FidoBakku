@@ -1,6 +1,6 @@
 module UpgradeHelper
   
   class Error < StandardError; end
-  class LimitReached < Error; end
+  class NeedUpgrade < Error; end
   
 end

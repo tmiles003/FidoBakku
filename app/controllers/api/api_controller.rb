@@ -3,7 +3,7 @@ class Api::ApiController < ApplicationController
   before_action :authenticate_user!
   rescue_from CanCan::AccessDenied, with: :forbidden_access
   
-  rescue_from UpgradeHelper::LimitReached, with: :upgrade_needed
+  rescue_from UpgradeHelper::NeedUpgrade, with: :upgrade_needed
   
   #before_action :set_user
   #before_action :set_account

@@ -1,17 +1,13 @@
 
 defaults: &defaults
   fidobakku:
-    account_plan: premium
+    initial_plan: premium
     demo_days: 42
     account_limits:
       basic:
-        user_evaluations: false
-        goals: false
-        comments: false
+        can_add_content: false
       premium:
-        user_evaluations: true
-        goals: true
-        comments: true
+        can_add_content: true
 
 development:
   <<: *defaults
