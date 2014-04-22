@@ -5,12 +5,6 @@ class Api::GoalsController < Api::ApiController
   prepend_before_filter :set_goal, only: [:show, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_goal
   
-  # GET /api/goals.json
-  def index
-    logger.warn 'this should not be in use'
-    #render json: ::Goal.for_user(@user, params[:user_id]).with_limit(params[:limit])
-  end
-  
   # GET /api/goals/1.json
   def show
     render json: @goal, serializer: ::Goal::GoalSerializer
@@ -19,6 +13,7 @@ class Api::GoalsController < Api::ApiController
   # POST /api/goals.json
   def create
     @goal = ::Goal.new(goal_params) # :: forces root namespace
+    @goal.account = current_user.account
 
     if @goal.save
       render json: @goal, status: :created, serializer: ::User::GoalSerializer
@@ -45,7 +40,7 @@ class Api::GoalsController < Api::ApiController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_goal
-      @goal = ::Goal.find(params[:id]) # for this user/in account
+      @goal = ::Goal.in_account(current_user.account.id).find(params[:id])
     end
     
     def invalid_goal

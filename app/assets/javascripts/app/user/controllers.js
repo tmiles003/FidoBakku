@@ -78,6 +78,9 @@ fiApp.controller('UserCtrl', ['$scope', '$routeParams', '$modal',
   }
   
   var deleteGoal = function(goal) {
+    $scope.submitted = false;
+    $scope.eGoal = {};
+    $scope.eGoalForm.$setPristine();
     GoalSrv.delete({ id: goal.id }, function() {
       $scope.goals = _.without($scope.goals, goal);
       NotifSrv.success();

@@ -29,6 +29,7 @@ fiApp.controller('GoalCtrl', ['$scope', '$modal', '$filter', 'GoalSrv', 'goal', 
     // returned date from picker is "Fri May 09 2014 05:30:00 GMT+0530 (India Standard Time)", 
     // *not* "2014-04-21", which causes 2 saves in a row as the date flip-flops between the 2 formats
     // so, $filter to the rescue, to format both passed values to the same format (same format as db)
+    // (this also relies on the user's browser having the correct timezone)
     newVal = $filter('date')(newVal, 'yyyy-MM-dd');
     oldVal = $filter('date')(oldVal, 'yyyy-MM-dd');
     if (newVal !== oldVal) {
