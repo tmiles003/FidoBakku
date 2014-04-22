@@ -13,9 +13,7 @@ class EvaluationSession < ActiveRecord::Base
   #before_validation :check_plan_evaluation_sessions, on: :create
   
   validates :title, length: {
-    in: 2..250,
-    too_short: 'Too short',
-    too_long: 'Too long'
+    in: 1..100
   }
   
   def to_param

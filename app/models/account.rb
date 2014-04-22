@@ -6,7 +6,7 @@ class Account < ActiveRecord::Base
   after_validation :initial_setup, on: :create
   
   validates :name, length: {
-    in: 1..250,
+    in: 1..100,
   }, on: :update
   
   validates :owner_id, presence: true, on: :update

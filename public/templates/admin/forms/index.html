@@ -78,7 +78,7 @@
         <div class="form-group" ng-class="{ 'has-error': eFormForm.form_name.$invalid && submitted }">
           <label for="form_name" class="sr-only">Form name</label>
           <input name="form_name" class="form-control" ng-model="eForm.name" type="text" 
-            ng-required="true" ng-minlength="2" ng-maxlength="100" placeholder="Form name">
+            ng-required="true" ng-minlength="1" ng-maxlength="100" placeholder="Form name">
           <p ng-show="eFormForm.form_name.$invalid && submitted" 
             class="help-block">A name is required</p>
         </div>

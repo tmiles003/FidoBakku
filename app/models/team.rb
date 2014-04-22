@@ -6,9 +6,7 @@ class Team < ActiveRecord::Base
   has_many :users, through: :team_users
   
   validates :name, length: {
-    in: 1..100,
-    too_short: 'Too short',
-    too_long: 'Too long'
+    in: 1..100
   }
   
 end

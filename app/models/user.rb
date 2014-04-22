@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   after_create :form_user
   
   validates :name, length: {
-    in: 1..250
+    in: 1..100
   }
   
   validates :role, inclusion: { 

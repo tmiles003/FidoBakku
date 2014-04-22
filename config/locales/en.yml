@@ -33,6 +33,7 @@ en:
   activerecord:
     errors:
       models:
+
         user:
           attributes:
             email:
@@ -49,6 +50,50 @@ en:
               too_long: 'Name is too long'
             role:
               inclusion: 'Not a valid role'
+
+        team:
+          attributes:
+            name:
+              too_short: 'Name cannot be empty'
+              too_long: 'Name is too long'
+
+        account:
+          attributes:
+            name:
+              too_short: 'Name cannot be empty'
+              too_long: 'Name is too long'
+            owner_id:
+              blank: 'Account must be owned by an admin'
+
+        evaluation_session:
+          attributes:
+            title:
+              too_short: 'Title cannot be empty'
+              too_long: 'Title is too long'
+
+        evaluation:
+
+        user_evaluation:
+
+        form:
+          attributes:
+            name:
+              too_short: 'Form name cannot be empty'
+              too_long: 'Form name is too long'
+
+        form_section:
+          attributes:
+            name:
+              too_short: 'Section name cannot be empty'
+              too_long: 'Section name is too long'
+
+        form_comp:
+
+
+
+
+
+
 
 # example:
         pdf:

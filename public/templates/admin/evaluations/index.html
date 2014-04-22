@@ -51,7 +51,7 @@
         <div class="form-group" ng-class="{ 'has-error': eSessionForm.session_title.$invalid && submitted }">
           <label for="session_title" class="sr-only">Title</label>
           <input name="session_title" class="form-control" ng-model="eSession.title" type="text"
-            ng-required="true" ng-minlength="2" ng-maxlength="200" placeholder="Title">
+            ng-required="true" ng-minlength="1" ng-maxlength="100" placeholder="Title">
           <p ng-show="eSessionForm.session_title.$invalid && submitted" 
             class="help-block">A title must be set</p>
         </div>

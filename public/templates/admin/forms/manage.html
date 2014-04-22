@@ -72,7 +72,7 @@
               ng-class="{ 'has-error': eSectionForm.section_name.$invalid && submitted }">
               <label for="section_name" class="sr-only">Section</label>
               <input name="section_name" class="form-control" ng-model="eSection.name" type="text"
-                ng-required="true" ng-minlength="4" ng-maxlength="100" placeholder="Section">
+                ng-required="true" ng-minlength="1" ng-maxlength="100" placeholder="Section">
               <p ng-show="eSectionForm.section_name.$invalid && submitted" 
                 class="help-block">A section is required</p>
             </div>

@@ -13,9 +13,7 @@ class FormSection < ActiveRecord::Base
   }
   
   validates :name, length: {
-    in: 4..250,
-    too_short: 'Too short',
-    too_long: 'Too long'
+    in: 1..100
   }
   
   def next_ordr

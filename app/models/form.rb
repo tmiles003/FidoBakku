@@ -17,9 +17,7 @@ class Form < ActiveRecord::Base
   has_many :children, through: :form_parts, source: :children
   
   validates :name, length: {
-    in: 2..250,
-    too_short: 'Too short',
-    too_long: 'Too long'
+    in: 1..100
   }
   
   # dynamic ordering when generating form
