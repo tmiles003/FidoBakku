@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  email: MyString
-  name: MyString
-  key: MyString
-  expires_at: 2014-03-01
+#one:
+#  email: MyString
+#  name: MyString
+#  key: MyString
+#  expires_at: 2014-03-01
 
-two:
-  email: MyString
-  name: MyString
-  key: MyString
-  expires_at: 2014-03-01
+#two:
+#  email: MyString
+#  name: MyString
+#  key: MyString
+#  expires_at: 2014-03-01
