@@ -1,4 +1,7 @@
 /* toaster overrides */
+#toast-container > div {
+  width: 350px;
+}
 
 #toast-container > div.ng-enter {
   -webkit-transition: none !important;

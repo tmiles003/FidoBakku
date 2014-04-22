@@ -24,7 +24,8 @@ class Api::Admin::UserEvaluationsController < Api::Admin::ApiController
     @user_evaluation = ::UserEvaluation.new(user_evaluation_params)
     
     if @user_evaluation.save
-      render json: @user_evaluation, status: :created, serializer: ::Admin::Evaluation::UserEvaluationSerializer
+      render json: @user_evaluation, status: :created, 
+        serializer: ::Admin::Evaluation::UserEvaluationSerializer
     else
       render json: @user_evaluation.errors, status: :unprocessable_entity
     end
@@ -43,8 +44,9 @@ class Api::Admin::UserEvaluationsController < Api::Admin::ApiController
     end
     
     def invalid_evaluation
-      logger.warn 'no evaluation with this id'
-      head :no_content
+      logger.error "No evaluation with this id: #{params[:evaluation_id]}"
+      error = Hash['error', [t('admin.evaluations.record_not_found')]]
+      render json: error, status: :not_found
     end
     
     def set_user_evaluation
@@ -53,8 +55,9 @@ class Api::Admin::UserEvaluationsController < Api::Admin::ApiController
     end
     
     def invalid_user_evaluation
-      logger.warn 'no user evaluation with this id'
-      head :no_content
+      logger.error "No user evaluation with this id: #{params[:id]}"
+      error = Hash['error', [t('admin.evaluations.record_not_found')]]
+      render json: error, status: :not_found
     end
     
     # Never trust parameters from the scary internet, only allow the white list through.

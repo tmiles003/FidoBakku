@@ -22,7 +22,8 @@ class Api::Admin::EvaluationSessionsController < Api::Admin::ApiController
     @evaluation_session.account = current_user.account
 
     if @evaluation_session.save
-      render json: @evaluation_session, status: :created, serializer: ::Admin::EvaluationSessionSerializer
+      render json: @evaluation_session, status: :created, 
+        serializer: ::Admin::EvaluationSessionSerializer
     else
       render json: @evaluation_session.errors, status: :unprocessable_entity
     end
@@ -50,9 +51,9 @@ class Api::Admin::EvaluationSessionsController < Api::Admin::ApiController
     end
     
     def invalid_evaluation_session
-      logger.error 'No evaluation session with this id'
-      ## Redirect to sessions 302
-      head :no_content
+      logger.error "No evaluation session with this id: #{params[:id]}"
+      error = Hash['error', [t('admin.evaluation_sessions.record_not_found')]]
+      render json: error, status: :not_found
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -28,6 +28,9 @@ fiApp.config(['$httpProvider', function($httpProvider) {
         else if (402 == rejection.status) {
           NotifSrv.info(rejection.data);
         }
+        else if (500 == rejection.status) {
+          NotifSrv.error('Sorry, something went wrong');
+        }
         return $q.reject(rejection);
       }
     };
