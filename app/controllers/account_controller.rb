@@ -13,7 +13,6 @@ class AccountController < ApplicationController
     if @account.save
       
       @user = User.new(email: account_params[:email])
-      #@user._account = @account
       @account.users << @user # assign to account
       @user.update(name: 'Admin', role: 'admin') # promote
       @account.update(owner_id: @user.id)

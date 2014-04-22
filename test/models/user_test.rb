@@ -5,7 +5,7 @@ class UserTest < ActiveSupport::TestCase
   #   assert true
   # end
   
-  test "name not empty" do 
+  test "create user" do 
     hash = OpenSSL::Digest::MD5.new(Time.new.strftime('%c')).hexdigest[0..12]
                                     
     user = User.new

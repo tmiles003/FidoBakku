@@ -131,31 +131,23 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
 /*4456*/
 .alert-success {
   color: #fff;
-  background-color: #48cfad;
-  /* color: #48cfad;
-  background-color: rgba(72, 207, 173, 0.2); */
-  border: none; /* #37bc9b; */
+  background-color: rgba(72, 207, 173, 0.7);
+  border-color: #48cfad;
 }
 .alert-info {
   color: #fff;
-  background-color: #415b76;
-  /* color: #34495e;
-  background-color: rgba(65, 91, 118, 0.2); */
-  border: none; /* #34495e; */
+  background-color: rgba(65, 91, 118, 0.7);
+  border-color: #415b76;
 }
 .alert-warning {
   color: #333;
-  background-color: #f6bb42;
-  /* color: #f6bb42;
-  background-color: rgba(246, 187, 66, 0.2); */
-  border: none; /* #ffce54; */
+  background-color: rgba(246, 187, 66, 0.7);
+  border-color: #f6bb42;
 }
 .alert-danger {
   color: #fff;
-  background-color: #c43d4a;
-  /* color: #c43d4a; 
-  background-color: rgba(196, 61, 74, 0.2); */
-  border: none; /* #c9505c; */
+  background-color: rgba(196, 61, 74, 0.7);
+  border-color: #c43d4a;
 }
 
 /*4953*/

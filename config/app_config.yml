@@ -1,21 +1,17 @@
 
 defaults: &defaults
   fidobakku:
-    account_plan: basic
-    account_expiry: 2013-03-01
+    account_plan: premium
+    demo_days: 42
     account_limits:
       basic:
-        users: 5
-        forms: 1
-        sections: 3
-        comps: 15
-        evaluation_sessions: 1
+        user_evaluations: false
+        goals: false
+        comments: false
       premium:
-        users: 500
-        forms: 1000
-        sections: 3000
-        comps: 15000
-        evaluation_sessions: 1000
+        user_evaluations: true
+        goals: true
+        comments: true
 
 development:
   <<: *defaults
