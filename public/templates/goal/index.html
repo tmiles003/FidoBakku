@@ -88,7 +88,7 @@
           <div class="form-group" ng-class="{ 'has-error': eCommentForm.comment_content.$invalid && submitted }">
             <label for="comment_content" class="sr-only">Comment</label>
             <textarea class="form-control fi-vresize" name="comment_content" ng-model="eComment.content"
-              ng-required="true" ng-minlength="2" rows="2" placeholder="Add comment"></textarea>
+              ng-required="true" ng-minlength="1" rows="2" placeholder="Add comment"></textarea>
             <p ng-show="eCommentForm.comment_content.$invalid && submitted" 
               class="help-block">Comment is required</p>
           </div>

@@ -49,8 +49,9 @@ class Api::GoalsController < Api::ApiController
     end
     
     def invalid_goal
-      logger.warn 'no goal with this id'
-      head :no_content
+      logger.error "No goal with this id: #{params[:id]}"
+      error = Hash['error', [t('admin.goals.record_not_found')]]
+      render json: error, status: :not_found
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

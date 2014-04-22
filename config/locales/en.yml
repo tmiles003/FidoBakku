@@ -29,6 +29,8 @@ en:
       record_not_found: 'Form competency not found'
       above_not_found: 'Form competency not found'
       below_not_found: 'Form competency not found'
+    goals:
+      record_not_found: 'Goal not found'
 
   errors:
     messages:
@@ -92,3 +94,8 @@ en:
               too_long: 'Section name is too long'
 
         form_comp:
+
+        goal:
+          attributes:
+            content:
+              blank: 'Content cannot be empty'

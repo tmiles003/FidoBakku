@@ -4,9 +4,7 @@ class Goal < ActiveRecord::Base
   has_many :comments, primary_key: :id, foreign_key: :goal_id, dependent: :destroy
   
   validates :title, length: {
-    in: 2..100,
-    too_short: 'Too short',
-    too_long: 'Too long'
+    in: 1..100
   }
   
   # validate user_id is you or someone in the admin/manager's team

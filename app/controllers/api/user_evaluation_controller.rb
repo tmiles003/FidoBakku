@@ -5,18 +5,9 @@ class Api::UserEvaluationController < Api::ApiController
   prepend_before_filter :set_user_evaluation, only: [:show, :update]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_user_evaluation
   
-  before_action :set_user_evaluation_form, only: [:form]
-  rescue_from ActiveRecord::RecordNotFound, with: :invalid_user_evaluation_form
-  
   # GET /api/user_evaluation/1.json
   def show
     render json: @user_evaluation, serializer: ::Evaluation::UserEvaluationSerializer
-  end
-  
-  # GET /api/user_evaluation/form.json
-  def form
-    logger.warn 'this might not be in use (Api::UserEvaluationController#form)'
-    render json: @user_evaluation_form, serializer: UserEvaluationFormSerializer
   end
   
   # PATCH/PUT /api/user_evaluation/1.json
@@ -37,18 +28,9 @@ class Api::UserEvaluationController < Api::ApiController
     end
     
     def invalid_user_evaluation
-      logger.warn 'No user evaluation with this id'
-      head :no_content
-    end
-    
-    def set_user_evaluation_form
-      # for this user id? / evaluator_id
-      @user_evaluation_form = ::Form.in_account(@account.id).find(params[:form_id])
-    end
-    
-    def invalid_user_evaluation_form
-      logger.warn 'No form with this id'
-      head :no_content
+      logger.error "No user evaluation with this id: #{params[:id]}"
+      error = Hash['error', [t('admin.user_evaluations.record_not_found')]]
+      render json: error, status: :not_found
     end
     
     # Never trust parameters from the scary internet, only allow the white list through.

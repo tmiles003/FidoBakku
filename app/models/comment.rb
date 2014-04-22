@@ -6,6 +6,8 @@ class Comment < ActiveRecord::Base
   belongs_to :goal
   belongs_to :user_evaluation
   
+  validates :content, presence: true
+  
   def serializer
     case 
     when !self.user_evaluation_id.nil?

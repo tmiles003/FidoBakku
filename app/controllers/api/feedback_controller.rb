@@ -2,7 +2,7 @@ class Api::FeedbackController < Api::ApiController
   
   authorize_resource :evaluation, :parent => false
   
-  prepend_before_filter :set_evaluation, only: [:show]
+  prepend_before_filter :set_evaluation, only: [:show, :update]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_evaluation
   
   # GET /api/feedback/1.json
@@ -27,8 +27,9 @@ class Api::FeedbackController < Api::ApiController
     end
     
     def invalid_evaluation
-      logger.warn 'no evaluation with this id'
-      head :no_content
+      logger.error "No evaluation with this id: #{params[:id]}"
+      error = Hash['error', [t('admin.evaluations.record_not_found')]]
+      render json: error, status: :not_found
     end
     
     def evaluation_params
