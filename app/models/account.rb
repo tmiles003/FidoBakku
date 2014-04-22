@@ -7,8 +7,6 @@ class Account < ActiveRecord::Base
   
   validates :name, length: {
     in: 1..250,
-    too_short: 'Too short',
-    too_long: 'Too long'
   }, on: :update
   
   validates :owner_id, presence: true, on: :update
