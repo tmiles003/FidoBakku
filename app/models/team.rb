@@ -1,5 +1,7 @@
 class Team < ActiveRecord::Base
   
+  include InAccount
+  
   belongs_to :account
   
   has_many :team_users, dependent: :destroy

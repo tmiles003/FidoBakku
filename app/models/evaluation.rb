@@ -1,10 +1,7 @@
 class Evaluation < ActiveRecord::Base
   
+  include InAccount
   include Upgradable
-  
-  scope :in_account, ->(account_id) { 
-    where('account_id = ?', account_id) 
-  }
   
   belongs_to :evaluation_session
   belongs_to :account

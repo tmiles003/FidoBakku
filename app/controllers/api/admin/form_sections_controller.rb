@@ -77,7 +77,7 @@ class Api::Admin::FormSectionsController < Api::Admin::ApiController
     end
     
     def set_form_section
-      @form_section = ::FormSection.in_account(current_user.account.id).find(params[:id])
+      @form_section = ::FormSection.find(params[:id])
     end
     
     def invalid_form_section

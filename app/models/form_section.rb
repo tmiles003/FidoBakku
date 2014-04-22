@@ -1,16 +1,10 @@
 class FormSection < ActiveRecord::Base
   
-  include Upgradable
+  #include InAccount
   
   belongs_to :form
   
   has_many :form_comps, dependent: :destroy
-  
-  scope :in_account, ->(account_id) { 
-    joins(:form)
-    .where('account_id = ?', account_id)
-    .readonly(false) # required, otherwise record is "ReadOnly"
-  }
   
   validates :name, length: {
     in: 1..100

@@ -1,8 +1,12 @@
 class UserEvaluation < ActiveRecord::Base
   
+  include InAccount
+  
   belongs_to :evaluation
   has_one :evaluator, class_name: 'User', primary_key: :evaluator_id, foreign_key: :id
   has_one :comment, dependent: :destroy
+  
+  belongs_to :account
   
   after_validation :initial_setup, on: :create
   before_update :update_progress

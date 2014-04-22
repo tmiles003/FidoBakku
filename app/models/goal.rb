@@ -1,5 +1,7 @@
 class Goal < ActiveRecord::Base
   
+  include InAccount
+  
   belongs_to :user
   has_many :comments, primary_key: :id, foreign_key: :goal_id, dependent: :destroy
   
@@ -7,10 +9,6 @@ class Goal < ActiveRecord::Base
   
   validates :title, length: {
     in: 1..100
-  }
-  
-  scope :in_account, ->(account_id) { 
-    where('account_id = ?', account_id) 
   }
   
   scope :for_user, lambda { |user, param|

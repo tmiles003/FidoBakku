@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140422080815) do
+ActiveRecord::Schema.define(version: 20140422082153) do
 
   create_table "account_users", force: true do |t|
     t.integer "account_id"
@@ -124,6 +124,7 @@ ActiveRecord::Schema.define(version: 20140422080815) do
   end
 
   create_table "user_evaluations", force: true do |t|
+    t.integer  "account_id"
     t.integer  "evaluation_id"
     t.integer  "evaluator_id"
     t.string   "evaluator_name"
