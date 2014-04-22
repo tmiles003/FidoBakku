@@ -11,7 +11,24 @@
 
 <div class="row">
   <div class="col-md-9">
-  <!-- pretty graph here -->
+    <div class="panel panel-default">
+      <!-- div class="panel-heading">User evaluations</div -->
+      <div class="panel-body">
+        User evaluations
+      </div>
+      <table class="table">
+        <tr ng-repeat="evaluation in userEvaluations | orderBy: '+name'">
+          <td>
+            {{ evaluation.evaluator.name }}
+          </td>
+          <td class="text-right">
+            <button class="btn btn-default fi-btn-slim" ng-click="deleteConfirm(userEvaluation)">
+              <i class="fa fa-trash-o fa-lg"></i>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
   </div>
   
   <div class="col-md-3">
@@ -25,13 +42,16 @@
           ng-options="team.id as team.name for team in teams">
           <option value="">Filter by team</option>
         </select>
-        <hr>
-        <div class="fi-eval-user-list">
-          <button ng-repeat="user in users | orderBy: '+name' | filter: { team: team_id }" 
-            ng-click="assign(user.id)" fi-evaluation-user="user"
-            class="btn btn-default fi-eval-user">{{ user.name }}</button>
+        <br><!-- hr -->
+        <div class="btn-group-vertical btn-group-justified">
+          <div class="btn-group">
+            <button ng-repeat="user in users | orderBy: '+name' | filter: { team_id: team_id }" 
+              ng-click="assign(user.id)" btn-checkbox ng-model="user"
+              type="button" class="btn btn-default fi-form-user">{{ user.name }}</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  
 </div>

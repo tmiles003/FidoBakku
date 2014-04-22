@@ -8,7 +8,7 @@ fiApp.controller('UserEvaluationsAdminCtrl', ['$scope',
                            UserEvaluationsAdminSrv, TeamsAdminSrv, UsersAdminSrv, NotifSrv, evaluation) {
   
   $scope.evaluation = evaluation;
-  $scope.userEvaluations = evaluation.userEvaluations;
+  $scope.userEvaluations = evaluation.user_evaluations;
   
   $scope.teams = [];
   TeamsAdminSrv.query(function(teams) {
