@@ -36,18 +36,20 @@ en:
         user:
           attributes:
             email:
-              blank: "Please Specify an Email id"
-              taken: "Please use a different Email id"
-              invalid: "Please Specify a valid Email id"
+              blank: 'Email cannot be empty'
+              taken: 'Email cannot be used'
+              invalid: 'Email format incorrect'
             password:
-              blank: "Please Specify a Password"
-              confirmation: "Password does not match"
+              blank: 'Password cannot be empty'
+              confirmation: 'Passwords do not match'
             password_confirmation:
-              blank: "Please Specify a Password Confirmation"
-            first_name:
-              blank: "Please Specify First Name"
-            last_name:
-              blank: "Please Specify Last Name"
+              blank: 'Password confirmation cannot be empty'
+            name:
+              too_short: 'Name cannot be empty'
+              too_long: 'Name is too long'
+            role:
+              inclusion: 'Not a valid role'
+
 # example:
         pdf:
           attributes:

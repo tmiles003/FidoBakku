@@ -7,6 +7,14 @@ class User < ActiveRecord::Base
   before_validation :initial_setup, on: :create
   after_create :form_user
   
+  validates :name, length: {
+    in: 1..250
+  }
+  
+  validates :role, inclusion: { 
+    in: ROLES
+  }
+  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
