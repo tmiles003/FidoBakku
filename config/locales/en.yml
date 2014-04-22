@@ -30,6 +30,10 @@ en:
       above_not_found: 'Form competency not found'
       below_not_found: 'Form competency not found'
 
+  errors:
+    messages:
+      confirmation: "%{attribute}s don't match"
+
   activerecord:
     errors:
       models:
@@ -88,18 +92,3 @@ en:
               too_long: 'Section name is too long'
 
         form_comp:
-
-
-
-
-
-
-
-# example:
-        pdf:
-          attributes:
-            name:
-              blank: "Please Specify name to PDF"
-              taken: "Please use different name for PDF"
-            attachment:
-              blank: "Please Upload a PDF Attachment"
