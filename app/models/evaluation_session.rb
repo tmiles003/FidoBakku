@@ -8,7 +8,7 @@ class EvaluationSession < ActiveRecord::Base
   
   belongs_to :account
   
-  has_many :evaluations, foreign_key: :session_id, dependent: :destroy
+  has_many :evaluations, dependent: :destroy
   
   #before_validation :check_plan_evaluation_sessions, on: :create
   

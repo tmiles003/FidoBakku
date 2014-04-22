@@ -22,7 +22,8 @@ class Api::Admin::EvaluationsController < Api::Admin::ApiController
   # POST /api/admin/evaluations.json
   def create
     @evaluation = ::Evaluation.new(evaluation_params) # :: forces root namespace
-    @evaluation.session_id = @evaluation_session.id
+    @evaluation.evaluation_session = @evaluation_session
+    @evaluation.account = current_user.account
 
     if @evaluation.save
       render json: @evaluation, status: :created, 
