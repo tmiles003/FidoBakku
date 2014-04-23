@@ -16,7 +16,7 @@ class Api::Admin::FormUsersController < Api::Admin::ApiController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_form_user
-      @form_user = ::FormUser.find_or_create_by(user_id: params[:user_id])
+      @form_user = ::FormUser.find_or_create_by(id: params[:id], user_id: params[:user_id])
     end
     
     # Never trust parameters from the scary internet, only allow the white list through.

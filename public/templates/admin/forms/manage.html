@@ -10,7 +10,7 @@
 <div class="row">
   <div class="col-md-9">
   <!-- shared form -->
-    <div class="panel panel-default">
+    <div class="panel panel-default" ng-show="{{ form.shared_forms }}">
       <!-- div class="panel-heading">Shared form</div -->
       <div class="panel-body">
         Attach shared form
@@ -100,16 +100,16 @@
       </div>
       <div class="fi-panel-inner" ng-controller="FormUserAdminCtrl">
         <select ng-model="team_id" class="form-control" 
-          ng-options="team.id as team.name for team in teams">
+          ng-options="team.id as team.name for team in teams | orderBy: '+name'">
           <option value="">Filter by team</option>
         </select>
         <br><!-- hr -->
         <div class="btn-group-vertical btn-group-justified">
           <div class="btn-group">
             <button ng-repeat="form_user in form_users | orderBy: '+name' | filter: { team_id: team_id }" 
-              ng-click="updateAssignment(form_user)" btn-checkbox ng-model="form_user.assigned" 
-              ng-class="{ active: form_user.assigned }"
-              type="button" class="btn btn-default fi-form-user">{{ form_user.user.name }}</button>
+              ng-click="updateAssignment(form_user)" btn-checkbox ng-model="form_user.form_id" 
+              ng-class="{ active: form_user.form_id }"
+              type="button" class="btn btn-default fi-form-user">{{ form_user.name }}</button>
           </div>
         </div>
       </div>

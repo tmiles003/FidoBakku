@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
   ROLES = %w[employee manager admin]
   
   before_validation :initial_setup, on: :create
-  after_create :form_user
   
   validates :name, length: {
     in: 1..100
@@ -60,10 +59,6 @@ class User < ActiveRecord::Base
       self.role = 'employee'
     end
     self.password = gen_random_password
-  end
-  
-  def form_user
-    ::FormUser.find_or_create_by(user_id: self.id)
   end
   
   def to_param

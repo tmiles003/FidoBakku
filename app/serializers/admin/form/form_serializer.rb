@@ -16,7 +16,7 @@ class Admin::Form::FormSerializer < ActiveModel::Serializer
   
   # the possible shared forms to use as "parent"
   def shared_forms
-    shared_forms = ::Form.where(shared: 1).where.not(id: object.id)
+    shared_forms = ::Form.in_account(scope.account.id).where(shared: 1).where.not(id: object.id)
     ActiveModel::ArraySerializer.new(shared_forms, each_serializer: ::Admin::Form::SharedFormSerializer)
   end
   
@@ -26,7 +26,8 @@ class Admin::Form::FormSerializer < ActiveModel::Serializer
   end
   
   def form_users
-    form_users = ::FormUser.where('form_users.form_id IS NULL OR form_users.form_id = ?', object.id)
+    form_users = ::FormUser.in_account(scope.account.id)
+      .where('form_users.form_id IS NULL OR form_users.form_id = ?', object.id)
       .includes(:form, user: :team)
     ActiveModel::ArraySerializer.new(form_users, each_serializer: ::Admin::Form::FormUserSerializer)
   end
