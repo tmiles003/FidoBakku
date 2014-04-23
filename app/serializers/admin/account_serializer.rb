@@ -4,7 +4,6 @@ class Admin::AccountSerializer < ActiveModel::Serializer
   
   def admins
     admin_users = current_user.account.users.where(role: 'admin')
-      
     ActiveModel::ArraySerializer.new(admin_users, each_serializer: ::Admin::AdminUserSerializer)
   end
 

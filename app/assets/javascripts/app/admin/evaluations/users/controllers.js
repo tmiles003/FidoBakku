@@ -3,22 +3,14 @@
 /* Controllers */
 
 fiApp.controller('UserEvaluationsAdminCtrl', ['$scope', 
-                 'UserEvaluationsAdminSrv', 'TeamsAdminSrv', 'UsersAdminSrv', 'NotifSrv', 'evaluation', 
+                 'UserEvaluationsAdminSrv', 'NotifSrv', 'evaluation', 
                   function($scope, 
-                           UserEvaluationsAdminSrv, TeamsAdminSrv, UsersAdminSrv, NotifSrv, evaluation) {
+                           UserEvaluationsAdminSrv, NotifSrv, evaluation) {
   
   $scope.evaluation = evaluation;
-  $scope.userEvaluations = evaluation.user_evaluations;
-  
-  $scope.teams = [];
-  TeamsAdminSrv.query(function(teams) {
-    $scope.teams = teams;
-  });
-  
-  $scope.users = [];
-  UsersAdminSrv.query(function(users) {
-    $scope.users = users;
-  });
+  $scope.user_evaluations = evaluation.user_evaluations;
+  $scope.teams = evaluation.teams;
+  $scope.users = evaluation.users;
   
   $scope.assign = function(evaluator_id) {
     var data = {};

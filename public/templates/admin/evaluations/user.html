@@ -17,12 +17,15 @@
         User evaluations
       </div>
       <table class="table">
-        <tr ng-repeat="evaluation in userEvaluations | orderBy: '+name'">
+        <tr ng-repeat="user_evaluation in user_evaluations | orderBy: '+name'">
           <td>
-            {{ evaluation.evaluator.name }}
+            {{ user_evaluation.name }}
+          </td>
+          <td>
+            {{ user_evaluation.progress }}
           </td>
           <td class="text-right">
-            <button class="btn btn-default fi-btn-slim" ng-click="deleteConfirm(userEvaluation)">
+            <button class="btn btn-default fi-btn-slim" ng-click="deleteConfirm(user_evaluation)">
               <i class="fa fa-trash-o fa-lg"></i>
             </button>
           </td>

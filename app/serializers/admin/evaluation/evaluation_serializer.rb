@@ -1,8 +1,8 @@
 class Admin::Evaluation::EvaluationSerializer < ActiveModel::Serializer
   
-  attributes :id, :user_id, :created_at, :manage_path
+  attributes :teams, :users
   # session - for return url
-  has_one :user, serializer: ::Admin::Evaluation::UserSerializer
+  has_one :user, serializer: BaseUserSerializer
   has_many :user_evaluations, serializer: ::Admin::Evaluation::UserEvaluationSerializer
   
   def created_at
@@ -11,6 +11,20 @@ class Admin::Evaluation::EvaluationSerializer < ActiveModel::Serializer
   
   def manage_path
     root_path(anchor: admin_evaluation_manage_path(object))
+  end
+  
+  def teams
+    teams = scope.account.teams
+    ActiveModel::ArraySerializer.new(teams, each_serializer: ::Admin::TeamSerializer)
+  end
+  
+  def users
+    users = ::User.in_account(scope.account.id).includes(:team)
+    ActiveModel::ArraySerializer.new(users, each_serializer: ::Admin::Evaluation::UserSerializer)
+  end
+  
+  def user_evaluations
+    user_evaluations = ::UserEvaluation.where(evaluation_id: object.id).includes(:evaluator)
   end
   
   # , :due_date, :due_date_ts
