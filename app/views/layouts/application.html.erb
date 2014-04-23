@@ -6,7 +6,6 @@
   <title>FidoBakku</title>
   <link rel="shortcut icon" href="/favicon.ico">
   <%= stylesheet_link_tag 'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
   <% render 'ngconf' %>
   <%= csrf_meta_tags %>
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -31,5 +30,6 @@
   </div>
   <toaster-container toaster-options="{'limit': 3, 'position-class': 'toast-bottom-right'}">
   </toaster-container>
+  <%= javascript_include_tag 'application' %>
 </body>
 </html>
