@@ -3,16 +3,14 @@
 /* Controllers */
 
 fiApp.controller('EvaluationsAdminCtrl', ['$scope', '$modal', 
-                 'EvaluationsAdminSrv', 'UsersAdminSrv', 'NotifSrv', 'session', 
+                 'EvaluationsAdminSrv', 'NotifSrv', 'session', 
                   function($scope, $modal, 
-                           EvaluationsAdminSrv, UsersAdminSrv, NotifSrv, session) {
+                           EvaluationsAdminSrv, NotifSrv, session) {
   
   $scope.session = session;
   $scope.evaluations = session.evaluations;
-  $scope.users = [];
-  UsersAdminSrv.query({ has_form: 1 }, function(users) {
-    $scope.users = users;
-  });
+  $scope.teams = session.teams;
+  $scope.users = session.users;
   
   var createEvaluation = function(newEvaluation) {
     EvaluationsAdminSrv.save({ session_id: $scope.session.id, evaluation: newEvaluation }, function(val, resp) {

@@ -1,7 +1,7 @@
 
 <div class="row">
   
-  <div class="col-md-8">
+  <div class="col-md-9">
     <h2>Evaluations</h2>
   
     <p>Evaluations help text</p>
@@ -11,62 +11,48 @@
 
 <div class="row">
 
-  <div class="col-md-8">
-  
-  <div class="panel panel-default">
-    <!-- div class="panel-heading">Evaluations</div -->
-    <!-- div class="panel-body">
-    </div -->
-    <table class="table">
-      <tr ng-repeat="evaluation in evaluations | orderBy: '-created_at'">
-        <td>
-          <a href="{{ evaluation.manage_path }}">{{ evaluation.user.name }}</a>
-        </td>
-        <td class="text-right">
-          <button class="btn btn-default fi-btn-slim" ng-click="deleteConfirm(evaluation)">
-            <i class="fa fa-trash-o fa-lg"></i>
-          </button>
-        </td>
-      </tr>
-    </table>
-  </div>
-  
-  </div>
-
-  <div class="col-md-4">
-  
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <span ng-hide="eEvaluation.id">New evaluation</span>
-      <span ng-show="eEvaluation.id">Update evaluation</span>
-    </div>
-    <!-- div class="panel-body">
-    </div -->
-    <div class="fi-panel-inner">
-
-      <form accept-charset="utf-8" novalidate name="eEvaluationForm">
-        <div class="form-group" ng-class="{ 'has-error': eEvaluationForm.evaluation_user.$invalid && submitted }">
-          <label for="evaluation_user" class="sr-only">User</label>
-          <select name="evaluation_user" ng-model="eEvaluation.user_id" class="form-control" 
-            ng-options="user.id as user.name group by ucFirst(user.role) for user in users | 
-              orderBy: ['+role_sort', '+name']" 
-            ng-required="true">
-            <option value="">Select a user</option>
-          </select>
-          <p ng-show="eEvaluationForm.evaluation_user.$invalid && submitted" 
-            class="help-block">A user must be selected</p>
-        </div>
-        
-        <div class="actions text-right">
-          <input ng-click="saveEvaluation(eEvaluation, eEvaluationForm.$valid)" type="submit" value="Save"
-            class="btn btn-default btn-success btn-sm fi-btn-wide">
-          <button ng-click="clearForm()" class="btn btn-default btn-sm" title="Clear form">
-            <i class="fa fa-eraser fa-lg"></i></button>
-        </div>
-      </form>
-    
+  <div class="col-md-9">
+    <div class="panel panel-default">
+      <!-- div class="panel-heading">Evaluations</div -->
+      <!-- div class="panel-body">
+      </div -->
+      <table class="table">
+        <tr ng-repeat="evaluation in evaluations | orderBy: '-created_at'">
+          <td>
+            <a href="{{ evaluation.manage_path }}">{{ evaluation.name }}</a>
+          </td>
+          <td class="text-right">
+            <button class="btn btn-default fi-btn-slim" ng-click="deleteConfirm(evaluation)">
+              <i class="fa fa-trash-o fa-lg"></i>
+            </button>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
-  </div>
 
+  <div class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Create evaluation
+      </div>
+      <!-- div class="panel-body">
+      </div -->
+      <div class="fi-panel-inner">
+        <select ng-model="team_id" class="form-control" 
+          ng-options="team.id as team.name for team in teams | orderBy: '+name'">
+          <option value="">Filter by team</option>
+        </select>
+        <br><!-- hr -->
+        <div class="btn-group-vertical btn-group-justified">
+          <div class="btn-group">
+            <button ng-repeat="user in users | orderBy: '+name' | filter: { team_id: team_id }" 
+              ng-click="updateAssignment(user)" btn-checkbox ng-model="user.form_id" 
+              type="button" class="btn btn-default fi-form-user">{{ user.name }}</button>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 </div>

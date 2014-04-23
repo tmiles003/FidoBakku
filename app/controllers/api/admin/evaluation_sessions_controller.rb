@@ -13,7 +13,8 @@ class Api::Admin::EvaluationSessionsController < Api::Admin::ApiController
 
   # GET /api/admin/evaluation_sessions/1.json
   def show
-    render json: @evaluation_session, serializer: ::Admin::EvaluationSession::SessionSerializer
+    render json: @evaluation_session, 
+      serializer: ::Admin::EvaluationSession::SessionSerializer
   end
 
   # POST /api/admin/evaluation_sessions.json
