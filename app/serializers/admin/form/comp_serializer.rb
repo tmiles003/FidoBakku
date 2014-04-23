@@ -1,5 +1,6 @@
 class Admin::Form::CompSerializer < ActiveModel::Serializer
   
-  attributes :id, :form_section_id, :content, :ordr
+  attributes :id, :content, :ordr
+  # , :form_section_id
   
 end

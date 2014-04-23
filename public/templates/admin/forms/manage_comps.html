@@ -27,7 +27,7 @@
       <div class="form-group" ng-class="{ 'has-error': eCompForm.comp_content.$invalid && submitted }">
         <label for="comp_content" class="sr-only">Competency</label>
         <textarea class="form-control fi-vresize" name="comp_content" ng-model="eComp.content" 
-              ng-required="true" ng-minlength="2" rows="2" placeholder="Competency"></textarea>
+              ng-required="true" ng-minlength="1" rows="2" placeholder="Competency"></textarea>
         <p ng-show="eCompForm.comp_content.$invalid && submitted" 
               class="help-block">Content is required</p>
       </div>

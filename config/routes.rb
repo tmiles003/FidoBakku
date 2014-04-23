@@ -50,27 +50,22 @@ FidoBakku::Application.routes.draw do
       end
       resources :teams, except: [:show, :new, :edit]
       
-      resources :form_sections, except: [:index, :show, :new, :edit] do 
-        resources :form_comps, except: [:show, :new, :edit], shallow: true do 
-          member do 
-            put 'up'
-            put 'down'
-          end
+      resources :forms, except: [:new]
+      resources :form_sections, except: [:index, :show, :new, :edit] do
+        member do 
+          put 'up'
+          put 'down'
         end
       end
-      resources :forms, except: [:new] do
-        collection do 
-          get 'list'
-        end
-        resources :form_sections, only: [:index], shallow: true do 
-          member do 
-            put 'up'
-            put 'down'
-          end
+      resources :form_comps, except: [:index, :show, :new, :edit] do
+        member do 
+          put 'up'
+          put 'down'
         end
       end
+      
       resources :form_parts, only: [:update]
-      resources :form_users, only: [:index, :update]
+      resources :form_users, only: [:update]
       
       resources :evaluation_sessions
       resources :evaluations, except: [:new, :edit]

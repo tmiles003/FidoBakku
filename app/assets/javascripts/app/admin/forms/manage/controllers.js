@@ -135,10 +135,7 @@ fiApp.controller('FormCompsAdminCtrl', ['$scope', '$modal', '$filter',
                            FormCompsAdminSrv, NotifSrv) {
   
   $scope.sectionId = $scope.$parent.section.id;
-  $scope.comps = [];
-  FormCompsAdminSrv.query({ section_id: $scope.sectionId }, function(comps) {
-    $scope.comps = comps;
-  });
+  $scope.comps = $scope.$parent.section.form_comps;
   
   $scope.eComp = {};
   $scope.submitted = false;
@@ -153,7 +150,8 @@ fiApp.controller('FormCompsAdminCtrl', ['$scope', '$modal', '$filter',
   }
   
   var updateComp = function(comp) {
-    comp.$update(function(val, resp) {
+    // comp.$update(function(val, resp) {
+    FormCompsAdminSrv.update(comp, function(val, resp) {
       var comp = _.find($scope.comps, function(c) {
         return c.id === val.id;
       });

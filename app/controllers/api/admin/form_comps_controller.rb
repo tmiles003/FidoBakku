@@ -2,7 +2,7 @@ class Api::Admin::FormCompsController < Api::Admin::ApiController
   
   authorize_resource
   
-  prepend_before_filter :set_form_section, only: [:index, :create]
+  prepend_before_filter :set_form_section, only: [:create]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_form_section
   
   before_action :set_form_comp, only: [:update, :up, :down, :destroy]
@@ -13,11 +13,6 @@ class Api::Admin::FormCompsController < Api::Admin::ApiController
   before_action :set_comp_below, only: [:down]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_comp_below
 
-  # GET /api/admin/form_sections/:form_section_id/form_comps.json
-  def index
-    render json: @form_section.form_comps, each_serializer: ::Admin::Form::CompSerializer
-  end
-  
   # POST /api/admin/form_comps.json
   def create
     @form_comp = ::FormComp.new(form_comp_params)
@@ -67,11 +62,11 @@ class Api::Admin::FormCompsController < Api::Admin::ApiController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_form_section
-      @form_section = ::FormSection.find(params[:form_section_id])
+      @form_section = ::FormSection.find(params[:section_id])
     end
     
     def invalid_form_section
-      logger.error "No form section with this id: #{params[:form_section_id]}"
+      logger.error "No form section with this id: #{params[:section_id]}"
       error = Hash['error', [t('admin.form_sections.record_not_found')]]
       render json: error, status: :not_found
     end
