@@ -141,7 +141,8 @@
           && userFormSubmitted }">
         <label for="user_role" class="sr-only">Access level</label>
         <select name="user_role" ng-model="eUser.role" class="form-control" 
-          ng-options="role.s as role.l for role in roles" ng-required="true">
+          ng-options="role.s as role.l for role in roles" ng-required="true"
+          ng-disabled="eUser.id == currentUser.id">
           <option value="">Access level</option>
         </select>
         <p ng-show="eUserForm.user_role.$invalid && userFormSubmitted" 

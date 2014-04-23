@@ -16,11 +16,11 @@ fiApp.controller('UsersAdminCtrl', ['$scope', '$rootScope', '$modal',
   
   // watch for changes to the current user, to update CurrentUserCtrl
   CurrentUserSrv.getUser().then(function(resp) {
-    $scope.currUser = _.find($scope.users, function(u) {
+    $scope.currentUser = _.find($scope.users, function(u) {
       return u.id === resp.id;
     });
-    $scope.$watchCollection('currUser', function() {
-      CurrentUserSrv.setUser($scope.currUser);
+    $scope.$watchCollection('currentUser', function() {
+      CurrentUserSrv.setUser($scope.currentUser);
     });
   });
   
