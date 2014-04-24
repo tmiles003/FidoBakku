@@ -60,7 +60,7 @@
       <table class="table">
         <tr ng-repeat="comment in comments | orderBy: '+created_at_ts'">
           <td class="fi-5pc">
-            <img ng-src="//secure.gravatar.com/avatar/{{ comment.user.email_hash }}?s=30&d=mm" alt="">
+            <gravatar data-hash="comment.user.email_hash" data-size="25"></gravatar>
           </td>
           <td class="fi-15pc">
             {{ comment.user.name }}

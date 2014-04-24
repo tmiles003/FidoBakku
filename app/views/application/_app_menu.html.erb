@@ -20,7 +20,7 @@
   </ul>
   <ul class="nav navbar-nav navbar-right" ng-controller="CurrentUserCtrl">
     <li style="padding-top:6px;">
-      <img ng-src="//secure.gravatar.com/avatar/{{ currentUser.email_hash }}?s=40&d=blank" alt="">
+      <gravatar data-hash="{{ currentUser.email_hash }}" data-size="40" data-d="blank"></gravatar>
     </li>
     <li class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown">{{ currentUser.name }} <b class="caret"></b></a>

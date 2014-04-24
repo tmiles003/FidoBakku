@@ -20,7 +20,7 @@
     <table class="table table-hover">
       <tr ng-repeat="user in users | orderBy: '+name' | filter: { team_id: null }">
         <td class="fi-5pc">
-          <img ng-src="//secure.gravatar.com/avatar/{{ user.email_hash }}?s=25&d=mm" alt="">
+          <gravatar data-hash="user.email_hash" data-size="25"></gravatar>
         </td>
         <td class="fi-35pc">
           <a href="{{ user.user_path }}">{{ user.name }}</a>
@@ -58,7 +58,7 @@
     <table class="table table-hover">
       <tr ng-repeat="user in users | orderBy: '+name' | filter: { team_id: team.id }">
         <td class="fi-5pc">
-          <img ng-src="//secure.gravatar.com/avatar/{{ user.email_hash }}?s=25&d=mm" alt="">
+        <gravatar data-hash="user.email_hash" data-size="25"></gravatar>
         </td>
         <td class="fi-35pc">
           <a href="{{ user.user_path }}">{{ user.name }}</a>

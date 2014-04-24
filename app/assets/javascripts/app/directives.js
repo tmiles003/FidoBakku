@@ -20,3 +20,28 @@ fiApp.directive('activeNavLink', ['$location', function(location) {
     }
   };
 }]);
+
+fiApp.directive('gravatar', [function() {
+  return {
+    restrict: 'E',
+    link: function(scope, element, attrs) { console.log(attrs);
+      scope.$watch('attrs.hash', function(val) {
+        var hash = val;
+        var s = attrs.size;
+        if (!s) {
+          s = 25;
+        }
+        var d = !!attrs.d ? attrs.d : false;
+        if (!d) {
+          d = 'fidobakku'; // 'blank';
+        }
+        if ('fidobakku' == d) {
+          var domain = 'd31q9n9jefsa5o.cloudfront.net';
+          d = 'https://'+ domain +'/images/fidobakku-'+ s +'x'+ s +'.png';
+        } 
+        var tag = '<img alt="" src="https://secure.gravatar.com/avatar/' + hash + '?s=' + s + '&d=' + d + '">';
+        element.replaceWith(tag);
+      });
+    }
+  }
+}]);
