@@ -24,7 +24,7 @@ class Admin::EvaluationSession::SessionSerializer < ActiveModel::Serializer
     users = ::FormUser.in_account(scope.account.id)
       .includes(:form, user: :team)
       .where('form_users.form_id IS NOT NULL')
-    ActiveModel::ArraySerializer.new(users, each_serializer: ::Admin::Form::FormUserSerializer)
+    ActiveModel::ArraySerializer.new(users, each_serializer: ::Admin::EvaluationSession::UserSerializer)
   end
   
 end

@@ -18,13 +18,13 @@
       </div -->
       <table class="table table-hover">
         <tr ng-repeat="evaluation in evaluations | orderBy: '+name' | filter: { team_id: team_id }">
-        <td>
-         G
-        </td>
+          <td class="fi-5pc">
+            <img ng-src="//secure.gravatar.com/avatar/{{ evaluation.email_hash }}?s=25&d=mm" alt="">
+          </td>
           <td>
             <a href="{{ evaluation.manage_path }}">{{ evaluation.name }}</a>
           </td>
-          <td class="text-right">
+          <td class="text-right fi-5pc">
             <button class="btn btn-default fi-btn-slim" ng-click="deleteConfirm(evaluation)">
               <i class="fa fa-trash-o fa-lg"></i>
             </button>
@@ -50,7 +50,7 @@
         <div class="btn-group-vertical btn-group-justified">
           <div class="btn-group">
             <button ng-repeat="user in users | orderBy: '+name' | filter: { team_id: team_id }" 
-              ng-click="createEvaluation(user.user_id)" btn-checkbox ng-model="user.added" 
+              ng-click="createEvaluation(user.id)" btn-checkbox ng-model="user.added" 
               type="button" class="btn btn-default fi-form-user">{{ user.name }}</button>
           </div>
         </div>

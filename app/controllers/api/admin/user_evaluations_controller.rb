@@ -2,10 +2,10 @@ class Api::Admin::UserEvaluationsController < Api::Admin::ApiController
   
   authorize_resource
   
-  prepend_before_filter :set_evaluation, only: [:index]
+  prepend_before_filter :set_evaluation, only: [:index, :create]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_evaluation
   
-  before_action :set_user_evaluation, only: [:update, :destroy]
+  before_action :set_user_evaluation, only: [:destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_user_evaluation
   
   # GET /api/admin/user_evaluations.json
@@ -17,6 +17,7 @@ class Api::Admin::UserEvaluationsController < Api::Admin::ApiController
   # POST /api/admin/user_evaluations.json
   def create
     @user_evaluation = ::UserEvaluation.new(user_evaluation_params)
+    @user_evaluation.evaluation = @evaluation
     @user_evaluation.account = current_user.account
     
     if @user_evaluation.save
@@ -57,6 +58,6 @@ class Api::Admin::UserEvaluationsController < Api::Admin::ApiController
     
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_evaluation_params
-      params.require(:user_evaluation).permit(:evaluation_id, :evaluator_id)
+      params.require(:user_evaluation).permit(:evaluator_id)
     end
 end
