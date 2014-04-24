@@ -5,6 +5,8 @@ class Account < ActiveRecord::Base
   validate :email_valid, :email_unique, on: :create
   after_validation :initial_setup, on: :create
   
+  before_destroy :delete_account
+  
   validates :name, length: {
     in: 1..100,
   }, on: :update
@@ -36,6 +38,12 @@ class Account < ActiveRecord::Base
     self.name = 'New Account'
     self.plan = AppConfig.fidobakku['initial_plan']
     self.expires_at = Date.today.advance(:days => AppConfig.fidobakku['demo_days'])
+  end
+  
+  private
+
+  def delete_account
+    ActiveSupport::Notifications.instrument 'delete.account', account: self
   end
   
 end
