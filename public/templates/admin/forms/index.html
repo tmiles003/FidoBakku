@@ -37,12 +37,12 @@
     </table>
   </div>
   
-  <div class="panel panel-default">
+  <div class="panel panel-default" ng-show="shared_forms.length">
     <div class="panel-heading">Shared forms</div>
     <!-- div class="panel-body">
     </div -->
     <table class="table table-hover">
-      <tr ng-repeat="form in forms | filter: { shared: true } | orderBy: '+name'">
+      <tr ng-repeat="form in shared_forms = (forms | filter: { shared: true }) | orderBy: '+name'">
         <td>
           <a href="{{ form.form_path }}">{{ form.name }}</a>
         </td>
