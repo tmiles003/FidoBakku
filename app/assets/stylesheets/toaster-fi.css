@@ -12,24 +12,34 @@
 }
 
 #toast-container > .toast-info {
-  background-image: url('/images/toast-info.png') !important;
+  /* background-image: url('/images/toast-info.png') !important; */
+  background-image: url('/images/toast-info-415b76.png') !important;
 }
 #toast-container > .toast-error {
-  background-image: url('/images/toast-error.png') !important;
+  /* background-image: url('/images/toast-error.png') !important; */
+  background-image: url('/images/toast-error-c43d4a.png') !important;
 }
 #toast-container > .toast-success {
-  background-image: url('/images/toast-success.png') !important;
+  /* background-image: url('/images/toast-success.png') !important; */
+  background-image: url('/images/toast-success-37bc9b.png') !important;
 }
 
 .toast {
-  border: 1px solid #fff;
+  /* border: 1px solid #fff; */
+  background-color: #fff;
 }
 .toast-success {
-  background-color: #37bc9b;
+  /* background-color: #37bc9b; */
+  border: 1px solid #37bc9b;
+  color: #37bc9b !important;
 }
 .toast-error {
-  background-color: #c43d4a;
+  /* background-color: #c43d4a; */
+  border: 1px solid #c43d4a;
+  color: #c43d4a !important;
 }
 .toast-info {
-  background-color: #415b76; /* CHANGE ME */
+  /* background-color: #415b76; */
+  border: 1px solid #415b76;
+  color: #415b76 !important;
 }

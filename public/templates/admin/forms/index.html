@@ -17,7 +17,7 @@
     <!-- div class="panel-heading">Forms</div -->
     <!-- div class="panel-body">
     </div -->
-    <table class="table">
+    <table class="table table-hover">
       <tr ng-repeat="form in forms | filter: { shared: false } | orderBy: '+name'">
         <td>
           <a href="{{ form.form_path }}">{{ form.name }}</a>
@@ -41,7 +41,7 @@
     <div class="panel-heading">Shared forms</div>
     <!-- div class="panel-body">
     </div -->
-    <table class="table">
+    <table class="table table-hover">
       <tr ng-repeat="form in forms | filter: { shared: true } | orderBy: '+name'">
         <td>
           <a href="{{ form.form_path }}">{{ form.name }}</a>

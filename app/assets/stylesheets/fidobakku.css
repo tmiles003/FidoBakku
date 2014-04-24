@@ -1,9 +1,14 @@
 /* fidobakku.css */
 
-/* #415b76, #34495e - blue */
-/* #48cfad, #37bc9b - green */
-/* #fc6e51, #e9573f - page links */
-/* #c43d4a, #c9505c red dark/light */
+/* 
+#415b76 - blue
+#34495e - dark blue
+#48cfad - green 
+#37bc9b - dark green
+#c9505c - red
+#c43d4a - dark red
+*/
+/* #fc6e51, #e9573f - page links - not in use */
 
 /* remove browser focus style(s) */
 *:focus {
@@ -70,8 +75,12 @@ body {
 }
 
 .fi-comps-table {
-  border-bottom: 1px solid #ddd;
+  /* border-bottom: 1px solid #ddd; */
   margin-bottom: 10px;
+}
+.fi-comps-table > tbody > tr > td,
+.fi-comps-table > tbody > tr > th {
+  border-bottom: 1px solid #ddd;
 }
 
 .fi-vresize {

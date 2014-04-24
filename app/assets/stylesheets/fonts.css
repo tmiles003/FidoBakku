@@ -23,9 +23,9 @@ i.fa {
   margin: 3px 0;
 }
 
-.navbar i.fa, .panel-heading i.fa {
+/* .navbar i.fa, .panel-heading i.fa {
   color: #fff;
-}
+} */
 
 i.fa-angle-up:hover,
 i.fa-angle-down:hover,
@@ -37,11 +37,11 @@ i.fa-trash-o:hover {
   color: #c43d4a;
 }
 
-.panel-heading i.fa-angle-up:hover,
+/* .panel-heading i.fa-angle-up:hover,
 .panel-heading i.fa-angle-down:hover,
 .panel-heading i.fa-edit:hover {
   color: #ddd;
-}
+} */
 
 i.fa-font,
 i.fa-briefcase {

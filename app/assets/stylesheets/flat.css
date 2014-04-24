@@ -4,8 +4,8 @@
 * {
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
-  /* border-radius: 0px !important; */
-  border-radius: 2px !important;
+  border-radius: 0px !important;
+  /* border-radius: 2px !important; */
   -webkit-transition: none;
   transition: none;
 }
