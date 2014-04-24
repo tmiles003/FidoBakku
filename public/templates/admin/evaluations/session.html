@@ -17,7 +17,10 @@
       <!-- div class="panel-body">
       </div -->
       <table class="table table-hover">
-        <tr ng-repeat="evaluation in evaluations | orderBy: '-created_at'">
+        <tr ng-repeat="evaluation in evaluations | orderBy: '+name' | filter: { team_id: team_id }">
+        <td>
+         G
+        </td>
           <td>
             <a href="{{ evaluation.manage_path }}">{{ evaluation.name }}</a>
           </td>
@@ -47,7 +50,7 @@
         <div class="btn-group-vertical btn-group-justified">
           <div class="btn-group">
             <button ng-repeat="user in users | orderBy: '+name' | filter: { team_id: team_id }" 
-              ng-click="updateAssignment(user)" btn-checkbox ng-model="user.form_id" 
+              ng-click="createEvaluation(user.user_id)" btn-checkbox ng-model="user.added" 
               type="button" class="btn btn-default fi-form-user">{{ user.name }}</button>
           </div>
         </div>

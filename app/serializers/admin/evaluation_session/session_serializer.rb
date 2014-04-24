@@ -12,7 +12,7 @@ class Admin::EvaluationSession::SessionSerializer < ActiveModel::Serializer
   end
   
   def evaluations
-    evaluations = ::Evaluation.where(evaluation_session_id: object.id).includes(:user)
+    evaluations = ::Evaluation.where(evaluation_session_id: object.id).includes(user: :team)
   end
   
   def teams

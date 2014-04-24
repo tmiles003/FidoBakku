@@ -12,27 +12,11 @@ fiApp.controller('EvaluationsAdminCtrl', ['$scope', '$modal',
   $scope.teams = session.teams;
   $scope.users = session.users;
   
-  var createEvaluation = function(newEvaluation) {
-    EvaluationsAdminSrv.save({ session_id: $scope.session.id, evaluation: newEvaluation }, function(val, resp) {
+  $scope.createEvaluation = function(user_id) {
+    EvaluationsAdminSrv.save({ session_id: $scope.session.id, user_id: user_id }, function(val, resp) {
       $scope.evaluations.push(val);
-      $scope.eEvaluation = {};
-      $scope.eEvaluationForm.$setPristine();
       NotifSrv.success();
     });
-  }
-  
-  $scope.saveEvaluation = function(evaluation, isValid) {
-    $scope.submitted = true;
-    if (isValid) {
-      $scope.submitted = false;
-      createEvaluation(evaluation);
-    }
-  }
-  
-  $scope.clearForm = function() {
-    $scope.submitted = false;
-    $scope.eEvaluation = {};
-    $scope.eEvaluationForm.$setPristine();
   }
   
   $scope.deleteConfirm = function(evaluation) {
@@ -57,9 +41,6 @@ fiApp.controller('EvaluationsAdminCtrl', ['$scope', '$modal',
   }
   
   var deleteEvaluation = function(evaluation) {
-    $scope.submitted = false;
-    $scope.eEvaluation = {};
-    $scope.eEvaluationForm.$setPristine();
     EvaluationsAdminSrv.delete({ id: evaluation.id }, function() {
       $scope.evaluations = _.without($scope.evaluations, evaluation);
       NotifSrv.success();
