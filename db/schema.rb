@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140425033043) do
+ActiveRecord::Schema.define(version: 20140425092017) do
 
   create_table "account_users", force: true do |t|
     t.integer "account_id"
@@ -41,6 +41,10 @@ ActiveRecord::Schema.define(version: 20140425033043) do
     t.datetime "created_at"
   end
 
+  add_index "comments", ["evaluation_id"], name: "index_comments_on_evaluation_id", using: :btree
+  add_index "comments", ["goal_id"], name: "index_comments_on_goal_id", using: :btree
+  add_index "comments", ["user_evaluation_id"], name: "index_comments_on_user_evaluation_id", using: :btree
+
   create_table "evaluation_sessions", force: true do |t|
     t.integer  "account_id"
     t.string   "title"
@@ -61,6 +65,8 @@ ActiveRecord::Schema.define(version: 20140425033043) do
     t.datetime "created_at"
   end
 
+  add_index "evaluations", ["evaluation_session_id"], name: "index_evaluations_on_evaluation_session_id", using: :btree
+
   create_table "form_competencies", force: true do |t|
     t.integer  "form_section_id"
     t.text     "content"
@@ -68,6 +74,8 @@ ActiveRecord::Schema.define(version: 20140425033043) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "form_competencies", ["form_section_id"], name: "index_form_competencies_on_form_section_id", using: :btree
 
   create_table "form_parts", force: true do |t|
     t.integer "form_id"
@@ -83,6 +91,8 @@ ActiveRecord::Schema.define(version: 20140425033043) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "form_sections", ["form_id"], name: "index_form_sections_on_form_id", using: :btree
 
   create_table "form_users", force: true do |t|
     t.integer "account_id"
@@ -112,6 +122,8 @@ ActiveRecord::Schema.define(version: 20140425033043) do
     t.datetime "created_at"
   end
 
+  add_index "goals", ["user_id"], name: "index_goals_on_user_id", using: :btree
+
   create_table "team_users", force: true do |t|
     t.integer "team_id"
     t.integer "user_id"
@@ -135,6 +147,9 @@ ActiveRecord::Schema.define(version: 20140425033043) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "user_evaluations", ["evaluation_id"], name: "index_user_evaluations_on_evaluation_id", using: :btree
+  add_index "user_evaluations", ["evaluator_id"], name: "index_user_evaluations_on_evaluator_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
