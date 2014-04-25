@@ -19,6 +19,13 @@ fiApp.controller('EvaluationsAdminCtrl', ['$scope', '$modal',
     });
   }
   
+  $scope.setMode = function(evaluation, mode) {
+    evaluation.mode = mode;
+    EvaluationsAdminSrv.update(evaluation, function() {
+      NotifSrv.success();
+    });
+  }
+  
   $scope.deleteConfirm = function(evaluation) {
     var modalInstance = $modal
       .open({

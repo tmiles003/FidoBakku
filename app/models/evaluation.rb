@@ -2,6 +2,8 @@ class Evaluation < ActiveRecord::Base
   
   include InAccount
   
+  MODES = %w[evaluations feedback]
+  
   belongs_to :evaluation_session
   belongs_to :account
   
@@ -16,6 +18,10 @@ class Evaluation < ActiveRecord::Base
   def assign_user_form_id
     form_user = ::FormUser.where(user_id: self.user_id).take
     self.form_id = form_user.form_id
+  end
+  
+  def set_done
+    # remove mode
   end
   
   def to_param

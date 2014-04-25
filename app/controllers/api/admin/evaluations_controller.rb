@@ -72,6 +72,6 @@ class Api::Admin::EvaluationsController < Api::Admin::ApiController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def evaluation_params
-      params.require(:evaluation).permit(:user_id)
+      params.require(:evaluation).permit(:user_id, :mode)
     end
 end

@@ -24,6 +24,39 @@
           <td>
             <a href="{{ evaluation.manage_path }}">{{ evaluation.name }}</a>
           </td>
+          <!-- td class="fi-5pc">
+            <i class="fa fa-user fa-lg"></i> x {{ evaluation.num_user_evaluations }}
+          </td -->
+          <td class="fi-5pc">
+            <span ng-hide="evaluation.done">
+              <button class="btn btn-default fi-btn-slim" 
+                ng-click="setMode(evaluation, 'evaluations')" ng-show="'evaluations' !== evaluation.mode">
+                <i class="fa fa-file-text-o fa-lg"></i>
+              </button>
+              <button class="btn btn-default fi-btn-slim" 
+                ng-click="setMode(evaluation, null)" ng-show="'evaluations' == evaluation.mode">
+                <i class="fa fa-file-text fa-lg fi-blue"></i>
+              </button>
+            </span>
+          </td>
+          <td class="fi-5pc">
+            <span ng-hide="evaluation.done">
+              <button class="btn btn-default fi-btn-slim" 
+                ng-click="setMode(evaluation, 'feedback')" ng-show="'feedback' !== evaluation.mode">
+                <i class="fa fa-comment-o fa-lg"></i>
+              </button>
+              <button class="btn btn-default fi-btn-slim" 
+                ng-click="setMode(evaluation, null)" ng-show="'feedback' == evaluation.mode">
+                <i class="fa fa-comment fa-lg fi-blue"></i>
+              </button>
+            </span>
+          </td>
+          <td class="fi-5pc">
+            <i class="fa fa-check fa-lg fi-blue" ng-show="evaluation.done"></i>
+          </td>
+          <td class="fi-5pc">
+            &nbsp;
+          </td>
           <td class="text-right fi-5pc">
             <button class="btn btn-default fi-btn-slim" ng-click="deleteConfirm(evaluation)">
               <i class="fa fa-trash-o fa-lg"></i>

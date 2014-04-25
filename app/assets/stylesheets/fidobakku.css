@@ -61,6 +61,14 @@ body {
   white-space: pre-line;
 }
 
+.fi-blue {
+  color: #415b76 !important;
+}
+
+.fi-green {
+  color: #48cfad !important;
+}
+
 .panel-default .fi-panel-inner {
   padding: 8px;
 }

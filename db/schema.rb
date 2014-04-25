@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140423040220) do
+ActiveRecord::Schema.define(version: 20140425033043) do
 
   create_table "account_users", force: true do |t|
     t.integer "account_id"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20140423040220) do
     t.integer  "evaluation_session_id"
     t.integer  "user_id"
     t.integer  "form_id"
+    t.string   "mode"
     t.integer  "rating"
     t.boolean  "done"
     t.datetime "created_at"

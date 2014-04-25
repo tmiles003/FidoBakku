@@ -1,6 +1,7 @@
 class Admin::EvaluationSession::EvaluationSerializer < ActiveModel::Serializer
   
-  attributes :id, :manage_path, :name, :email_hash, :team_id
+  attributes :id, :manage_path, :name, :email_hash, :team_id, :mode, :done
+  #, :num_ue
   
   def manage_path
     root_path(anchor: admin_evaluation_manage_path(object))
@@ -16,6 +17,14 @@ class Admin::EvaluationSession::EvaluationSerializer < ActiveModel::Serializer
   
   def team_id
     object.user.team.nil? ? nil : object.user.team.id
+  end
+  
+  def done
+    !!object.done
+  end
+  
+  def num_ue
+    object.user_evaluations.count
   end
   
 end
