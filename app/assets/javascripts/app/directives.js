@@ -24,8 +24,8 @@ fiApp.directive('activeNavLink', ['$location', function(location) {
 fiApp.directive('gravatar', [function() {
   return {
     restrict: 'E',
-    link: function(scope, element, attrs) { console.log(attrs);
-      scope.$watch('attrs.hash', function(val) {
+    link: function(scope, element, attrs) {
+      scope.$watch(attrs.hash, function(val) {
         var hash = val;
         var s = attrs.size;
         if (!s) {
