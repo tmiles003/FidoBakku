@@ -5,7 +5,12 @@ fiApp.config(['$routeProvider', '$locationProvider',
   
   $routeProvider.when('/dashboard', { 
     templateUrl: '/templates/dashboard/index.html', 
-    controller: 'DashboardCtrl' 
+    controller: 'DashboardCtrl',
+    resolve: {
+      dashboard: function(DashboardSrv) {
+        return DashboardSrv.query()['$promise'];
+      }
+    }
   });
   
   /* admin routes first */

@@ -2,21 +2,12 @@
 
 /* Controllers */
 
-fiApp.controller('DashboardCtrl', ['$scope', '$http', function($scope, $http) {
+fiApp.controller('DashboardCtrl', ['$scope', 'dashboard', function($scope, dashboard) {
   
-  $scope.evaluations = [];
-  $http.get('/api/dashboard/evaluations').success(function(evaluations) {
-    $scope.evaluations = evaluations;
-  });
+  $scope.users = dashboard.users; 
+  $scope.teams = dashboard.teams; 
   
-  $scope.feedbacks = [];
-  $http.get('/api/dashboard/feedbacks').success(function(feedbacks) {
-    $scope.feedbacks = feedbacks;
-  });
-  
-  $scope.users = [];
-  $http.get('/api/dashboard/users').success(function(users) {
-    $scope.users = users;
-  });
+  $scope.evaluations = dashboard.evaluations;
+  $scope.feedbacks = dashboard.feedbacks;
   
 }]);
