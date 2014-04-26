@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140425092017) do
+ActiveRecord::Schema.define(version: 20140426031312) do
 
   create_table "account_users", force: true do |t|
     t.integer "account_id"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20140425092017) do
   create_table "evaluation_sessions", force: true do |t|
     t.integer  "account_id"
     t.string   "title"
-    t.boolean  "evals"
+    t.text     "progress"
     t.boolean  "done"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20140425092017) do
     t.integer  "user_id"
     t.integer  "form_id"
     t.string   "mode"
+    t.text     "progress"
     t.integer  "rating"
     t.boolean  "done"
     t.datetime "created_at"

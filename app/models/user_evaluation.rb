@@ -10,8 +10,11 @@ class UserEvaluation < ActiveRecord::Base
   belongs_to :account
   
   before_validation :check_plan, on: :create
-  after_validation :initial_setup, on: :create
+  before_create :initial_setup
+  after_create :add_to_evaluation
   before_update :update_progress
+  after_update :update_evaluation
+  before_destroy :remove_from_evaluation
   
   def to_param
     [id, self.name].join('/')
@@ -51,7 +54,7 @@ class UserEvaluation < ActiveRecord::Base
       # if hash has key and value is not empty
       if ratings_h.has_key?(c_id) && !ratings_h[c_id].to_s.empty?
         # store it in the temp hash
-        ratings_tmp[c_id] = ratings_h[c_id]
+        ratings_tmp[c_id] = ratings_h[c_id].to_i
       end
       # this ensures a clean ratings hash is saved
     }
@@ -112,6 +115,34 @@ class UserEvaluation < ActiveRecord::Base
     }
     
     avg_ratings = avg_ratings.empty? ? nil : avg_ratings
+  end
+  
+  def add_to_evaluation
+    evaluation = Evaluation.find(self.evaluation_id)
+    progress_h = ActiveSupport::JSON.decode evaluation.progress
+    c_id = self.id.to_s
+    progress_h[c_id] = 0
+    
+    evaluation.update(progress: ActiveSupport::JSON.encode(progress_h))
+  end
+  
+  # sets the progress in the evaluation - saves db calls for stats
+  def update_evaluation
+    evaluation = Evaluation.find(self.evaluation_id)
+    progress_h = ActiveSupport::JSON.decode evaluation.progress
+    c_id = self.id.to_s
+    progress_h[c_id] = self.progress
+    
+    evaluation.update(progress: ActiveSupport::JSON.encode(progress_h))
+  end
+  
+  def remove_from_evaluation
+    evaluation = Evaluation.find(self.evaluation_id)
+    progress_h = ActiveSupport::JSON.decode evaluation.progress
+    c_id = self.id.to_s
+    progress_h.delete(c_id)
+    
+    evaluation.update(progress: ActiveSupport::JSON.encode(progress_h))
   end
   
 end
