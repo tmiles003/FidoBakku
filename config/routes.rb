@@ -72,19 +72,12 @@ FidoBakku::Application.routes.draw do
       resource :account, controller: :account, only: [:show, :update, :destroy]
     end
     
-    resources :user_evaluation, only: [:show, :update] do
-      collection do 
-        get 'form' => 'user_evaluation#form'
-      end
-    end
-    resources :feedback, only: [:show, :update] do
-      collection do 
-        get 'form' => 'feedback#form'
-        get 'scores' => 'feedback#scores'
-      end
-    end
+    resources :user_evaluation, only: [:show, :update]
+    put 'form_comp/:id' => 'form_comp#update'
     
-    resources :comments, except: [:new, :edit]
+    resources :feedback, only: [:show, :update]
+    
+    resources :comments, except: [:new, :edit, :delete]
     
     resource :user, path: '/profile', controller: :profile, only: [:update]
   end

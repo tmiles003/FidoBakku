@@ -13,8 +13,8 @@ class Api::UserEvaluationController < Api::ApiController
   # PATCH/PUT /api/user_evaluation/1.json
   def update
     if @user_evaluation.update(user_evaluation_params)
-      #render nothing: true, status: :ok # no need to send data back, just "ok"
-      render json: @user_evaluation.progress
+      #render json: @user_evaluation.progress
+      render nothing: true
     else
       render json: @user_evaluation.errors, status: :unprocessable_entity
     end

@@ -1,23 +1,28 @@
 <h2>Evaluation</h2>
 
-<div class="row" ng-repeat="form in forms | orderBy: '-ordr'">
+<div class="row" ng-repeat="form_part in form_parts | orderBy: '-ordr'">
   <div class="col-md-12">
   
-  <div class="panel panel-default" ng-repeat="section in form.form_sections | orderBy: '+ordr'">
+  <div class="panel panel-default" ng-repeat="section in form_part.form_sections | orderBy: '+ordr'">
     <div class="panel-heading">
       {{ section.name }}
     </div>
     
-    <table class="table">
+    <table class="table table-hover">
       <tr ng-repeat="comp in section.form_comps | orderBy: '+ordr'">
-        <td>{{ comp.content }}</td>
+        <td class="fi-nl2br">{{ comp.content }}</td>
         <td class="text-right">
           <div class="btn-group">
-            <button type="button" class="btn btn-default" ng-model="ratings[comp.id]" btn-radio="'1'">1</button>
-            <button type="button" class="btn btn-default" ng-model="ratings[comp.id]" btn-radio="'2'">2</button>
-            <button type="button" class="btn btn-default" ng-model="ratings[comp.id]" btn-radio="'3'">3</button>
-            <button type="button" class="btn btn-default" ng-model="ratings[comp.id]" btn-radio="'4'">4</button>
-            <button type="button" class="btn btn-default" ng-model="ratings[comp.id]" btn-radio="'5'">5</button>
+            <button type="button" class="btn btn-default" ng-model="ratings[comp.id]" btn-radio="'1'"
+              ng-click="compInUse(comp)" ng-class="{ active: 1 == ratings[comp.id] }">1</button>
+            <button type="button" class="btn btn-default" ng-model="ratings[comp.id]" btn-radio="'2'"
+              ng-click="compInUse(comp)" ng-class="{ active: 2 == ratings[comp.id] }">2</button>
+            <button type="button" class="btn btn-default" ng-model="ratings[comp.id]" btn-radio="'3'"
+              ng-click="compInUse(comp)" ng-class="{ active: 3 == ratings[comp.id] }">3</button>
+            <button type="button" class="btn btn-default" ng-model="ratings[comp.id]" btn-radio="'4'"
+              ng-click="compInUse(comp)" ng-class="{ active: 4 == ratings[comp.id] }">4</button>
+            <button type="button" class="btn btn-default" ng-model="ratings[comp.id]" btn-radio="'5'"
+              ng-click="compInUse(comp)" ng-class="{ active: 5 == ratings[comp.id] }">5</button>
           </div>
         </td>
       </tr>

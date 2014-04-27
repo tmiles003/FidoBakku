@@ -2,6 +2,7 @@ class FormPart < ActiveRecord::Base
   
   has_many :children, class_name: 'Form', foreign_key: :id, primary_key: :form_id
   
+  # in use: Evaluation::EvaluationSerializer + Feed::EvaluationSerializer
   def self.get_parts form_id
     parts = []
     part_ids = Hash.new

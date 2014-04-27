@@ -2,20 +2,16 @@
 
 /* Controllers */
 
-fiApp.controller('UserEvaluationCtrl', ['$scope', '$http', 
-                 'UserEvaluationSrv', 'userEvaluation', 'CommentsSrv', 'NotifSrv', 
-                  function($scope, $http, 
-                           UserEvaluationSrv, userEvaluation, CommentsSrv, NotifSrv) {
+fiApp.controller('UserEvaluationCtrl', ['$scope', 
+                 'UserEvaluationSrv', 'userEvaluation', 'CommentsSrv', 'FormCompSrv', 'NotifSrv', 
+                  function($scope, 
+                           UserEvaluationSrv, userEvaluation, CommentsSrv, FormCompSrv, NotifSrv) {
   
   $scope.userEvaluation = userEvaluation;
+  $scope.form_parts = userEvaluation.evaluation.form_parts;
   $scope.ratings = angular.fromJson(userEvaluation.ratings);
+  $scope.comment = userEvaluation.comment;
   
-  $scope.forms = [];
-  $http.get('/api/form', { params: { form_id: userEvaluation.evaluation.form_id } })
-    .success(function(forms) {
-      $scope.forms = forms;
-    });
-
   $scope.$watch('ratings', function(newVal, oldVal) {
     if (newVal !== oldVal) {
       // no-fuss update, nothing returned
@@ -27,9 +23,15 @@ fiApp.controller('UserEvaluationCtrl', ['$scope', '$http',
     }
   }, true);
   
-  $scope.comment = userEvaluation.comment;
+  $scope.compInUse = function(comp) {
+    if (!comp.in_use) {
+      comp.in_use = true;
+      FormCompSrv.update({ id: comp.id });
+    }
+  }
+  
   $scope.saveComment = function(comment) {
-    CommentsSrv.update({ id: comment.id, comment: comment }, function(val, resp) {
+    CommentsSrv.update(comment, function(val, resp) {
       $scope.comment = val;
       NotifSrv.success();
     });
