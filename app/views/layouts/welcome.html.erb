@@ -29,6 +29,9 @@
     <%= yield %>
   </div>
   
+<% if lookup_context.template_exists?('home/footer', [], true) %>
+  <%= render partial: 'home/footer' %>
+<% end %>
   <%= javascript_include_tag 'application' %>
 <% if lookup_context.template_exists?('home/analytics', [], true) %>
   <%= render partial: 'home/analytics' %>

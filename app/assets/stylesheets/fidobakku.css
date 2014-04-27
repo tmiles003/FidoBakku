@@ -17,13 +17,14 @@
 
 /* prevent page from "jumping" when not enough content for scrollbar */
 html {
+  min-height: 100%;
   overflow-y: scroll;
 }
 
 /* more content below nav + footer space */
 body {
   background-color: #fff;
-  margin: 60px 0 50px 0;
+  margin: 60px 0 70px 0;
 }
 
 /* a {
@@ -167,13 +168,20 @@ body {
 
 .footer {
   background-color: #fff;
-  /* border-top: 1px solid #558baa; */
   bottom: 0;
-  position: fixed;
+  color: #415b76;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  position: absolute;
   width: 100%;
 }
 
-.footer p {
-  color: #558baa;
-  margin: 5px 0;
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
 }
+
+.footer ul {
+  list-style-type: none;
+}
+
