@@ -17,7 +17,7 @@ class Api::Admin::FormPartsController < Api::Admin::ApiController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_form_part
-      @form_part = ::FormPart.find(params[:id])
+      @form_part = ::FormPart.in_account(current_user.account.id).find(params[:id])
     end
     
     def invalid_form_part

@@ -11,7 +11,8 @@ class Admin::Form::FormSerializer < ActiveModel::Serializer
   end
   
   def form_part
-    ::FormPart.find_or_create_by(form_id: object.id)
+    form_part = ::FormPart.select('id, form_id, part_id')
+      .find_or_create_by(account_id: scope.account.id, form_id: object.id)
   end
   
   # the possible shared forms to use as "parent"

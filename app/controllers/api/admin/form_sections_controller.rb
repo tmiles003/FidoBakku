@@ -16,6 +16,7 @@ class Api::Admin::FormSectionsController < Api::Admin::ApiController
   # POST /api/admin/form_sections.json
   def create
     @form_section = ::FormSection.new(form_section_params)
+    @form_section.account = current_user.account
     @form_section.next_ordr # move to model callback
 
     if @form_section.save
@@ -71,7 +72,7 @@ class Api::Admin::FormSectionsController < Api::Admin::ApiController
     end
     
     def set_form_section
-      @form_section = ::FormSection.find(params[:id])
+      @form_section = ::FormSection.in_account(current_user.account.id).find(params[:id])
     end
     
     def invalid_form_section

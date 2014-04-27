@@ -1,7 +1,8 @@
 class FormSection < ActiveRecord::Base
   
-  #include InAccount
+  include InAccount
   
+  belongs_to :account
   belongs_to :form
   
   has_many :form_comps, dependent: :destroy

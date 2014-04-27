@@ -27,7 +27,7 @@ class Api::Admin::UsersController < Api::Admin::ApiController
     if @new_user.save
       current_user.account.users << @new_user
       
-      @team_user = ::TeamUser.find_or_create_by(user_id: @new_user.id, team_id: params[:team_id])
+      @team_user = ::TeamUser.find_or_create_by(user_id: @new_user.id, account_id: current_user.account.id, team_id: params[:team_id])
       @form_user = ::FormUser.find_or_create_by(user_id: @new_user.id, account_id: current_user.account.id)
       
       render json: @new_user, status: :created, serializer: ::Admin::UserSerializer
@@ -40,7 +40,7 @@ class Api::Admin::UsersController < Api::Admin::ApiController
   def update
     if @account_user.update(user_params)
       
-      @team_user = ::TeamUser.find_or_create_by(user_id: @account_user.id)
+      @team_user = ::TeamUser.find_or_create_by(user_id: @account_user.id, account_id: current_user.account.id)
       @team_user.update(team_id: params[:team_id])
       
       render json: @account_user, serializer: ::Admin::UserSerializer

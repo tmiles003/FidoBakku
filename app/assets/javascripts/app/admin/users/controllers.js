@@ -148,10 +148,12 @@ fiApp.controller('UsersAdminCtrl', ['$scope', '$rootScope', '$modal',
   $scope.deleteTeam = function(team) {
     var teamId = team.id;
     team.$delete(function() {
+      
       // update users with that team id
       _.each(_.where($scope.users, { team_id: teamId }), function(u) {
         u.team_id = null;
       });
+      
       $scope.teams = _.without($scope.teams, team);
       NotifSrv.success();
     });

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140427035343) do
+ActiveRecord::Schema.define(version: 20140427070641) do
 
   create_table "account_users", force: true do |t|
     t.integer "account_id"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20140427035343) do
   end
 
   create_table "comments", force: true do |t|
+    t.integer  "account_id"
     t.integer  "user_id"
     t.integer  "evaluation_id"
     t.integer  "goal_id"
@@ -69,6 +70,7 @@ ActiveRecord::Schema.define(version: 20140427035343) do
   add_index "evaluations", ["evaluation_session_id"], name: "index_evaluations_on_evaluation_session_id", using: :btree
 
   create_table "form_competencies", force: true do |t|
+    t.integer  "account_id"
     t.integer  "form_section_id"
     t.text     "content"
     t.integer  "ordr"
@@ -80,6 +82,7 @@ ActiveRecord::Schema.define(version: 20140427035343) do
   add_index "form_competencies", ["form_section_id"], name: "index_form_competencies_on_form_section_id", using: :btree
 
   create_table "form_parts", force: true do |t|
+    t.integer "account_id"
     t.integer "form_id"
     t.integer "part_id"
   end
@@ -87,6 +90,7 @@ ActiveRecord::Schema.define(version: 20140427035343) do
   add_index "form_parts", ["form_id", "part_id"], name: "index_form_parts_on_form_id_and_part_id", unique: true, using: :btree
 
   create_table "form_sections", force: true do |t|
+    t.integer  "account_id"
     t.integer  "form_id"
     t.string   "name"
     t.integer  "ordr"
@@ -127,6 +131,7 @@ ActiveRecord::Schema.define(version: 20140427035343) do
   add_index "goals", ["user_id"], name: "index_goals_on_user_id", using: :btree
 
   create_table "team_users", force: true do |t|
+    t.integer "account_id"
     t.integer "team_id"
     t.integer "user_id"
   end

@@ -1,5 +1,8 @@
 class FormPart < ActiveRecord::Base
   
+  include InAccount
+  
+  belongs_to :account
   has_many :children, class_name: 'Form', foreign_key: :id, primary_key: :form_id
   
   # in use: Evaluation::EvaluationSerializer + Feed::EvaluationSerializer

@@ -13,15 +13,16 @@ class DashboardSerializer < ActiveModel::Serializer
   end
   
   def evaluations
-    evaluations = UserEvaluation.where(evaluator_id: current_user.id)
+    evaluations = UserEvaluation.where(account_id: current_user.account.id) # can't use scope because of ambiguity
+      .where(evaluator_id: current_user.id)
       .includes(evaluation: :user)
       .where('evaluations.mode = ?', 'evaluations').references(:evaluations)
-      #.joins(evaluation: :user).where('evaluations.mode = ?', 'evaluations')
     ActiveModel::ArraySerializer.new(evaluations, each_serializer: ::Dashboard::UserEvaluationSerializer)
   end
   
   def feedbacks
-    feedbacks = Evaluation.where('evaluations.mode = ?', 'feedback')
+    feedbacks = Evaluation.where(account_id: current_user.account.id) # same as above
+      .where('evaluations.mode = ?', 'feedback')
       .includes(:user)
     ActiveModel::ArraySerializer.new(feedbacks, each_serializer: ::Dashboard::EvaluationSerializer)
   end

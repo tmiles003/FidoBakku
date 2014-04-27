@@ -16,6 +16,7 @@ class Api::Admin::FormCompsController < Api::Admin::ApiController
   # POST /api/admin/form_comps.json
   def create
     @form_comp = ::FormComp.new(form_comp_params)
+    @form_comp.account = current_user.account
     @form_comp.form_section = @form_section
     @form_comp.next_ordr
 
@@ -62,7 +63,7 @@ class Api::Admin::FormCompsController < Api::Admin::ApiController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_form_section
-      @form_section = ::FormSection.find(params[:section_id])
+      @form_section = ::FormSection.in_account(current_user.account.id).find(params[:section_id])
     end
     
     def invalid_form_section
@@ -72,7 +73,7 @@ class Api::Admin::FormCompsController < Api::Admin::ApiController
     end
     
     def set_form_comp
-      @form_comp = ::FormComp.find(params[:id])
+      @form_comp = ::FormComp.in_account(current_user.account.id).find(params[:id])
     end
     
     def invalid_form_comp

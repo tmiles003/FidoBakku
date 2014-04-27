@@ -23,7 +23,7 @@ class Api::FeedbackController < Api::ApiController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_evaluation
-      @evaluation = ::Evaluation.find(params[:id])
+      @evaluation = ::Evaluation.in_account(current_user.account.id).find(params[:id])
     end
     
     def invalid_evaluation

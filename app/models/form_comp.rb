@@ -1,9 +1,10 @@
 class FormComp < ActiveRecord::Base
   
-  #include InAccount
+  include InAccount
   
   self.table_name = 'form_competencies'
   
+  belongs_to :account
   belongs_to :form_section
   
   def next_ordr

@@ -33,13 +33,13 @@ class Api::Admin::TeamsController < Api::Admin::ApiController
   # DELETE /api/admin/teams/1.json
   def destroy
     @team.destroy
-    head :no_content
+    head nothing: true, status: :ok
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_team
-      @team = ::Team.find(params[:id])
+      @team = ::Team.in_account(current_user.account.id).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
