@@ -168,20 +168,23 @@ body {
 
 .footer {
   background-color: #fff;
+  border-top: 1px solid #415b76;
   bottom: 0;
-  color: #415b76;
   /* Set the fixed height of the footer here */
   height: 60px;
-  position: absolute;
+  position: fixed;
   width: 100%;
 }
 
 .footer > .container {
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-top: 5px;
 }
 
 .footer ul {
   list-style-type: none;
 }
 
+.footer a {
+  color: #415b76;
+  text-decoration: underline;
+}
