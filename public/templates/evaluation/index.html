@@ -1,61 +1,50 @@
-<h2>Evaluation</h2>
+
+<div class="row">
+  <div class="col-md-12">
+    <h1>Evaluation</h1>
+  </div>
+</div>
 
 <div class="row" ng-repeat="form_part in form_parts | orderBy: '-ordr'">
   <div class="col-md-12">
-  
-  <div class="panel panel-default" ng-repeat="section in form_part.form_sections | orderBy: '+ordr'">
-    <div class="panel-heading">
-      {{ section.name }}
+    <div class="panel" ng-repeat="section in form_part.form_sections | orderBy: '+ordr'">
+      <h4><small>Section:</small> {{ section.name }}</h4>
+      <table class="table table-hover">
+        <tr ng-repeat="comp in section.form_comps | orderBy: '+ordr'">
+          <td class="fi-nl2br">{{ comp.content }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default" ng-model="ratings[comp.id]" btn-radio="'1'"
+                ng-click="compInUse(comp)" ng-class="{ active: 1 == ratings[comp.id] }">1</button>
+              <button type="button" class="btn btn-default" ng-model="ratings[comp.id]" btn-radio="'2'"
+                ng-click="compInUse(comp)" ng-class="{ active: 2 == ratings[comp.id] }">2</button>
+              <button type="button" class="btn btn-default" ng-model="ratings[comp.id]" btn-radio="'3'"
+                ng-click="compInUse(comp)" ng-class="{ active: 3 == ratings[comp.id] }">3</button>
+              <button type="button" class="btn btn-default" ng-model="ratings[comp.id]" btn-radio="'4'"
+                ng-click="compInUse(comp)" ng-class="{ active: 4 == ratings[comp.id] }">4</button>
+              <button type="button" class="btn btn-default" ng-model="ratings[comp.id]" btn-radio="'5'"
+                ng-click="compInUse(comp)" ng-class="{ active: 5 == ratings[comp.id] }">5</button>
+            </div>
+          </td>
+        </tr>
+      </table>
     </div>
-    
-    <table class="table table-hover">
-      <tr ng-repeat="comp in section.form_comps | orderBy: '+ordr'">
-        <td class="fi-nl2br">{{ comp.content }}</td>
-        <td class="text-right">
-          <div class="btn-group">
-            <button type="button" class="btn btn-default" ng-model="ratings[comp.id]" btn-radio="'1'"
-              ng-click="compInUse(comp)" ng-class="{ active: 1 == ratings[comp.id] }">1</button>
-            <button type="button" class="btn btn-default" ng-model="ratings[comp.id]" btn-radio="'2'"
-              ng-click="compInUse(comp)" ng-class="{ active: 2 == ratings[comp.id] }">2</button>
-            <button type="button" class="btn btn-default" ng-model="ratings[comp.id]" btn-radio="'3'"
-              ng-click="compInUse(comp)" ng-class="{ active: 3 == ratings[comp.id] }">3</button>
-            <button type="button" class="btn btn-default" ng-model="ratings[comp.id]" btn-radio="'4'"
-              ng-click="compInUse(comp)" ng-class="{ active: 4 == ratings[comp.id] }">4</button>
-            <button type="button" class="btn btn-default" ng-model="ratings[comp.id]" btn-radio="'5'"
-              ng-click="compInUse(comp)" ng-class="{ active: 5 == ratings[comp.id] }">5</button>
-          </div>
-        </td>
-      </tr>
-    </table>
-  </div>
-  
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-12">
-    <div class="panel panel-default">
-    <!-- div class="panel-heading">
-      Comment
-    </div -->
-    <div class="panel-body">
-      Comment
-    </div>
-    
-    <div class="clearfix">
-      <form accept-charset="utf-8" novalidate name="eCommentForm">
-        <div class="col-md-10 form-group">
-          <label for="content" class="sr-only">Comment</label>
-          <textarea class="form-control" name="content" ng-model="eComment.content" 
-            rows="5" placeholder="..."></textarea>
-        </div>
-        <div class="col-md-2 actions">
-          <button ng-click="saveComment(eComment)" type="button"
-            class="btn btn-default btn-success btn-sm fi-btn-wide">Save</button>
-        </div>
-      </form>
-    </div>
-    
-    </div>
+    <h4>Evaluation feedback</h4>
+    <form accept-charset="utf-8" novalidate name="eCommentForm">
+      <div class="col-md-10 form-group">
+        <label for="content" class="sr-only">Comment</label>
+        <textarea class="form-control" name="content" ng-model="eComment.content" 
+          rows="5" placeholder="..."></textarea>
+      </div>
+      <div class="col-md-2 actions">
+        <button ng-click="saveComment(eComment)" type="button"
+          class="btn btn-default btn-success btn-sm fi-btn-wide">Save</button>
+      </div>
+    </form>
   </div>
 </div>

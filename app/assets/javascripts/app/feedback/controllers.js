@@ -2,22 +2,17 @@
 
 /* Controllers */
 
-fiApp.controller('FeedbackCtrl', ['$scope', '$http', 
+fiApp.controller('FeedbackCtrl', ['$scope', 
                  'FeedbackSrv', 'feedback', 'CommentsSrv', 'NotifSrv', 
-                  function($scope, $http, 
+                  function($scope, 
                            FeedbackSrv, feedback, CommentsSrv, NotifSrv) {
   
   $scope.feedback = feedback;
+  $scope.form_parts = feedback.form_parts;
+  $scope.eComment = $scope.feedback.comment;
   
-  $scope.forms = [];
-  $http.get('/api/form', { params: { form_id: feedback.form_id } })
-    .success(function(forms) {
-      $scope.forms = forms;
-    });
-  
-  $scope.eComment = feedback.comment;
   $scope.saveComment = function(eComment) {
-    CommentsSrv.update({ id: eComment.id, comment: eComment }, function(val, resp) {
+    CommentsSrv.update(comment, function(val, resp) {
       $scope.eComment = val;
       NotifSrv.success();
     });

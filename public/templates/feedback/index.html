@@ -1,44 +1,36 @@
-<h2>Feedback</h2>
 
-<div class="row" ng-repeat="form in forms | orderBy: '-ordr'">
+<div class="row">
   <div class="col-md-12">
-  <!-- {{ form }} -->
-  
-  <div class="panel panel-default" ng-repeat="section in form.form_sections | orderBy: '+ordr'">
-    <div class="panel-heading">
-      {{ section.name }}
-    </div>
-    
-    <table class="table">
-      <tr ng-repeat="comp in section.form_comps | orderBy: '+ordr'">
-        <td>{{ comp.content }}</td>
-        <td ng-if="feedback.ratings.mine">
-          {{ feedback.ratings.mine[comp.id] }}
-        </td>
-        <td ng-if="feedback.ratings.peers">
-          {{ feedback.ratings.peers[comp.id] }}
-        </td>
-        <td ng-if="feedback.ratings.manager">
-          {{ feedback.ratings.manager[comp.id] }}
-        </td>
-      </tr>
-    </table>
+    <h1>Feedback</h1>
   </div>
-  
+</div>
+
+<div class="row" ng-repeat="form_part in form_parts | orderBy: '-ordr'">
+  <div class="col-md-12">
+    <div class="panel" ng-repeat="section in form_part.form_sections | orderBy: '+ordr'">
+      <h4><small>Section:</small> {{ section.name }}</h4>
+      <table class="table">
+        <tr ng-repeat="comp in section.form_comps | orderBy: '+ordr'">
+          <td class="fi-nl2br">{{ comp.content }}</td>
+          <td ng-if="feedback.ratings.mine">
+            {{ feedback.ratings.mine[comp.id] }}
+          </td>
+          <td ng-if="feedback.ratings.peers">
+            {{ feedback.ratings.peers[comp.id] }}
+          </td>
+          <td ng-if="feedback.ratings.manager">
+            {{ feedback.ratings.manager[comp.id] }}
+          </td>
+        </tr>
+      </table>
+    </div>
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-12">
-    <div class="panel panel-default">
-    <!-- div class="panel-heading">
-      Comment
-    </div -->
-    <div class="panel-body">
-      Comment
-    </div>
-    
-    <div class="clearfix">
+    <div class="panel">
+      <h4>Comment</h4>
       <form accept-charset="utf-8" novalidate name="eCommentForm">
         <div class="col-md-10 form-group">
           <label for="content" class="sr-only">Comment</label>
@@ -50,8 +42,6 @@
             class="btn btn-default btn-success btn-sm fi-btn-wide">Save</button>
         </div>
       </form>
-    </div>
-    
     </div>
   </div>
 </div>
