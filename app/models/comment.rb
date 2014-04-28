@@ -1,13 +1,10 @@
 class Comment < ActiveRecord::Base
   
-  belongs_to :account
   belongs_to :user
   
   belongs_to :evaluation
   belongs_to :goal
   belongs_to :user_evaluation
-  
-  validates :content, presence: true
   
   def serializer
     case 

@@ -35,14 +35,14 @@
 <div class="row">
   <div class="col-md-12">
     <h4>Evaluation feedback</h4>
-    <form accept-charset="utf-8" novalidate name="eCommentForm">
+    <form accept-charset="utf-8" novalidate name="commentForm">
       <div class="col-md-10 form-group">
         <label for="content" class="sr-only">Comment</label>
-        <textarea class="form-control" name="content" ng-model="eComment.content" 
+        <textarea class="form-control" name="content" ng-model="comment.content" 
           rows="5" placeholder="..."></textarea>
       </div>
       <div class="col-md-2 actions">
-        <button ng-click="saveComment(eComment)" type="button"
+        <button ng-click="saveComment(comment)" type="button"
           class="btn btn-default btn-success btn-sm fi-btn-wide">Save</button>
       </div>
     </form>

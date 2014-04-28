@@ -9,11 +9,11 @@ fiApp.controller('FeedbackCtrl', ['$scope',
   
   $scope.feedback = feedback;
   $scope.form_parts = feedback.form_parts;
-  $scope.eComment = $scope.feedback.comment;
+  $scope.comment = $scope.feedback.comment;
   
-  $scope.saveComment = function(eComment) {
+  $scope.saveComment = function(comment) {
     CommentsSrv.update(comment, function(val, resp) {
-      $scope.eComment = val;
+      $scope.comment = val;
       NotifSrv.success();
     });
   }

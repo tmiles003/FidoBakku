@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140427070641) do
+ActiveRecord::Schema.define(version: 20140428120744) do
 
   create_table "account_users", force: true do |t|
     t.integer "account_id"
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 20140427070641) do
   end
 
   create_table "comments", force: true do |t|
-    t.integer  "account_id"
     t.integer  "user_id"
     t.integer  "evaluation_id"
     t.integer  "goal_id"

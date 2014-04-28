@@ -30,7 +30,7 @@ class Feedback::EvaluationSerializer < ActiveModel::Serializer
   end
   
   def comment
-    ::Comment.find_or_create_by(evaluation_id: object.id)
+    ::Comment.find_or_create_by(user_id: scope.id, evaluation_id: object.id)
   end
   
 end
