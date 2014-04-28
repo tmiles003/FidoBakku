@@ -1,40 +1,28 @@
 
 <div class="row">
-  <div class="col-md-9">
-    <h2>{{ form.name }}</h2>
-    
-    <p>Sections help text</p>
+  <div class="col-md-8">
+    <h1><small>Form:</small> {{ form.name }}</h1>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-md-9">
-  <!-- shared form -->
-    <div class="panel panel-default" ng-show="{{ form.shared_forms }}">
-      <!-- div class="panel-heading">Shared form</div -->
-      <div class="panel-body">
-        Attach shared form
-      </div>
-      <div class="fi-panel-inner">
-        <div class="row">
-          <div class="col-md-12 form-group">
-            <select name="shared_form" ng-model="form_part.part_id" class="form-control" 
-              ng-options="part.id as part.name for part in form.shared_forms | orderBy: '+name'">
-              <option value="">Shared forms</option>
-            </select>
-          </div>
-          <!-- div class="col-md-3 actions">
-            <button ng-click="saveShared(sharedForm)" type="button"
-              class="btn btn-default btn-success btn-sm fi-btn-wide">Save</button>
-          </div -->
+  <div class="col-md-8">
+    <div class="panel" ng-show="{{ form.shared_forms }}">
+      <div class="row">
+        <p>Attach shared form</p>
+        <div class="form-group">
+          <select name="shared_form" ng-model="form_part.part_id" class="form-control" 
+            ng-options="part.id as part.name for part in form.shared_forms | orderBy: '+name'">
+            <option value="">Shared forms</option>
+          </select>
         </div>
       </div>
     </div>
     
     <!-- sections -->
-    <div class="panel panel-default" ng-repeat="section in sections | orderBy: '+ordr'">
-      <div class="panel-heading">{{ section.name }}
-        <span class="pull-right">
+    <div class="panel" ng-repeat="section in sections | orderBy: '+ordr'">
+      <h4><small>Section:</small> {{ section.name }}
+        <span class="pull-right" style="margin-right: 9px;">
           <button class="btn btn-default fi-btn-slim" ng-click="moveSectionUp(section)" ng-hide="$first"
             ng-class="{ 'fi-fa-margin': $last }">
             <i class="fa fa-angle-up fa-lg"></i>
@@ -48,57 +36,42 @@
           <button class="btn btn-default fi-btn-slim" ng-click="deleteConfirm(section)">
             <i class="fa fa-trash-o fa-lg"></i>
           </button>
-        </span>
-      </div>
-    <!-- /div>
-    <div class="panel panel-default" -->
-      <!-- section benchmarks -->
+        </span></h4>
       <div ng-include="'/templates/admin/forms/manage_comps.html'">
       </div>
     </div>
     
     <!-- then the new/edit section form -->
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <span ng-hide="eSection.id">Add new section</span>
-        <span ng-show="eSection.id">Update section</span>
+    <div class="panel">
+      <h4 ng-hide="eSection.id">Add new section</h4>
+      <h4 ng-show="eSection.id">Update section</h4>
+      <div class="row">
+        <form accept-charset="utf-8" novalidate name="eSectionForm">
+          <div class="form-group col-md-9" 
+            ng-class="{ 'has-error': eSectionForm.section_name.$invalid && submitted }">
+            <label for="section_name" class="sr-only">Section</label>
+            <input name="section_name" class="form-control" ng-model="eSection.name" type="text"
+              ng-required="true" ng-minlength="1" ng-maxlength="100" placeholder="Section">
+            <p ng-show="eSectionForm.section_name.$invalid && submitted" 
+              class="help-block">A section is required</p>
+          </div>
+          
+          <div class="actions col-md-3 text-right">
+            <button ng-click="saveSection(eSection, eSectionForm.$valid)" type="button"
+              class="btn btn-default btn-success btn-sm fi-btn-wide">Save</button>
+            <button ng-click="clearForm()" class="btn btn-default btn-sm">
+              <i class="fa fa-eraser" tooltip="Clear form" 
+                tooltip-placement="bottom" tooltip-popup-delay="1500"></i></button>
+          </div>
+        </form>
       </div>
-      <!-- div class="panel-body">
-      </div -->
-      <div class="fi-panel-inner">
-        <!-- div class="row" -->
-          <form accept-charset="utf-8" novalidate name="eSectionForm">
-            <div class="form-group" 
-              ng-class="{ 'has-error': eSectionForm.section_name.$invalid && submitted }">
-              <label for="section_name" class="sr-only">Section</label>
-              <input name="section_name" class="form-control" ng-model="eSection.name" type="text"
-                ng-required="true" ng-minlength="1" ng-maxlength="100" placeholder="Section">
-              <p ng-show="eSectionForm.section_name.$invalid && submitted" 
-                class="help-block">A section is required</p>
-            </div>
-            
-            <div class="actions text-right">
-              <button ng-click="saveSection(eSection, eSectionForm.$valid)" type="button"
-                class="btn btn-default btn-success btn-sm fi-btn-wide">Save</button>
-              <button ng-click="clearForm()" class="btn btn-default btn-sm">
-                <i class="fa fa-eraser" tooltip="Clear form" 
-                  tooltip-placement="bottom" tooltip-popup-delay="1500"></i></button>
-            </div>
-          </form>
-        <!-- /div -->
-      </div>
-      
     </div>
   </div>
   
-  <div class="col-md-3">
-    <!-- tabbed user lists -->
-    <div class="panel panel-default" ng-hide="{{ form.shared }}">
-      <!-- div class="panel-heading">Users</div -->
-      <div class="panel-body">
-        Assigned users
-      </div>
-      <div class="fi-panel-inner" ng-controller="FormUserAdminCtrl">
+  <div class="col-md-3 col-md-offset-1">
+    <div class="panel" ng-hide="{{ form.shared }}">
+      <h4>Assigned users</h4>
+      <div ng-controller="FormUserAdminCtrl">
         <select ng-model="team_id" class="form-control" 
           ng-options="team.id as team.name for team in teams | orderBy: '+name'">
           <option value="">Filter by team</option>
@@ -114,12 +87,9 @@
         </div>
       </div>
     </div>
-    <div class="panel panel-default" ng-show="{{ form.shared && form.children }}">
-      <!-- div class="panel-heading"></div -->
-      <div class="panel-body">
-        Used by
-      </div>
-      <div class="fi-panel-inner">
+    <div class="panel" ng-show="{{ form.shared && form.children }}">
+      <h4>Used by</h4>
+      <div>
         <ul>
           <li ng-repeat="child in form.children | orderBy: '+name'">{{ child.name }}</li>
         </ul>

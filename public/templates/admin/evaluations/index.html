@@ -1,55 +1,38 @@
 
 <div class="row">
-  
   <div class="col-md-8">
-    <h2>Evaluation sessions</h2>
-  
-    <p>Evaluation sessions help text</p>
+    <h1>Evaluation sessions</h1>
   </div>
-
 </div>
 
 <div class="row">
-
   <div class="col-md-8">
-  
-  <div class="panel panel-default">
-    <!-- div class="panel-heading">Evaluation sessions</div -->
-    <!-- div class="panel-body">
-    </div -->
-    <table class="table table-hover">
-      <tr ng-repeat="session in sessions | orderBy: '-created_at'">
-        <td>
-          <a href="{{ session.manage_path }}">{{ session.title }}</a>
-        </td>
-        <!-- td>
-          {{ session.num_evaluations }}
-        </td -->
-        <td class="text-right fi-5pc">
-          <button class="btn btn-default fi-btn-slim" ng-click="editSession(session)">
-            <i class="fa fa-edit fa-lg"></i>
-          </button>
-          <button class="btn btn-default fi-btn-slim" ng-click="deleteConfirm(session)">
-            <i class="fa fa-trash-o fa-lg"></i>
-          </button>
-        </td>
-      </tr>
-    </table>
-  </div>
-  
-  </div>
-
-  <div class="col-md-4">
-  
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <span ng-hide="eSession.id">Add new session</span>
-      <span ng-show="eSession.id">Update session</span>
+    <div class="panel">
+      <table class="table table-hover">
+        <tr ng-repeat="session in sessions | orderBy: '-created_at'">
+          <td>
+            <a href="{{ session.manage_path }}">{{ session.title }}</a>
+          </td>
+          <!-- td>
+            {{ session.num_evaluations }}
+          </td -->
+          <td class="text-right fi-5pc">
+            <button class="btn btn-default fi-btn-slim" ng-click="editSession(session)">
+              <i class="fa fa-edit fa-lg"></i>
+            </button>
+            <button class="btn btn-default fi-btn-slim" ng-click="deleteConfirm(session)">
+              <i class="fa fa-trash-o fa-lg"></i>
+            </button>
+          </td>
+        </tr>
+      </table>
     </div>
-    <!-- div class="panel-body">
-    </div -->
-    <div class="fi-panel-inner">
+  </div>
 
+  <div class="col-md-3 col-md-offset-1">
+    <div class="panel">
+      <h4 ng-hide="eSession.id">Add new session</h4>
+      <h4 ng-show="eSession.id">Update session</h4>
       <form accept-charset="utf-8" novalidate name="eSessionForm">
         <div class="form-group" ng-class="{ 'has-error': eSessionForm.session_title.$invalid && submitted }">
           <label for="session_title" class="sr-only">Title</label>
@@ -62,13 +45,12 @@
         <div class="actions text-right">
           <input ng-click="saveSession(eSession, eSessionForm.$valid)" type="submit" value="Save"
             class="btn btn-default btn-success btn-sm fi-btn-wide">
-          <button ng-click="clearForm()" class="btn btn-default btn-sm" title="Clear form">
-            <i class="fa fa-eraser fa-lg"></i></button>
+          <button ng-click="clearForm()" class="btn btn-default btn-sm">
+            <i class="fa fa-eraser fa-lg" tooltip="Clear form" 
+                tooltip-placement="bottom" tooltip-popup-delay="250"></i></button>
         </div>
       </form>
-    
     </div>
-  </div>
   </div>
 
 </div>

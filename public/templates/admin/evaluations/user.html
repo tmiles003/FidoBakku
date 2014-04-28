@@ -1,21 +1,13 @@
 
 <div class="row">
-  
-  <div class="col-md-9">
-    <h2>User evaluations</h2>
-  
-    <p>User evaluations help text</p>
+  <div class="col-md-8">
+    <h1>User evaluations</h1>
   </div>
-
 </div>
 
 <div class="row">
-  <div class="col-md-9">
-    <div class="panel panel-default">
-      <!-- div class="panel-heading">User evaluations</div -->
-      <div class="panel-body">
-        User evaluations
-      </div>
+  <div class="col-md-8">
+    <div class="panel">
       <table class="table table-hover">
         <tr ng-repeat="user_evaluation in user_evaluations | orderBy: '+name'">
           <td class="fi-5pc">
@@ -37,24 +29,19 @@
     </div>
   </div>
   
-  <div class="col-md-3">
-    <!-- tabbed user lists -->
-    <div class="panel panel-default">
-      <div class="panel-heading">Users</div>
-      <!-- div class="panel-body">
-      </div -->
-      <div class="fi-panel-inner">
-        <select ng-model="team_id" class="form-control" 
-          ng-options="team.id as team.name for team in teams">
-          <option value="">Filter by team</option>
-        </select>
-        <br><!-- hr -->
-        <div class="btn-group-vertical btn-group-justified">
-          <div class="btn-group">
-            <button ng-repeat="user in users | orderBy: '+name' | filter: { team_id: team_id }" 
-              ng-click="createUserEvaluation(user.id)" btn-checkbox ng-model="user.added"
-              type="button" class="btn btn-default fi-form-user">{{ user.name }}</button>
-          </div>
+  <div class="col-md-3 col-md-offset-1">
+    <div class="panel">
+      <h4>Users</h4>
+      <select ng-model="team_id" class="form-control" 
+        ng-options="team.id as team.name for team in teams">
+        <option value="">Filter by team</option>
+      </select>
+      <br><!-- hr -->
+      <div class="btn-group-vertical btn-group-justified">
+        <div class="btn-group">
+          <button ng-repeat="user in users | orderBy: '+name' | filter: { team_id: team_id }" 
+            ng-click="createUserEvaluation(user.id)" btn-checkbox ng-model="user.added"
+            type="button" class="btn btn-default fi-form-user">{{ user.name }}</button>
         </div>
       </div>
     </div>
