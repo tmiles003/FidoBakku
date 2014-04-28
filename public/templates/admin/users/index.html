@@ -1,172 +1,148 @@
 
 <div class="row">
-  
-  <div class="col-md-9">
-    <h2>Staff</h2>
-  
-    <p>Users help text</p>
+  <div class="col-md-8">
+    <h1>Staff admin</h1>
   </div>
-
 </div>
 
 <div class="row">
-
-  <div class="col-md-9">
+  <div class="col-md-8">
+    <div class="panel">
+      <table class="table table-hover">
+        <tr ng-repeat="user in users | orderBy: '+name' | filter: { team_id: null }">
+          <td class="fi-5pc">
+            <gravatar data-hash="user.email_hash" data-size="25"></gravatar>
+          </td>
+          <td class="fi-35pc">
+            <a href="{{ user.user_path }}">{{ user.name }}</a>
+          </td>
+          <td>{{ user.email }}</td>
+          <td ng-switch on="user.role" class="fi-5pc">
+            <i class="fa fa-font" ng-switch-when="admin"></i>
+            <i class="fa fa-briefcase" ng-switch-when="manager"></i>
+          </td>
+          <td class="text-right fi-5pc">
+            <button class="btn btn-default fi-btn-slim" ng-click="editUser(user)">
+              <i class="fa fa-edit fa-lg"></i>
+            </button>
+            <button class="btn btn-default fi-btn-slim" ng-click="deleteConfirm(user)">
+              <i class="fa fa-trash-o fa-lg"></i>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
   
-  <div class="panel panel-default">
-    <!-- div class="panel-heading">No team</div -->
-    <!-- div class="panel-body">
-    </div -->
-    <table class="table table-hover">
-      <tr ng-repeat="user in users | orderBy: '+name' | filter: { team_id: null }">
-        <td class="fi-5pc">
+    <div class="panel" ng-repeat="team in teams | orderBy: '+name'">
+      <h4><small>Team:</small> {{ team.name }}
+        <span class="pull-right" style="margin-right: 9px;">
+          <button class="btn btn-default fi-btn-slim" ng-click="editTeam(team)">
+            <i class="fa fa-edit fa-lg"></i>
+          </button>
+          <button class="btn btn-default fi-btn-slim" ng-click="deleteConfirm(team)">
+            <i class="fa fa-trash-o fa-lg"></i>
+          </button>
+        </span></h4>
+      <table class="table table-hover">
+        <tr ng-repeat="user in users | orderBy: '+name' | filter: { team_id: team.id }">
+          <td class="fi-5pc">
           <gravatar data-hash="user.email_hash" data-size="25"></gravatar>
-        </td>
-        <td class="fi-35pc">
-          <a href="{{ user.user_path }}">{{ user.name }}</a>
-        </td>
-        <td>{{ user.email }}</td>
-        <td ng-switch on="user.role" class="fi-5pc">
-          <i class="fa fa-font" ng-switch-when="admin"></i>
-          <i class="fa fa-briefcase" ng-switch-when="manager"></i>
-        </td>
-        <td class="text-right fi-5pc">
-          <button class="btn btn-default fi-btn-slim" ng-click="editUser(user)">
-            <i class="fa fa-edit fa-lg"></i>
-          </button>
-          <button class="btn btn-default fi-btn-slim" ng-click="deleteConfirm(user)">
-            <i class="fa fa-trash-o fa-lg"></i>
-          </button>
-        </td>
-      </tr>
-    </table>
-  </div>
-  
-  <div class="panel panel-default" ng-repeat="team in teams | orderBy: '+name'">
-    <div class="panel-heading">{{ team.name }}
-      <span class="pull-right">
-        <button class="btn btn-default fi-btn-slim" ng-click="editTeam(team)">
-          <i class="fa fa-edit fa-lg"></i>
-        </button>
-        <button class="btn btn-default fi-btn-slim" ng-click="deleteConfirm(team)">
-          <i class="fa fa-trash-o fa-lg"></i>
-        </button>
-      </span>
+          </td>
+          <td class="fi-35pc">
+            <a href="{{ user.user_path }}">{{ user.name }}</a>
+          </td>
+          <td>{{ user.email }}</td>
+          <td ng-switch on="user.role" class="text-right fi-5pc">
+            <i class="fa fa-font" ng-switch-when="admin"></i>
+            <i class="fa fa-briefcase" ng-switch-when="manager"></i>
+          </td>
+          <td class="text-right fi-5pc">
+            <button class="btn btn-default fi-btn-slim" ng-click="editUser(user)">
+              <i class="fa fa-edit fa-lg"></i>
+            </button>
+            <button class="btn btn-default fi-btn-slim" ng-click="deleteConfirm(user)">
+              <i class="fa fa-trash-o fa-lg"></i>
+            </button>
+          </td>
+        </tr>
+      </table>
     </div>
-    <!-- div class="panel-body">
-    </div -->
-    <table class="table table-hover">
-      <tr ng-repeat="user in users | orderBy: '+name' | filter: { team_id: team.id }">
-        <td class="fi-5pc">
-        <gravatar data-hash="user.email_hash" data-size="25"></gravatar>
-        </td>
-        <td class="fi-35pc">
-          <a href="{{ user.user_path }}">{{ user.name }}</a>
-        </td>
-        <td>{{ user.email }}</td>
-        <td ng-switch on="user.role" class="text-right fi-5pc">
-          <i class="fa fa-font" ng-switch-when="admin"></i>
-          <i class="fa fa-briefcase" ng-switch-when="manager"></i>
-        </td>
-        <td class="text-right fi-5pc">
-          <button class="btn btn-default fi-btn-slim" ng-click="editUser(user)">
-            <i class="fa fa-edit fa-lg"></i>
-          </button>
-          <button class="btn btn-default fi-btn-slim" ng-click="deleteConfirm(user)">
-            <i class="fa fa-trash-o fa-lg"></i>
-          </button>
-        </td>
-      </tr>
-    </table>
-  </div>
-  
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <span ng-hide="eTeam.id">Add new team</span>
-      <span ng-show="eTeam.id">Update team</span>
+    
+    <div class="panel">
+      <h4 ng-hide="eTeam.id">Add new team</h4>
+      <h4 ng-show="eTeam.id">Update team</h4>
+      <div class="row">
+        <form accept-charset="utf-8" novalidate name="eTeamForm">
+          <div class="form-group col-md-9" ng-class="{ 'has-error': eTeamForm.team_name.$invalid 
+            && teamFormSubmitted }">
+            <label for="team_name" class="sr-only">Team</label>
+          
+            <input name="team_name" class="form-control" ng-model="eTeam.name" type="text"
+              ng-required="true" ng-minlength="1" ng-maxlength="100" placeholder="Team name">
+            <p ng-show="eTeamForm.team_name.$invalid && teamFormSubmitted" 
+              class="help-block">A name is required</p>
+          </div>
+          <div class="actions col-md-3 text-right">
+            <button ng-click="saveTeam(eTeam, eTeamForm.$valid)" type="button"
+              class="btn btn-default btn-success btn-sm fi-btn-wide">Save</button>
+            <button ng-click="clearTeamForm()" class="btn btn-default btn-sm">
+              <i class="fa fa-eraser fa-lg" tooltip="Clear form" 
+                  tooltip-placement="bottom" tooltip-popup-delay="250"></i></button>
+          </div>
+        </form>
+      </div>
     </div>
-    <!-- div class="panel-body">
-    </div -->
-    <div class="fi-panel-inner">
-      <form accept-charset="utf-8" novalidate name="eTeamForm">
-        <div class="form-group" ng-class="{ 'has-error': eTeamForm.team_name.$invalid && teamFormSubmitted }">
-          <label for="team_name" class="sr-only">Team</label>
-        
-          <input name="team_name" class="form-control" ng-model="eTeam.name" type="text"
-            ng-required="true" ng-minlength="1" ng-maxlength="100" placeholder="Team name">
-          <p ng-show="eTeamForm.team_name.$invalid && teamFormSubmitted" 
+  </div>
+
+  <div class="col-md-3 col-md-offset-1">
+    <div class="panel">
+      <h4 ng-hide="eUser.id">Add new user</h4>
+      <h4 ng-show="eUser.id">Update user</h4>
+      <form accept-charset="utf-8" novalidate name="eUserForm">
+        <div class="form-group" ng-class="{ 'has-error': eUserForm.user_name.$invalid 
+            && userFormSubmitted }">
+          <label for="user_name" class="sr-only">Name</label>
+          <input name="user_name" class="form-control" ng-model="eUser.name" type="text"
+            ng-required="true" ng-minlength="1" ng-maxlength="100" placeholder="Name">
+          <p ng-show="eUserForm.user_name.$invalid && userFormSubmitted" 
             class="help-block">A name is required</p>
         </div>
+        <div class="form-group" ng-class="{ 'has-error': eUserForm.user_email.$invalid 
+            && userFormSubmitted }">
+          <label for="user_email" class="sr-only">Email</label>
+          <input name="user_email" class="form-control" ng-model="eUser.email" type="email"
+            ng-required="true" placeholder="Email">
+          <p ng-show="eUserForm.user_email.$invalid && userFormSubmitted" 
+            class="help-block">A valid email address is required</p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': eUserForm.user_role.$invalid 
+            && userFormSubmitted }">
+          <label for="user_role" class="sr-only">Access level</label>
+          <select name="user_role" ng-model="eUser.role" class="form-control" 
+            ng-options="role.s as role.l for role in roles" ng-required="true"
+            ng-disabled="eUser.id == currentUser.id">
+            <option value="">Access level</option>
+          </select>
+          <p ng-show="eUserForm.user_role.$invalid && userFormSubmitted" 
+            class="help-block">Access level must be set</p>
+        </div>
+        <div class="form-group">
+          <label for="user_team_id" class="sr-only">Team</label>
+          <select name="user_team_id" ng-model="eUser.team_id" class="form-control" 
+            ng-options="team.id as team.name for team in teams">
+            <option value="">Team</option>
+          </select>
+        </div>
+
         <div class="actions text-right">
-          <button ng-click="saveTeam(eTeam, eTeamForm.$valid)" type="button"
-            class="btn btn-default btn-success btn-sm fi-btn-wide">Save</button>
-          <button ng-click="clearTeamForm()" class="btn btn-default btn-sm" title="Clear form">
-            <i class="fa fa-eraser fa-lg"></i></button>
+          <input ng-click="saveUser(eUser, eUserForm.$valid)" type="submit" value="Save"
+            class="btn btn-default btn-success btn-sm fi-btn-wide">
+          <button ng-click="clearUserForm()" class="btn btn-default btn-sm">
+            <i class="fa fa-eraser fa-lg" tooltip="Clear form" 
+                  tooltip-placement="bottom" tooltip-popup-delay="250"></i></button>
         </div>
       </form>
     </div>
-  </div>
-  
-  </div>
-
-  <div class="col-md-3">
-  
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <span ng-hide="eUser.id">Add new user</span>
-      <span ng-show="eUser.id">Update user</span>
-    </div>
-    <!-- div class="panel-body">
-    </div -->
-    <div class="fi-panel-inner">
-
-    <form accept-charset="utf-8" novalidate name="eUserForm">
-      <div class="form-group" ng-class="{ 'has-error': eUserForm.user_name.$invalid 
-          && userFormSubmitted }">
-        <label for="user_name" class="sr-only">Name</label>
-        <input name="user_name" class="form-control" ng-model="eUser.name" type="text"
-          ng-required="true" ng-minlength="1" ng-maxlength="100" placeholder="Name">
-        <p ng-show="eUserForm.user_name.$invalid && userFormSubmitted" 
-          class="help-block">A name is required</p>
-      </div>
-      <div class="form-group" ng-class="{ 'has-error': eUserForm.user_email.$invalid 
-          && userFormSubmitted }">
-        <label for="user_email" class="sr-only">Email</label>
-        <input name="user_email" class="form-control" ng-model="eUser.email" type="email"
-          ng-required="true" placeholder="Email">
-        <p ng-show="eUserForm.user_email.$invalid && userFormSubmitted" 
-          class="help-block">A valid email address is required</p>
-      </div>
-      <div class="form-group" ng-class="{ 'has-error': eUserForm.user_role.$invalid 
-          && userFormSubmitted }">
-        <label for="user_role" class="sr-only">Access level</label>
-        <select name="user_role" ng-model="eUser.role" class="form-control" 
-          ng-options="role.s as role.l for role in roles" ng-required="true"
-          ng-disabled="eUser.id == currentUser.id">
-          <option value="">Access level</option>
-        </select>
-        <p ng-show="eUserForm.user_role.$invalid && userFormSubmitted" 
-          class="help-block">Access level must be set</p>
-      </div>
-      <div class="form-group">
-        <label for="user_team_id" class="sr-only">Team</label>
-        <select name="user_team_id" ng-model="eUser.team_id" class="form-control" 
-          ng-options="team.id as team.name for team in teams">
-          <option value="">Team</option>
-        </select>
-      </div>
-
-      <div class="actions text-right">
-        <input ng-click="saveUser(eUser, eUserForm.$valid)" type="submit" value="Save"
-          class="btn btn-default btn-success btn-sm fi-btn-wide">
-        <button ng-click="clearUserForm()" class="btn btn-default btn-sm" title="Clear form">
-          <i class="fa fa-eraser fa-lg"></i></button>
-      </div>
-      
-    </form>
-    
-    </div>
-  </div>
   </div>
 
 </div>
