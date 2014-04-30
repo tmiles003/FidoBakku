@@ -90,6 +90,11 @@ fiApp.config(['$routeProvider', '$locationProvider',
     }
   });
   
+  $routeProvider.when('/help', { 
+    templateUrl: '/templates/admin/help/index.html', 
+    controller: 'HelpCtrl'
+  });
+  
   /* routes for everyone */
   $routeProvider.when('/user/:id/:name', { 
     templateUrl: '/templates/user/index.html', 
