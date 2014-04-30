@@ -1,17 +1,17 @@
 class Api::Admin::EvaluationsController < Api::Admin::ApiController
   
-  authorize_resource :evaluation_session, :parent => false
+  authorize_resource :evaluation_loop, :parent => false
   
-  prepend_before_filter :set_evaluation_session, only: [:index, :create]
-  rescue_from ActiveRecord::RecordNotFound, with: :invalid_evaluation_session
+  prepend_before_filter :set_evaluation_loop, only: [:index, :create]
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_evaluation_loop
   
   before_action :set_evaluation, only: [:show, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_evaluation
   
   # GET /api/admin/evaluations.json
   def index
-    render json: @evaluation_session.evaluations.includes(:user), 
-      each_serializer: ::Admin::EvaluationSession::EvaluationSerializer
+    render json: @evaluation_loop.evaluations.includes(:user), 
+      each_serializer: ::Admin::EvaluationLoop::EvaluationSerializer
   end
   
   # GET /api/admin/evaluations/1.json
@@ -22,12 +22,12 @@ class Api::Admin::EvaluationsController < Api::Admin::ApiController
   # POST /api/admin/evaluations.json
   def create
     @evaluation = ::Evaluation.new(evaluation_params) # :: forces root namespace
-    @evaluation.evaluation_session = @evaluation_session
+    @evaluation.evaluation_loop = @evaluation_loop
     @evaluation.account = current_user.account
 
     if @evaluation.save
       render json: @evaluation, status: :created, 
-        serializer: ::Admin::EvaluationSession::EvaluationSerializer
+        serializer: ::Admin::EvaluationLoop::EvaluationSerializer
     else
       render json: @evaluation.errors, status: :unprocessable_entity
     end
@@ -36,7 +36,7 @@ class Api::Admin::EvaluationsController < Api::Admin::ApiController
   # PATCH/PUT /api/admin/evaluations/1.json
   def update
     if @evaluation.update(evaluation_params)
-      render json: @evaluation, serializer: ::Admin::EvaluationSession::EvaluationSerializer
+      render json: @evaluation, serializer: ::Admin::EvaluationLoop::EvaluationSerializer
     else
       render json: @evaluation.errors, status: :unprocessable_entity
     end
@@ -50,13 +50,13 @@ class Api::Admin::EvaluationsController < Api::Admin::ApiController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_evaluation_session
-      @evaluation_session = ::EvaluationSession.in_account(current_user.account.id).find(params[:session_id])
+    def set_evaluation_loop
+      @evaluation_loop = ::EvaluationLoop.in_account(current_user.account.id).find(params[:loop_id])
     end
     
-    def invalid_evaluation_session
-      logger.error "No evaluation session with this id: #{params[:session_id]}"
-      error = Hash['error', [t('admin.evaluation_sessions.record_not_found')]]
+    def invalid_evaluation_loop
+      logger.error "No evaluation loop with this id: #{params[:loop_id]}"
+      error = Hash['error', [t('admin.evaluation_loops.record_not_found')]]
       render json: error, status: :not_found
     end
     

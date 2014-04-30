@@ -1,7 +1,7 @@
 class Admin::Evaluation::EvaluationSerializer < ActiveModel::Serializer
   
   attributes :id, :teams, :users
-  # session - for return url
+  # loop? - for return url
   has_one :user, serializer: BaseUserSerializer
   has_many :user_evaluations, serializer: ::Admin::Evaluation::UserEvaluationSerializer
   

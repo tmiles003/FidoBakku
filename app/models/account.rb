@@ -12,7 +12,7 @@ class Account < ActiveRecord::Base
   }, on: :update
   validates :owner_id, presence: true, on: :update
   
-  has_many :evaluation_sessions, dependent: :destroy
+  has_many :evaluation_loops, dependent: :destroy
   has_many :forms, dependent: :destroy
   has_many :teams, dependent: :destroy
   

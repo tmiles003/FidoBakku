@@ -48,23 +48,23 @@ fiApp.config(['$routeProvider', '$locationProvider',
     }
   });
   
-  // list all the evaluation sessions
+  // list all the evaluation loops
   $routeProvider.when('/admin/evaluations', { 
     templateUrl: '/templates/admin/evaluations/index.html', 
-    controller: 'EvaluationSessionsAdminCtrl', 
+    controller: 'EvaluationLoopsAdminCtrl', 
     resolve: {
-      sessions: function(EvaluationSessionsAdminSrv) { 
-        return EvaluationSessionsAdminSrv.query()['$promise']; 
+      loops: function(EvaluationLoopsAdminSrv) { 
+        return EvaluationLoopsAdminSrv.query()['$promise']; 
       }
     }
   });
   
-  $routeProvider.when('/admin/session/:id/:slug', { 
-    templateUrl: '/templates/admin/evaluations/session.html', 
+  $routeProvider.when('/admin/loop/:id/:slug', { 
+    templateUrl: '/templates/admin/evaluations/loop.html', 
     controller: 'EvaluationsAdminCtrl', 
     resolve: {
-      session: function(EvaluationSessionsAdminSrv, $route) {
-        return EvaluationSessionsAdminSrv.get({ id: $route.current.params.id })['$promise'];
+      loop: function(EvaluationLoopsAdminSrv, $route) {
+        return EvaluationLoopsAdminSrv.get({ id: $route.current.params.id })['$promise'];
       }
     }
   });

@@ -1,4 +1,4 @@
-class Admin::EvaluationSession::EvaluationSerializer < ActiveModel::Serializer
+class Admin::EvaluationLoop::EvaluationSerializer < ActiveModel::Serializer
   
   attributes :id, :manage_path, :name, :email_hash, :team_id, :mode, :done
   #, :num_ue

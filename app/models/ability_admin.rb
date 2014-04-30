@@ -14,7 +14,7 @@ class AbilityAdmin
       #can :manage, :all
       can :show, Account
       can :read, [User, Team]
-      can :manage, [Goal, EvaluationSession, Evaluation, UserEvaluation]
+      can :manage, [Goal, EvaluationLoop, Evaluation, UserEvaluation]
       can :manage, [Form, FormSection, FormComp, FormPart, FormUser]
     end
     

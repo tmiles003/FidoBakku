@@ -4,12 +4,12 @@ class Goal::GoalSerializer < ActiveModel::Serializer
   
   has_one :user, serializer: ::Goal::UserSerializer
   has_many :comments, serializer: ::Goal::CommentSerializer
-  has_one :evaluation_session
+  has_one :evaluation_loop
   
-  def evaluation_session
+  def evaluation_loop
     evaluation = object.user.evaluations.take
-    evaluation_session = evaluation.evaluation_session unless evaluation.nil?
-    ::Goal::EvaluationSessionSerializer.new( evaluation_session ) # for display only
+    evaluation_loop = evaluation.evaluation_loop unless evaluation.nil?
+    ::Goal::EvaluationLoopSerializer.new(evaluation_loop) # for display only
   end
   
 end

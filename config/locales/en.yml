@@ -13,8 +13,8 @@ en:
     users:
       self_delete: 'Cannot delete yourself'
       record_not_found: 'User not found'
-    evaluation_sessions:
-      record_not_found: 'Evaluation session not found'
+    evaluation_loops:
+      record_not_found: 'Evaluation loop not found'
     evaluations:
       record_not_found: 'Evaluation not found'
     user_evaluations:
@@ -71,7 +71,7 @@ en:
             owner_id:
               blank: 'Account must be owned by an admin'
 
-        evaluation_session:
+        evaluation_loop:
           attributes:
             title:
               too_short: 'Title cannot be empty'

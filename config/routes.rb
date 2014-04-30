@@ -1,7 +1,6 @@
 FidoBakku::Application.routes.draw do
   
   root 'welcome#index'
-  
   get 'done' => 'welcome#done'
   
   resources :account, only: [:create, :new]
@@ -21,7 +20,7 @@ FidoBakku::Application.routes.draw do
   
   namespace :admin, defaults: { format: :json } do
     get 'form/:id' => 'welcome#application', as: :form_manage
-    get 'session/:id' => 'welcome#application', as: :session_manage
+    get 'loop/:id' => 'welcome#application', as: :loop_manage
     get 'evaluations/:id' => 'welcome#application', as: :evaluation_manage
   end
   
@@ -31,21 +30,16 @@ FidoBakku::Application.routes.draw do
     get 'dashboard' => 'dashboard#index'
     
     resources :users, only: [:show]
-    #get 'teams' => 'teams#index'
-    get 'form' => 'form#index'
     
-    resources :goals, except: [:new, :edit] do
-      collection do
-        get 'team'
-      end
-    end
+    resources :goals, except: [:new, :edit]
     
     namespace :admin do
-      resources :users, except: [:new, :show, :edit] do 
-        collection do 
+      resources :users, except: [:new, :show, :edit] do
+        collection do
           get 'roles'
         end
       end
+
       resources :teams, except: [:show, :new, :edit]
       
       resources :forms, except: [:new]
@@ -65,8 +59,8 @@ FidoBakku::Application.routes.draw do
       resources :form_parts, only: [:update]
       resources :form_users, only: [:update]
       
-      resources :evaluation_sessions
-      resources :evaluations, except: [:new, :edit]
+      resources :evaluation_loops, except: [:new, :edit]
+      resources :evaluations, except: [:new, :update, :edit]
       resources :user_evaluations, except: [:new, :update, :edit]
       
       resource :account, controller: :account, only: [:show, :update, :destroy]

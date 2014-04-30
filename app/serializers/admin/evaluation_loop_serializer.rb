@@ -1,4 +1,4 @@
-class Admin::EvaluationSessionSerializer < ActiveModel::Serializer
+class Admin::EvaluationLoopSerializer < ActiveModel::Serializer
   
   attributes :id, :title, :created_at, :manage_path
   #, :num_evaluations
@@ -8,7 +8,7 @@ class Admin::EvaluationSessionSerializer < ActiveModel::Serializer
   end
   
   def manage_path
-    root_path(anchor: admin_session_manage_path(object))
+    root_path(anchor: admin_loop_manage_path(object))
   end
   
   def num_evaluations

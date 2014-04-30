@@ -1,4 +1,4 @@
-class Admin::EvaluationSession::UserSerializer < ActiveModel::Serializer
+class Admin::EvaluationLoop::UserSerializer < ActiveModel::Serializer
   
   attributes :id, :name, :team_id
   

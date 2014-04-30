@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140428120744) do
+ActiveRecord::Schema.define(version: 20140430030010) do
 
   create_table "account_users", force: true do |t|
     t.integer "account_id"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20140428120744) do
   add_index "comments", ["goal_id"], name: "index_comments_on_goal_id", using: :btree
   add_index "comments", ["user_evaluation_id"], name: "index_comments_on_user_evaluation_id", using: :btree
 
-  create_table "evaluation_sessions", force: true do |t|
+  create_table "evaluation_loops", force: true do |t|
     t.integer  "account_id"
     t.string   "title"
     t.text     "progress"
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20140428120744) do
 
   create_table "evaluations", force: true do |t|
     t.integer  "account_id"
-    t.integer  "evaluation_session_id"
+    t.integer  "evaluation_loop_id"
     t.integer  "user_id"
     t.integer  "form_id"
     t.string   "mode"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20140428120744) do
     t.datetime "created_at"
   end
 
-  add_index "evaluations", ["evaluation_session_id"], name: "index_evaluations_on_evaluation_session_id", using: :btree
+  add_index "evaluations", ["evaluation_loop_id"], name: "index_evaluations_on_evaluation_loop_id", using: :btree
 
   create_table "form_competencies", force: true do |t|
     t.integer  "account_id"

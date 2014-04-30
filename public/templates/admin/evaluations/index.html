@@ -1,7 +1,7 @@
 
 <div class="row">
   <div class="col-md-8">
-    <h1>Evaluation sessions</h1>
+    <h1>Evaluation loops</h1>
   </div>
 </div>
 
@@ -9,18 +9,18 @@
   <div class="col-md-8">
     <div class="panel">
       <table class="table table-hover">
-        <tr ng-repeat="session in sessions | orderBy: '-created_at'">
+        <tr ng-repeat="loop in loops | orderBy: '-created_at'">
           <td>
-            <a href="{{ session.manage_path }}">{{ session.title }}</a>
+            <a href="{{ loop.manage_path }}">{{ loop.title }}</a>
           </td>
           <!-- td>
-            {{ session.num_evaluations }}
+            {{ loop.num_evaluations }}
           </td -->
           <td class="text-right fi-5pc">
-            <button class="btn btn-default fi-btn-slim" ng-click="editSession(session)">
+            <button class="btn btn-default fi-btn-slim" ng-click="editLoop(loop)">
               <i class="fa fa-edit fa-lg"></i>
             </button>
-            <button class="btn btn-default fi-btn-slim" ng-click="deleteConfirm(session)">
+            <button class="btn btn-default fi-btn-slim" ng-click="deleteConfirm(loop)">
               <i class="fa fa-trash-o fa-lg"></i>
             </button>
           </td>
@@ -31,19 +31,19 @@
 
   <div class="col-md-3 col-md-offset-1">
     <div class="panel">
-      <h4 ng-hide="eSession.id">Add new session</h4>
-      <h4 ng-show="eSession.id">Update session</h4>
-      <form accept-charset="utf-8" novalidate name="eSessionForm">
-        <div class="form-group" ng-class="{ 'has-error': eSessionForm.session_title.$invalid && submitted }">
-          <label for="session_title" class="sr-only">Title</label>
-          <input name="session_title" class="form-control" ng-model="eSession.title" type="text"
+      <h4 ng-hide="eLoop.id">Add new loop</h4>
+      <h4 ng-show="eLoop.id">Update loop</h4>
+      <form accept-charset="utf-8" novalidate name="eLoopForm">
+        <div class="form-group" ng-class="{ 'has-error': eLoopForm.loop_title.$invalid && submitted }">
+          <label for="loop_title" class="sr-only">Title</label>
+          <input name="loop_title" class="form-control" ng-model="eLoop.title" type="text"
             ng-required="true" ng-minlength="1" ng-maxlength="100" placeholder="Title">
-          <p ng-show="eSessionForm.session_title.$invalid && submitted" 
+          <p ng-show="eLoopForm.loop_title.$invalid && submitted" 
             class="help-block">A title must be set</p>
         </div>
         
         <div class="actions text-right">
-          <input ng-click="saveSession(eSession, eSessionForm.$valid)" type="submit" value="Save"
+          <input ng-click="saveLoop(eLoop, eLoopForm.$valid)" type="submit" value="Save"
             class="btn btn-default btn-success btn-sm fi-btn-wide">
           <button ng-click="clearForm()" class="btn btn-default btn-sm">
             <i class="fa fa-eraser fa-lg" tooltip="Clear form" 

@@ -1,4 +1,4 @@
-class EvaluationSession < ActiveRecord::Base
+class EvaluationLoop < ActiveRecord::Base
   
   include InAccount
   
