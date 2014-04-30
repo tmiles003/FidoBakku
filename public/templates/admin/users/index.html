@@ -39,7 +39,7 @@
           <button class="btn btn-default fi-btn-slim" ng-click="editTeam(team)">
             <i class="fa fa-edit fa-lg"></i>
           </button>
-          <button class="btn btn-default fi-btn-slim" ng-click="deleteConfirm(team)">
+          <button class="btn btn-default fi-btn-slim" ng-click="deleteTeamConfirm(team)">
             <i class="fa fa-trash-o fa-lg"></i>
           </button>
         </span></h4>
@@ -129,7 +129,7 @@
         <div class="form-group">
           <label for="user_team_id" class="sr-only">Team</label>
           <select name="user_team_id" ng-model="eUser.team_id" class="form-control" 
-            ng-options="team.id as team.name for team in teams">
+            ng-options="team.id as team.name for team in teams | orderBy: '+name'">
             <option value="">Team</option>
           </select>
         </div>

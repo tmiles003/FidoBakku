@@ -145,15 +145,34 @@ fiApp.controller('UsersAdminCtrl', ['$scope', '$rootScope', '$modal',
     $scope.eTeamForm.$setPristine();
   }
   
-  $scope.deleteTeam = function(team) {
+  $scope.deleteTeamConfirm = function(team) {
+    var modalInstance = $modal
+      .open({
+        templateUrl: '/templates/admin/users/team-delete.html',
+        controller: deleteTeamCtrl,
+        resolve: {
+          team: function() { return team; }
+        }
+      })
+      .result.then(function(team) {
+        deleteTeam(team);
+      });
+  }
+  
+  var deleteTeamCtrl = function($scope, $modalInstance, team) {
+    $scope.team = team;
+    $scope.delete = function() {
+      $modalInstance.close($scope.team);
+    }
+  }
+  
+  var deleteTeam = function(team) {
     var teamId = team.id;
     team.$delete(function() {
-      
-      // update users with that team id
-      _.each(_.where($scope.users, { team_id: teamId }), function(u) {
+      var teamUsers = _.where($scope.users, { team_id: teamId });
+      _.each(teamUsers, function(u) {
         u.team_id = null;
       });
-      
       $scope.teams = _.without($scope.teams, team);
       NotifSrv.success();
     });
