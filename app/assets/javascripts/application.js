@@ -21,6 +21,7 @@
 //= require angular-ui/ui-bootstrap-0.10.0.min
 //= require app/ui-bootstrap-tpls
 //= require toaster/toaster
+//= require d3/d3.v3.min
 //= require app/app.js
 //= require app/routes.js
 //= require_tree .

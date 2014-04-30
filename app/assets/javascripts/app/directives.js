@@ -45,3 +45,25 @@ fiApp.directive('gravatar', [function() {
     }
   }
 }]);
+
+fiApp.directive('fiProgress', [function() {
+  return {
+    // restrict: 'E',
+    link: function(scope, element, attrs) {
+      scope.$watch(attrs.angle, function(val) {
+        var angle = val;
+        var arc = d3.svg.arc()
+          .innerRadius(8)
+          .outerRadius(12)
+          .startAngle(0)
+          .endAngle(angle);
+        var svg = d3.select(element[0]).append('svg')
+          .attr('height', 24).attr('width', 24)
+          .style('fill', '#415b76')
+          .append('path')
+          .attr('d', arc)
+          .attr('transform', 'translate(12,12)');
+      });
+    }
+  }
+}]);
