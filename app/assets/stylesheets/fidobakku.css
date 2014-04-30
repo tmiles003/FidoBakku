@@ -74,17 +74,15 @@ body {
   color: #48cfad !important;
 }
 
-.panel-default .fi-panel-inner {
-  padding: 8px;
-}
-.panel-default .fi-panel-inner .fi-btn-short {
-  border: none;
-  padding: 2px 8px;
-  text-align: left;
-}
-
 .fi-fa-margin {
   margin-right: 22px;
+}
+
+.fi-panel {
+  margin-bottom: 50px;
+}
+.fi-panel table {
+  border-collapse: separate;
 }
 
 .fi-comps-table {

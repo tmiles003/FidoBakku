@@ -7,7 +7,7 @@
 
 <div class="row">
   <div class="col-md-8">
-    <div class="panel">
+    <div class="fi-panel">
       <table class="table table-hover">
         <tr ng-repeat="form in forms | filter: { shared: false } | orderBy: '+name'">
           <td>
@@ -25,7 +25,7 @@
       </table>
     </div>
     
-    <div class="panel" ng-show="shared_forms.length">
+    <div class="fi-panel" ng-show="shared_forms.length">
       <h4>Shared forms</h4>
       <table class="table table-hover">
         <tr ng-repeat="form in shared_forms = (forms | filter: { shared: true }) | orderBy: '+name'">
@@ -46,7 +46,7 @@
   </div>
 
   <div class="col-md-3 col-md-offset-1">
-    <div class="panel">
+    <div>
       <h4 ng-hide="eForm.id">Add new form</h4>
       <h4 ng-show="eForm.id">Update form</h4>
       <form accept-charset="utf-8" novalidate name="eFormForm">

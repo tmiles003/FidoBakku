@@ -7,7 +7,7 @@
 
 <div class="row">
   <div class="col-md-8">
-    <div class="panel" ng-show="{{ form.shared_forms }}">
+    <div class="fi-panel" ng-show="{{ form.shared_forms }}">
       <div class="row">
         <p>Attach shared form</p>
         <div class="form-group">
@@ -20,7 +20,7 @@
     </div>
     
     <!-- sections -->
-    <div class="panel" ng-repeat="section in sections | orderBy: '+ordr'">
+    <div class="fi-panel" ng-repeat="section in sections | orderBy: '+ordr'">
       <h4><small>Section:</small> {{ section.name }}
         <span class="pull-right" style="margin-right: 9px;">
           <button class="btn btn-default fi-btn-slim" ng-click="moveSectionUp(section)" ng-hide="$first"
@@ -42,7 +42,7 @@
     </div>
     
     <!-- then the new/edit section form -->
-    <div class="panel">
+    <div class="fi-panel">
       <h4 ng-hide="eSection.id">Add new section</h4>
       <h4 ng-show="eSection.id">Update section</h4>
       <div class="row">
@@ -69,7 +69,7 @@
   </div>
   
   <div class="col-md-3 col-md-offset-1">
-    <div class="panel" ng-hide="{{ form.shared }}">
+    <div class="fi-panel" ng-hide="{{ form.shared }}">
       <h4>Assigned users</h4>
       <div ng-controller="FormUserAdminCtrl">
         <select ng-model="team_id" class="form-control" 
@@ -87,7 +87,7 @@
         </div>
       </div>
     </div>
-    <div class="panel" ng-show="{{ form.shared && form.children }}">
+    <div class="fi-panel" ng-show="{{ form.shared && form.children }}">
       <h4>Used by</h4>
       <div>
         <ul>

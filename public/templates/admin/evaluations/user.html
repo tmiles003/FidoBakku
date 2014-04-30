@@ -7,7 +7,7 @@
 
 <div class="row">
   <div class="col-md-8">
-    <div class="panel">
+    <div class="fi-panel">
       <table class="table table-hover">
         <tr ng-repeat="user_evaluation in user_evaluations | orderBy: '+name'">
           <td class="fi-5pc">
@@ -30,7 +30,7 @@
   </div>
   
   <div class="col-md-3 col-md-offset-1">
-    <div class="panel">
+    <div class="fi-panel">
       <h4>Users</h4>
       <select ng-model="team_id" class="form-control" 
         ng-options="team.id as team.name for team in teams">
