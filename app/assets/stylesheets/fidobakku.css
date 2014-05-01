@@ -43,6 +43,17 @@ body {
 
 .main-container {}
 
+.fi-jumbotron {
+  padding-bottom: 75px;
+  padding-top: 75px;
+  text-align: center;
+}
+
+.fi-jumbotron h1 {
+  color: #333;
+  font-size: 32px;
+}
+
 .fi-mt100 {
   margin-top: 100px;
 }
