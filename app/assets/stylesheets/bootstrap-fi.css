@@ -34,16 +34,16 @@ h2, .h2 {
 .table-hover > tbody > tr:hover > td,
 .table-hover > tbody > tr:hover > th {
   background-color: transparent;
-  border-bottom: 1px solid #415b76;
-  border-top: 1px solid #415b76;
+  border-bottom: 1px solid rgba(65, 91, 118, 0.5); /* #415b76; */
+  border-top: 1px solid rgba(65, 91, 118, 0.5); /* #415b76; */
 }
 .table-hover > tbody > tr:hover > td:first-child,
 .table-hover > tbody > tr:hover > th:first-child {
-  border-left: 1px solid #415b76;
+  border-left: 1px solid rgba(65, 91, 118, 0.5); /* #415b76; */
 }
 .table-hover > tbody > tr:hover > td:last-child,
 .table-hover > tbody > tr:hover > th:last-child {
-  border-right: 1px solid #415b76;
+  border-right: 1px solid rgba(65, 91, 118, 0.5); /* #415b76; */
 }
 
 /*1650*/
