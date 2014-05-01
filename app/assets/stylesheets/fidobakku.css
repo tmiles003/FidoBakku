@@ -92,7 +92,7 @@ body {
 .fi-panel {
   margin-bottom: 50px;
 }
-.fi-panel table {
+.table {
   border-collapse: separate;
 }
 
@@ -114,7 +114,7 @@ body {
   width: 100%;
   max-width: 100%;
 } */
-.fi-form-user {
+/* .fi-form-user {
   color: #415b76;
   font-size: 15px;
   text-align: left;
@@ -123,6 +123,17 @@ body {
   background-color: #ddd;
 }
 .fi-form-user.active {
+  background-color: #415b76;
+  color: #fff;
+} */
+
+.fi-btn {
+  text-align: left;
+}
+.fi-btn:hover {
+  background-color: #ddd;
+}
+.btn.active {
   background-color: #415b76;
   color: #fff;
 }

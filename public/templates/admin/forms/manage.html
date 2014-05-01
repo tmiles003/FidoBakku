@@ -58,8 +58,8 @@
           
           <div class="actions col-md-3 text-right">
             <button ng-click="saveSection(eSection, eSectionForm.$valid)" type="button"
-              class="btn btn-default btn-success btn-sm fi-btn-wide">Save</button>
-            <button ng-click="clearForm()" class="btn btn-default btn-sm">
+              class="btn btn-default btn-success fi-btn-wide">Save</button>
+            <button ng-click="clearForm()" class="btn btn-default">
               <i class="fa fa-eraser" tooltip="Clear form" 
                 tooltip-placement="bottom" tooltip-popup-delay="1500"></i></button>
           </div>
@@ -82,7 +82,7 @@
             <button ng-repeat="form_user in form_users | orderBy: '+name' | filter: { team_id: team_id }" 
               ng-click="updateAssignment(form_user)" btn-checkbox ng-model="form_user.form_id" 
               ng-class="{ active: form_user.form_id }"
-              type="button" class="btn btn-default fi-form-user">{{ form_user.name }}</button>
+              type="button" class="btn btn-default fi-btn">{{ form_user.name }}</button>
           </div>
         </div>
       </div>

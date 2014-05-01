@@ -71,7 +71,7 @@
         <div class="btn-group">
           <button ng-repeat="user in users | orderBy: '+name' | filter: { team_id: team_id }" 
             ng-click="createEvaluation(user.id)" btn-checkbox ng-model="user.added" 
-            type="button" class="btn btn-default fi-form-user">{{ user.name }}</button>
+            type="button" class="btn btn-default fi-btn">{{ user.name }}</button>
         </div>
       </div>
     </div>
