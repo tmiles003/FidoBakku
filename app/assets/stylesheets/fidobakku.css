@@ -114,6 +114,19 @@ body {
   border-collapse: separate;
 }
 
+.fi-prog-24 {
+  background-color: transparent;
+  height: 24px;
+  width: 24px;
+}
+
+.fi-prog-80 {
+  background-color: transparent;
+  height: 80px;
+  margin: 0 auto;
+  width: 80px;
+}
+
 .fi-comps-table {
   /* border-bottom: 1px solid #ddd; */
   margin-bottom: 10px;
@@ -126,24 +139,6 @@ body {
 .fi-vresize {
   resize: vertical;
 }
-
-/* .fi-form-user-list, .fi-eval-user-list {
-  display: inline-block;
-  width: 100%;
-  max-width: 100%;
-} */
-/* .fi-form-user {
-  color: #415b76;
-  font-size: 15px;
-  text-align: left;
-}
-.fi-form-user:hover {
-  background-color: #ddd;
-}
-.fi-form-user.active {
-  background-color: #415b76;
-  color: #fff;
-} */
 
 .fi-btn {
   text-align: left;

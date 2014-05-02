@@ -2,15 +2,14 @@
 <div class="fi-hero">
   <div class="container">
     <div class="row fi-hero-margin">
-      <div class="col-md-7">
-        <h1><small>Evaluation for</small> {{ evaluation.user.name }}</h1>
-      </div>
-      <div class="col-md-1 text-right">
+      <div class="col-md-2">
         <gravatar data-hash="evaluation.user.email_hash" data-size="80"></gravatar>
       </div>
+      <div class="col-md-6">
+        <h1><small>Evaluation for</small> {{ evaluation.user.name }}</h1>
+      </div>
       <div class="col-md-3 col-md-offset-1">
-        <div fi-progress data-angle="progress" data-size="80" 
-          style="background-color:transparent;height:80px;width:80px;margin:0 auto;"></div>
+        <div fi-progress data-angle="progress" data-size="80" class="fi-prog-80"></div>
       </div>
     </div>
   </div>
