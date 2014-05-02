@@ -54,6 +54,24 @@ body {
   font-size: 32px;
 }
 
+.fi-hero {
+  background-color: #fff;
+  position: fixed;
+  z-index: 1000;
+}
+
+.fi-hero-margin {
+  margin: 10px 0;
+}
+
+.fi-hero-stub {
+  height: 110px;
+}
+
+.fi-row {
+  margin-bottom: 0px;
+}
+
 .fi-mt100 {
   margin-top: 100px;
 }
