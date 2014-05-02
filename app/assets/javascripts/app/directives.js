@@ -39,7 +39,8 @@ fiApp.directive('gravatar', [function() {
           var domain = 'd31q9n9jefsa5o.cloudfront.net';
           d = 'https://'+ domain +'/images/fidobakku-'+ s +'x'+ s +'.png';
         } 
-        var tag = '<img alt="" src="https://secure.gravatar.com/avatar/' + hash + '?s=' + s + '&d=' + d + '">';
+        var tag = '<img alt="" src="https://secure.gravatar.com/avatar/' + hash;
+        tag = tag + '?s=' + s + '&d=' + d + '" height="'+ s +'" width="'+ s +'">';
         element.replaceWith(tag);
       });
     }
@@ -48,21 +49,22 @@ fiApp.directive('gravatar', [function() {
 
 fiApp.directive('fiProgress', [function() {
   return {
-    // restrict: 'E',
+    restrict: 'A',
     link: function(scope, element, attrs) {
       scope.$watch(attrs.angle, function(val) {
         var angle = val;
+        var size = attrs.size;
         var arc = d3.svg.arc()
-          .innerRadius(8)
-          .outerRadius(12)
+          .innerRadius(size/3)
+          .outerRadius(size/2)
           .startAngle(0)
           .endAngle(angle);
         var svg = d3.select(element[0]).append('svg')
-          .attr('height', 24).attr('width', 24)
+          .attr('height', size).attr('width', size)
           .style('fill', '#415b76')
           .append('path')
           .attr('d', arc)
-          .attr('transform', 'translate(12,12)');
+          .attr('transform', 'translate('+ size/2 +','+ size/2 +')');
       });
     }
   }
