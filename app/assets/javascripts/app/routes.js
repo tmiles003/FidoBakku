@@ -140,7 +140,12 @@ fiApp.config(['$routeProvider', '$locationProvider',
   
   $routeProvider.when('/profile', { 
     templateUrl: '/templates/profile/index.html', 
-    controller: 'ProfileCtrl' 
+    controller: 'ProfileCtrl',
+    resolve: {
+      currentUser: function(CurrentUserSrv) {
+        return CurrentUserSrv.getUser(); 
+      }
+    }
   });
   
   $routeProvider.otherwise({ 

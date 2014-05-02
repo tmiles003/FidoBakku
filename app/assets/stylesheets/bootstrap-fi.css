@@ -14,6 +14,11 @@ h2, .h2 {
   font-size: 24px;
 }
 
+/*763*/
+.row {
+  margin-bottom: 30px;
+}
+
 /*1419*/
 .table > thead > tr > th, .table > thead > tr > td, 
 .table > tbody > tr > th, .table > tbody > tr > td, 

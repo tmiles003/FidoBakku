@@ -1,8 +1,16 @@
-<h2>Update account</h2>
+
+<div class="row">
+  <div class="col-md-8">
+    <h1>Account
+    <span class="pull-right">
+      <a href="/#/help" target="_blank"><i class="fa fa-question-circle"></i></a>
+    </span></h1>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
     <form accept-charset="utf-8" novalidate name="accountForm" class="form-horizontal">
-
       <div class="form-group" ng-class="{ 'has-error': accountForm.account_name.$invalid 
           && !accountForm.account_name.$pristine && submitted }">
         <label for="account_name" class="col-md-3 control-label">Account name</label>
@@ -39,7 +47,12 @@
   </div>
 </div>
 
-<h2>Delete account</h2>
+<div class="row" ng-if="account.owner_id == currentUser.id">
+  <div class="col-md-8">
+    <h1>Delete account</h1>
+  </div>
+</div>
+
 <div class="row" ng-if="account.owner_id == currentUser.id">
   <div class="col-md-8 col-md-offset-2">
     <form accept-charset="utf-8" novalidate name="deleteAccountForm" class="form-horizontal">

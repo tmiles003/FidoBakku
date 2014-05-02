@@ -7,25 +7,63 @@
 
 <div class="row">
   <div class="col-md-12">
-    <tabset>
-      <tab>
-        <tab-heading>
-          <i class="fa fa-file-text-o"></i> Evaluations
-        </tab-heading>
-        <h3>Evaluations</h3>
-      </tab>
-      <tab>
-        <tab-heading>
-          <i class="fa fa-list-alt"></i> Forms
-        </tab-heading>
-        <h3>Forms</h3>
-      </tab>
-      <tab>
-        <tab-heading>
-          <i class="fa fa-users"></i> Staff
-        </tab-heading>
-        <h3>Users</h3>
-      </tab>
-    </tabset>
+  
+    <h3><i class="fa fa-file-text-o"></i> Evaluations</h3>
+    <p>Evaluations are contained in loops, each loop representing a period of evaluation. <br>
+      An evaluation is for 1 person, user evaluations are created for each evaluation. The form used 
+      is the one set in the Forms section for that user. 
+      An evaluation can be in one of 4 modes:</p>
+    <ul>
+      <li>"New" - only Managers &amp; Admins have visibility, while they set up all the user 
+        evaluations</li>
+      <li><i class="fa fa-file-text fi-blue"></i> "Evaluation" - it's available for the 
+        users to complete the user evaluations</li>
+      <li><i class="fa fa-comment fi-blue"></i> "Feedback" - it's available to Managers 
+        and Admins to do the evaluation feedback</li>
+      <li><i class="fa fa-check fi-blue"></i> "Done" - the user can see the completed 
+        evaluation</li>
+    </ul>
+    <p>Evaluation mode can be toggled between Evaluation & Feedback on the assignment page. The 
+      evaluation is marked complete from the evaluation itself.</p>
+        
+    <h3><i class="fa fa-list-alt"></i> Forms</h3>
+    <p>Forms are your templates of competencies for rating. Add sections and competencies as you see 
+      fit, you can move them up and down, they will keep their order.</p>
+    <h4>Shared forms</h4>
+    <p>To avoid unnecessary repetition, you can create shared forms. They are re-usable form components 
+      that you can prefix to other forms, so for example you could have company-wide competencies, 
+      prefixed to team-wide competencies, prefixed to role competencies.</p>
+    <h4>Assigned users</h4>
+    <p>Users are assigned to a form, it is the form that will be used for their evaluation. <br>
+      <em>Only users with an assigned form will be available in the drop-down when you create 
+      evaluations.</em></p>
+    
+    <h3><i class="fa fa-users"></i> Staff</h3>
+    <p>Users are created with a random password. The first time they sign in to the service, they 
+     will need to use the "Reset password" functionality to get started.</p>
+    <p>There are 3 access levels:</p>
+    <ul>
+      <li>Employee: can view their own goals and evaluations, and any assigned user evaluations in 
+        "Evaluation" mode</li>
+      <li>Manager: as Employee, + can manage Forms, Loops &amp; Evaluations (including User 
+        Evaluations), as well as Feedbacks</li>
+      <li>Admin: as Manager, + can manage Staff, &amp; Account</li>
+    </ul>
+    <p>Users can be assigned to a team. The users at the top of the page are not assigned to any 
+      team.</p>
+    <h4>Avatars</h4>
+    <p>To personalise their profile, each user can 
+      <a href="https://gravatar.com" target="_blank">create a Gravatar</a>. Their chosen picture 
+      will then appear instead of the FidoBakku logo.</p>
+    <h4>Teams</h4>
+    <p>Deleting a team does not delete the users in that team.</p>
+    
+    <h3><i class="fa fa-cog"></i> Account</h3>
+    <p>An account must have an admin user as owner.</p>
+    
+    <h3>Deleting data</h3>
+    <p><em>Deleting data is an immediate, permanent, unreversible action, after the confirmation 
+      prompt.</em></p>
+    
   </div>
 </div>

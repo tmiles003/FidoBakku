@@ -1,11 +1,27 @@
-<h2>Update password</h2>
 
 <div class="row">
+  <div class="col-md-8">
+    <h1>My profile</h1>
+  </div>
+</div>
 
+<div class="row">
+  <div class="col-md-4 col-md-offset-4 text-center">
+    <gravatar data-hash="currentUser.email_hash" data-size="80"></gravatar>
+    <p style="margin-top:20px;">Not your photo? <br>
+      <a href="https://gravatar.com" target="_blank">Create a Gravatar</a></p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <h1>Update password</h1>
+  </div>
+</div>
+
+<div class="row">
   <div class="col-md-4 col-md-offset-4">
-
     <form accept-charset="utf-8" novalidate name="passwordForm" class="form-horizontal">
-
       <div class="form-group" ng-class="{ 'has-error': passwordForm.new_password.$invalid && submitted }">
         <label for="new_password" class="control-label sr-only">New password</label>
         <div>
@@ -16,7 +32,6 @@
             class="help-block">A password is required</p>
         </div>
       </div>
-      
       <div class="form-group" ng-class="{ 'has-error': passwordForm.password_confirmation.$invalid && submitted }">
         <label for="password_confirmation" class="control-label sr-only">Confirm password</label>
         <div>
@@ -27,7 +42,6 @@
             class="help-block">A password is required</p>
         </div>
       </div>
-
       <div class="actions text-right">
         <div>
           <input ng-click="updatePassword(password, passwordForm.$valid)" type="submit" value="Save"
@@ -36,9 +50,6 @@
             <i class="fa fa-eraser fa-lg"></i></button>
         </div>
       </div>
-      
     </form>
-
   </div>
-
 </div>
