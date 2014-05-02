@@ -60,7 +60,7 @@ FidoBakku::Application.routes.draw do
       resources :form_users, only: [:update]
       
       resources :evaluation_loops, except: [:new, :edit]
-      resources :evaluations, except: [:new, :update, :edit]
+      resources :evaluations, except: [:new, :edit]
       resources :user_evaluations, except: [:new, :update, :edit]
       
       resource :account, controller: :account, only: [:show, :update, :destroy]
