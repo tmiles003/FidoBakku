@@ -159,9 +159,9 @@ body {
   resize: none;
 }
 
-.fi-due-date, .fi-due-date:hover, .fi-due-date:active, .fi-due-date:focus {
+/* .fi-due-date, .fi-due-date:hover, .fi-due-date:active, .fi-due-date:focus {
   border: 1px solid #ccc;
-}
+} */
 /* .fi-due-date:focus {
   border-color: #415b76;
 } */

@@ -17,28 +17,31 @@
           class="form-control" placeholder="Goal details"
           >{{ goal.content }}</textarea>
       </div>
-      <div class="actions text-right" ng-show="eGoalForm.goal_content.$dirty">
-        <button ng-click="saveGoal(goal)" type="button"
-          class="btn btn-default btn-success fi-btn-wide">Save</button>
-      </div>
-    </form>
-    <!-- need something here... -->
-    <form accept-charset="utf-8" novalidate name="eGoalDueForm" class="form-horizontal">
       <div class="form-group">
-        <label for="goal_due_date" class="col-md-3 control-label">Due date</label>
-        <div class="input-group col-md-6 fi-datepicker">
-          <input type="text" class="form-control" 
+        <label for="goal_due_date" class="sr-only">Due date</label>
+        <div class="input-group fi-datepicker">
+          <span class="input-group-btn">
+            <button class="btn btn-default" ng-click="openDatePicker($event)">
+              <i class="fa fa-calendar"></i></button>
+          </span>
+          <input type="text" class="form-control text-center" 
             is-open="opened" 
             ng-model="goal.due_date"
             datepicker-popup="{{ format }}" 
             show-button-bar="false" 
             datepicker-options="datePickerOptions" 
-            min="minDate">
+            min="minDate"
+            placeholder="Due date">
           <span class="input-group-btn">
-            <button class="btn btn-default fi-due-date" ng-click="openDatePicker($event)">
-              <i class="fa fa-calendar"></i></button>
+            <button class="btn btn-default" ng-click="clearDueDate(goal)">
+              <i class="fa fa-eraser" tooltip="Clear form" 
+                tooltip-placement="bottom" tooltip-popup-delay="250"></i></button>
           </span>
         </div>
+      </div>
+      <div class="actions text-right" ng-show="eGoalForm.$dirty">
+        <button ng-click="saveGoal(goal)" type="button"
+          class="btn btn-default btn-success fi-btn-wide">Save</button>
       </div>
     </form>
   </div>
@@ -50,14 +53,8 @@
 
 <div class="row">
   <div class="col-md-12">
-  
-    <div class="panel panel-default" ng-show="comments.length">
-      <!-- div class="panel-heading">Comments</div -->
-      <!-- div class="panel-body">
-        Comments
-      </div -->
-    
-      <table class="table">
+    <div class="fi-panel" ng-show="comments.length">
+      <table class="table table-hover">
         <tr ng-repeat="comment in comments | orderBy: '+created_at_ts'">
           <td class="fi-5pc">
             <gravatar data-hash="comment.user.email_hash" data-size="25"></gravatar>
@@ -76,33 +73,28 @@
         </tr>
       </table>
     </div>
-      
-    <div class="panel panel-default">
-      <!-- div class="panel-body">
-        Add Comment
-      </div -->
-      
-      <div class="fi-panel-inner">
-        <form accept-charset="utf-8" novalidate name="eCommentForm">
-         
-          <div class="form-group" ng-class="{ 'has-error': eCommentForm.comment_content.$invalid && submitted }">
-            <label for="comment_content" class="sr-only">Comment</label>
-            <textarea class="form-control fi-vresize" name="comment_content" ng-model="eComment.content"
-              ng-required="true" ng-minlength="1" rows="2" placeholder="Add comment"></textarea>
-            <p ng-show="eCommentForm.comment_content.$invalid && submitted" 
-              class="help-block">Comment is required</p>
-          </div>
-          <div class="actions text-right">
-            <button ng-click="saveComment(eComment, eCommentForm.$valid)" type="button"
-              class="btn btn-default btn-success fi-btn-wide">Save</button>
-            <button ng-click="clearForm()" class="btn btn-default">
-              <i class="fa fa-eraser" tooltip="Clear form" 
-                tooltip-placement="bottom" tooltip-popup-delay="1500"></i></button>
-          </div>
-        </form>
-      </div>
-      
-    </div>
-    
   </div>
+</div>
+
+<div class="row">
+  <form accept-charset="utf-8" novalidate name="eCommentForm">
+    <div class="col-md-10">
+      <div class="form-group" ng-class="{ 'has-error': eCommentForm.comment_content.$invalid && submitted }">
+        <label for="comment_content" class="sr-only">Comment</label>
+        <textarea class="form-control fi-vresize" name="comment_content" ng-model="eComment.content"
+          ng-required="true" ng-minlength="1" rows="2" placeholder="Add comment"></textarea>
+        <p ng-show="eCommentForm.comment_content.$invalid && submitted" 
+          class="help-block">Comment is required</p>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="actions text-right">
+        <button ng-click="saveComment(eComment, eCommentForm.$valid)" type="button"
+          class="btn btn-default btn-success fi-btn-wide">Save</button>
+        <button ng-click="clearForm()" class="btn btn-default">
+          <i class="fa fa-eraser" tooltip="Clear form" 
+            tooltip-placement="bottom" tooltip-popup-delay="250"></i></button>
+      </div>
+    </div>
+  </form>
 </div>

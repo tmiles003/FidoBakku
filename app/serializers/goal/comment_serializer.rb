@@ -1,6 +1,6 @@
 class Goal::CommentSerializer < ActiveModel::Serializer
   
-  attributes :id, :content, :created_at
+  attributes :id, :content, :created_at, :created_at_ts
   has_one :user, serializer: ::Goal::UserSerializer
   
   def created_at

@@ -4,6 +4,18 @@ class Api::CommentsController < Api::ApiController
   
   prepend_before_filter :set_comment, only: [:update, :destroy]
   
+  # POST /api/comments
+  def create
+    @comment = ::Comment.new(comment_params) # :: forces root namespace
+    @comment.user = current_user
+
+    if @comment.save
+      render json: @comment, status: :created, serializer: ::Goal::CommentSerializer
+    else
+      render json: @comment.errors, status: :unprocessable_entity
+    end
+  end
+  
   # PATCH/PUT /api/comments/1.json
   def update
     if @comment.update(comment_params)
