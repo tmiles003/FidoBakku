@@ -13,8 +13,7 @@ class Api::UserEvaluationController < Api::ApiController
   # PATCH/PUT /api/user_evaluation/1.json
   def update
     if @user_evaluation.update(user_evaluation_params)
-      #render json: @user_evaluation.progress
-      render nothing: true
+      render json: @user_evaluation, serializer: ::Evaluation::ProgressSerializer
     else
       render json: @user_evaluation.errors, status: :unprocessable_entity
     end

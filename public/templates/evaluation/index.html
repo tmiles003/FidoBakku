@@ -1,7 +1,14 @@
 
 <div class="row">
-  <div class="col-md-12">
-    <h1>Evaluation</h1>
+  <div class="col-md-7">
+    <h1><small>Evaluation for</small> {{ evaluation.user.name }}</h1>
+  </div>
+  <div class="col-md-1 text-right">
+    <gravatar data-hash="evaluation.user.email_hash" data-size="80"></gravatar>
+  </div>
+  <div class="col-md-3 col-md-offset-1">
+    <div fi-progress data-angle="progress" data-size="80" 
+      style="background-color:transparent;height:80px;width:80px;margin:0 auto;"></div>
   </div>
 </div>
 

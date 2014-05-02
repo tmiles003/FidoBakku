@@ -8,16 +8,19 @@ fiApp.controller('UserEvaluationCtrl', ['$scope',
                            UserEvaluationSrv, userEvaluation, CommentsSrv, FormCompSrv, NotifSrv) {
   
   $scope.userEvaluation = userEvaluation;
+  $scope.evaluation = userEvaluation.evaluation;
   $scope.form_parts = userEvaluation.evaluation.form_parts;
   $scope.ratings = angular.fromJson(userEvaluation.ratings);
+  $scope.progress = userEvaluation.progress;
   $scope.comment = userEvaluation.comment;
   
   $scope.$watch('ratings', function(newVal, oldVal) {
     if (newVal !== oldVal) {
-      // no-fuss update, nothing returned
       UserEvaluationSrv.update({ id: $scope.userEvaluation.id }, { 
         ratings: JSON.stringify(newVal) 
-      }, function(progress) {
+      }, function(val) {
+        // only progress required for update return
+        $scope.progress = val.progress;
         NotifSrv.success();
       });
     }

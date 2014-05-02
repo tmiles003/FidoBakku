@@ -40,7 +40,7 @@ fiApp.directive('gravatar', [function() {
           d = 'https://'+ domain +'/images/fidobakku-'+ s +'x'+ s +'.png';
         } 
         var tag = '<img alt="" src="https://secure.gravatar.com/avatar/' + hash;
-        tag = tag + '?s=' + s + '&d=' + d + '" height="'+ s +'" width="'+ s +'">';
+        tag += '?s=' + s + '&d=' + d + '" height="'+ s +'" width="'+ s +'">';
         element.replaceWith(tag);
       });
     }
@@ -50,22 +50,45 @@ fiApp.directive('gravatar', [function() {
 fiApp.directive('fiProgress', [function() {
   return {
     restrict: 'A',
+    scope: {
+      angle: '='
+    },
     link: function(scope, element, attrs) {
-      scope.$watch(attrs.angle, function(val) {
-        var angle = val;
-        var size = attrs.size;
-        var arc = d3.svg.arc()
-          .innerRadius(size/3)
-          .outerRadius(size/2)
-          .startAngle(0)
-          .endAngle(angle);
-        var svg = d3.select(element[0]).append('svg')
-          .attr('height', size).attr('width', size)
-          .style('fill', '#415b76')
-          .append('path')
-          .attr('d', arc)
-          .attr('transform', 'translate('+ size/2 +','+ size/2 +')');
-      });
+      var arc = d3.svg.arc();
+      var size = attrs.size;
+      
+      arc.innerRadius(size/3)
+        .outerRadius(size/2)
+        .startAngle(0);
+      
+      var svg = d3.select(element[0]).append('svg')
+        .attr('height', size).attr('width', size)
+        .style('fill', '#415b76')
+        .datum({ endAngle: 0 }) // very important it's placed here, before 'path'
+        .append('path')
+        .attr('d', arc)
+        .attr('transform', 'translate('+ size/2 +','+ size/2 +')');
+      
+      scope.$watch('angle', function(newAngle) {
+        scope.render(newAngle);
+      }, true);
+      
+      scope.render = function(newAngle) {
+        svg.transition()
+          .duration(200)
+          .call(arcTween, newAngle);
+      };
+      
+      var arcTween = function(transition, newAngle) {
+        transition.attrTween('d', function(d) {
+          var interpolate = d3.interpolate(d.endAngle, newAngle);
+          return function(t) {
+            d.endAngle = interpolate(t);
+            return arc(d);
+          };
+        });
+      }
+      
     }
   }
 }]);
