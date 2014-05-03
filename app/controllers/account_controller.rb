@@ -18,7 +18,7 @@ class AccountController < ApplicationController
       @account.update(owner_id: @user.id)
       sign_in @user
       
-      # send welcome email
+      ActiveSupport::Notifications.instrument 'create.account', account: @account
       
       redirect_to root_path
     else
