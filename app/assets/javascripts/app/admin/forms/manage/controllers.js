@@ -88,6 +88,7 @@ fiApp.controller('FormSectionsAdminCtrl', ['$scope', '$filter', '$modal',
   
   $scope.editSection = function(section) {
     $scope.eSection = angular.copy(section);
+    jQuery('input[name="section_name"]').first().focus();
   }
   
   $scope.clearForm = function() {

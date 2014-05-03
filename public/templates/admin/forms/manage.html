@@ -11,14 +11,12 @@
 <div class="row">
   <div class="col-md-8">
     <div class="fi-panel" ng-show="{{ form.shared_forms }}">
-      <div class="row">
-        <p>Attach shared form</p>
-        <div class="form-group">
-          <select name="shared_form" ng-model="form_part.part_id" class="form-control" 
-            ng-options="part.id as part.name for part in form.shared_forms | orderBy: '+name'">
-            <option value="">Shared forms</option>
-          </select>
-        </div>
+      <h4>Attach shared form</h4>
+      <div class="form-group">
+        <select name="shared_form" ng-model="form_part.part_id" class="form-control" 
+          ng-options="part.id as part.name for part in form.shared_forms | orderBy: '+name'">
+          <option value="">Shared forms</option>
+        </select>
       </div>
     </div>
     
