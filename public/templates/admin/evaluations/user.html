@@ -20,7 +20,11 @@
             {{ user_evaluation.name }}
           </td>
           <td class="fi-5pc">
-            {{ user_evaluation.progress }}
+            <div fi-progress data-angle="user_evaluation.progress" data-size="24" class="fi-prog-24">
+            </div>
+          </td>
+          <td class="fi-5pc">
+            &nbsp;
           </td>
           <td class="text-right fi-5pc">
             <button class="btn btn-default fi-btn-slim" ng-click="deleteConfirm(user_evaluation)">

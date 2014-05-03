@@ -21,7 +21,7 @@ fiApp.controller('UserEvaluationCtrl', ['$scope',
       }, function(val) {
         // only progress required for update return
         $scope.progress = val.progress;
-        NotifSrv.success();
+        // NotifSrv.success();
       });
     }
   }, true);
