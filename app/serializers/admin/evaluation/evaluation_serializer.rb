@@ -1,16 +1,11 @@
 class Admin::Evaluation::EvaluationSerializer < ActiveModel::Serializer
   
-  attributes :id, :teams, :users
-  # loop? - for return url
+  attributes :id, :form, :teams, :users, :evaluation_loop_path
   has_one :user, serializer: BaseUserSerializer
   has_many :user_evaluations, serializer: ::Admin::Evaluation::UserEvaluationSerializer
   
-  def created_at
-    object.created_at.strftime('%s') unless object.created_at.nil?
-  end
-  
-  def manage_path
-    root_path(anchor: admin_evaluation_manage_path(object))
+  def form
+    object.form.name unless object.form.nil?
   end
   
   def teams
@@ -23,8 +18,12 @@ class Admin::Evaluation::EvaluationSerializer < ActiveModel::Serializer
     ActiveModel::ArraySerializer.new(users, each_serializer: ::Admin::Evaluation::UserSerializer)
   end
   
+  def evaluation_loop_path
+    root_path(anchor: admin_loop_manage_path(object.evaluation_loop))
+  end
+  
   def user_evaluations
-    user_evaluations = ::UserEvaluation.where(evaluation_id: object.id).includes(:evaluator)
+    user_evaluations = ::UserEvaluation.where(evaluation_id: object.id).includes(:evaluator, :comment)
   end
   
   # , :due_date, :due_date_ts

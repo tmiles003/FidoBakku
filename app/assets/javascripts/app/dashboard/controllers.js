@@ -7,7 +7,7 @@ fiApp.controller('DashboardCtrl', ['$scope', 'dashboard', function($scope, dashb
   $scope.users = dashboard.users; 
   $scope.teams = dashboard.teams; 
   
+  $scope.user_evaluations = dashboard.user_evaluations;
   $scope.evaluations = dashboard.evaluations;
-  $scope.feedbacks = dashboard.feedbacks;
   
 }]);

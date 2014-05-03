@@ -8,6 +8,7 @@ fiApp.controller('UserEvaluationsAdminCtrl', ['$scope', '$modal',
                            UserEvaluationsAdminSrv, NotifSrv, evaluation) {
   
   $scope.evaluation = evaluation;
+  $scope.form = evaluation.form;
   $scope.user_evaluations = evaluation.user_evaluations;
   $scope.teams = evaluation.teams;
   $scope.users = evaluation.users;
@@ -43,7 +44,7 @@ fiApp.controller('UserEvaluationsAdminCtrl', ['$scope', '$modal',
   var deleteUserEvaluation = function(userEvaluation) {
     UserEvaluationsAdminSrv.delete({ id: userEvaluation.id }, function() {
       $scope.user_evaluations = _.without($scope.user_evaluations, userEvaluation);
-      NotifSrv.success();
+      // NotifSrv.success();
     });
   }
   

@@ -2,17 +2,17 @@ class Api::Admin::UserEvaluationsController < Api::Admin::ApiController
   
   authorize_resource
   
-  prepend_before_filter :set_evaluation, only: [:index, :create]
+  prepend_before_filter :set_evaluation, only: [:create]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_evaluation
   
   before_action :set_user_evaluation, only: [:destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_user_evaluation
   
   # GET /api/admin/user_evaluations.json
-  def index
-    render json: @evaluation.user_evaluations.includes(:evaluator), 
-      each_serializer: ::Admin::Evaluation::UserEvaluationSerializer
-  end
+#  def index
+#    render json: @evaluation.user_evaluations.includes(:evaluator), 
+#      each_serializer: ::Admin::Evaluation::UserEvaluationSerializer
+#  end
   
   # POST /api/admin/user_evaluations.json
   def create

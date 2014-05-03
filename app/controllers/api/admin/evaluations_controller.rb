@@ -16,7 +16,8 @@ class Api::Admin::EvaluationsController < Api::Admin::ApiController
   
   # GET /api/admin/evaluations/1.json
   def show
-    render json: @evaluation, serializer: ::Admin::Evaluation::EvaluationSerializer
+    render json: @evaluation, 
+      serializer: ::Admin::Evaluation::EvaluationSerializer
   end
 
   # POST /api/admin/evaluations.json

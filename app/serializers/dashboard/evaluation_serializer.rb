@@ -1,6 +1,6 @@
 class Dashboard::EvaluationSerializer < ActiveModel::Serializer
   
-  attributes :name, :email_hash, :feedback_path
+  attributes :name, :email_hash, :evaluation_path
   
   def name
     object.user.name
@@ -10,7 +10,7 @@ class Dashboard::EvaluationSerializer < ActiveModel::Serializer
     OpenSSL::Digest::MD5.new(object.user.email).hexdigest
   end
   
-  def feedback_path
+  def evaluation_path
     root_path(anchor: evaluation_feedback_path(object))
   end
   

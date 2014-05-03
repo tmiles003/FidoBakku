@@ -50,7 +50,7 @@ fiApp.controller('EvaluationsAdminCtrl', ['$scope', '$modal',
   var deleteEvaluation = function(evaluation) {
     EvaluationsAdminSrv.delete({ id: evaluation.id }, function() {
       $scope.evaluations = _.without($scope.evaluations, evaluation);
-      NotifSrv.success();
+      // NotifSrv.success();
     });
   }
   

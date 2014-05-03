@@ -1,10 +1,14 @@
 
 <div class="row">
   <div class="col-md-8">
-    <h1>User evaluations
+    <h1><small>User evaluations for</small> {{ evaluation.user.name }}
     <span class="pull-right">
       <a href="/#/help" target="_blank"><i class="fa fa-question-circle"></i></a>
     </span></h1>
+    <h4><small>With form:</small> {{ form }}</h4>
+  </div>
+  <div class="col-md-3 col-md-offset-1">
+    <a href="{{ evaluation.evaluation_loop_path }}">Return to loop</a>
   </div>
 </div>
 
@@ -22,6 +26,9 @@
           <td class="fi-5pc">
             <div fi-progress data-angle="user_evaluation.progress" data-size="24" class="fi-prog-24">
             </div>
+          </td>
+          <td class="fi-5pc">
+            <i class="fa fa-comment-o fa-lg" ng-class="{ 'fi-blue': user_evaluation.comment }"></i>
           </td>
           <td class="fi-5pc">
             &nbsp;

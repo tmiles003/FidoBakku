@@ -1,6 +1,6 @@
 class DashboardSerializer < ActiveModel::Serializer
   
-  attributes :teams, :users, :evaluations, :feedbacks
+  attributes :teams, :users, :user_evaluations, :evaluations
   
   def teams
     teams = scope.account.teams
@@ -12,19 +12,19 @@ class DashboardSerializer < ActiveModel::Serializer
     ActiveModel::ArraySerializer.new(users, each_serializer: ::Dashboard::UserSerializer)
   end
   
-  def evaluations
-    evaluations = UserEvaluation.where(account_id: current_user.account.id) # can't use scope because of ambiguity
+  def user_evaluations
+    user_evaluations = UserEvaluation.where(account_id: current_user.account.id) # can't use scope because of ambiguity
       .where(evaluator_id: current_user.id)
-      .includes(evaluation: :user)
+      .includes(:comment, evaluation: :user)
       .where('evaluations.mode = ?', 'evaluations').references(:evaluations)
-    ActiveModel::ArraySerializer.new(evaluations, each_serializer: ::Dashboard::UserEvaluationSerializer)
+    ActiveModel::ArraySerializer.new(user_evaluations, each_serializer: ::Dashboard::UserEvaluationSerializer)
   end
   
-  def feedbacks
-    feedbacks = Evaluation.where(account_id: current_user.account.id) # same as above
+  def evaluations
+    evaluations = Evaluation.where(account_id: current_user.account.id) # same as above
       .where('evaluations.mode = ?', 'feedback')
       .includes(:user)
-    ActiveModel::ArraySerializer.new(feedbacks, each_serializer: ::Dashboard::EvaluationSerializer)
+    ActiveModel::ArraySerializer.new(evaluations, each_serializer: ::Dashboard::EvaluationSerializer)
   end
   
 end
