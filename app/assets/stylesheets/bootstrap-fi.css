@@ -196,3 +196,6 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
   filter: alpha(opacity=75);
   opacity: .75;
 }
+.modal-content {
+  padding: 10px 20px;
+}
