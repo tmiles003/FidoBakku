@@ -23,6 +23,7 @@ fiApp.config(['$httpProvider', function($httpProvider) {
         }
         else if (401 == rejection.status) {
           NotifSrv.info('Please log in');
+          // reload, send to sign_in
         }
         // upgrade
         else if (402 == rejection.status) {

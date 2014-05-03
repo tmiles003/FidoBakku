@@ -57,15 +57,24 @@ fiApp.directive('fiProgress', [function() {
       var arc = d3.svg.arc();
       var size = attrs.size;
       
-      arc.innerRadius(size/3)
+      arc.innerRadius(size/2.5)
         .outerRadius(size/2)
         .startAngle(0);
       
       var svg = d3.select(element[0]).append('svg')
-        .attr('height', size).attr('width', size)
+        .attr('height', size)
+        .attr('width', size);
+        // .style('fill', '#415b76');
+      
+      var bg = svg.append('path')
+        .datum({ endAngle: 2 * Math.PI })
+        .style('fill', '#ddd')
+        .attr('d', arc)
+        .attr('transform', 'translate('+ size/2 +','+ size/2 +')');
+    
+      var fg = svg.append('path')
+        .datum({ endAngle: 0 })
         .style('fill', '#415b76')
-        .datum({ endAngle: 0 }) // very important it's placed here, before 'path'
-        .append('path')
         .attr('d', arc)
         .attr('transform', 'translate('+ size/2 +','+ size/2 +')');
       
@@ -74,7 +83,7 @@ fiApp.directive('fiProgress', [function() {
       }, true);
       
       scope.render = function(newAngle) {
-        svg.transition()
+        fg.transition()
           .duration(200)
           .call(arcTween, newAngle);
       };
