@@ -18,7 +18,7 @@ class AccountController < ApplicationController
       @account.update(owner_id: @user.id)
       sign_in @user
       
-      ActiveSupport::Notifications.instrument 'create.account', account: @account
+      ActiveSupport::Notifications.instrument 'create.account', account: @account, user: @user
       
       redirect_to root_path
     else
