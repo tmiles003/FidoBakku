@@ -8,7 +8,7 @@ var fiApp = angular.module('fiApp', [
 ]);
 
 fiApp.config(['$httpProvider', function($httpProvider) {
-  $httpProvider.interceptors.push(function($q, $location, NotifSrv) {
+  $httpProvider.interceptors.push(function($q, $location, $timeout, $window, NotifSrv) {
     return {
       responseError: function(rejection) {
         if (403 == rejection.status) {
@@ -22,8 +22,10 @@ fiApp.config(['$httpProvider', function($httpProvider) {
           });
         }
         else if (401 == rejection.status) {
-          NotifSrv.info('Please log in');
-          // reload, send to sign_in
+          NotifSrv.info('Please sign in');
+          $timeout(function() {
+            $window.location.href = '/signin';
+          }, 3500);
         }
         // upgrade
         else if (402 == rejection.status) {
