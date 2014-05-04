@@ -16,20 +16,32 @@
   <!-- stub to clear the position:fixed div above -->
 </div>
 
-<div class="row" ng-repeat="form_part in form_parts | orderBy: '-ordr'">
+<div class="fi-row" ng-repeat="form_part in form_parts | orderBy: '-ordr'">
   <div class="col-md-12">
-    <div class="panel" ng-repeat="section in form_part.form_sections | orderBy: '+ordr'">
+    <div class="fi-panel" ng-repeat="section in form_part.form_sections | orderBy: '+ordr'">
       <h4><small>Section:</small> {{ section.name }}</h4>
-      <table class="table">
+      <table class="table table-hover">
+        <!-- tr>
+          <td>&nbsp;</td>
+          <td ng-if="feedback.ratings.mine" class="fi-5pc">
+            <i class="fa fa-user fi-lg"></i>
+          </td>
+          <td ng-if="feedback.ratings.peers" class="fi-5pc">
+            <i class="fa fa-users fi-lg"></i>
+          </td>
+          <td ng-if="feedback.ratings.manager" class="fi-5pc">
+            <i class="fa fa-briefcase fi-lg"></i>
+          </td>
+        </tr -->
         <tr ng-repeat="comp in section.form_comps | orderBy: '+ordr'">
           <td class="fi-nl2br">{{ comp.content }}</td>
-          <td ng-if="feedback.ratings.mine">
+          <td ng-if="feedback.ratings.mine" class="fi-5pc">
             {{ feedback.ratings.mine[comp.id] }}
           </td>
-          <td ng-if="feedback.ratings.peers">
+          <td ng-if="feedback.ratings.peers" class="fi-5pc">
             {{ feedback.ratings.peers[comp.id] }}
           </td>
-          <td ng-if="feedback.ratings.manager">
+          <td ng-if="feedback.ratings.manager" class="fi-5pc">
             {{ feedback.ratings.manager[comp.id] }}
           </td>
         </tr>
@@ -40,19 +52,17 @@
 
 <div class="row">
   <div class="col-md-12">
-    <div class="panel">
-      <h4>Comment</h4>
-      <form accept-charset="utf-8" novalidate name="commentForm">
-        <div class="col-md-10 form-group">
-          <label for="content" class="sr-only">Comment</label>
-          <textarea class="form-control" name="content" ng-model="comment.content" 
-            rows="5" placeholder="..."></textarea>
-        </div>
-        <div class="col-md-2 actions">
-          <button ng-click="saveComment(comment)" type="button"
-            class="btn btn-default btn-success fi-btn-wide">Save</button>
-        </div>
-      </form>
-    </div>
+    <h4>Comment</h4>
+    <form accept-charset="utf-8" novalidate name="commentForm">
+      <div class="col-md-10 form-group">
+        <label for="content" class="sr-only">Comment</label>
+        <textarea class="form-control" name="content" ng-model="comment.content" 
+          rows="5" placeholder="..."></textarea>
+      </div>
+      <div class="col-md-2 actions">
+        <button ng-click="saveComment(comment)" type="button"
+          class="btn btn-default btn-success fi-btn-wide">Save</button>
+      </div>
+    </form>
   </div>
 </div>
