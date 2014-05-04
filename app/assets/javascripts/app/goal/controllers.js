@@ -40,6 +40,20 @@ fiApp.controller('GoalCtrl', ['$scope', '$modal', '$filter', 'GoalSrv', 'goal', 
     goal.due_date = null;
   }
   
+  $scope.markDonePass = function(goal) {
+    GoalSrv.update({ id: goal.id, done: 1 }, function(val, resp) {
+      $scope.goal.done = 1;
+      NotifSrv.success();
+    });
+  }
+  
+  $scope.markDoneFail = function(goal) {
+    GoalSrv.update({ id: goal.id, done: 2 }, function(val, resp) {
+      $scope.goal.done = 2;
+      NotifSrv.success();
+    });
+  }
+  
   $scope.saveComment = function(comment, isValid) {
     $scope.submitted = true;
     if (isValid) {

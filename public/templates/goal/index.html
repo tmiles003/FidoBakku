@@ -4,11 +4,11 @@
     <h2><small>Goal:</small> {{ goal.title }}</h2>
   </div>
   <div class="col-md-4">
-    <p><a href="{{ goal.user.user_path }}">Back to {{ goal.user.name }}</a></p>
+    <p><a href="{{ goal.user.user_path }}">Return to {{ goal.user.name }}</a></p>
   </div>
 </div>
 
-<div class="row">
+<div class="fi-row">
   <div class="col-md-8" id="fi-goal-content">
     <form accept-charset="utf-8" novalidate name="eGoalForm">
       <div class="form-group">
@@ -17,37 +17,46 @@
           class="form-control" placeholder="Goal details"
           >{{ goal.content }}</textarea>
       </div>
-      <div class="form-group">
-        <label for="goal_due_date" class="sr-only">Due date</label>
-        <div class="input-group fi-datepicker">
-          <span class="input-group-btn">
-            <button class="btn btn-default" ng-click="openDatePicker($event)">
-              <i class="fa fa-calendar"></i></button>
-          </span>
-          <input type="text" class="form-control text-center" 
-            is-open="opened" 
-            ng-model="goal.due_date"
-            datepicker-popup="{{ format }}" 
-            show-button-bar="false" 
-            datepicker-options="datePickerOptions" 
-            min="minDate"
-            placeholder="Due date">
-          <span class="input-group-btn">
-            <button class="btn btn-default" ng-click="clearDueDate(goal)">
-              <i class="fa fa-eraser" tooltip="Clear form" 
-                tooltip-placement="bottom" tooltip-popup-delay="250"></i></button>
-          </span>
-        </div>
-      </div>
-      <div class="actions text-right" ng-show="eGoalForm.$dirty">
-        <button ng-click="saveGoal(goal)" type="button"
-          class="btn btn-default btn-success fi-btn-wide">Save</button>
-      </div>
     </form>
   </div>
   
   <div class="col-md-4">
-    <h3><small>Loop:</small> {{ goal.evaluation_loop.title }}</h3>
+    <div class="row">
+      <div class="col-md-5 col-md-offset-1 text-center fi-datepicker">
+        {{ goal.due_date_parts.m }}<br>
+        {{ goal.due_date_parts.d }}<br>
+        {{ goal.due_date_parts.y }}
+        <div is-open="opened" 
+          ng-model="goal.due_date"
+          datepicker-popup="{{ format }}" 
+          show-button-bar="true" 
+          datepicker-options="datePickerOptions" 
+          min="minDate"></div>
+      </div>
+      <div class="col-md-5 text-center">
+        <button class="btn btn-default" ng-click="openDatePicker($event)">
+          <i class="fa fa-calendar fa-2x"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8 text-right">
+    <div class="actions" ng-show="eGoalForm.$dirty">
+      <button ng-click="saveGoal(goal)" type="button"
+        class="btn btn-default btn-success fi-btn-wide">Save</button>
+    </div>
+  </div>
+  <div class="col-md-2 text-center">
+    <button class="btn btn-default" ng-click="markDonePass(goal)">
+      <i class="fa fa-thumbs-o-up fa-3x" ng-class="{ 'fi-blue': 1 == goal.done }"
+        tooltip="Mark as done" tooltip-placement="bottom" tooltip-popup-delay="500"></i></button>
+  </div>
+  <div class="col-md-2 text-center">
+    <button class="btn btn-default" ng-click="markDoneFail(goal)">
+      <i class="fa fa-thumbs-o-down fa-3x"  ng-class="{ 'fi-blue': 2 == goal.done }"
+        tooltip="Mark as done" tooltip-placement="bottom" tooltip-popup-delay="500"></i></button>
   </div>
 </div>
 
