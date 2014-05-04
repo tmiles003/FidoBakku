@@ -41,18 +41,6 @@
     <div class="fi-panel" ng-repeat="section in form_part.form_sections | orderBy: '+ordr'">
       <h4><small>Section:</small> {{ section.name }}</h4>
       <table class="table table-hover">
-        <!-- tr>
-          <td>&nbsp;</td>
-          <td ng-if="feedback.ratings.mine" class="fi-5pc">
-            <i class="fa fa-user fi-lg"></i>
-          </td>
-          <td ng-if="feedback.ratings.peers" class="fi-5pc">
-            <i class="fa fa-users fi-lg"></i>
-          </td>
-          <td ng-if="feedback.ratings.manager" class="fi-5pc">
-            <i class="fa fa-briefcase fi-lg"></i>
-          </td>
-        </tr -->
         <tr ng-repeat="comp in section.form_comps | orderBy: '+ordr'">
           <td class="fi-nl2br">{{ comp.content }}</td>
           <td ng-if="feedback.ratings.mine" class="fi-5pc text-center">
@@ -71,18 +59,57 @@
 </div>
 
 <div class="row">
+  <form accept-charset="utf-8" novalidate name="feedbackForm">
+    <div class="col-md-8">
+      <h4>Evaluation comment</h4>
+      <label for="content" class="sr-only">Comment</label>
+      <textarea class="form-control" name="content" ng-model="comment.content" 
+        rows="4" placeholder=""></textarea>
+    </div>
+    <div class="col-md-3 col-md-offset-1">
+      <h4>Evaluation rating</h4>
+      <div class="btn-group">
+        <button type="button" class="btn btn-default fi-btn" ng-model="feedback.rating" 
+          btn-radio="1" ng-class="{ active: 1 == feedback.rating }">1</button>
+        <button type="button" class="btn btn-default fi-btn" ng-model="feedback.rating" 
+          btn-radio="2" ng-class="{ active: 2 == feedback.rating }">2</button>
+        <button type="button" class="btn btn-default fi-btn" ng-model="feedback.rating" 
+          btn-radio="3" ng-class="{ active: 3 == feedback.rating }">3</button>
+        <button type="button" class="btn btn-default fi-btn" ng-model="feedback.rating" 
+          btn-radio="4" ng-class="{ active: 4 == feedback.rating }">4</button>
+        <button type="button" class="btn btn-default fi-btn" ng-model="feedback.rating" 
+          btn-radio="5" ng-class="{ active: 5 == feedback.rating }">5</button>
+      </div>
+    </div>
+    <div class="clear-fix">
+      <div class="col-md-3 col-md-offset-9">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="feedback.done"> Feedback done?
+          </label>
+        </div>
+        <div class="form-group">
+          <button ng-click="updateFeedback(comment, feedback)" type="button"
+            class="btn btn-default btn-success fi-btn-wide">Save</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="row">
   <div class="col-md-12">
-    <h4>Comment</h4>
-    <form accept-charset="utf-8" novalidate name="commentForm">
-      <div class="col-md-10 form-group">
-        <label for="content" class="sr-only">Comment</label>
-        <textarea class="form-control" name="content" ng-model="comment.content" 
-          rows="5" placeholder="..."></textarea>
-      </div>
-      <div class="col-md-2 actions">
-        <button ng-click="saveComment(comment)" type="button"
-          class="btn btn-default btn-success fi-btn-wide">Save</button>
-      </div>
-    </form>
+    <h4>User evaluations comments</h4>
+    <table class="table table-hover">
+      <tr ng-repeat="comment in comments | orderBy: '+name'">
+        <td class="fi-5pc">
+          <gravatar data-hash="comment.email_hash" data-size="25"></gravatar>
+        </td>
+        <td class="fi-15pc">
+          {{ comment.name }}
+        </td>
+        <td class="fi-nl2br">{{ comment.content }}</td>
+      </tr>
+    </table>
   </div>
 </div>

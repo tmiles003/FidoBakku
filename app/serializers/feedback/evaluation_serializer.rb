@@ -1,6 +1,6 @@
 class Feedback::EvaluationSerializer < ActiveModel::Serializer
   
-  attributes :form_parts, :ratings
+  attributes :id, :rating, :done, :form_parts, :ratings, :comments
   has_one :user, serializer: ::Feedback::UserSerializer
   has_one :comment, serializer: ::Feedback::CommentSerializer
   
@@ -27,6 +27,17 @@ class Feedback::EvaluationSerializer < ActiveModel::Serializer
     ratings['manager'] = manager
     
     ratings
+  end
+  
+  def comments
+    evaluation = ::Evaluation.find(object.id)
+    user_evaluations = evaluation.user_evaluations.includes(comment: :user)
+    comments = []
+    user_evaluations.each { |user_evaluation|
+      comments << user_evaluation.comment
+    }
+    
+    ActiveModel::ArraySerializer.new(comments, each_serializer: ::Feedback::UserCommentSerializer)
   end
   
   def comment

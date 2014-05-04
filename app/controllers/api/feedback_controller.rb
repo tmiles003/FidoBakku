@@ -33,6 +33,6 @@ class Api::FeedbackController < Api::ApiController
     end
     
     def evaluation_params
-      params.require(:evaluation).permit(:rating, :done)
+      params.require(:feedback).permit(:rating, :done)
     end
 end

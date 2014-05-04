@@ -5,4 +5,8 @@ class User::UserSerializer < BaseUserSerializer
   has_many :goals, serializer: ::User::GoalSerializer
   has_many :evaluations, serializer: ::User::EvaluationSerializer
   
+  def evaluations
+    object.evaluations.where(done: 1)
+  end
+  
 end

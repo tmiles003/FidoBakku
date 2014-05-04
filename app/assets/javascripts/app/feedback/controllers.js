@@ -9,13 +9,20 @@ fiApp.controller('FeedbackCtrl', ['$scope',
   
   $scope.feedback = feedback;
   $scope.form_parts = feedback.form_parts;
-  $scope.comment = $scope.feedback.comment;
+  $scope.comment = feedback.comment;
+  $scope.comments = feedback.comments;
   
-  $scope.saveComment = function(comment) {
+  $scope.updateFeedback = function(comment, feedback) {
     CommentsSrv.update(comment, function(val, resp) {
       $scope.comment = val;
       NotifSrv.success();
     });
+    FeedbackSrv.update({ 
+        id: feedback.id, 
+        rating: feedback.rating, 
+        done: feedback.done }, function(val, resp) {
+      NotifSrv.success();
+    })
   }
 
 }]);
