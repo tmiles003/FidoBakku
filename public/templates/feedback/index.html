@@ -58,7 +58,7 @@
   </div>
 </div>
 
-<div class="row">
+<div class="fi-row">
   <form accept-charset="utf-8" novalidate name="feedbackForm">
     <div class="col-md-8">
       <h4>Evaluation comment</h4>
@@ -81,27 +81,27 @@
           btn-radio="5" ng-class="{ active: 5 == feedback.rating }">5</button>
       </div>
     </div>
-    <div class="clear-fix">
-      <div class="col-md-3 col-md-offset-9">
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" ng-model="feedback.done"> Done?
-          </label>
-        </div>
-        <div class="form-group">
-          <button ng-click="updateFeedback(comment, feedback)" type="button"
-            class="btn btn-default btn-success fi-btn-wide">Save</button>
-        </div>
-      </div>
-    </div>
   </form>
+</div>
+<div class="row">
+  <div class="col-md-8 text-right">
+    <div class="form-group">
+      <button ng-click="saveComment(comment)" type="button"
+        class="btn btn-default btn-success fi-btn-wide">Save</button>
+    </div>
+  </div>
+  <div class="col-md-3 col-md-offset-1 text-center">
+    <button ng-click="markDone(feedback)" type="button" class="btn btn-default">
+      <i class="fa fa-check-square-o fa-3x" ng-class="{ 'fi-blue': 1 == feedback.done }"
+        tooltip="Mark as done" tooltip-placement="bottom" tooltip-popup-delay="500"></i></button>
+  </div>
 </div>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-12" ng-show="comments.length">
     <h4>User evaluations comments</h4>
     <table class="table table-hover">
-      <tr ng-repeat="comment in comments | orderBy: '+name'">
+      <tr ng-repeat="comment in comments | orderBy: '+name'" ng-show="comment.content">
         <td class="fi-5pc">
           <gravatar data-hash="comment.email_hash" data-size="25"></gravatar>
         </td>
