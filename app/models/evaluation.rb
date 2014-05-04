@@ -16,6 +16,7 @@ class Evaluation < ActiveRecord::Base
   before_create :initial_setup
   before_save :assign_user_form_id, on: :create
   after_create :add_to_evaluation_loop
+  before_update :remove_mode
   after_update :update_evaluation_loop
   before_destroy :remove_from_evaluation_loop
   
@@ -24,8 +25,10 @@ class Evaluation < ActiveRecord::Base
     self.form_id = form_user.form_id
   end
   
-  def set_done
-    # remove mode
+  def remove_mode
+    if self.done
+      self.mode = nil
+    end
   end
   
   def to_param
