@@ -91,8 +91,8 @@
     </div>
   </div>
   <div class="col-md-3 col-md-offset-1 text-center">
-    <button ng-click="markDone(feedback)" type="button" class="btn btn-default">
-      <i class="fa fa-check-square-o fa-3x" ng-class="{ 'fi-blue': 1 == feedback.done }"
+    <button ng-click="markEvaluationDone(feedback)" type="button" class="btn btn-default">
+      <i class="fa fa-check-square-o fa-3x" ng-class="{ 'fi-blue': !!feedback.done }"
         tooltip="Mark as done" tooltip-placement="bottom" tooltip-popup-delay="500"></i></button>
   </div>
 </div>

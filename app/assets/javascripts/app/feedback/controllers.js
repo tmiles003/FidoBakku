@@ -12,17 +12,26 @@ fiApp.controller('FeedbackCtrl', ['$scope',
   $scope.comment = feedback.comment;
   $scope.comments = feedback.comments;
   
-  $scope.updateFeedback = function(comment, feedback) {
+  $scope.evaluationComment = function(comment) {
     CommentsSrv.update(comment, function(val, resp) {
       $scope.comment = val;
       NotifSrv.success();
     });
-    FeedbackSrv.update({ 
-        id: feedback.id, 
-        rating: feedback.rating, 
-        done: feedback.done }, function(val, resp) {
+  }
+  
+  $scope.$watch('feedback.rating', function(newVal, oldVal) {
+    if (newVal !== oldVal) {
+      FeedbackSrv.update({ id: feedback.id, rating: feedback.rating }, function(val, resp) {
+        NotifSrv.success();
+      });
+    }
+  });
+  
+  $scope.markEvaluationDone = function(feedback) {
+    feedback.done = !feedback.done;
+    FeedbackSrv.update({ id: feedback.id, done: feedback.done }, function(val, resp) {
       NotifSrv.success();
-    })
+    });
   }
 
 }]);
