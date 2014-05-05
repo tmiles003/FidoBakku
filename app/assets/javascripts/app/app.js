@@ -24,7 +24,7 @@ fiApp.config(['$httpProvider', function($httpProvider) {
         else if (401 == rejection.status) {
           NotifSrv.info('Please sign in');
           $timeout(function() {
-            $window.location.href = '/signin';
+            $window.location.href = '/sign_in';
           }, 3500);
         }
         // upgrade
