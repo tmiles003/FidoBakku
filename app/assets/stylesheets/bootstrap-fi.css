@@ -117,34 +117,34 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
 
 /*3040*/
 .dropdown-menu>li>a {
-  color: #fff;
+  color: #415b76;
   padding-bottom: 15px;
   padding-top: 15px;
 }
 
 /*3049*/
 .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
-  background-color: #34495e;
+  background-color: #415b76;
   color: #fff;
 }
 
 /*3941*/
 .navbar-default {
-  background-color: #415b76;
+  background-color: #fff;
+  border: none;
 }
 .navbar-default .navbar-nav>li>a {
-  color: #fff;
+  color: #415b76;
 }
-.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus, 
-  .navbar-default .navbar-nav>li>a.active {
-  background-color: #34495e;
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+  background-color: #415b76;
   color: #fff;
 }
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
-  background-color: #34495e;
+  background-color: #fff;
 }
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
-  color: #fff;
+  color: #415b76;
 }
 
 /*4456*/

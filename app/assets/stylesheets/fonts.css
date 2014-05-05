@@ -24,6 +24,9 @@ i.fa {
 }
 
 .navbar i.fa, .panel-heading i.fa {
+  color: #415b76;
+}
+.navbar-default .navbar-nav>li>a:hover i.fa, .navbar-default .navbar-nav>li>a:focus i.fa {
   color: #fff;
 }
 

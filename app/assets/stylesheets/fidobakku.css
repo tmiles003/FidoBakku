@@ -36,9 +36,12 @@ body {
 }
 
 .fi-dropdown-menu {
-  background-color: #415b76;
+  background-color: #fff;
   border: none;
   padding: 0;
+}
+.dropdown-menu>li>a:hover i.fa, .dropdown-menu>li>a:focus i.fa {
+  color: #fff;
 }
 
 .fi-container {
