@@ -7,7 +7,6 @@ FidoBakku::Application.routes.draw do
 
   devise_for :users, 
     :path => '',
-    :path_names => { :sign_in => 'signin', :sign_out => 'signout' },
     :skip => [:registrations]
   
   # get '/' => 'welcome#application', as: :dashboard
