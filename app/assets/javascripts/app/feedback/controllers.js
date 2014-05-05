@@ -28,7 +28,7 @@ fiApp.controller('FeedbackCtrl', ['$scope',
   });
   
   $scope.markEvaluationDone = function(feedback) {
-    feedback.done = !feedback.done;
+    feedback.done = 1
     FeedbackSrv.update({ id: feedback.id, done: feedback.done }, function(val, resp) {
       NotifSrv.success();
     });

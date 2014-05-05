@@ -41,7 +41,10 @@ body {
   padding: 0;
 }
 
-.main-container {}
+.fi-container {
+  padding-left: 0px;
+  padding-right: 30px;
+}
 
 .fi-jumbotron {
   padding-bottom: 75px;
@@ -112,6 +115,9 @@ body {
 }
 .table {
   border-collapse: separate;
+}
+.fi-table {
+  width: 100%;
 }
 
 .fi-prog-24 {
