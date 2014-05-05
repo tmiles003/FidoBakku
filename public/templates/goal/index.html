@@ -22,10 +22,10 @@
   
   <div class="col-md-4">
     <div class="row">
-      <div class="col-md-5 col-md-offset-1 text-center fi-datepicker">
-        {{ goal.due_date_parts.m }}<br>
-        {{ goal.due_date_parts.d }}<br>
-        {{ goal.due_date_parts.y }}
+      <div class="col-md-6 text-center fi-datepicker">
+        <span class="fi-due-date fi-due-date-d">{{ goal.due_date_parts.d }}</span>
+        <span class="fi-due-date fi-due-date-m">{{ goal.due_date_parts.m }}</span>
+        <span class="fi-due-date fi-due-date-y">{{ goal.due_date_parts.y }}</span>
         <div is-open="opened" 
           ng-model="goal.due_date"
           datepicker-popup="{{ format }}" 
@@ -33,9 +33,10 @@
           datepicker-options="datePickerOptions" 
           min="minDate"></div>
       </div>
-      <div class="col-md-5 text-center">
+      <div class="col-md-6 text-center">
         <button class="btn btn-default" ng-click="openDatePicker($event)">
-          <i class="fa fa-calendar fa-2x"></i></button>
+          <i class="fa fa-calendar fa-lg"
+            tooltip="Due date" tooltip-placement="bottom" tooltip-popup-delay="500"></i></button>
       </div>
     </div>
   </div>

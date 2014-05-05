@@ -25,20 +25,24 @@ fiApp.controller('GoalCtrl', ['$scope', '$modal', '$filter', 'GoalSrv', 'goal', 
     $scope.opened = true;
   };
   
-  $scope.$watch('goal.due_date', function(newVal, oldVal) {
-    // removes timezone from picked date
-    goal.due_date = $filter('date')(newVal, 'yyyy-MM-dd');
-  });
-  
   $scope.datePickerOptions = {
     'year-format': "'yy'",
     'starting-day': 1,
     'show-weeks': false
   };
   
-  $scope.clearDueDate = function(goal) {
-    goal.due_date = null;
-  }
+  $scope.$watch('goal.due_date', function(newVal, oldVal) {
+    // removes timezone from picked date
+    newVal = $filter('date')(newVal, 'yyyy-MM-dd');
+    oldVal = $filter('date')(oldVal, 'yyyy-MM-dd');
+    if (newVal !== oldVal) {
+      goal.due_date = newVal;
+      goal.$update(function(val, resp) {
+        $scope.goal = val;
+        NotifSrv.success();
+      });
+    }
+  });
   
   $scope.markDonePass = function(goal) {
     GoalSrv.update({ id: goal.id, done: 1 }, function(val, resp) {

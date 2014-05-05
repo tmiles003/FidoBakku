@@ -172,6 +172,25 @@ body {
   resize: none;
 }
 
+.fi-due-date {
+  clear: left;
+  color: #415b76;
+  float: left;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+}
+
+.fi-due-date-m {
+}
+.fi-due-date-d {
+  font-size: 30px;
+}
+.fi-due-date-y {
+  font-weight: normal;
+  padding-top: 2px;
+}
+
 /* .fi-due-date, .fi-due-date:hover, .fi-due-date:active, .fi-due-date:focus {
   border: 1px solid #ccc;
 } */
