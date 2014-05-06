@@ -4,17 +4,17 @@
     </li>
   <% if can? :create, Evaluation # admins + managers %>
     <li>
-      <a href="/#/admin/evaluations" active-nav-link="active"><i class="fa fa-file-text-o fa-lg"></i> Evaluations</a>
+      <a href="/#/admin/evaluations" active-nav-link="active"><i class="fa fa-file-text-o"></i> Evaluations</a>
     </li>
   <% end %>
   <% if can? :create, Form # admins + managers %>
     <li>
-      <a href="/#/admin/forms" active-nav-link="active"><i class="fa fa-list-alt fa-lg"></i> Forms</a>
+      <a href="/#/admin/forms" active-nav-link="active"><i class="fa fa-list-alt"></i> Forms</a>
     </li>
   <% end %>
   <% if can? :update, User # admins only %>
     <li>
-      <a href="/#/admin/staff" active-nav-link="active"><i class="fa fa-users fa-lg"></i> Staff</a>
+      <a href="/#/admin/staff" active-nav-link="active"><i class="fa fa-users"></i> Staff</a>
     </li>
   <% end %>
   </ul>
@@ -28,14 +28,14 @@
       <ul class="dropdown-menu fi-dropdown-menu">
       <% if can? :show, Account # admins + managers %>
         <li>
-          <a href="/#/admin/account"><i class="fa fa-cog fa-lg"></i> Account</a>
+          <a href="/#/admin/account"><i class="fa fa-cog"></i> Account</a>
         </li>
       <% end %>
         <li>
-          <a href="/#/profile"><i class="fa fa-user fa-lg"></i> Profile</a>
+          <a href="/#/profile"><i class="fa fa-user"></i> Profile</a>
         </li>
         <li>
-          <a data-method="delete" href="/sign_out"><i class="fa fa-sign-out fa-lg"></i> Sign out</a>
+          <a data-method="delete" href="/sign_out"><i class="fa fa-sign-out"></i> Sign out</a>
         </li>
       </ul>
     </li>
