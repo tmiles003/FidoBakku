@@ -28,7 +28,12 @@ class DashboardSerializer < ActiveModel::Serializer
   end
   
   def goals
-    []
+    goals = Goal.in_account(object.account.id)
+      .where(user_id: current_user.id)
+      .where(done: false)
+      .includes(:user)
+      .limit(10)
+    ActiveModel::ArraySerializer.new(goals, each_serializer: ::Dashboard::GoalSerializer)
   end
   
   def user_evaluations
@@ -44,6 +49,8 @@ class DashboardSerializer < ActiveModel::Serializer
       .where(user_id: current_user.id)
       .where('evaluations.done = ?', true)
       .includes(:user)
+      .order(created_at: :desc)
+      .limit(10)
     ActiveModel::ArraySerializer.new(evaluations, each_serializer: ::Dashboard::EvaluationSerializer)
   end
   
