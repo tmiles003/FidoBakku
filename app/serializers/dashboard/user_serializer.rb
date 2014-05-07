@@ -1,6 +1,6 @@
 class Dashboard::UserSerializer < BaseUserSerializer
   
-  attributes :name, :email_hash, :user_path, :team_id
+  attributes :name, :role, :email_hash, :user_path, :team_id
   
   def team_id
     object.team.nil? ? nil : object.team.id

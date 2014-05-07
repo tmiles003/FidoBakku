@@ -1,13 +1,19 @@
 
 <div class="row">
   <div class="col-md-8">
-    <h1>Dashboard</h1>
+    <h1>Hello {{ user.name }}</h1>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-4" ng-show="teams">
     <select ng-model="team_id" class="form-control" 
       ng-options="team.id as team.name for team in teams | orderBy: '+name'">
       <option value="">Filter by team</option>
     </select>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4" ng-show="true">
+    <h4>User evaluations</h4><!-- small>To do:</small -->
   </div>
 </div>
 
