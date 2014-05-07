@@ -11,6 +11,7 @@ fiApp.controller('DashboardCtrl', ['$scope', 'dashboard', function($scope, dashb
   $scope.goals = dashboard.goals;
   $scope.evaluations = dashboard.evaluations;
   
+  $scope.feedbacks = dashboard.feedbacks;
   $scope.teams = dashboard.teams;
   $scope.users = dashboard.users;
   
