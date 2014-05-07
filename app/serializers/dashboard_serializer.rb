@@ -57,7 +57,7 @@ class DashboardSerializer < ActiveModel::Serializer
   def feedbacks
     evaluations = Evaluation.where(account_id: current_user.account.id) # same as above
       .where('evaluations.mode = ?', 'feedback')
-      .includes(:user)
+      .includes(user: :team)
     ActiveModel::ArraySerializer.new(evaluations, each_serializer: ::Dashboard::EvaluationSerializer)
   end
   

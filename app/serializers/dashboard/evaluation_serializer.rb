@@ -1,6 +1,6 @@
 class Dashboard::EvaluationSerializer < ActiveModel::Serializer
   
-  attributes :name, :email_hash, :evaluation_path
+  attributes :name, :email_hash, :team_id, :evaluation_path
   
   def name
     object.user.name
@@ -8,6 +8,10 @@ class Dashboard::EvaluationSerializer < ActiveModel::Serializer
   
   def email_hash
     OpenSSL::Digest::MD5.new(object.user.email).hexdigest
+  end
+  
+  def team_id
+    object.user.team.id unless object.user.team.nil?
   end
   
   def evaluation_path

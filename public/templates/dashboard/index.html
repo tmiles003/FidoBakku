@@ -12,7 +12,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-6" ng-if="user_evaluations">
+  <div class="col-md-6" ng-if="user_evaluations.length">
     <h4><small>To do:</small> User evaluations</h4>
     <table class="table table-hover">
       <tr ng-repeat="user_evaluation in user_evaluations | orderBy: '+name' | filter: { team_id: team_id }">
@@ -31,7 +31,7 @@
       </tr>
     </table>
   </div>
-  <div class="col-md-6" ng-if="feedbacks">
+  <div class="col-md-6" ng-if="feedbacks.length">
     <h4><small>To do:</small> Feedbacks</h4>
     <table class="table table-hover">
       <tr ng-repeat="feedback in feedbacks | orderBy: '+name' | filter: { team_id: team_id }">
@@ -69,7 +69,7 @@
   </div>
 </div>
 
-<div class="row" ng-if="users">
+<div class="row" ng-if="users.length">
   <div class="col-md-12">
     <h4>Staff</h4>
     <table class="table table-hover">

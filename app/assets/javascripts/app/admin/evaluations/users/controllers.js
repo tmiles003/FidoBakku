@@ -3,15 +3,21 @@
 /* Controllers */
 
 fiApp.controller('UserEvaluationsAdminCtrl', ['$scope', '$modal',
-                 'UserEvaluationsAdminSrv', 'NotifSrv', 'evaluation', 
+                 'UserEvaluationsAdminSrv', 'evaluation', 'CurrentUserSrv', 'NotifSrv', 
                   function($scope, $modal, 
-                           UserEvaluationsAdminSrv, NotifSrv, evaluation) {
+                           UserEvaluationsAdminSrv, evaluation, CurrentUserSrv, NotifSrv) {
   
   $scope.evaluation = evaluation;
   $scope.form = evaluation.form;
   $scope.user_evaluations = evaluation.user_evaluations;
   $scope.teams = evaluation.teams;
   $scope.users = evaluation.users;
+  
+  // set user's team as default
+  $scope.team_id = '';
+  CurrentUserSrv.getUser().then(function(currentUser) {
+    $scope.team_id = currentUser.team_id;
+  });
   
   $scope.createUserEvaluation = function(user_id) {
     UserEvaluationsAdminSrv.save({ evaluation_id: $scope.evaluation.id, evaluator_id: user_id }, function(val, resp) {

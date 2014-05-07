@@ -3,9 +3,9 @@
 /* Controllers */
 
 fiApp.controller('FormSectionsAdminCtrl', ['$scope', '$filter', '$modal',
-                  'form', 'FormSectionsAdminSrv', 'FormPartAdminSrv', 'NotifSrv', 
+                  'form', 'FormSectionsAdminSrv', 'FormPartAdminSrv', 'CurrentUserSrv', 'NotifSrv', 
                   function($scope, $filter, $modal,
-                           form, FormSectionsAdminSrv, FormPartAdminSrv, NotifSrv) {
+                           form, FormSectionsAdminSrv, FormPartAdminSrv, CurrentUserSrv, NotifSrv) {
   
   $scope.form = form;
   $scope.form_part = new FormPartAdminSrv(form.form_part);
@@ -13,6 +13,12 @@ fiApp.controller('FormSectionsAdminCtrl', ['$scope', '$filter', '$modal',
   
   $scope.eSection = {};
   $scope.submitted = false;
+  
+  // set user's team as default
+  $scope.team_id = '';
+  CurrentUserSrv.getUser().then(function(currentUser) {
+    $scope.team_id = currentUser.team_id;
+  });
   
   // save part_id when changed
   $scope.$watch('form_part.part_id', function(newVal, oldVal) {
