@@ -27,11 +27,13 @@
             <span ng-hide="evaluation.done">
               <button class="btn btn-default fi-btn-slim" 
                 ng-click="setMode(evaluation, 'evaluations')" ng-show="'evaluations' !== evaluation.mode">
-                <i class="fa fa-file-text-o fa-lg"></i>
+                <i class="fa fa-file-text-o fa-lg" tooltip="Evaluation mode" 
+                  tooltip-placement="bottom" tooltip-popup-delay="100"></i>
               </button>
               <button class="btn btn-default fi-btn-slim" 
                 ng-click="setMode(evaluation, null)" ng-show="'evaluations' == evaluation.mode">
-                <i class="fa fa-file-text fa-lg fi-blue"></i>
+                <i class="fa fa-file-text fa-lg fi-blue" tooltip="Feedback mode" 
+                  tooltip-placement="bottom" tooltip-popup-delay="100"></i>
               </button>
             </span>
           </td>
@@ -39,11 +41,13 @@
             <span ng-hide="evaluation.done">
               <button class="btn btn-default fi-btn-slim" 
                 ng-click="setMode(evaluation, 'feedback')" ng-show="'feedback' !== evaluation.mode">
-                <i class="fa fa-comment-o fa-lg"></i>
+                <i class="fa fa-comment-o fa-lg" tooltip="Evaluation mode" 
+                  tooltip-placement="bottom" tooltip-popup-delay="100"></i>
               </button>
               <button class="btn btn-default fi-btn-slim" 
                 ng-click="setMode(evaluation, null)" ng-show="'feedback' == evaluation.mode">
-                <i class="fa fa-comment fa-lg fi-blue"></i>
+                <i class="fa fa-comment fa-lg fi-blue" tooltip="Feedback mode" 
+                  tooltip-placement="bottom" tooltip-popup-delay="100"></i>
               </button>
             </span>
           </td>
