@@ -60,6 +60,7 @@ fiApp.controller('UsersAdminCtrl', ['$scope', '$rootScope', '$modal',
   
   $scope.editUser = function(user) {
     $scope.eUser = angular.copy(user);
+    jQuery('input[name="user_name"]').first().focus();
   }
   
   $scope.clearUserForm = function() {
@@ -137,6 +138,7 @@ fiApp.controller('UsersAdminCtrl', ['$scope', '$rootScope', '$modal',
   
   $scope.editTeam = function(team) {
     $scope.eTeam = angular.copy(team);
+    jQuery('input[name="team_name"]').first().focus();
   }
   
   $scope.clearTeamForm = function() {

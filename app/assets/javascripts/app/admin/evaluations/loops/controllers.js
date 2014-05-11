@@ -51,6 +51,7 @@ fiApp.controller('EvaluationLoopsAdminCtrl', ['$scope', '$modal',
   
   $scope.editLoop = function(loop) {
     $scope.eLoop = angular.copy(loop);
+    jQuery('input[name="loop_title"]').first().focus();
   }
   
   $scope.deleteConfirm = function(loop) {

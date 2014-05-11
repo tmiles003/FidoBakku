@@ -51,6 +51,7 @@ fiApp.controller('FormsAdminCtrl', ['$scope', '$modal',
   
   $scope.editForm = function(form) {
     $scope.eForm = angular.copy(form);
+    jQuery('input[name="form_name"]').first().focus();
   }
   
   $scope.deleteConfirm = function(form) {

@@ -214,6 +214,7 @@ fiApp.controller('FormCompsAdminCtrl', ['$scope', '$modal', '$filter',
   
   $scope.editComp = function(comp) {
     $scope.eComp = angular.copy(comp);
+    jQuery('textarea')[$scope.$parent.$index].focus(); // lol
   }
   
   $scope.clearForm = function() {
