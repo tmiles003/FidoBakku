@@ -74,6 +74,14 @@ body {
   height: 110px;
 }
 
+a.fi-help {
+  padding: 0px;
+}
+
+a.fi-help:hover {
+  background-color: transparent;
+}
+
 .fi-row {
   margin-bottom: 0px;
 }
@@ -116,9 +124,11 @@ body {
 .fi-panel {
   margin-bottom: 50px;
 }
+
 .table {
   border-collapse: separate;
 }
+
 .fi-table {
   width: 100%;
 }
