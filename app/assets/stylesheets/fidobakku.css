@@ -254,3 +254,7 @@ a.fi-help:hover {
 .footer > .container {
   padding-top: 5px;
 }
+
+.footer a {
+  padding: 0px;
+}
